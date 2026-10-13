@@ -15,8 +15,8 @@ Milestone 1: Design Foundation & Living Skeleton
 
 | Phase | Name | Status |
 |-------|------|--------|
-| 1 | Project Scaffolding & Design System | **Next** |
-| 2 | Navigation & Page Structure | Pending |
+| 1 | Project Scaffolding & Design System | **Complete** |
+| 2 | Navigation & Page Structure | **Next** |
 | 3 | Hero Section with 3D Orbital Canvas | Pending |
 | 4 | Professional Experience — Content & Layout | Pending |
 | 5 | Experience — 3D Timeline & Scroll Animations | Pending |
