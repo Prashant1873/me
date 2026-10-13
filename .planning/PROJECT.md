@@ -118,19 +118,19 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 ### Color Palette
 | Token | Hex | Name | Usage |
 |-------|-----|------|-------|
-| Primary Dark | `#171916` | Obsidian | Dark mode background |
+| Primary Dark | `#000000` | Pure Black | Dark mode background |
 | Primary Light | `#F1EEE5` | Warm Ivory | Light mode background |
-| Signature Accent | `#737A58` | Engineered Olive | Primary accent |
-| Emotional Accent | `#C38B55` | Tungsten Amber | Focus, warmth, CTA |
+| Signature Accent | `#2962FF` | Royal Blue | Primary accent, links, highlights |
+| Emotional Accent | `#E8655A` | Coral | Warmth, CTAs, focal points |
 | Connective | Graphite & Stone Grey | — | Structure, borders, secondary text |
 
 ### Typography System
 | Role | Font | Size Range | Weight |
 |------|------|-----------|--------|
-| Hero Headline | Manrope | 56–80px | Medium |
-| Section Heading | Manrope | 28–40px | Semibold |
-| Body Text | Manrope | 16–18px | Regular |
-| UI Labels | Manrope | 12–14px | Medium |
+| Hero Headline | Horizon (CDN/self-hosted) | 56–80px | Regular, uppercase |
+| Section Heading | Plus Jakarta Sans | 28–40px | Semibold |
+| Body Text | Plus Jakarta Sans | 16–18px | Regular |
+| UI Labels | Plus Jakarta Sans | 12–14px | Medium |
 | Technical Metadata | IBM Plex Mono | 11–13px | — |
 | Editorial Statement | Newsreader | 32–56px | Regular/Italic |
 
@@ -215,7 +215,7 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 - **Deployment:** GitHub Pages (static export)
 - **Performance:** 3D graphics must not tank mobile performance — progressive enhancement required
 - **Accessibility:** WCAG 2.2 AA compliance for text, navigation, and interactive elements
-- **Fonts:** Manrope (primary), IBM Plex Mono (technical), Newsreader (expressive) — Google Fonts only
+- **Fonts:** Horizon (hero, via CDN), Plus Jakarta Sans (body/UI, Google Fonts), IBM Plex Mono (technical, Google Fonts), Newsreader (expressive, Google Fonts)
 
 ## Key Decisions
 

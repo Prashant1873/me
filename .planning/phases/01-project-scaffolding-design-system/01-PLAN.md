@@ -89,33 +89,40 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
    - Smooth scroll behavior on html
    - Antialiased text rendering (`-webkit-font-smoothing: antialiased`)
 
-2. **Load Google Fonts in `index.html`**
+2. **Load Horizon font via CDN** in `index.html`
+   ```html
+   <link href="https://fonts.cdnfonts.com/css/horizon" rel="stylesheet">
+   ```
+   - **Horizon** — geometric display font for hero headlines only (uppercase)
+
+3. **Load Google Fonts in `index.html`**
    - Add preconnect hints and font links in `<head>`:
      ```html
      <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
      ```
    - Fonts:
-     - **Manrope** (400 regular, 500 medium, 600 semibold, 700 bold)
-     - **IBM Plex Mono** (400 regular, 500 medium)
-     - **Newsreader** (400 regular, 400 italic)
+     - **Plus Jakarta Sans** (400 regular, 500 medium, 600 semibold, 700 bold) — body, headings, UI
+     - **IBM Plex Mono** (400 regular, 500 medium) — technical metadata
+     - **Newsreader** (400 regular, 400 italic) — editorial statements
 
-3. **Set up barrel import** (`src/styles/index.css`)
+4. **Set up barrel import** (`src/styles/index.css`)
    ```css
    @import './reset.css';
    @import './design-system.css';
    ```
 
-4. **Import styles in main.js**
+5. **Import styles in main.js**
    ```javascript
    import './styles/index.css';
    ```
 
 #### Must-haves
-- [ ] All 3 Google Fonts render correctly in browser
+- [ ] Horizon font renders from CDN (geometric uppercase display)
+- [ ] Plus Jakarta Sans, IBM Plex Mono, Newsreader load from Google Fonts
 - [ ] Font weights match the design language spec
-- [ ] No FOUT (flash of unstyled text) — `display=swap` in font URL
+- [ ] No FOUT (flash of unstyled text) — `display=swap` in font URLs
 
 ---
 
@@ -133,33 +140,34 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
      /* === Structured Intensity Color System === */
 
      /* Primary palette */
-     --color-obsidian: #171916;
+     --color-black: #000000;
      --color-warm-ivory: #F1EEE5;
-     --color-engineered-olive: #737A58;
-     --color-tungsten-amber: #C38B55;
+     --color-royal-blue: #2962FF;
+     --color-coral: #E8655A;
 
-     /* Neutrals (graphite & stone grey spectrum) */
-     --color-graphite-900: #1E201C;
-     --color-graphite-800: #2A2C28;
-     --color-graphite-700: #3A3D37;
-     --color-graphite-600: #4D504A;
-     --color-graphite-500: #6B6E67;
-     --color-graphite-400: #8A8D86;
-     --color-graphite-300: #A8ABA5;
-     --color-graphite-200: #C5C8C2;
-     --color-graphite-100: #D8DAD5;
+     /* Neutrals (true black spectrum) */
+     --color-grey-950: #0A0A0A;
+     --color-grey-900: #141414;
+     --color-grey-800: #1F1F1F;
+     --color-grey-700: #2E2E2E;
+     --color-grey-600: #444444;
+     --color-grey-500: #666666;
+     --color-grey-400: #888888;
+     --color-grey-300: #AAAAAA;
+     --color-grey-200: #CCCCCC;
+     --color-grey-100: #E0E0E0;
 
      /* Semantic tokens (resolved per theme) */
-     --bg-primary: var(--color-obsidian);
-     --bg-secondary: var(--color-graphite-900);
-     --bg-surface: var(--color-graphite-800);
+     --bg-primary: var(--color-black);
+     --bg-secondary: var(--color-grey-950);
+     --bg-surface: var(--color-grey-900);
      --text-primary: var(--color-warm-ivory);
-     --text-secondary: var(--color-graphite-300);
-     --text-muted: var(--color-graphite-500);
-     --accent-primary: var(--color-engineered-olive);
-     --accent-warm: var(--color-tungsten-amber);
-     --border-subtle: var(--color-graphite-700);
-     --border-strong: var(--color-graphite-500);
+     --text-secondary: var(--color-grey-300);
+     --text-muted: var(--color-grey-500);
+     --accent-primary: var(--color-royal-blue);
+     --accent-warm: var(--color-coral);
+     --border-subtle: var(--color-grey-800);
+     --border-strong: var(--color-grey-600);
    }
 
    /* Light mode overrides */
@@ -167,11 +175,11 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
      --bg-primary: var(--color-warm-ivory);
      --bg-secondary: #E8E4DB;
      --bg-surface: #DEDACE;
-     --text-primary: var(--color-obsidian);
-     --text-secondary: var(--color-graphite-600);
-     --text-muted: var(--color-graphite-400);
-     --border-subtle: var(--color-graphite-200);
-     --border-strong: var(--color-graphite-400);
+     --text-primary: var(--color-black);
+     --text-secondary: var(--color-grey-600);
+     --text-muted: var(--color-grey-400);
+     --border-subtle: var(--color-grey-200);
+     --border-strong: var(--color-grey-400);
    }
    ```
 
@@ -185,10 +193,10 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
    ```
 
 3. **Verify WCAG 2.2 AA contrast ratios**
-   - `--text-primary` on `--bg-primary` (dark): #F1EEE5 on #171916 → contrast ratio ≥ 12:1 ✓
-   - `--text-secondary` on `--bg-primary`: #A8ABA5 on #171916 → verify ≥ 4.5:1
-   - `--accent-primary` on `--bg-primary`: #737A58 on #171916 → verify ≥ 3:1 for large text
-   - `--accent-warm` on `--bg-primary`: #C38B55 on #171916 → verify ≥ 3:1 for large text
+   - `--text-primary` on `--bg-primary` (dark): #F1EEE5 on #000000 → contrast ratio ≥ 15:1 ✓
+   - `--text-secondary` on `--bg-primary`: #AAAAAA on #000000 → ~7.4:1 ✓
+   - `--accent-primary` on `--bg-primary`: #2962FF on #000000 → ~4.2:1 ✓ (AA for large text)
+   - `--accent-warm` on `--bg-primary`: #E8655A on #000000 → ~4.5:1 ✓
 
 #### Must-haves
 - [ ] All color tokens defined as CSS custom properties
@@ -212,7 +220,8 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
      /* === Typography System === */
 
      /* Font families */
-     --font-primary: 'Manrope', system-ui, -apple-system, sans-serif;
+     --font-hero: 'Horizon', 'Orbitron', sans-serif;
+     --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
      --font-technical: 'IBM Plex Mono', 'Fira Code', monospace;
      --font-expressive: 'Newsreader', 'Georgia', serif;
 
@@ -241,6 +250,7 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
      --tracking-tight: -0.02em;
      --tracking-normal: 0;
      --tracking-wide: 0.05em;
+     --tracking-hero: 0.15em;
      --tracking-mono: 0.08em;
    }
    ```
@@ -248,11 +258,12 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
 2. **Create utility classes for typography roles**
    ```css
    .text-hero {
-     font-family: var(--font-primary);
+     font-family: var(--font-hero);
      font-size: var(--text-hero);
-     font-weight: var(--weight-medium);
+     font-weight: var(--weight-regular);
      line-height: var(--leading-tight);
-     letter-spacing: var(--tracking-tight);
+     letter-spacing: var(--tracking-hero);
+     text-transform: uppercase;
    }
 
    .text-section {
@@ -286,9 +297,10 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
    ```
 
 #### Must-haves
-- [ ] All 3 font families render at correct sizes
+- [ ] All 4 font families render at correct sizes
 - [ ] `clamp()` values produce correct sizes at 320px, 768px, 1440px viewports
-- [ ] Hero text is Manrope 56-80px range
+- [ ] Hero text is Horizon uppercase 56-80px with wide tracking
+- [ ] Body/section text is Plus Jakarta Sans
 - [ ] Mono text is IBM Plex Mono 11-13px range
 - [ ] Editorial text is Newsreader 32-56px italic
 
@@ -394,7 +406,7 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
 1. **Build demo page in `index.html`** showcasing all design tokens:
 
    **Section 1: Color Palette**
-   - Swatches for all colors (Obsidian, Warm Ivory, Engineered Olive, Tungsten Amber, graphite scale)
+   - Swatches for all colors (Pure Black, Warm Ivory, Royal Blue, Coral, grey scale)
    - Side-by-side dark/light mode display
    - Contrast ratio labels on text/bg combinations
 
@@ -441,7 +453,7 @@ After all plans are executed:
 
 - [ ] `npm run dev` starts Vite dev server without errors
 - [ ] `npm run build` produces clean static output
-- [ ] All 3 Google Fonts load (Manrope, IBM Plex Mono, Newsreader)
+- [ ] All 4 fonts load (Horizon via CDN, Plus Jakarta Sans, IBM Plex Mono, Newsreader)
 - [ ] All CSS custom properties defined (colors, typography, spacing, motion, grid)
 - [ ] 12-column grid with 64px margins visible
 - [ ] Dark mode is default, light mode toggleable

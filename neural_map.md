@@ -21,7 +21,7 @@ Single-Page Scrollable Portfolio
     ├── Custom properties (tokens)
     ├── 12-column grid
     ├── Dark/light mode
-    └── Typography scale (Manrope / IBM Plex Mono / Newsreader)
+    └── Typography scale (Horizon / Plus Jakarta Sans / IBM Plex Mono / Newsreader)
 ```
 
 ## Page Flow (Top to Bottom)
@@ -34,11 +34,11 @@ Single-Page Scrollable Portfolio
 
 ## Design System: Structured Intensity
 
-- Primary Dark: `#171916` (Obsidian)
+- Primary Dark: `#000000` (Pure Black)
 - Primary Light: `#F1EEE5` (Warm Ivory)
-- Accent 1: `#737A58` (Engineered Olive)
-- Accent 2: `#C38B55` (Tungsten Amber)
-- Fonts: Manrope (primary), IBM Plex Mono (technical), Newsreader (expressive)
+- Accent 1: `#2962FF` (Royal Blue)
+- Accent 2: `#E8655A` (Coral)
+- Fonts: Horizon (hero display), Plus Jakarta Sans (primary body/UI), IBM Plex Mono (technical), Newsreader (expressive)
 - Motion: 160–280ms for UI, longer for narrative
 - Grid: 12-column, 8px base spacing
 

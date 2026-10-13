@@ -12,7 +12,7 @@ Valuable concepts, design directions, and feature ideas for the portfolio.
 - Hero orbital canvas: concentric circles with intersecting trajectories — feels like a command center
 - Experience 3D timeline: literally floating in space, scroll through time as z-depth traversal
 - Terrain landscape: weathered stone aesthetic as scrollable background narrative
-- Particle systems: subtle, muted olive particles that drift like dust motes in directional light
+- Particle systems: subtle, ethereal royal blue and silver particles that drift like dust motes in directional light
 - Per-section objects: architectural/geometric forms that reinforce each section's theme
 
 ## Storytelling Arc

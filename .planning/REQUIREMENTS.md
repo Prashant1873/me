@@ -9,7 +9,7 @@
 
 - [ ] **FOUND-01**: Vite project initialized with vanilla JS, Three.js, GSAP dependencies
 - [ ] **FOUND-02**: Design system CSS implementing Structured Intensity tokens (colors, typography, spacing, grid)
-- [ ] **FOUND-03**: Google Fonts loaded: Manrope, IBM Plex Mono, Newsreader
+- [ ] **FOUND-03**: Fonts loaded: Horizon (hero, CDN), Plus Jakarta Sans, IBM Plex Mono, Newsreader (Google Fonts)
 - [ ] **FOUND-04**: Dark mode as default with functional light mode toggle
 - [ ] **FOUND-05**: 12-column grid layout with 8px base spacing system
 - [ ] **FOUND-06**: CSS custom properties for all design tokens (colors, sizes, motion timings)
@@ -20,13 +20,13 @@
 - [ ] **NAV-02**: Smooth scroll-to-section on nav click with GSAP-powered animation
 - [ ] **NAV-03**: Active section highlighting in nav based on scroll position
 - [ ] **NAV-04**: Mobile-responsive hamburger menu
-- [ ] **NAV-05**: Navigation uses Manrope font with correct weight/size per design system
+- [ ] **NAV-05**: Navigation uses Plus Jakarta Sans font with correct weight/size per design system
 
 ### Hero Section
 
 - [ ] **HERO-01**: Full-viewport hero section with Three.js 3D canvas (orbital geometry motif)
 - [ ] **HERO-02**: Bold personal statement: thinker-builder hybrid identity narrative
-- [ ] **HERO-03**: Name display with Manrope hero headline (56–80px)
+- [ ] **HERO-03**: Name display with Horizon hero headline (56–80px uppercase)
 - [ ] **HERO-04**: IBM Plex Mono technical metadata (role, location coordinates)
 - [ ] **HERO-05**: Entrance animation sequence (GSAP timeline: text reveals, 3D elements fade in)
 - [ ] **HERO-06**: Scroll indicator prompting downward exploration
@@ -40,7 +40,7 @@
 - [ ] **EXP-05**: LinkedIn links for each company (clickable, opens in new tab)
 - [ ] **EXP-06**: Interactive category filters: Work Experience, Entrepreneurship, Leadership, Creative/Sports
 - [ ] **EXP-07**: Scroll-triggered reveal animations for timeline nodes
-- [ ] **EXP-08**: Tungsten Amber accent (#C38B55) for timeline highlights
+- [ ] **EXP-08**: Coral accent (#E8655A) or Royal Blue (#2962FF) for timeline highlights
 
 ### Projects Section
 
