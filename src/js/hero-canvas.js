@@ -50,47 +50,47 @@ export function initHeroCanvas(container) {
   const colors = getColors();
 
   // --- Central wireframe core (icosahedron) ---
-  const coreGeo = new THREE.IcosahedronGeometry(0.8, 1);
+  const coreGeo = new THREE.IcosahedronGeometry(1.22, 1);
   const coreMat = new THREE.MeshBasicMaterial({
     color: colors.core,
     wireframe: true,
     transparent: true,
-    opacity: 0.5,
+    opacity: 0.52,
   });
   const core = new THREE.Mesh(coreGeo, coreMat);
   scene.add(core);
 
   // --- Inner glow sphere ---
-  const glowGeo = new THREE.SphereGeometry(0.5, 16, 16);
+  const glowGeo = new THREE.SphereGeometry(0.8, 16, 16);
   const glowMat = new THREE.MeshBasicMaterial({
     color: colors.core,
     transparent: true,
-    opacity: 0.06,
+    opacity: 0.07,
   });
   const glow = new THREE.Mesh(glowGeo, glowMat);
   scene.add(glow);
 
-  // --- Floating particles scattered in orbital cloud ---
-  const particleCount = 80;
+  // --- Floating particles scattered widely across orbital space ---
+  const particleCount = 180;
   const particleGeo = new THREE.BufferGeometry();
   const positions = new Float32Array(particleCount * 3);
 
   for (let i = 0; i < particleCount; i++) {
-    const angle = (i / particleCount) * Math.PI * 2 + (Math.random() - 0.5) * 0.5;
-    const radius = 1.1 + Math.random() * 1.3;
-    const tilt = (Math.random() - 0.5) * 1.6;
+    const angle = (i / particleCount) * Math.PI * 2 + (Math.random() - 0.5) * 0.7;
+    const radius = 1.6 + Math.random() * 2.2;
+    const tilt = (Math.random() - 0.5) * 2.4;
     positions[i * 3] = Math.cos(angle) * radius;
-    positions[i * 3 + 1] = Math.sin(angle) * radius * Math.cos(tilt);
-    positions[i * 3 + 2] = Math.sin(tilt) * radius * 0.5 + (Math.random() - 0.5) * 0.6;
+    positions[i * 3 + 1] = Math.sin(angle) * radius * Math.cos(tilt) + (Math.random() - 0.5) * 0.35;
+    positions[i * 3 + 2] = Math.sin(tilt) * radius * 0.85 + (Math.random() - 0.5) * 0.7;
   }
 
   particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
   const particleMat = new THREE.PointsMaterial({
     color: colors.particles,
-    size: 0.035,
+    size: 0.046,
     transparent: true,
-    opacity: 0.45,
+    opacity: 0.55,
     sizeAttenuation: true,
   });
   const particles = new THREE.Points(particleGeo, particleMat);
@@ -153,24 +153,35 @@ export function initHeroCanvas(container) {
   }
   animate();
 
-  // --- Resize ---
-  function onResize() {
+  // --- Resize handling via ResizeObserver (preserves strict 1:1 aspect ratio) ---
+  function handleResize() {
     if (!container || state.destroyed) return;
-    width = container.clientWidth;
-    height = container.clientHeight;
-    camera.aspect = width / height;
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    if (w <= 0 || h <= 0) return;
+
+    width = w;
+    height = h;
+    camera.aspect = w / h;
     camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
+    renderer.setSize(w, h);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   }
-  window.addEventListener('resize', onResize);
+
+  const resizeObserver = new ResizeObserver(() => {
+    handleResize();
+  });
+  resizeObserver.observe(container);
+  window.addEventListener('resize', handleResize);
 
   return {
     fadeIn,
     destroy() {
       state.destroyed = true;
       observer.disconnect();
+      resizeObserver.disconnect();
       window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('resize', onResize);
+      window.removeEventListener('resize', handleResize);
       renderer.dispose();
       if (renderer.domElement.parentNode) {
         renderer.domElement.parentNode.removeChild(renderer.domElement);
