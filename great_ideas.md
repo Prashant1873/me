@@ -28,3 +28,4 @@ Valuable concepts, design directions, and feature ideas for the portfolio.
 - Prefers-reduced-motion: disable all 3D and transitions, show clean static layout
 - Zero-FOUC skeleton shell: instant frame-0 render with render-blocking CSS and smooth 3D handoff
 - Authentic artifact evidence: subtle inline photo proof strips for real-world roles from `Portfolio_images`
+- Education lineage: St. Francis' College (ICSE 98% Gold Medal) → City Montessori School / CMS (ISC 98.25% Gold Medal) → IIT Bombay (Aerospace B.Tech)

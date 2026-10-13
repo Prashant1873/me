@@ -90,13 +90,20 @@
 
 ### Phase 7: Education & Contact Sections
 
-**Goal:** Education section with IIT Bombay, school achievements, extracurriculars. Contact section with all links and resume PDF download.
+**Goal:** Education section with IIT Bombay, school achievements, campus governance (Abhyuday, Placement Cell), and extracurriculars. Contact section with all links and resume PDF download.
+
+**Context & Logos:**
+- IIT Bombay: Aerospace Engineering (B.Tech 2026) [`Indian_Institute_of_Technology_Bombay_Logo.svg.webp`]
+- Campus Governance: Abhyuday (Head, ₹10M+ budget) & Placement Cell (Coordinator, 2000+ students)
+- St. Francis' College, Lucknow: Till 10th grade ICSE Exam, Gold Medal 98% [`St._Francis_Lucknow.png`]
+- City Montessori School (CMS), Lucknow: 11–12th grade ISC Exam, Gold Medal 98.25% [`cms.png`]
 
 **Delivers:** EDU-01, EDU-02, EDU-03, EDU-04, EDU-05, CONT-01, CONT-02, CONT-03, CONT-04, CONT-05, CONT-06
 
 **UAT:**
-- IIT Bombay Aerospace Engineering prominently displayed
-- Gold medal achievements visible (ISC 98.25%, ICSE 98%)
+- IIT Bombay Aerospace Engineering prominently displayed with IITB crest
+- High-stakes campus governance showcase (Abhyuday & Placement Cell)
+- School achievements accurately attributed: St. Francis (ICSE 98% Gold Medal) & CMS (ISC 98.25% Gold Medal) with logos
 - Extracurriculars listed (dramatics, sports, comedy)
 - Skills displayed appropriately
 - All contact links work (LinkedIn, GitHub, Email, Phone)
