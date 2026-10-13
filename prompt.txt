@@ -1,0 +1,31 @@
+I want to go into the building of this particular website in a very structured way using GSD because this one website is very important to me and very close to my heart.
+What we're going to do is this: this is sort of a portfolio website or an about-me website (about me, that is, Prashant Shukla). It will have the normal sections that are there in every single portfolio website but the entire design language, the theme, the animations, everything has to be me. It has to reflect a lot of taste and a lot of uniqueness.
+I want the planning, the phases, and the milestones of this to be very granular, step by step, taking a lot of inputs from me. The UI and the UX are the most important parts of this because this is sort of a presentation or something to be shown to future recruiters or future people I meet. The UI and the UX are of utmost importance. They cannot be forsaken, taken for granted, or made vanilla. They have to be very enriched.
+The pages that need to be there are:
+- Home on the landing page
+- Professional experience page
+- Projects page
+- Education page
+- Contact me page
+These can all actually be one scrollable page itself, showing the story in a linear pattern, with buttons in the top bar that can be clicked to quickly scroll down to that one particular point of the web page. Do that.
+In the scrolling mechanism the transitions and animations that come among different sections will be very important. They have to be brilliant, very unique, and very, very animated. Try using 3D animation and 3D graphics throughout the platform for sure.
+I will give you an understanding of the themes of myself and my resume, which will be in this folder, along with:
+- All the projects that I've done and their images
+- All the professional experiences I've done and their images as well
+These have to be included in pretty slideshows. These slideshows cannot be basic in any way. They have to be perfectly blended with the website and should not look like just another photo that is put on a website. They should be a part of the storytelling as well.
+
+Structured_Intensity_Personal_Design_Language.docx
+This document has the design language that I have chosen for myself and my personality in it. Go through it in depth and this will be the sole truth of the entire theme of the portfolio.
+
+We'll be using a lot of elements from the frontend skill (for example, the buttons, the color contrast ratios, the animation ratios, the sizing of fonts and all) for maximum clarity and the best UI/UX. We'll be using the frontend skill a lot so initialize this project in GSD.
+
+For the first milestone decide what would be the best small task to complete because I want to go small, step by small step, and give utmost detail, work, compute, and decisions on every single small step. Decide how the first milestone shall be made and what its phases would be. 
+ I want you to create a portfolio website for me with that brand identity. I want to create it with you step by step with detailed planning, and a lot of feedback and back and forth.
+
+i have added the resume txt and cover letter txt also to include a summary and professional experience along with the (company details, logo and linkedin links shud be there)
+my other links shud be there in contactme like linkedin github and all
+
+use cover letter for summary or planning / storyline of the website
+and resume for all the detailed work experience 
+use resume.txt to make a linear timeline of my life and experiences 
+will keep adding photo folders but right now make the skeleton and planning

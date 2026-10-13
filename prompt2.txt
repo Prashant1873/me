@@ -1,0 +1,3 @@
+continue and shift the 3d design to the right so that it doesnt come immediately behind the text, remove the big blue rings they are too much noise
+
+
