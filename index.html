@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Prashant Shukla — Portfolio & System Design. Aerospace Engineer from IIT Bombay, Automation Architect & Product Builder." />
-    <title>Prashant Shukla — Design System Foundation</title>
+    <meta name="description" content="Prashant Shukla — Product Strategist, Builder & Storyteller from IIT Bombay. Aerospace Engineer turned Automation Architect." />
+    <meta property="og:title" content="Prashant Shukla — Portfolio" />
+    <meta property="og:description" content="Product Strategist, Builder & Storyteller from IIT Bombay. Engineering rigor meets behavioral empathy." />
+    <meta property="og:type" content="website" />
+    <title>Prashant Shukla — Portfolio</title>
 
     <!-- Font CDNs -->
     <link href="https://fonts.cdnfonts.com/css/horizon" rel="stylesheet" />
@@ -14,354 +17,187 @@
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;1,400&display=swap"
       rel="stylesheet"
     />
-
-    <style>
-      /* Page-specific showcase styles */
-      .demo-header {
-        padding-top: var(--space-8);
-        padding-bottom: var(--space-6);
-        border-bottom: 1px solid var(--border-subtle);
-        background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-      }
-
-      .demo-nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: var(--space-4);
-      }
-
-      .demo-section {
-        padding-block: var(--space-12);
-        border-bottom: 1px solid var(--border-subtle);
-      }
-
-      .demo-card {
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-md);
-        padding: var(--space-6);
-        transition: border-color var(--duration-fast) var(--ease-default),
-                    transform var(--duration-fast) var(--ease-default);
-      }
-
-      .demo-card:hover {
-        border-color: var(--border-strong);
-        transform: translateY(-2px);
-      }
-
-      .swatch-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: var(--space-4);
-        margin-top: var(--space-6);
-      }
-
-      .swatch {
-        border-radius: var(--radius-sm);
-        border: 1px solid var(--border-subtle);
-        overflow: hidden;
-        background-color: var(--bg-surface);
-      }
-
-      .swatch-color {
-        height: 72px;
-        width: 100%;
-        display: flex;
-        align-items: flex-end;
-        padding: var(--space-2);
-      }
-
-      .swatch-info {
-        padding: var(--space-3);
-      }
-
-      .swatch-name {
-        font-family: var(--font-primary);
-        font-size: var(--text-ui);
-        font-weight: var(--weight-semibold);
-      }
-
-      .swatch-hex {
-        font-family: var(--font-technical);
-        font-size: var(--text-mono);
-        color: var(--text-muted);
-        margin-top: var(--space-1);
-      }
-
-      /* Grid Visualizer Overlay */
-      #grid-overlay {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 9999;
-        display: none;
-      }
-
-      #grid-overlay .grid-col-box {
-        background: rgba(41, 98, 255, 0.05);
-        border-inline: 1px dashed rgba(41, 98, 255, 0.25);
-        height: 100%;
-      }
-
-      .canvas-wrap {
-        position: relative;
-        width: 100%;
-        height: 280px;
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-md);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
-
-      .canvas-label {
-        position: absolute;
-        top: var(--space-3);
-        left: var(--space-3);
-        z-index: 10;
-      }
-    </style>
   </head>
   <body>
-    <!-- 12-Column Grid Overlay (Toggleable via button) -->
-    <div id="grid-overlay" class="grid-container">
-      <div class="grid-col-box"></div>
-      <div class="grid-col-box"></div>
-      <div class="grid-col-box"></div>
-      <div class="grid-col-box"></div>
-      <div class="grid-col-box"></div>
-      <div class="grid-col-box"></div>
-      <div class="grid-col-box"></div>
-      <div class="grid-col-box"></div>
-      <div class="grid-col-box"></div>
-      <div class="grid-col-box"></div>
-      <div class="grid-col-box"></div>
-      <div class="grid-col-box"></div>
-    </div>
+    <!-- ================================================================
+         NAVIGATION
+         ================================================================ -->
+    <nav class="site-nav" id="site-nav" role="navigation" aria-label="Main navigation">
+      <div class="site-nav__inner">
+        <!-- Logo -->
+        <a href="#hero" class="site-nav__logo" aria-label="Go to top">
+          <span class="site-nav__name">Prashant Shukla</span>
+          <span class="site-nav__tagline">IIT Bombay // Aerospace</span>
+        </a>
 
-    <!-- Header / Status Bar -->
-    <header class="demo-header">
-      <div class="grid-container">
-        <div class="col-span-12 demo-nav">
-          <div>
-            <span class="section-tag">STRUCTURED INTENSITY // SYSTEM FOUNDATION</span>
-            <div class="text-mono" style="margin-top: var(--space-1);">PRASHANT SHUKLA — IIT BOMBAY</div>
-          </div>
-          <div style="display: flex; gap: var(--space-3); align-items: center;">
-            <button id="grid-toggle" class="btn btn-secondary text-ui" title="Toggle 12-Column Grid Lines">
-              GRID OVERLAY
-            </button>
-            <button id="theme-toggle" class="btn btn-primary text-ui" title="Toggle Theme">
-              <span class="theme-label">DARK MODE [ACTIVE]</span>
-            </button>
-          </div>
+        <!-- Nav Links -->
+        <div class="site-nav__links">
+          <a href="#hero" class="site-nav__link is-active" data-section="hero">Home</a>
+          <a href="#experience" class="site-nav__link" data-section="experience">Experience</a>
+          <a href="#projects" class="site-nav__link" data-section="projects">Projects</a>
+          <a href="#education" class="site-nav__link" data-section="education">Education</a>
+          <a href="#contact" class="site-nav__link" data-section="contact">Contact</a>
+
+          <!-- Theme Toggle -->
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+            <!-- Sun icon (shown in dark mode → click to go light) -->
+            <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <!-- Moon icon (shown in light mode → click to go dark) -->
+            <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
         </div>
       </div>
-    </header>
+    </nav>
+
+    <!-- Nav spacer (fixed nav doesn't push content) -->
+    <div class="nav-spacer"></div>
 
     <main>
-      <!-- Hero Headline & Identity Preview -->
-      <section class="demo-section">
-        <div class="grid-container">
-          <div class="col-span-12">
-            <span class="section-tag">01.0 // HERO TYPOGRAPHY MOTIF</span>
-            <h1 class="text-hero" style="margin-top: var(--space-4); margin-bottom: var(--space-2);">
+      <!-- ==============================================================
+           HERO SECTION
+           ============================================================== -->
+      <section id="hero" class="section section--hero">
+        <div class="grid-container hero__grid">
+          <div class="col-span-7 hero__content">
+            <span class="section-tag">00 // HOME</span>
+            <h1 class="hero__name" style="margin-top: var(--space-4);">
               PRASHANT SHUKLA
             </h1>
-            <p class="text-editorial" style="margin-bottom: var(--space-4);">
+            <div class="hero__metadata text-mono">
+              IIT BOMBAY // AEROSPACE ENGINEERING // B.TECH 2026 // STATUS: DEPLOYED
+            </div>
+            <p class="hero__tagline">
               "Engineering rigor meets behavioral empathy."
             </p>
-            <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
-              <span class="badge">AEROSPACE ENGINEERING @ IIT BOMBAY</span>
-              <span class="badge">PRODUCT & AUTOMATION ARCHITECT</span>
-              <span class="badge">THREE.JS + GSAP RUNTIME</span>
+            <div class="hero__meta">
+              <span class="badge">PRODUCT &amp; AUTOMATION ARCHITECT</span>
+              <span class="badge">ANALYST @ IQVIA</span>
+              <span class="badge">BUILDER &amp; STORYTELLER</span>
             </div>
           </div>
+
+          <!-- 3D Orbital Canvas (Anchored in Right Column) -->
+          <div class="col-span-5 hero__canvas-col" aria-hidden="true">
+            <div id="hero-canvas" class="hero__canvas"></div>
+          </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="hero__scroll-indicator" id="hero-scroll-btn" role="button" tabindex="0" aria-label="Scroll to experience section">
+          <span>Scroll</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <polyline points="19 12 12 19 5 12"/>
+          </svg>
         </div>
       </section>
 
-      <!-- Color Palette Showcase -->
-      <section class="demo-section">
+      <!-- ==============================================================
+           EXPERIENCE SECTION
+           ============================================================== -->
+      <section id="experience" class="section section--alt">
         <div class="grid-container">
+          <div class="col-span-12 section__header">
+            <span class="section-tag">01 // PROFESSIONAL EXPERIENCE</span>
+            <h2 class="section__title">Where I've Built</h2>
+            <p class="section__subtitle">
+              From YC startups to global fintechs — building products, automating workflows, and driving strategy across 7 roles.
+            </p>
+          </div>
           <div class="col-span-12">
-            <span class="section-tag">01.1 // COLOR PALETTE & WCAG AA RATIOS</span>
-            <h2 class="text-section" style="margin-top: var(--space-2);">Core Palette Tokens</h2>
-            <p class="text-body" style="margin-top: var(--space-1);">
-              Engineered high-contrast palette calibrated for pure black dark mode and warm ivory light mode.
-            </p>
-
-            <div class="swatch-grid">
-              <div class="swatch">
-                <div class="swatch-color" style="background-color: #000000; border-bottom: 1px solid var(--border-subtle);">
-                  <span class="badge" style="font-size: 10px;">CANVAS</span>
-                </div>
-                <div class="swatch-info">
-                  <div class="swatch-name">Pure Black</div>
-                  <div class="swatch-hex">#000000</div>
-                  <div class="text-mono" style="font-size: 10px; margin-top: 4px;">Dark Canvas</div>
-                </div>
-              </div>
-
-              <div class="swatch">
-                <div class="swatch-color" style="background-color: #2962FF;">
-                  <span class="badge" style="background: rgba(0,0,0,0.6); color: #FFF; font-size: 10px;">SIGNATURE</span>
-                </div>
-                <div class="swatch-info">
-                  <div class="swatch-name">Royal Blue</div>
-                  <div class="swatch-hex">#2962FF</div>
-                  <div class="text-mono" style="font-size: 10px; margin-top: 4px;">Primary Accent</div>
-                </div>
-              </div>
-
-              <div class="swatch">
-                <div class="swatch-color" style="background-color: #E8655A;">
-                  <span class="badge" style="background: rgba(0,0,0,0.6); color: #FFF; font-size: 10px;">WARMTH</span>
-                </div>
-                <div class="swatch-info">
-                  <div class="swatch-name">Coral Accent</div>
-                  <div class="swatch-hex">#E8655A</div>
-                  <div class="text-mono" style="font-size: 10px; margin-top: 4px;">CTA & Timeline</div>
-                </div>
-              </div>
-
-              <div class="swatch">
-                <div class="swatch-color" style="background-color: #F1EEE5;">
-                  <span class="badge" style="background: rgba(0,0,0,0.6); color: #FFF; font-size: 10px;">LIGHT MODE</span>
-                </div>
-                <div class="swatch-info">
-                  <div class="swatch-name">Warm Ivory</div>
-                  <div class="swatch-hex">#F1EEE5</div>
-                  <div class="text-mono" style="font-size: 10px; margin-top: 4px;">Primary Light</div>
-                </div>
-              </div>
-
-              <div class="swatch">
-                <div class="swatch-color" style="background-color: #141414;"></div>
-                <div class="swatch-info">
-                  <div class="swatch-name">Grey 900</div>
-                  <div class="swatch-hex">#141414</div>
-                  <div class="text-mono" style="font-size: 10px; margin-top: 4px;">Surface Tile</div>
-                </div>
-              </div>
-
-              <div class="swatch">
-                <div class="swatch-color" style="background-color: #444444;"></div>
-                <div class="swatch-info">
-                  <div class="swatch-name">Grey 600</div>
-                  <div class="swatch-hex">#444444</div>
-                  <div class="text-mono" style="font-size: 10px; margin-top: 4px;">Border Strong</div>
-                </div>
-              </div>
-
-              <div class="swatch">
-                <div class="swatch-color" style="background-color: #AAAAAA;"></div>
-                <div class="swatch-info">
-                  <div class="swatch-name">Grey 300</div>
-                  <div class="swatch-hex">#AAAAAA</div>
-                  <div class="text-mono" style="font-size: 10px; margin-top: 4px;">Secondary Text</div>
-                </div>
-              </div>
+            <!-- Experience cards + 3D timeline — populated in Phase 4 & 5 -->
+            <div class="section__placeholder">
+              EXPERIENCE TIMELINE // PHASE 4–5
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Typography Roles & Scales -->
-      <section class="demo-section">
+      <!-- ==============================================================
+           PROJECTS SECTION
+           ============================================================== -->
+      <section id="projects" class="section">
         <div class="grid-container">
+          <div class="col-span-12 section__header">
+            <span class="section-tag">02 // PROJECTS</span>
+            <h2 class="section__title">What I've Shipped</h2>
+            <p class="section__subtitle">
+              Six products built from zero — each solving a problem I personally experienced.
+            </p>
+          </div>
           <div class="col-span-12">
-            <span class="section-tag">01.2 // TYPOGRAPHY HIERARCHY</span>
-            <h2 class="text-section" style="margin-top: var(--space-2); margin-bottom: var(--space-6);">
-              4-Font Type Architecture
-            </h2>
-          </div>
-
-          <div class="col-span-6 demo-card">
-            <span class="text-mono">01 // DISPLAY HERO — HORIZON (CDN)</span>
-            <h3 class="text-hero" style="font-size: clamp(2rem, 3.5vw, 3rem); margin-block: var(--space-3);">
-              PRECISION IN THOUGHT.
-            </h3>
-            <p class="text-body">
-              Geometric all-caps uppercase display font reserved strictly for high-impact hero headings and primary title locks.
-            </p>
-          </div>
-
-          <div class="col-span-6 demo-card">
-            <span class="text-mono">02 // EDITORIAL STATEMENT — NEWSREADER</span>
-            <div class="text-editorial" style="margin-block: var(--space-3);">
-              "Depth in expression, intent in execution."
+            <!-- Cinematic project cards — populated in Phase 6 -->
+            <div class="section__placeholder">
+              PROJECT CASE STUDIES // PHASE 6
             </div>
-            <p class="text-body">
-              Literary italic serif creating warmth, introspective weight, and humane contrast against geometric elements.
-            </p>
-          </div>
-
-          <div class="col-span-6 demo-card">
-            <span class="text-mono">03 // PRIMARY BODY & UI — PLUS JAKARTA SANS</span>
-            <h4 class="text-section" style="margin-top: var(--space-2); margin-bottom: var(--space-1);">
-              Professional Experience
-            </h4>
-            <p class="text-body" style="margin-bottom: var(--space-3);">
-              High-legibility humanist sans-serif with geometric accents, engineered for optimal reading across all screen sizes.
-            </p>
-            <div style="display: flex; gap: var(--space-2);">
-              <span class="badge">REGULAR 400</span>
-              <span class="badge">MEDIUM 500</span>
-              <span class="badge">SEMIBOLD 600</span>
-              <span class="badge">BOLD 700</span>
-            </div>
-          </div>
-
-          <div class="col-span-6 demo-card">
-            <span class="text-mono">04 // TECHNICAL METADATA — IBM PLEX MONO</span>
-            <div class="text-mono" style="color: var(--accent-primary); margin-block: var(--space-3); font-size: var(--text-ui);">
-              LAT: 19.1334° N // LON: 72.9133° E // STATUS: DEPLOYED
-            </div>
-            <p class="text-body">
-              Monospaced type for engineering metadata, dates, metrics, coordinates, and technical badge indicators.
-            </p>
           </div>
         </div>
       </section>
 
-      <!-- Three.js + GSAP Sanity Proof & Buttons -->
-      <section class="demo-section">
+      <!-- ==============================================================
+           EDUCATION SECTION
+           ============================================================== -->
+      <section id="education" class="section section--alt">
         <div class="grid-container">
-          <div class="col-span-6">
-            <span class="section-tag">01.3 // 3D & MOTION ARCHITECTURE</span>
-            <h2 class="text-section" style="margin-top: var(--space-2);">Three.js WebGL & GSAP Runtime</h2>
-            <p class="text-body" style="margin-block: var(--space-3);">
-              Validates WebGL canvas rendering with Three.js and continuous GSAP rotation matrix. Ready for Phase 3 orbital geometry canvas.
+          <div class="col-span-12 section__header">
+            <span class="section-tag">03 // EDUCATION</span>
+            <h2 class="section__title">Where I Learned</h2>
+            <p class="section__subtitle">
+              IIT Bombay Aerospace Engineering, Gold Medal academics, and everything between the classroom and the stage.
             </p>
-            <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
-              <button class="btn btn-primary">PRIMARY ACTION</button>
-              <button class="btn btn-warm">CORAL FOCUS CTA</button>
-              <button class="btn btn-secondary">SECONDARY OUTLINE</button>
-            </div>
           </div>
-
-          <div class="col-span-6">
-            <div class="canvas-wrap">
-              <span class="badge canvas-label">THREE.JS WEBGL + GSAP ORBIT</span>
-              <div id="three-sanity-canvas" style="width: 100%; height: 100%;"></div>
+          <div class="col-span-12">
+            <!-- Education content — populated in Phase 7 -->
+            <div class="section__placeholder">
+              EDUCATION & ACHIEVEMENTS // PHASE 7
             </div>
           </div>
         </div>
+      </section>
+
+      <!-- ==============================================================
+           CONTACT SECTION
+           ============================================================== -->
+      <section id="contact" class="section section--contact">
+        <div class="grid-container" style="margin-block: auto;">
+          <div class="col-span-12 section__header">
+            <span class="section-tag">04 // CONTACT</span>
+            <h2 class="section__title">Let's Connect</h2>
+            <p class="section__subtitle">
+              Always open to conversations about product, automation, or anything that makes humans tick.
+            </p>
+          </div>
+          <div class="col-span-12">
+            <!-- Contact links & resume — populated in Phase 7 -->
+            <div class="section__placeholder">
+              CONTACT LINKS &amp; RESUME // PHASE 7
+            </div>
+          </div>
+        </div>
+
+        <!-- Integrated footer -->
+        <footer class="site-footer">
+          <div class="grid-container">
+            <div class="col-span-12 site-footer__inner">
+              <div class="text-mono">PRASHANT SHUKLA // STRUCTURED INTENSITY V1.0</div>
+              <div class="text-mono">BUILT WITH PRECISION &amp; INTENT</div>
+            </div>
+          </div>
+        </footer>
       </section>
     </main>
-
-    <footer style="padding-block: var(--space-8); border-top: 1px solid var(--border-subtle); background-color: var(--bg-secondary);">
-      <div class="grid-container">
-        <div class="col-span-12" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-4);">
-          <div class="text-mono">PRASHANT SHUKLA // STRUCTURED INTENSITY V1.0</div>
-          <div class="text-mono">PHASE 1 VERIFICATION PASS: READY</div>
-        </div>
-      </div>
-    </footer>
 
     <script type="module" src="/src/js/main.js"></script>
   </body>

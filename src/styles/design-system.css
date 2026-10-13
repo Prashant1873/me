@@ -108,9 +108,9 @@
      ------------------------------------------------------------------------ */
   --grid-columns: 12;
   --grid-gap: var(--space-6);
-  --grid-margin: var(--space-16);
+  --grid-margin: clamp(1.5rem, 4vw, 4rem);
   --grid-margin-mobile: var(--space-4);
-  --max-content-width: 1440px;
+  --max-content-width: min(92vw, 1720px);
 
   /* Radii */
   --radius-xs: 2px;
@@ -245,15 +245,19 @@
 
 .col-span-12 { grid-column: span 12; }
 .col-span-8  { grid-column: span 8; }
+.col-span-7  { grid-column: span 7; }
 .col-span-6  { grid-column: span 6; }
+.col-span-5  { grid-column: span 5; }
 .col-span-4  { grid-column: span 4; }
 .col-span-3  { grid-column: span 3; }
 
 @media (max-width: 900px) {
   .col-span-8,
+  .col-span-7,
   .col-span-6 {
     grid-column: span 12;
   }
+  .col-span-5,
   .col-span-4,
   .col-span-3 {
     grid-column: span 6;
@@ -289,15 +293,8 @@
   text-transform: uppercase;
 }
 
-.section-tag::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background-color: var(--accent-primary);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--accent-primary);
-}
+
+
 
 .badge {
   display: inline-flex;
