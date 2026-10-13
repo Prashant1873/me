@@ -5,11 +5,11 @@ gsap.registerPlugin(ScrollToPlugin);
 
 /**
  * Full-Viewport Elastic Section Scroll Manager
- * - Strictly enforces 1 swipe = 1 page (no multiple section skips on strong flicks)
- * - Zero-lag trackpad response via normalized delta accumulation (15px threshold)
+ * - Strictly 1 section advance per swipe gesture
+ * - Anti-lockout: fixed, non-sliding cooldown ensures pages NEVER get stuck
+ * - Instant zero-lag initiation (~25ms response via 18px delta accumulator)
  * - Immediate mid-flight reversal on opposite flick
- * - Trackpad momentum suppression prevents decaying inertia from skipping extra pages
- * - Apple-style fluid spring physics with elastic boundary bounce
+ * - Apple-style fluid spring settling and boundary bounce
  */
 export function initSectionScroll() {
   const sections = Array.from(document.querySelectorAll('section[id]'));
@@ -22,12 +22,12 @@ export function initSectionScroll() {
   let activeScrollTween = null;
   let activeContentTween = null;
   let animDirection = 0;
+  let lastScrollTriggerTime = 0;
+  let animationSafetyTimer = null;
 
-  // Single-swipe gesture enforcement
-  let activeGestureDir = 0;       // Direction of currently active continuous swipe
-  let gestureResetTimer = null;   // Detects when physical swipe has ended
   let wheelAccumulator = 0;
-  const ACCUMULATOR_THRESHOLD = 15; // Low threshold for instantaneous start (~30ms)
+  let accumulatorClearTimeout = null;
+  const ACCUMULATOR_THRESHOLD = 18; // Fast, responsive initiation
 
   let touchStartY = 0;
   let touchStartX = 0;
@@ -84,11 +84,13 @@ export function initSectionScroll() {
   function goToSection(newTargetIndex, direction = 0) {
     // 1. Boundary check: Elastic rubber-band rebound
     if (newTargetIndex < 0) {
-      elasticBounce(sections[0], -28);
+      elasticBounce(sections[0], -24);
+      lastScrollTriggerTime = Date.now() - 350; // Don't lockout when hitting boundary
       return;
     }
     if (newTargetIndex >= sections.length) {
-      elasticBounce(sections[sections.length - 1], 28);
+      elasticBounce(sections[sections.length - 1], 24);
+      lastScrollTriggerTime = Date.now() - 350; // Don't lockout when hitting boundary
       return;
     }
 
@@ -98,7 +100,7 @@ export function initSectionScroll() {
     // If already at target and settled, ignore
     if (newTargetIndex === currentIndex && !isAnimating) return;
 
-    // 2. Interrupt active flight immediately for instant response
+    // 2. Clear any previous tweens immediately
     if (activeScrollTween) {
       activeScrollTween.kill();
       activeScrollTween = null;
@@ -109,34 +111,41 @@ export function initSectionScroll() {
     }
 
     isAnimating = true;
+    lastScrollTriggerTime = Date.now();
     animDirection = dir;
     targetIndex = newTargetIndex;
     currentIndex = newTargetIndex;
 
     const targetSection = sections[targetIndex];
-    const targetY = targetSection.offsetTop;
+    const targetY = getSectionTop(targetSection);
 
     updateNav(targetSection.id);
+
+    // Safety timeout: guarantees isAnimating ALWAYS resets, avoiding any freeze
+    clearTimeout(animationSafetyTimer);
+    animationSafetyTimer = setTimeout(() => {
+      isAnimating = false;
+    }, 650);
 
     // 3. Incoming section subtle elastic spring settling
     const incomingContainer = targetSection.querySelector('.grid-container') || targetSection.firstElementChild;
     if (incomingContainer) {
       activeContentTween = gsap.fromTo(incomingContainer,
-        { y: dir * 30, opacity: 0.88 },
+        { y: dir * 28, opacity: 0.88 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.62,
+          duration: 0.55,
           ease: 'power3.out',
           clearProps: 'transform'
         }
       );
     }
 
-    // 4. Fast, fluid scroll to target (0.58s duration eliminates perceived sluggishness)
+    // 4. Fast, smooth scroll to target (0.5s duration)
     activeScrollTween = gsap.to(window, {
       scrollTo: { y: targetY, autoKill: false },
-      duration: 0.58,
+      duration: 0.5,
       ease: 'power3.out',
       onComplete: () => {
         window.scrollTo(0, targetY);
@@ -151,6 +160,8 @@ export function initSectionScroll() {
     if (e.ctrlKey || e.metaKey) return;
     e.preventDefault();
 
+    const now = Date.now();
+
     // Normalize delta across input devices (pixels, lines, pages)
     let delta = e.deltaY;
     if (e.deltaMode === 1) delta *= 28; // Lines (standard mouse wheel)
@@ -160,45 +171,50 @@ export function initSectionScroll() {
 
     const inputDir = delta > 0 ? 1 : -1;
 
-    // Reset gesture detection after 180ms of silence (fingers lifted / inertia died)
-    clearTimeout(gestureResetTimer);
-    gestureResetTimer = setTimeout(() => {
-      activeGestureDir = 0;
-      wheelAccumulator = 0;
-    }, 180);
-
-    // 1. MID-FLIGHT REVERSAL:
-    // If currently animating and user flicks in the OPPOSITE direction, immediately reverse
+    // 1. MID-FLIGHT HANDLING:
     if (isAnimating) {
+      // Reversal: if user flicks in OPPOSITE direction, immediately reverse back!
       if (inputDir !== animDirection) {
-        activeGestureDir = inputDir;
         wheelAccumulator = 0;
-        const reverseTarget = inputDir > 0 ? Math.min(sections.length - 1, targetIndex + 1) : Math.max(0, targetIndex - 1);
+        const reverseTarget = inputDir > 0 
+          ? Math.min(sections.length - 1, targetIndex + 1) 
+          : Math.max(0, targetIndex - 1);
         goToSection(reverseTarget, inputDir);
       }
-      // Strictly prevent any same-direction advance during flight (enforces 1 swipe = 1 page)
+      // Strictly prevent multiple forward jumps from the same flight
       return;
     }
 
-    // 2. ONE-SWIPE-ONE-PAGE LOCK:
-    // If the active swipe gesture already triggered a section advance in this direction,
-    // ignore all remaining events (including high-velocity momentum tail) of this swipe.
-    if (activeGestureDir === inputDir) {
+    // 2. FIXED TIME COOLDOWN (Anti-Double-Skip & Anti-Lockout):
+    // Prevents trailing trackpad momentum from triggering a 2nd section.
+    // Fixed window of 550ms since initiation (does NOT slide with subsequent events).
+    if (now - lastScrollTriggerTime < 550) {
+      // Reversal is always honored immediately
+      if (inputDir !== animDirection) {
+        wheelAccumulator = 0;
+        goToSection(currentIndex + inputDir, inputDir);
+        return;
+      }
+      // Discard trailing momentum of previous swipe in the same direction
       return;
     }
 
-    // 3. Resting / new swipe: accumulate delta
+    // 3. RESTING STATE / NEW SWIPE ACCUMULATOR:
     if ((wheelAccumulator > 0 && delta < 0) || (wheelAccumulator < 0 && delta > 0)) {
       wheelAccumulator = 0;
     }
 
     wheelAccumulator += delta;
 
-    // 4. Trigger section transition when threshold is met
+    clearTimeout(accumulatorClearTimeout);
+    accumulatorClearTimeout = setTimeout(() => {
+      wheelAccumulator = 0;
+    }, 120);
+
+    // 4. TRIGGER TRANSITION:
     if (Math.abs(wheelAccumulator) >= ACCUMULATOR_THRESHOLD) {
       const scrollDir = wheelAccumulator > 0 ? 1 : -1;
       wheelAccumulator = 0;
-      activeGestureDir = scrollDir; // Lock this swipe until user pauses
       goToSection(currentIndex + scrollDir, scrollDir);
     }
   }
@@ -243,14 +259,7 @@ export function initSectionScroll() {
 
     if (Math.abs(deltaY) > 36 && Math.abs(deltaY) > Math.abs(deltaX)) {
       const touchDir = deltaY > 0 ? 1 : -1;
-      if (isAnimating) {
-        if (touchDir !== animDirection) {
-          const reverseTarget = touchDir > 0 ? Math.min(sections.length - 1, targetIndex + 1) : Math.max(0, targetIndex - 1);
-          goToSection(reverseTarget, touchDir);
-        }
-      } else {
-        goToSection(currentIndex + touchDir, touchDir);
-      }
+      goToSection(currentIndex + touchDir, touchDir);
     }
     touchStartY = 0;
   }
@@ -262,7 +271,6 @@ export function initSectionScroll() {
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      activeGestureDir = 0;
       wheelAccumulator = 0;
       const secId = link.getAttribute('data-section');
       const idx = sections.findIndex(s => s.id === secId);
@@ -276,14 +284,12 @@ export function initSectionScroll() {
   const scrollIndicatorBtn = document.getElementById('hero-scroll-btn');
   if (scrollIndicatorBtn) {
     scrollIndicatorBtn.addEventListener('click', () => {
-      activeGestureDir = 0;
       wheelAccumulator = 0;
       goToSection(1, 1);
     });
     scrollIndicatorBtn.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        activeGestureDir = 0;
         wheelAccumulator = 0;
         goToSection(1, 1);
       }
@@ -293,7 +299,7 @@ export function initSectionScroll() {
   // --- Resize Alignment ---
   window.addEventListener('resize', () => {
     if (sections[currentIndex]) {
-      const targetY = sections[currentIndex].offsetTop;
+      const targetY = getSectionTop(sections[currentIndex]);
       window.scrollTo(0, targetY);
     }
   });

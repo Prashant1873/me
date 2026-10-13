@@ -78,9 +78,9 @@ src/
 
 ## Scroll Controller State Machine (`section-scroll.js`)
 
-- **Input Accumulation:** Normalizes wheel `deltaY` (pixels, lines, pages); triggers when `|wheelAccumulator| >= 15px` (eliminates trackpad deadzone).
-- **Single-Swipe Lock (1 Swipe = 1 Page):**
-  - Once a continuous swipe triggers an advance in a direction, `activeGestureDir` locks that direction until physical gesture ends (180ms pause). Subsequent events and momentum tails are ignored, strictly preventing multi-page skips.
-  - *Opposite Flick:* Immediately interrupts active GSAP tweens and reverses towards the opposing section without dropping input.
-- **Settling:** 0.58s `power3.out` transition with incoming container elastic spring settling.
+- **Input Accumulation:** Normalizes wheel `deltaY` (pixels, lines, pages); triggers when `|wheelAccumulator| >= 18px` (~25ms response).
+- **Anti-Lockout Fixed Cooldown (1 Swipe = 1 Page):**
+  - Uses a fixed, non-sliding 550ms cooldown window since scroll initiation, plus a 650ms animation safety timer. Incoming wheel events during flight and decay do not push the cooldown into the future, guaranteeing pages never freeze or get stuck.
+  - *Opposite Flick:* Immediately interrupts flight and reverses towards opposing section without dropped input.
+- **Settling:** 0.5s `power3.out` transition with incoming container spring settling.
 

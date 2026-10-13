@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Audit updated layout, 3D canvas placement, and single-swipe scroll enforcement', async ({ page }) => {
-  test.setTimeout(45000);
+  test.setTimeout(60000);
   await page.goto('http://localhost:3000/');
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(1000); // let entrance animations settle
@@ -53,14 +53,14 @@ test('Audit updated layout, 3D canvas placement, and single-swipe scroll enforce
   const initialScrollY = await page.evaluate(() => window.scrollY);
   expect(initialScrollY).toBe(0);
 
-  // Dispatch a very strong trackpad scroll gesture with rapid momentum events
+  // Dispatch a very strong trackpad scroll swipe with rapid momentum events
   console.log('Dispatching a strong trackpad scroll swipe (wheel 450px + momentum 300px)...');
   await page.mouse.wheel(0, 450);
   await page.waitForTimeout(50);
   await page.mouse.wheel(0, 300);
   await page.waitForTimeout(50);
   await page.mouse.wheel(0, 150);
-  await page.waitForTimeout(900);
+  await page.waitForTimeout(700);
 
   const expBox = await page.locator('#experience').boundingBox();
   const projBox = await page.locator('#projects').boundingBox();
@@ -73,12 +73,12 @@ test('Audit updated layout, 3D canvas placement, and single-swipe scroll enforce
   expect(projBox.y).toBeGreaterThanOrEqual(vh - 2);
   console.log('✓ Strong swipe advanced exactly 1 section (Experience) and did NOT skip multiple sections!');
 
-  // 5. Test Second Swipe after pause advances exactly 1 more section
+  // 5. Test Second Swipe advances exactly 1 more section
   console.log('\n--- 5. SECOND SWIPE AUDIT ---');
-  await page.waitForTimeout(250); // Pause to end first swipe gesture
+  await page.waitForTimeout(200);
   console.log('Dispatching second swipe...');
   await page.mouse.wheel(0, 100);
-  await page.waitForTimeout(900);
+  await page.waitForTimeout(700);
 
   const projBox2 = await page.locator('#projects').boundingBox();
   console.log(`Projects section top after 2nd swipe: ${projBox2.y.toFixed(1)}px`);
@@ -92,7 +92,7 @@ test('Audit updated layout, 3D canvas placement, and single-swipe scroll enforce
   await page.mouse.wheel(0, 80);
   await page.waitForTimeout(100);
   await page.mouse.wheel(0, -80);
-  await page.waitForTimeout(900);
+  await page.waitForTimeout(700);
 
   const projBoxInterrupted = await page.locator('#projects').boundingBox();
   console.log(`Projects section after mid-flight reversal: top=${projBoxInterrupted.y.toFixed(1)}px`);
@@ -102,9 +102,11 @@ test('Audit updated layout, 3D canvas placement, and single-swipe scroll enforce
   // 7. Test Nav Direct Links
   console.log('\n--- 7. NAV DIRECT LINK AUDIT ---');
   await page.locator('.site-nav__link[data-section="hero"]').click();
-  await page.waitForTimeout(800);
+  await page.waitForTimeout(700);
   const heroBoxReturn = await page.locator('#hero').boundingBox();
   expect(Math.abs(heroBoxReturn.y)).toBeLessThan(2);
+  console.log('✓ Nav link returned cleanly to Hero section.');
+
   // 8. Verify Browser Tab Favicon
   console.log('\n--- 8. BROWSER TAB FAVICON AUDIT ---');
   const faviconLink = page.locator('link[rel="icon"]');
@@ -118,6 +120,29 @@ test('Audit updated layout, 3D canvas placement, and single-swipe scroll enforce
   expect(svgText).toContain('svg');
   expect(svgText).toContain('#E8655A'); // Coral wireframe color
   console.log('✓ 3D polygon wireframe favicon loaded with HTTP 200 and matches coral hero geometry.');
+
+  // 9. Full Traversal Verification: Scroll sequentially through all sections without getting stuck
+  console.log('\n--- 9. FULL TRAVERSAL AUDIT (NO STUCK PAGES) ---');
+  const forwardSections = ['experience', 'projects', 'education', 'contact'];
+  for (const secId of forwardSections) {
+    console.log(`Scrolling forward to #${secId}...`);
+    await page.mouse.wheel(0, 100);
+    await page.waitForTimeout(650);
+    const box = await page.locator(`#${secId}`).boundingBox();
+    expect(Math.abs(box.y)).toBeLessThan(2);
+    console.log(`  ✓ Arrived cleanly at #${secId}`);
+  }
+
+  const backwardSections = ['education', 'projects', 'experience', 'hero'];
+  for (const secId of backwardSections) {
+    console.log(`Scrolling backward to #${secId}...`);
+    await page.mouse.wheel(0, -100);
+    await page.waitForTimeout(650);
+    const box = await page.locator(`#${secId}`).boundingBox();
+    expect(Math.abs(box.y)).toBeLessThan(2);
+    console.log(`  ✓ Arrived cleanly at #${secId}`);
+  }
+  console.log('✓ Full bidirectional traversal completed with zero stuck pages!');
 
   console.log('\n================ ALL AUDIT & SINGLE-SWIPE CHECKS PASSED ================\n');
 });
