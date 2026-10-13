@@ -21,8 +21,70 @@
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;1,400&display=swap"
       rel="stylesheet"
     />
+    <!-- Immediate Theme Initialization (prevents theme flash) -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme') || 'dark';
+          document.documentElement.setAttribute('data-theme', saved);
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Master Stylesheet (Render-blocking: prevents raw unstyled HTML / FOUC) -->
+    <link rel="stylesheet" href="/src/styles/index.css" />
+
+    <!-- Critical Anti-FOUC Baseline -->
+    <style>
+      html, body {
+        background-color: #000000;
+        color: #F1EEE5;
+        margin: 0;
+        padding: 0;
+      }
+      html[data-theme="light"], html[data-theme="light"] body {
+        background-color: #FFFFFF;
+        color: #141414;
+      }
+    </style>
   </head>
   <body>
+    <!-- ================================================================
+         LIGHT LOADING SKELETON (Instant Anti-FOUC Shell)
+         ================================================================ -->
+    <div id="site-skeleton" class="site-skeleton" aria-hidden="true">
+      <div class="skeleton__nav">
+        <div class="skeleton__logo">
+          <div class="skeleton__block skeleton__block--name"></div>
+          <div class="skeleton__block skeleton__block--tagline"></div>
+        </div>
+        <div class="skeleton__links">
+          <div class="skeleton__block skeleton__block--pill"></div>
+          <div class="skeleton__block skeleton__block--pill"></div>
+          <div class="skeleton__block skeleton__block--pill"></div>
+          <div class="skeleton__block skeleton__block--circle"></div>
+        </div>
+      </div>
+
+      <div class="skeleton__hero">
+        <div class="skeleton__hero-left">
+          <div class="skeleton__block skeleton__block--tag"></div>
+          <div class="skeleton__block skeleton__block--title"></div>
+          <div class="skeleton__block skeleton__block--meta"></div>
+          <div class="skeleton__badges">
+            <div class="skeleton__block skeleton__block--badge"></div>
+            <div class="skeleton__block skeleton__block--badge"></div>
+            <div class="skeleton__block skeleton__block--badge"></div>
+          </div>
+        </div>
+        <div class="skeleton__hero-right">
+          <div class="skeleton__orbit">
+            <div class="skeleton__orbit-core"></div>
+            <div class="skeleton__orbit-ring"></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- ================================================================
          NAVIGATION
          ================================================================ -->

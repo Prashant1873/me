@@ -4,5 +4,6 @@
 
 @import './reset.css';
 @import './design-system.css';
+@import './skeleton.css';
 @import './navigation.css';
 @import './sections.css';
