@@ -64,13 +64,9 @@ gsap.fromTo('.hero__metadata',
   { y: 15, opacity: 0 },
   { y: 0, opacity: 1, duration: 0.6, delay: 0.45, ease: 'power3.out' }
 );
-gsap.fromTo('.hero__tagline',
-  { y: 25, opacity: 0 },
-  { y: 0, opacity: 1, duration: 0.8, delay: 0.55, ease: 'power3.out' }
-);
 gsap.fromTo('.hero__meta',
   { y: 15, opacity: 0 },
-  { y: 0, opacity: 1, duration: 0.6, delay: 0.75, ease: 'power3.out' }
+  { y: 0, opacity: 1, duration: 0.6, delay: 0.65, ease: 'power3.out' }
 );
 
 // Fade in the 3D canvas after text reveals
