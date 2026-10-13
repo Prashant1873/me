@@ -5,10 +5,10 @@ gsap.registerPlugin(ScrollToPlugin);
 
 /**
  * Full-Viewport Elastic Section Scroll Manager
- * - Instant zero-lag trackpad response via normalized delta accumulation (14px threshold)
- * - Interruptible mid-flight scrolls: instant reversal on opposite flick
- * - Fluid chaining: deliberate same-direction flick mid-flight smoothly accelerates to next section
- * - Decaying trackpad momentum suppression to prevent accidental double-skips
+ * - Strictly enforces 1 swipe = 1 page (no multiple section skips on strong flicks)
+ * - Zero-lag trackpad response via normalized delta accumulation (15px threshold)
+ * - Immediate mid-flight reversal on opposite flick
+ * - Trackpad momentum suppression prevents decaying inertia from skipping extra pages
  * - Apple-style fluid spring physics with elastic boundary bounce
  */
 export function initSectionScroll() {
@@ -22,14 +22,12 @@ export function initSectionScroll() {
   let activeScrollTween = null;
   let activeContentTween = null;
   let animDirection = 0;
-  let animStartTime = 0;
-  let momentumCooldownUntil = 0;
-  let lastDeltaY = 0;
 
-  // Trackpad / Mouse accumulator
+  // Single-swipe gesture enforcement
+  let activeGestureDir = 0;       // Direction of currently active continuous swipe
+  let gestureResetTimer = null;   // Detects when physical swipe has ended
   let wheelAccumulator = 0;
-  let wheelClearTimeout = null;
-  const ACCUMULATOR_THRESHOLD = 14; // Low threshold eliminates trackpad deadzone & lag
+  const ACCUMULATOR_THRESHOLD = 15; // Low threshold for instantaneous start (~30ms)
 
   let touchStartY = 0;
   let touchStartX = 0;
@@ -111,7 +109,6 @@ export function initSectionScroll() {
     }
 
     isAnimating = true;
-    animStartTime = Date.now();
     animDirection = dir;
     targetIndex = newTargetIndex;
     currentIndex = newTargetIndex;
@@ -145,7 +142,6 @@ export function initSectionScroll() {
         window.scrollTo(0, targetY);
         isAnimating = false;
         activeScrollTween = null;
-        momentumCooldownUntil = Date.now() + 220; // Guard against decaying trackpad momentum tail
       }
     });
   }
@@ -154,8 +150,6 @@ export function initSectionScroll() {
   function onWheel(e) {
     if (e.ctrlKey || e.metaKey) return;
     e.preventDefault();
-
-    const now = Date.now();
 
     // Normalize delta across input devices (pixels, lines, pages)
     let delta = e.deltaY;
@@ -166,61 +160,45 @@ export function initSectionScroll() {
 
     const inputDir = delta > 0 ? 1 : -1;
 
-    // A. Post-arrival momentum damping against decaying inertia
-    if (!isAnimating && now < momentumCooldownUntil) {
-      // Reversal during cooldown is always honored immediately
-      if (inputDir !== animDirection) {
-        momentumCooldownUntil = 0;
-      } else {
-        // Discard decaying inertia tail unless user performs a fresh high flick
-        const isDecaying = Math.abs(delta) <= Math.abs(lastDeltaY) * 1.05;
-        lastDeltaY = delta;
-        if (isDecaying) {
-          return;
-        }
-      }
-    }
-    lastDeltaY = delta;
+    // Reset gesture detection after 180ms of silence (fingers lifted / inertia died)
+    clearTimeout(gestureResetTimer);
+    gestureResetTimer = setTimeout(() => {
+      activeGestureDir = 0;
+      wheelAccumulator = 0;
+    }, 180);
 
-    // B. Mid-flight interruption & chaining
+    // 1. MID-FLIGHT REVERSAL:
+    // If currently animating and user flicks in the OPPOSITE direction, immediately reverse
     if (isAnimating) {
-      // 1. REVERSE FLICK: Immediately interrupt and reverse back
       if (inputDir !== animDirection) {
+        activeGestureDir = inputDir;
         wheelAccumulator = 0;
         const reverseTarget = inputDir > 0 ? Math.min(sections.length - 1, targetIndex + 1) : Math.max(0, targetIndex - 1);
         goToSection(reverseTarget, inputDir);
-        return;
       }
-
-      // 2. SAME DIRECTION FLICK: Fluid chaining after brief gesture window
-      const elapsed = now - animStartTime;
-      if (elapsed > 200 && Math.abs(delta) > 16) {
-        wheelAccumulator = 0;
-        const nextTarget = inputDir > 0 ? targetIndex + 1 : targetIndex - 1;
-        if (nextTarget >= 0 && nextTarget < sections.length) {
-          goToSection(nextTarget, inputDir);
-        }
-        return;
-      }
-
+      // Strictly prevent any same-direction advance during flight (enforces 1 swipe = 1 page)
       return;
     }
 
-    // C. Resting state accumulator: instant response with 0 lag
+    // 2. ONE-SWIPE-ONE-PAGE LOCK:
+    // If the active swipe gesture already triggered a section advance in this direction,
+    // ignore all remaining events (including high-velocity momentum tail) of this swipe.
+    if (activeGestureDir === inputDir) {
+      return;
+    }
+
+    // 3. Resting / new swipe: accumulate delta
     if ((wheelAccumulator > 0 && delta < 0) || (wheelAccumulator < 0 && delta > 0)) {
       wheelAccumulator = 0;
     }
 
     wheelAccumulator += delta;
 
-    clearTimeout(wheelClearTimeout);
-    wheelClearTimeout = setTimeout(() => {
-      wheelAccumulator = 0;
-    }, 120);
-
+    // 4. Trigger section transition when threshold is met
     if (Math.abs(wheelAccumulator) >= ACCUMULATOR_THRESHOLD) {
       const scrollDir = wheelAccumulator > 0 ? 1 : -1;
       wheelAccumulator = 0;
+      activeGestureDir = scrollDir; // Lock this swipe until user pauses
       goToSection(currentIndex + scrollDir, scrollDir);
     }
   }
@@ -284,6 +262,8 @@ export function initSectionScroll() {
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
+      activeGestureDir = 0;
+      wheelAccumulator = 0;
       const secId = link.getAttribute('data-section');
       const idx = sections.findIndex(s => s.id === secId);
       if (idx !== -1) {
@@ -296,11 +276,15 @@ export function initSectionScroll() {
   const scrollIndicatorBtn = document.getElementById('hero-scroll-btn');
   if (scrollIndicatorBtn) {
     scrollIndicatorBtn.addEventListener('click', () => {
+      activeGestureDir = 0;
+      wheelAccumulator = 0;
       goToSection(1, 1);
     });
     scrollIndicatorBtn.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
+        activeGestureDir = 0;
+        wheelAccumulator = 0;
         goToSection(1, 1);
       }
     });
