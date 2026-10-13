@@ -31,6 +31,11 @@ test('Verify ultrawide / zoom-out behavior (Option A)', async ({ page }) => {
   // Take screenshot of zoomed-out / ultrawide layout
   await page.screenshot({ path: 'test-results/hero-ultrawide.png' });
 
+  // Standard desktop 1440x900
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.waitForTimeout(600);
+  await page.screenshot({ path: 'test-results/hero-desktop.png' });
+
   // Test mobile viewport as well to verify responsive behavior
   await page.setViewportSize({ width: 390, height: 844 });
   await page.waitForTimeout(600);
