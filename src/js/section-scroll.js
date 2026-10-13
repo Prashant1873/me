@@ -16,6 +16,7 @@ export function initSectionScroll() {
   const navLinks = Array.from(document.querySelectorAll('.site-nav__link[data-section]'));
   let currentIndex = 0;
   let isScrolling = false;
+  let scrollDirection = 0; // 1 = forward/down, -1 = backward/up
   let safetyTimer = null;
 
   function updateNav(index) {
@@ -29,6 +30,7 @@ export function initSectionScroll() {
   function scrollToSection(index) {
     if (index < 0 || index >= sections.length || index === currentIndex) return;
     
+    scrollDirection = index > currentIndex ? 1 : -1;
     isScrolling = true;
     updateNav(index);
 
@@ -38,18 +40,18 @@ export function initSectionScroll() {
     clearTimeout(safetyTimer);
     safetyTimer = setTimeout(() => {
       isScrolling = false;
-    }, 1100);
+    }, 600);
 
     gsap.to(window, {
       scrollTo: { y: targetY, autoKill: false },
-      duration: 0.75,
+      duration: 0.42,
       ease: 'power2.inOut',
+      overwrite: 'auto',
       onComplete: () => {
         window.scrollTo(0, targetY);
-        // Generous 250ms buffer after landing ensures trackpad momentum is 100% dead
         setTimeout(() => {
           isScrolling = false;
-        }, 250);
+        }, 60);
       }
     });
   }
@@ -59,11 +61,16 @@ export function initSectionScroll() {
     if (e.ctrlKey || e.metaKey) return;
     e.preventDefault();
 
-    // While animating or absorbing swipe momentum, completely ignore all wheel events
-    if (isScrolling) return;
-
-    // Filter out resting touchpad noise / micro-jitters
     if (Math.abs(e.deltaY) < 18) return;
+    const eventDir = e.deltaY > 0 ? 1 : -1;
+
+    // While animating, allow immediate mid-flight reversal in opposite direction
+    if (isScrolling) {
+      if (eventDir !== scrollDirection && Math.abs(e.deltaY) > 30) {
+        scrollToSection(currentIndex - scrollDirection);
+      }
+      return;
+    }
 
     if (e.deltaY > 0) {
       scrollToSection(currentIndex + 1);
@@ -122,6 +129,14 @@ export function initSectionScroll() {
       }
     });
   });
+
+  const logoLink = document.querySelector('.site-nav__logo');
+  if (logoLink) {
+    logoLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToSection(0);
+    });
+  }
 
   // --- Hero scroll indicator button ---
   const scrollIndicatorBtn = document.getElementById('hero-scroll-btn');

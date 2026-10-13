@@ -2,6 +2,7 @@ import '../styles/index.css';
 import gsap from 'gsap';
 import { initHeroCanvas } from './hero-canvas.js';
 import { initSectionScroll } from './section-scroll.js';
+import { initExperience } from './experience.js';
 
 // --------------------------------------------------------------------------
 // Theme Toggle
@@ -48,6 +49,11 @@ const sectionScroll = initSectionScroll();
 // --------------------------------------------------------------------------
 const heroCanvasContainer = document.getElementById('hero-canvas');
 const heroScene = initHeroCanvas(heroCanvasContainer);
+
+// --------------------------------------------------------------------------
+// Experience Showcase (Phase 4)
+// --------------------------------------------------------------------------
+initExperience();
 
 // --------------------------------------------------------------------------
 // Dismiss Loading Skeleton & Trigger Orchestrated Entrance

@@ -1,0 +1,120 @@
+/**
+ * Commercial & Venture Experience Data Model
+ * 5 pure-play corporate, startup, and venture roles
+ */
+
+export const EXPERIENCES = [
+  {
+    id: 'iqvia',
+    company: 'IQVIA',
+    role: 'Analyst, Strategy Consulting',
+    period: 'Jul 2026 – Present',
+    category: 'strategy',
+    categoryLabel: 'Strategy Consulting',
+    tagline: 'Healthcare Analytics & AI Automation for Global Pharma',
+    metricHighlight: '5+ AI Bots & 7+ Dashboards',
+    bullets: [
+      'Developed automation mechanisms for everyday data analysis using AI agents and building 5+ production Python bots.',
+      'Managed 7+ enterprise dashboards for India expansion-monitoring for international clients including Sanofi, Eli Lilly, and Pfizer.',
+      'Engineered an AI data management portal for 5-year historical knowledge keeping and research reproducibility.'
+    ],
+    linkedinUrl: 'https://www.linkedin.com/company/iqvia/',
+    photos: [
+      { url: './images/experience/iqvia/20260717_110908.jpg', caption: 'Strategy consulting workspace & desk' },
+      { url: './images/experience/iqvia/20260731_141440.jpg', caption: 'Strategy execution & client engagements' },
+      { url: './images/experience/iqvia/20260910_155612.jpg', caption: 'Office & analytics reviews' }
+    ],
+    badgeColor: 'royal-blue'
+  },
+  {
+    id: 'revolut',
+    company: 'Revolut',
+    role: "CEO's Office Product Strategy Intern",
+    period: 'Jan 2026 – Jun 2026',
+    category: 'strategy',
+    categoryLabel: 'FinTech & Strategy',
+    tagline: 'Global Remittance Optimization & India Trading Launch',
+    metricHighlight: '£19.7M Fee Optimization',
+    bullets: [
+      'Launched Revolut’s first teen loyalty programme, benchmarking 5 international markets and building the core business case.',
+      'Quantified remittance costs across 900+ trade corridors, uncovering £19.7M in excess Agency Banking fees.',
+      'Shaped go-to-market strategy for Revolut’s India Trading platform launch, closely aligning product velocity with compliance requirements.'
+    ],
+    linkedinUrl: 'https://www.linkedin.com/company/revolut/',
+    photos: [
+      { url: './images/experience/revolut/1729271100596.jpeg', caption: 'Revolut identity & CEO office engagement' },
+      { url: './images/experience/revolut/AGC_EGO_BASE_20260602_003850962.jpg', caption: 'Workplace & strategy sessions' }
+    ],
+    badgeColor: 'royal-blue'
+  },
+  {
+    id: 'ketto',
+    company: 'Ketto.org',
+    role: 'Product, Strategy & Operations Intern',
+    period: 'Sep 2025 – Nov 2025',
+    category: 'venture',
+    categoryLabel: 'HealthTech & Product',
+    tagline: '0→1 Clinical Product Validation & Hybrid GTM Funnel',
+    metricHighlight: '+28% Conversion Lift',
+    bullets: [
+      'Identified a weight-loss treatment gap in the market and built an MVP funnel, validating Product-Market Fit with 50+ clinicians.',
+      'Designed the entire offline GTM blending clinician referrals and targeted outreach, driving a 28% lift in conversions over digital channels.',
+      'Synthesized quantitative & qualitative insights from 50+ deep clinician interviews to define product roadmap and expansion playbook.'
+    ],
+    linkedinUrl: 'https://www.linkedin.com/company/ketto/',
+    photos: [
+      { url: './images/experience/ketto/IMG-20250930-WA0388(1).jpg', caption: 'Field validation & clinician outreach' },
+      { url: './images/experience/ketto/Snapchat-374168654.jpg', caption: 'Product discovery team session' },
+      { url: './images/experience/ketto/Snapchat-841329839.jpg', caption: 'Operations & roadmap review' }
+    ],
+    badgeColor: 'coral'
+  },
+  {
+    id: 'kalam-labs',
+    company: 'Kalam Labs (YC S21)',
+    role: "Founder's Office Intern",
+    period: 'May 2025 – Jul 2025',
+    category: 'venture',
+    categoryLabel: 'DeepTech & EdTech',
+    tagline: 'Stratospheric Aerial Vehicle Deal & Growth Automation',
+    metricHighlight: '₹5M+ Deal with Indian Air Force',
+    bullets: [
+      'Awarded Letter of Recommendation for exceptional growth leadership and scaling the STEM Workshops Vertical.',
+      'Led an ₹5M+ deal with the Indian Air Force for a high-altitude stratospheric aerial vehicle program.',
+      'Reduced manual overhead by 10+ hours per week through custom web scrapers and automation pipelines using Selenium, BeautifulSoup, and Zapier.'
+    ],
+    linkedinUrl: 'https://www.linkedin.com/company/kalam-labs/',
+    photos: [
+      { url: './images/experience/kalam-labs/IMG-20250712-WA0010.jpg', caption: 'Kalam Labs Founder Office workspace' }
+    ],
+    badgeColor: 'coral'
+  },
+  {
+    id: 'faoud',
+    company: 'FAOUD',
+    role: 'Head of Product',
+    period: 'Dec 2024 – Apr 2025',
+    category: 'venture',
+    categoryLabel: '0→1 Venture & FMCG Tech',
+    tagline: 'MSME Onboarding & Algorithmic Demand Forecasting',
+    metricHighlight: '150+ MSMEs & 82% Model Accuracy',
+    bullets: [
+      'Architected the customer onboarding experience from ground zero, piloting successfully with 150+ MSMEs nationwide.',
+      'Rolled out standardized GTM playbooks and self-serve onboarding flows spanning 39 FMCG categories across the platform.',
+      'Engineered a demand-forecasting model utilizing Google Analytics and Python, reaching 82% forecast accuracy overall.',
+      'Initiated real-time event tracking and webhook reporting, surfacing operational insights on 50K+ daily active visitors via Power BI.'
+    ],
+    linkedinUrl: 'https://www.linkedin.com/company/faoud/',
+    photos: [
+      { url: './images/experience/faoud/20260820_175739.jpg', caption: 'Product architecture & platform review' },
+      { url: './images/experience/faoud/20260820_180125.jpg', caption: 'Team sprint & MSME pilot rollout' }
+    ],
+    badgeColor: 'coral'
+  }
+];
+
+export const CATEGORIES = [
+  { id: 'all', label: 'All Experience', count: 5 },
+  { id: 'strategy', label: 'Strategy & FinTech', count: 2 },
+  { id: 'venture', label: '0→1 Product & Startups', count: 3 }
+];

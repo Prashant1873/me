@@ -55,10 +55,10 @@ The 5 commercial, startup, and venture experience entries laid out with company 
 - Run automated tests (`tests/audit.spec.js`, `tests/zoom-out.spec.js`) to ensure zero regressions in scroll physics, layout bounding boxes, or performance
 
 ## UAT Checklist
-- [ ] All 5 commercial entries visible: IQVIA, Revolut, Ketto, Kalam Labs, FAOUD
-- [ ] Each entry displays: company name, role, date range, 3–4 bullet points, authentic photos, LinkedIn link
-- [ ] Authentic photos from `Portfolio_images/` render cleanly
-- [ ] Category tabs filter correctly: All (5), Strategy & FinTech (2), Venture & Startups (3)
-- [ ] LinkedIn links open correct company pages in new tab
-- [ ] Dark and light themes render flawlessly with WCAG AA contrast
-- [ ] Section scroll navigation advances smoothly without interference
+- [x] All 5 commercial entries visible: IQVIA, Revolut, Ketto, Kalam Labs, FAOUD
+- [x] Each entry displays: company name, role, date range, 3–4 bullet points, authentic photos, LinkedIn link
+- [x] Authentic photos from `Portfolio_images/` render cleanly
+- [x] Category tabs filter correctly: All (5), Strategy & FinTech (2), Venture & Startups (3)
+- [x] LinkedIn links open correct company pages in new tab
+- [x] Dark and light themes render flawlessly with WCAG AA contrast
+- [x] Section scroll navigation advances smoothly without interference
