@@ -105,7 +105,19 @@ test('Audit updated layout, 3D canvas placement, and single-swipe scroll enforce
   await page.waitForTimeout(800);
   const heroBoxReturn = await page.locator('#hero').boundingBox();
   expect(Math.abs(heroBoxReturn.y)).toBeLessThan(2);
-  console.log('✓ Nav link returned cleanly to Hero section.');
+  // 8. Verify Browser Tab Favicon
+  console.log('\n--- 8. BROWSER TAB FAVICON AUDIT ---');
+  const faviconLink = page.locator('link[rel="icon"]');
+  await expect(faviconLink).toHaveCount(1);
+  const href = await faviconLink.getAttribute('href');
+  expect(href).toContain('favicon.svg');
+
+  const response = await page.request.get('http://localhost:3000/favicon.svg');
+  expect(response.status()).toBe(200);
+  const svgText = await response.text();
+  expect(svgText).toContain('svg');
+  expect(svgText).toContain('#E8655A'); // Coral wireframe color
+  console.log('✓ 3D polygon wireframe favicon loaded with HTTP 200 and matches coral hero geometry.');
 
   console.log('\n================ ALL AUDIT & SINGLE-SWIPE CHECKS PASSED ================\n');
 });
