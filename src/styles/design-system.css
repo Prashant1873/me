@@ -1,0 +1,369 @@
+/* ==========================================================================
+   Design System: Structured Intensity Tokens & Utilities
+   Palette: Pure Black, Warm Ivory, Royal Blue, Coral
+   Fonts: Horizon (hero), Plus Jakarta Sans (primary), IBM Plex Mono (technical), Newsreader (expressive)
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------------
+     1. COLOR SYSTEM (Base Primitives)
+     ------------------------------------------------------------------------ */
+  --color-black: #000000;
+  --color-warm-ivory: #F1EEE5;
+  --color-royal-blue: #2962FF;
+  --color-coral: #E8655A;
+
+  /* True black & neutral scale */
+  --color-grey-950: #0A0A0A;
+  --color-grey-900: #141414;
+  --color-grey-850: #1A1A1A;
+  --color-grey-800: #1F1F1F;
+  --color-grey-700: #2E2E2E;
+  --color-grey-600: #444444;
+  --color-grey-500: #666666;
+  --color-grey-400: #888888;
+  --color-grey-300: #AAAAAA;
+  --color-grey-200: #CCCCCC;
+  --color-grey-100: #E0E0E0;
+
+  /* ------------------------------------------------------------------------
+     2. SEMANTIC COLOR TOKENS (Default: Dark Mode / Pure Black)
+     ------------------------------------------------------------------------ */
+  --bg-primary: var(--color-black);
+  --bg-secondary: var(--color-grey-950);
+  --bg-surface: var(--color-grey-900);
+  --bg-surface-elevated: var(--color-grey-850);
+  --bg-glass: rgba(10, 10, 10, 0.75);
+
+  --text-primary: var(--color-warm-ivory);
+  --text-secondary: var(--color-grey-300);
+  --text-muted: var(--color-grey-500);
+  --text-dim: var(--color-grey-600);
+
+  --accent-primary: var(--color-royal-blue);
+  --accent-primary-hover: #1e4bd8;
+  --accent-primary-glow: rgba(41, 98, 255, 0.25);
+
+  --accent-warm: var(--color-coral);
+  --accent-warm-hover: #d3554b;
+  --accent-warm-glow: rgba(232, 101, 90, 0.25);
+
+  --border-subtle: var(--color-grey-800);
+  --border-strong: var(--color-grey-600);
+  --border-focus: var(--color-royal-blue);
+
+  /* ------------------------------------------------------------------------
+     3. TYPOGRAPHY SYSTEM
+     ------------------------------------------------------------------------ */
+  --font-hero: 'Horizon', 'Orbitron', 'Space Grotesk', sans-serif;
+  --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-technical: 'IBM Plex Mono', 'Fira Code', monospace;
+  --font-expressive: 'Newsreader', 'Georgia', serif;
+
+  /* Fluid font scales via clamp() */
+  --text-hero: clamp(2.75rem, 5.5vw, 5rem);        /* ~44px to 80px */
+  --text-section: clamp(1.75rem, 3vw, 2.5rem);     /* ~28px to 40px */
+  --text-subsection: clamp(1.25rem, 2vw, 1.5rem);  /* ~20px to 24px */
+  --text-body: clamp(1rem, 1.125vw, 1.125rem);      /* ~16px to 18px */
+  --text-ui: clamp(0.75rem, 0.875vw, 0.875rem);    /* ~12px to 14px */
+  --text-mono: clamp(0.6875rem, 0.8vw, 0.8125rem); /* ~11px to 13px */
+  --text-editorial: clamp(2rem, 3.5vw, 3.5rem);    /* ~32px to 56px */
+
+  /* Weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  /* Letter Spacing */
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-hero: 0.15em;
+  --tracking-mono: 0.08em;
+
+  /* ------------------------------------------------------------------------
+     4. SPACING SCALE (8px Base System)
+     ------------------------------------------------------------------------ */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+  --space-24: 6rem;    /* 96px */
+  --space-32: 8rem;    /* 128px */
+
+  /* ------------------------------------------------------------------------
+     5. GRID & LAYOUT
+     ------------------------------------------------------------------------ */
+  --grid-columns: 12;
+  --grid-gap: var(--space-6);
+  --grid-margin: var(--space-16);
+  --grid-margin-mobile: var(--space-4);
+  --max-content-width: 1440px;
+
+  /* Radii */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-full: 9999px;
+
+  /* ------------------------------------------------------------------------
+     6. MOTION & INTERACTION (160–280ms UI timing)
+     ------------------------------------------------------------------------ */
+  --duration-instant: 100ms;
+  --duration-fast: 160ms;
+  --duration-normal: 220ms;
+  --duration-slow: 280ms;
+  --duration-narrative: 600ms;
+
+  --ease-default: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out: cubic-bezier(0, 0, 0.25, 1);
+  --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --------------------------------------------------------------------------
+   LIGHT MODE OVERRIDES
+   -------------------------------------------------------------------------- */
+[data-theme="light"] {
+  --bg-primary: var(--color-warm-ivory);
+  --bg-secondary: #E8E4DB;
+  --bg-surface: #DEDACE;
+  --bg-surface-elevated: #D4D0C4;
+  --bg-glass: rgba(241, 238, 229, 0.85);
+
+  --text-primary: var(--color-black);
+  --text-secondary: #333333;
+  --text-muted: #666666;
+  --text-dim: #888888;
+
+  --accent-primary: #1948D1;
+  --accent-primary-hover: #0E35AD;
+  --accent-primary-glow: rgba(25, 72, 209, 0.2);
+
+  --accent-warm: #D44E43;
+  --accent-warm-hover: #B83B31;
+  --accent-warm-glow: rgba(212, 78, 67, 0.2);
+
+  --border-subtle: #C8C4B8;
+  --border-strong: #99958A;
+  --border-focus: #1948D1;
+}
+
+/* --------------------------------------------------------------------------
+   TYPOGRAPHY ROLE UTILITY CLASSES
+   -------------------------------------------------------------------------- */
+.text-hero {
+  font-family: var(--font-hero);
+  font-size: var(--text-hero);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-hero);
+  text-transform: uppercase;
+}
+
+.text-section {
+  font-family: var(--font-primary);
+  font-size: var(--text-section);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+.text-subsection {
+  font-family: var(--font-primary);
+  font-size: var(--text-subsection);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+}
+
+.text-body {
+  font-family: var(--font-primary);
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--text-secondary);
+}
+
+.text-ui {
+  font-family: var(--font-primary);
+  font-size: var(--text-ui);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.text-mono {
+  font-family: var(--font-technical);
+  font-size: var(--text-mono);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.text-editorial {
+  font-family: var(--font-expressive);
+  font-size: var(--text-editorial);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-snug);
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   GRID CONTAINER & LAYOUT UTILITIES
+   -------------------------------------------------------------------------- */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gap);
+  max-width: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: var(--grid-margin);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    padding-inline: var(--grid-margin-mobile);
+    gap: var(--space-4);
+  }
+}
+
+.col-span-12 { grid-column: span 12; }
+.col-span-8  { grid-column: span 8; }
+.col-span-6  { grid-column: span 6; }
+.col-span-4  { grid-column: span 4; }
+.col-span-3  { grid-column: span 3; }
+
+@media (max-width: 900px) {
+  .col-span-8,
+  .col-span-6 {
+    grid-column: span 12;
+  }
+  .col-span-4,
+  .col-span-3 {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 600px) {
+  .col-span-4,
+  .col-span-3 {
+    grid-column: span 12;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   SIGNATURE DESIGN MOTIFS & ATOMS
+   -------------------------------------------------------------------------- */
+.editorial-rule {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-subtle);
+  border: none;
+  margin-block: var(--space-6);
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-technical);
+  font-size: var(--text-mono);
+  letter-spacing: var(--tracking-mono);
+  color: var(--accent-primary);
+  text-transform: uppercase;
+}
+
+.section-tag::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  font-family: var(--font-technical);
+  font-size: var(--text-mono);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-fast) var(--ease-default);
+}
+
+.badge:hover {
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-primary);
+  font-size: var(--text-ui);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-default);
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-primary-hover);
+  box-shadow: 0 4px 16px var(--accent-primary-glow);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+.btn-warm {
+  background-color: var(--accent-warm);
+  color: #FFFFFF;
+}
+
+.btn-warm:hover {
+  background-color: var(--accent-warm-hover);
+  box-shadow: 0 4px 16px var(--accent-warm-glow);
+  transform: translateY(-1px);
+}
