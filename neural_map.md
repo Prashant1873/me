@@ -53,11 +53,8 @@ src/
 │   └── components.css     # Cards, buttons, nav, toggle
 ├── js/
 │   ├── main.js            # Entry point, section orchestrator
-│   ├── nav.js             # Sticky nav, scroll spy, smooth scroll
-│   ├── theme.js           # Dark/light mode toggle
-│   ├── hero/
-│   │   ├── scene.js       # Three.js orbital geometry
-│   │   └── entrance.js    # GSAP entrance timeline
+│   ├── section-scroll.js  # Elastic full-viewport scroll controller & boundary physics
+│   ├── hero-canvas.js     # Three.js orbital wireframe core & particles
 │   ├── experience/
 │   │   ├── timeline3d.js  # Three.js 3D timeline
 │   │   ├── data.js        # Experience entries data
@@ -78,3 +75,12 @@ src/
     ├── images/            # Project screenshots, logos
     └── resume.pdf         # Downloadable resume
 ```
+
+## Scroll Controller State Machine (`section-scroll.js`)
+
+- **Input Accumulation:** Normalizes wheel `deltaY` (pixels, lines, pages); triggers when `|wheelAccumulator| >= 14px` (eliminates trackpad deadzone).
+- **In-Flight Interruption:**
+  - *Opposite Flick:* Immediately kills active GSAP tweens and reverses towards opposing section.
+  - *Same-Direction Flick (> 200ms elapsed):* Kills active tween and chains forward to next section.
+- **Settling & Damping:** 0.58s `power3.out` transition; post-arrival momentum filter suppresses decaying trackpad inertia tail for 220ms while immediately accepting reverse gestures.
+

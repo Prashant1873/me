@@ -22,6 +22,7 @@ Valuable concepts, design directions, and feature ideas for the portfolio.
 
 ## Technical Ideas
 - GSAP ScrollTrigger for all scroll-linked animations — industry standard, best performance
+- Full-viewport elastic section scroll: single long scroll advances exactly one section end-to-end with Apple fluid spring deceleration, rubber-band boundary bounce, zero-lag trackpad accumulator (14px threshold), and interruptible mid-flight reversals & chaining
 - Three.js scenes should share a single WebGL renderer for performance
 - Progressive enhancement: detect GPU capability, simplify 3D for mobile
 - Prefers-reduced-motion: disable all 3D and transitions, show clean static layout

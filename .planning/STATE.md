@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2026-10-12)
 
 **Core value:** The website must feel unmistakably personal — like meeting Prashant, not reading his resume.
-**Current focus:** Phase 1 — Project Scaffolding & Design System
+**Current focus:** Phase 4 — Professional Experience — Content & Layout
 
 ## Current Milestone
 
@@ -16,9 +16,9 @@ Milestone 1: Design Foundation & Living Skeleton
 | Phase | Name | Status |
 |-------|------|--------|
 | 1 | Project Scaffolding & Design System | **Complete** |
-| 2 | Navigation & Page Structure | **Next** |
-| 3 | Hero Section with 3D Orbital Canvas | Pending |
-| 4 | Professional Experience — Content & Layout | Pending |
+| 2 | Navigation & Page Structure | **Complete** |
+| 3 | Hero Section with 3D Orbital Canvas | **Complete** |
+| 4 | Professional Experience — Content & Layout | **Next** |
 | 5 | Experience — 3D Timeline & Scroll Animations | Pending |
 | 6 | Projects Section — Cinematic Case Studies | Pending |
 | 7 | Education & Contact Sections | Pending |
@@ -35,4 +35,4 @@ Milestone 1: Design Foundation & Living Skeleton
 - **Granularity:** Fine (8-12 phases, 5-10 plans each)
 
 ---
-*Last updated: 2026-10-12 after initialization*
+*Last updated: 2026-10-13 after Phase 2 completion*

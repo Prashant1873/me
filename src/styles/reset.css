@@ -14,7 +14,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  scroll-behavior: smooth;
   font-size: 16px;
   background-color: var(--bg-primary, #000000);
   color: var(--text-primary, #F1EEE5);
