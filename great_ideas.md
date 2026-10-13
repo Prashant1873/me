@@ -26,3 +26,5 @@ Valuable concepts, design directions, and feature ideas for the portfolio.
 - Three.js scenes should share a single WebGL renderer for performance
 - Progressive enhancement: detect GPU capability, simplify 3D for mobile
 - Prefers-reduced-motion: disable all 3D and transitions, show clean static layout
+- Zero-FOUC skeleton shell: instant frame-0 render with render-blocking CSS and smooth 3D handoff
+- Authentic artifact evidence: subtle inline photo proof strips for real-world roles from `Portfolio_images`
