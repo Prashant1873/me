@@ -35,16 +35,13 @@
 }
 
 .section--experience .section-tag {
-  font-family: var(--font-technical);
-  font-size: clamp(10px, 1.2vh, 11px);
-  letter-spacing: var(--tracking-wider);
-  color: var(--color-royal-blue);
+  color: var(--accent-primary);
   margin-bottom: 2px;
   display: inline-block;
 }
 
 .section--experience .section__title {
-  font-size: clamp(1.85rem, 3.4vh, 2.5rem);
+  font-size: var(--text-section);
   font-family: var(--font-primary);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-tight);
@@ -55,8 +52,8 @@
 }
 
 .section--experience .section__subtitle {
-  font-size: clamp(0.92rem, 1.5vh, 1.08rem);
-  line-height: 1.48;
+  font-size: var(--text-section-sub);
+  line-height: 1.45;
   color: var(--text-secondary);
   max-width: 980px;
   margin-top: 2px;
