@@ -73,9 +73,11 @@ export function initExperience() {
       ? `
         <div class="experience-detail__photos-group">
           <div class="experience-detail__photo-strip">
-            ${exp.photos.map((photoUrl, i) => `
+            ${exp.photos.map((photoUrl, i) => {
+              const thumbUrl = photoUrl.replace(/([^/]+)$/, 'thumb_$1');
+              return `
               <div class="experience-photo-thumb" data-photo-idx="${i}" title="View workplace snapshot" role="button" tabindex="0" aria-label="View photo ${i + 1}">
-                <img src="${photoUrl}" alt="${exp.company} workplace photo" loading="lazy" />
+                <img src="${thumbUrl}" onerror="this.onerror=null;this.src='${photoUrl}'" alt="${exp.company} workplace photo" loading="lazy" decoding="async" width="80" height="80" />
                 <div class="experience-photo-thumb__overlay">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="11" cy="11" r="8"/>
@@ -83,7 +85,7 @@ export function initExperience() {
                   </svg>
                 </div>
               </div>
-            `).join('')}
+            `;}).join('')}
           </div>
         </div>
       `

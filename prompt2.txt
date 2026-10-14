@@ -1,3 +1,1 @@
-continue and shift the 3d design to the right so that it doesnt come immediately behind the text, remove the big blue rings they are too much noise
-
-
+the white mode throughout has very bad contrast, fix that by reducing bg color or something, also the white logos in light mode are not visible at all and look ao weird fix that as well.

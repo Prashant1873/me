@@ -385,16 +385,28 @@ html[data-theme="light"] .experience-timeline-track {
   transform: translate(1px, -1px);
 }
 
+html[data-theme="light"] .experience-detail {
+  background-color: #FFFFFF;
+  border-color: #E2E8F0;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+html[data-theme="light"] .experience-detail__logo-box {
+  background-color: #0F172A;
+  border-color: rgba(0, 0, 0, 0.14);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
 html[data-theme="light"] .experience-detail__period {
-  color: var(--text-secondary);
-  background-color: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.08);
+  color: #0F172A;
+  background-color: #F8FAFC;
+  border-color: #E2E8F0;
 }
 
 html[data-theme="light"] .experience-detail__period:hover {
-  background-color: rgba(0, 0, 0, 0.06);
-  border-color: rgba(0, 0, 0, 0.18);
-  color: var(--text-primary);
+  background-color: #F1F5F9;
+  border-color: #CBD5E1;
+  color: #0F172A;
 }
 
 .experience-detail__role {
@@ -425,8 +437,8 @@ html[data-theme="light"] .experience-detail__period:hover {
 }
 
 html[data-theme="light"] .experience-detail__metric {
-  background-color: rgba(0, 0, 0, 0.035);
-  border-color: rgba(0, 0, 0, 0.08);
+  background-color: #F8FAFC;
+  border-color: #E2E8F0;
 }
 
 .experience-detail__metric-icon {
@@ -1252,3 +1264,38 @@ html[data-theme="light"] .experience-detail__metric {
   }
 }
 
+/* --------------------------------------------------------------------------
+   Light Mode Calendar Modal Enhancements
+   -------------------------------------------------------------------------- */
+html[data-theme="light"] .timeline-calendar-wrapper {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.12);
+}
+
+html[data-theme="light"] .timeline-year-badge {
+  color: #0F172A;
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+}
+
+html[data-theme="light"] .timeline-modal__content {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.16);
+}
+
+html[data-theme="light"] .timeline-track-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+}
+
+html[data-theme="light"] .timeline-track-card:hover {
+  background-color: #F8FAFC;
+  border-color: #CBD5E1;
+}
+
+html[data-theme="light"] .timeline-track-card__logo-box {
+  background-color: #0F172A;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}

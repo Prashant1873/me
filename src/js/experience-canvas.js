@@ -40,7 +40,7 @@ const PALETTES = {
     conduit: 0xA87038,
     inactiveGhost: 0xCBD5E1,
     medallionRim: 0xA87038,
-    medallionBack: 0xE2E8F0
+    medallionBack: 0x0E131F // High-contrast dark obsidian medallion in light mode
   }
 };
 
@@ -54,7 +54,7 @@ export function initExperienceCanvas(container, options = {}) {
 
   const onNodeClick = options.onNodeClick || (() => {});
   let width = container.clientWidth || 1000;
-  let height = container.clientHeight || 240;
+  let height = container.clientHeight || 160;
 
   let destroyed = false;
   let isIntersecting = true;
@@ -76,10 +76,19 @@ export function initExperienceCanvas(container, options = {}) {
   container.innerHTML = '';
   container.appendChild(renderer.domElement);
 
-  // 2. Camera & Scene
+  // 2. Camera & Scene (Orthographic projection prevents tangential elliptical distortion at horizon ends)
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 80);
-  camera.position.set(currentCameraX, 0, 7.8);
+  const frustumHeight = 5.2;
+  let frustumWidth = frustumHeight * (width / height);
+  const camera = new THREE.OrthographicCamera(
+    -frustumWidth / 2,
+    frustumWidth / 2,
+    frustumHeight / 2,
+    -frustumHeight / 2,
+    0.1,
+    100
+  );
+  camera.position.set(currentCameraX, 0, 10);
   camera.lookAt(currentCameraX, 0, 0);
 
   // Balanced Lighting
@@ -187,8 +196,8 @@ export function initExperienceCanvas(container, options = {}) {
   const raycastObjects = [];
 
   // Scaled up prominent geometries
-  const sharedRingGeo = new THREE.TorusGeometry(1.6, 0.045, 16, 48);
-  const sharedOrbitRingGeo = new THREE.TorusGeometry(1.9, 0.025, 16, 48);
+  const sharedRingGeo = new THREE.TorusGeometry(1.5, 0.04, 16, 48);
+  const sharedOrbitRingGeo = new THREE.TorusGeometry(1.82, 0.02, 16, 48);
   const sharedBackGeo = new THREE.CylinderGeometry(1.35, 1.35, 0.1, 32);
   sharedBackGeo.rotateX(Math.PI / 2);
   const sharedHaloGeo = new THREE.PlaneGeometry(3.6, 3.6);
@@ -208,15 +217,16 @@ export function initExperienceCanvas(container, options = {}) {
     const ring = new THREE.Mesh(sharedRingGeo, ringMat);
     nodeGroup.add(ring);
 
-    // B. Outer Orbiting Ring
+    // B. Outer Orbiting Ring (Continuously rotating 3D celestial orbit)
     const orbitRingMat = new THREE.MeshBasicMaterial({
       color: colors.activeAmber,
       transparent: true,
-      opacity: idx === activeIndex ? 0.75 : 0.22,
+      opacity: idx === activeIndex ? 0.8 : 0.28,
       blending: THREE.AdditiveBlending
     });
     const orbitRing = new THREE.Mesh(sharedOrbitRingGeo, orbitRingMat);
-    orbitRing.rotation.x = Math.PI * 0.25;
+    orbitRing.rotation.x = 0.45; // ~25° celestial inclination
+    orbitRing.rotation.y = idx * 0.7; // Staggered phase per milestone
     nodeGroup.add(orbitRing);
 
     // C. Medallion Backing Disc
@@ -269,8 +279,8 @@ export function initExperienceCanvas(container, options = {}) {
     nodeGroup.add(hitSphere);
     raycastObjects.push(hitSphere);
 
-    // Initial scale
-    const initScale = idx === activeIndex ? 1.15 : 0.95;
+    // Initial scale (selected orb significantly larger for clear emphasis)
+    const initScale = idx === activeIndex ? 1.28 : 0.88;
     nodeGroup.scale.set(initScale, initScale, initScale);
 
     scene.add(nodeGroup);
@@ -304,9 +314,9 @@ export function initExperienceCanvas(container, options = {}) {
         hoveredIndex = hitIdx;
         renderer.domElement.style.cursor = 'pointer';
         gsap.to(milestoneNodes[hitIdx].group.scale, {
-          x: hitIdx === activeIndex ? 1.25 : 1.05,
-          y: hitIdx === activeIndex ? 1.25 : 1.05,
-          z: hitIdx === activeIndex ? 1.25 : 1.05,
+          x: hitIdx === activeIndex ? 1.34 : 0.98,
+          y: hitIdx === activeIndex ? 1.34 : 0.98,
+          z: hitIdx === activeIndex ? 1.34 : 0.98,
           duration: 0.18,
           overwrite: 'auto'
         });
@@ -318,9 +328,9 @@ export function initExperienceCanvas(container, options = {}) {
       if (milestoneNodes[prevIdx]) {
         const isAct = prevIdx === activeIndex;
         gsap.to(milestoneNodes[prevIdx].group.scale, {
-          x: isAct ? 1.15 : 0.95,
-          y: isAct ? 1.15 : 0.95,
-          z: isAct ? 1.15 : 0.95,
+          x: isAct ? 1.28 : 0.88,
+          y: isAct ? 1.28 : 0.88,
+          z: isAct ? 1.28 : 0.88,
           duration: 0.18,
           overwrite: 'auto'
         });
@@ -387,7 +397,7 @@ export function initExperienceCanvas(container, options = {}) {
     // Update node visual emphasis
     milestoneNodes.forEach((node, k) => {
       const isActive = k === index;
-      const targetScale = isActive ? 1.15 : 0.95;
+      const targetScale = isActive ? 1.28 : 0.88;
 
       gsap.to(node.group.scale, {
         x: targetScale,
@@ -408,22 +418,12 @@ export function initExperienceCanvas(container, options = {}) {
         overwrite: 'auto'
       });
       gsap.to(node.orbitRing.material, {
-        opacity: isActive ? 0.75 : 0.22,
+        opacity: isActive ? 0.8 : 0.28,
         duration: 0.25,
         overwrite: 'auto'
       });
       gsap.to(node.halo.material, {
         opacity: isActive ? 0.6 : 0.2,
-        duration: 0.25,
-        overwrite: 'auto'
-      });
-      gsap.to(node.logoMat, {
-        opacity: 1.0,
-        duration: 0.25,
-        overwrite: 'auto'
-      });
-      gsap.to(node.backMaterial, {
-        opacity: 0.95,
         duration: 0.25,
         overwrite: 'auto'
       });
@@ -467,8 +467,12 @@ export function initExperienceCanvas(container, options = {}) {
   function onResize() {
     if (!container || destroyed) return;
     width = container.clientWidth || 1000;
-    height = container.clientHeight || 240;
-    camera.aspect = width / height;
+    height = container.clientHeight || 160;
+    frustumWidth = frustumHeight * (width / height);
+    camera.left = -frustumWidth / 2;
+    camera.right = frustumWidth / 2;
+    camera.top = frustumHeight / 2;
+    camera.bottom = -frustumHeight / 2;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
   }
@@ -497,15 +501,16 @@ export function initExperienceCanvas(container, options = {}) {
       mouseX += (targetMouseX - mouseX) * 0.05;
       mouseY += (targetMouseY - mouseY) * 0.05;
 
-      camera.position.y = mouseY * 0.25;
+      camera.position.y = mouseY * 0.15;
       camera.lookAt(camera.position.x, 0, 0);
 
       // Subtle organic floating tilt on nodes
       milestoneNodes.forEach((node, k) => {
-        node.group.rotation.y = Math.sin(elapsedTime * 0.7 + k) * 0.08 + mouseX * 0.12;
-        node.group.rotation.x = Math.cos(elapsedTime * 0.5 + k) * 0.05 - mouseY * 0.08;
+        node.group.rotation.y = Math.sin(elapsedTime * 0.7 + k) * 0.05 + mouseX * 0.08;
+        node.group.rotation.x = Math.cos(elapsedTime * 0.5 + k) * 0.04 - mouseY * 0.05;
         node.ring.rotation.z += 0.003;
-        node.orbitRing.rotation.y += 0.005;
+        // Ring itself rotates throughout continuously in 3D
+        node.orbitRing.rotation.y += 0.008;
       });
 
       // Subtle particle drift
