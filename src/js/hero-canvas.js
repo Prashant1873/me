@@ -31,9 +31,10 @@ export function initHeroCanvas(container) {
   let targetMouseY = 0;
 
   // --- Renderer ---
+  const getPixelRatio = () => Math.min(window.devicePixelRatio, window.innerWidth <= 768 ? 1.5 : 2);
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(getPixelRatio());
   renderer.setClearColor(0x000000, 0);
   container.appendChild(renderer.domElement);
 
@@ -165,7 +166,7 @@ export function initHeroCanvas(container) {
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(getPixelRatio());
   }
 
   const resizeObserver = new ResizeObserver(() => {

@@ -1319,6 +1319,76 @@ html[data-theme="light"] .experience-detail__metric {
   }
 }
 
+@media (max-width: 768px), (pointer: coarse) {
+  .section--experience {
+    padding-top: calc(56px + 20px);
+    padding-bottom: 40px;
+  }
+
+  .experience-timeline-track {
+    height: 140px;
+  }
+
+  .experience-detail {
+    padding: var(--space-4);
+  }
+
+  .timeline-modal__close,
+  .experience-lightbox__close,
+  .experience-lightbox__nav {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+.experience-detail__stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  margin-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.experience-stepper-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-technical);
+  font-size: 11px;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-default);
+}
+
+.experience-stepper-btn:hover:not(:disabled) {
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+  background: var(--bg-surface-elevated);
+}
+
+.experience-stepper-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.experience-stepper-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.experience-stepper-counter {
+  font-size: 12px;
+  color: var(--accent-primary);
+}
+
 /* --------------------------------------------------------------------------
    Light Mode Calendar Modal Enhancements
    -------------------------------------------------------------------------- */

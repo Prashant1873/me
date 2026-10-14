@@ -105,11 +105,20 @@ src/
     └── resume.pdf         # Downloadable resume
 ```
 
-## Scroll Controller State Machine (`section-scroll.js`)
+## Responsive & Mobile Adaptation Subsystem Architecture (Phase 8)
+- **Dual-Mode Scroll Engine:**
+  - *Desktop (> 1024px, pointer: fine):* Strict 100vh full-page snap scroll with trackpad cooldown and 1 swipe = 1 section jump.
+  - *Mobile/Tablet (<= 1024px or pointer: coarse):* Wheel/touch interception disabled; sections expand to `min-height: 100vh; height: auto;` allowing natural touch scrolling through taller multi-card sections. `IntersectionObserver` dynamically synchronizes the active nav item.
+- **Mobile Navigation Drawer Subsystem (`NAV-04`):**
+  - `#nav-toggle` (44px × 44px) morphs 3-bar hamburger to "X" with spring physics.
+  - `#mobile-nav-drawer` full-screen/right-slide glass panel (`backdrop-filter: blur(20px)`) with focus trap, Escape key handling, and auto-closing on section selection.
+- **Touch & Accessibility Subsystem (`RESP-04`, `RESP-05`):**
+  - All interactive buttons, nav links, filter tabs, modal close triggers, and cards adhere to WCAG 2.5.5 / 2.5.8 minimum tap target area (≥ 44px × 44px).
+  - Explicit `:focus-visible` outline rings (`2px solid var(--accent-primary)`) with logical tab cycle.
+  - Verified WCAG 2.2 AA contrast across Dark Mode (`#000000`/`#141414`) and Light Mode (`#FFFFFF`/`#F6F7F9`).
+- **Mobile 3D Canvas Adaptation:**
+  - Hero 3D canvas positioned in background with opacity 0.28 on mobile.
+  - WebGL pixel ratio capped at `Math.min(window.devicePixelRatio, 1.5)` on mobile to prevent GPU thermal throttling.
+  - IntersectionObserver throttles/pauses rendering loop when off-screen.
 
-- **Input Accumulation:** Normalizes wheel `deltaY` (pixels, lines, pages); triggers when `|wheelAccumulator| >= 18px` (~25ms response).
-- **Anti-Lockout Fixed Cooldown (1 Swipe = 1 Page):**
-  - Uses a fixed, non-sliding 550ms cooldown window since scroll initiation, plus a 650ms animation safety timer. Incoming wheel events during flight and decay do not push the cooldown into the future, guaranteeing pages never freeze or get stuck.
-  - *Opposite Flick:* Immediately interrupts flight and reverses towards opposing section without dropped input.
-- **Settling:** 0.5s `power3.out` transition with incoming container spring settling.
 

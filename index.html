@@ -96,15 +96,17 @@
           <span class="site-nav__tagline">IIT Bombay // Aerospace</span>
         </a>
 
-        <!-- Nav Links -->
+        <!-- Desktop Nav Links -->
         <div class="site-nav__links">
           <a href="#hero" class="site-nav__link is-active" data-section="hero">Home</a>
           <a href="#experience" class="site-nav__link" data-section="experience">Experience</a>
           <a href="#projects" class="site-nav__link" data-section="projects">Projects</a>
           <a href="#education" class="site-nav__link" data-section="education">Education</a>
           <a href="#contact" class="site-nav__link" data-section="contact">Contact</a>
+        </div>
 
-          <!-- Theme Toggle -->
+        <!-- Nav Actions (Theme Toggle & Mobile Hamburger) -->
+        <div class="site-nav__actions">
           <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
             <!-- Sun icon (shown in dark mode → click to go light) -->
             <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -123,9 +125,64 @@
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
             </svg>
           </button>
+
+          <!-- Mobile Hamburger Toggle (NAV-04) -->
+          <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+          </button>
         </div>
       </div>
     </nav>
+
+    <!-- ================================================================
+         MOBILE NAVIGATION DRAWER (NAV-04)
+         ================================================================ -->
+    <div id="mobile-nav-drawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation" hidden>
+      <div class="mobile-drawer__backdrop" id="drawer-backdrop"></div>
+      <div class="mobile-drawer__panel" id="drawer-panel">
+        <div class="mobile-drawer__header">
+          <div class="mobile-drawer__tag text-mono">00 // NAVIGATION</div>
+          <button class="mobile-drawer__close" id="drawer-close" aria-label="Close navigation menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <nav class="mobile-drawer__nav">
+          <a href="#hero" class="mobile-drawer__link is-active" data-section="hero">
+            <span class="mobile-drawer__num text-mono">00</span>
+            <span class="mobile-drawer__label">Home</span>
+          </a>
+          <a href="#experience" class="mobile-drawer__link" data-section="experience">
+            <span class="mobile-drawer__num text-mono">01</span>
+            <span class="mobile-drawer__label">Experience</span>
+          </a>
+          <a href="#projects" class="mobile-drawer__link" data-section="projects">
+            <span class="mobile-drawer__num text-mono">02</span>
+            <span class="mobile-drawer__label">Projects</span>
+          </a>
+          <a href="#education" class="mobile-drawer__link" data-section="education">
+            <span class="mobile-drawer__num text-mono">03</span>
+            <span class="mobile-drawer__label">Education</span>
+          </a>
+          <a href="#contact" class="mobile-drawer__link" data-section="contact">
+            <span class="mobile-drawer__num text-mono">04</span>
+            <span class="mobile-drawer__label">Contact</span>
+          </a>
+        </nav>
+        <div class="mobile-drawer__footer">
+          <a href="/Prashant_Shukla_Resume_IIT_Bombay.pdf" download="Prashant Shukla Resume IIT Bombay.pdf" class="mobile-drawer__resume-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Download Official CV</span>
+          </a>
+          <div class="mobile-drawer__socials">
+            <a href="https://www.linkedin.com/in/prashantmanishukla" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href="https://github.com/Prashant1873" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a href="mailto:shuklaprashant847@gmail.com">Email ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Nav spacer (fixed nav doesn't push content) -->
     <div class="nav-spacer"></div>

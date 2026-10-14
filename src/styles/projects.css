@@ -419,6 +419,14 @@
   background: var(--bg-surface-elevated);
 }
 
+@media (max-width: 768px), (pointer: coarse) {
+  .modal-close-btn,
+  .modal-traversal-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
 /* --------------------------------------------------------------------------
    7. Modal Cockpit Body (7fr Left / 5fr Right)
    -------------------------------------------------------------------------- */

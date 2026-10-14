@@ -43,6 +43,106 @@ window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
 // --------------------------------------------------------------------------
+// Mobile Navigation Drawer (NAV-04, RESP-05)
+// --------------------------------------------------------------------------
+function initMobileNav() {
+  const navToggle = document.getElementById('nav-toggle');
+  const mobileDrawer = document.getElementById('mobile-nav-drawer');
+  const drawerClose = document.getElementById('drawer-close');
+  const drawerBackdrop = document.getElementById('drawer-backdrop');
+
+  if (!navToggle || !mobileDrawer) return;
+
+  const drawerLinks = Array.from(mobileDrawer.querySelectorAll('.mobile-drawer__link, .mobile-drawer__resume-btn, .mobile-drawer__socials a'));
+  const focusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+  function openDrawer() {
+    mobileDrawer.removeAttribute('hidden');
+    // Force layout reflow before triggering transition
+    void mobileDrawer.offsetWidth;
+    mobileDrawer.classList.add('is-active');
+    navToggle.classList.add('is-open');
+    navToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+
+    // Set initial focus to close button or first link
+    setTimeout(() => {
+      if (drawerClose) drawerClose.focus();
+    }, 100);
+  }
+
+  function closeDrawer() {
+    mobileDrawer.classList.remove('is-active');
+    navToggle.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+
+    setTimeout(() => {
+      if (!mobileDrawer.classList.contains('is-active')) {
+        mobileDrawer.setAttribute('hidden', '');
+      }
+    }, 350);
+
+    // Return focus to navToggle
+    navToggle.focus();
+  }
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileDrawer.classList.contains('is-active');
+    if (isOpen) {
+      closeDrawer();
+    } else {
+      openDrawer();
+    }
+  });
+
+  if (drawerClose) {
+    drawerClose.addEventListener('click', closeDrawer);
+  }
+
+  if (drawerBackdrop) {
+    drawerBackdrop.addEventListener('click', closeDrawer);
+  }
+
+  drawerLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      closeDrawer();
+    });
+  });
+
+  // Focus trap and Escape key listener
+  mobileDrawer.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeDrawer();
+      return;
+    }
+
+    if (e.key === 'Tab') {
+      const focusables = Array.from(mobileDrawer.querySelectorAll(focusableSelector)).filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+      if (!focusables.length) return;
+
+      const firstEl = focusables[0];
+      const lastEl = focusables[focusables.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstEl) {
+          e.preventDefault();
+          lastEl.focus();
+        }
+      } else {
+        if (document.activeElement === lastEl) {
+          e.preventDefault();
+          firstEl.focus();
+        }
+      }
+    }
+  });
+}
+
+initMobileNav();
+
+// --------------------------------------------------------------------------
 // Elastic Full-Viewport Section Scroll Controller
 // --------------------------------------------------------------------------
 const sectionScroll = initSectionScroll();

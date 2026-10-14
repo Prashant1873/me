@@ -525,3 +525,20 @@
   }
 }
 
+@media (max-width: 768px), (pointer: coarse) {
+  .contact-btn {
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 11px;
+  }
+  .resume-btn {
+    min-height: 44px;
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+  .resume-modal__close-btn {
+    width: 44px;
+    height: 44px;
+  }
+}
+

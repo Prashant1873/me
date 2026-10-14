@@ -14,10 +14,15 @@ export function initSectionScroll() {
   if (!sections.length) return null;
 
   const navLinks = Array.from(document.querySelectorAll('.site-nav__link[data-section]'));
+  const drawerLinks = Array.from(document.querySelectorAll('.mobile-drawer__link[data-section]'));
   let currentIndex = 0;
   let isScrolling = false;
   let scrollDirection = 0; // 1 = forward/down, -1 = backward/up
   let safetyTimer = null;
+
+  function isMobileOrTablet() {
+    return window.innerWidth <= 1024 || window.matchMedia('(pointer: coarse)').matches;
+  }
 
   function updateNav(index) {
     currentIndex = index;
@@ -25,16 +30,39 @@ export function initSectionScroll() {
     navLinks.forEach(link => {
       link.classList.toggle('is-active', link.getAttribute('data-section') === secId);
     });
+    drawerLinks.forEach(link => {
+      link.classList.toggle('is-active', link.getAttribute('data-section') === secId);
+    });
   }
 
+  // Active section observer for mobile native scroll
+  const sectionObserver = new IntersectionObserver((entries) => {
+    if (!isMobileOrTablet()) return;
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !isScrolling) {
+        const idx = sections.indexOf(entry.target);
+        if (idx !== -1) {
+          updateNav(idx);
+        }
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: '-15% 0px -60% 0px',
+    threshold: 0
+  });
+
+  sections.forEach(sec => sectionObserver.observe(sec));
+
   function scrollToSection(index) {
-    if (index < 0 || index >= sections.length || index === currentIndex) return;
+    if (index < 0 || index >= sections.length) return;
     
     scrollDirection = index > currentIndex ? 1 : -1;
     isScrolling = true;
     updateNav(index);
 
-    const targetY = sections[index].offsetTop;
+    const navOffset = isMobileOrTablet() ? (window.innerWidth <= 768 ? 56 : 64) : 0;
+    const targetY = Math.max(0, sections[index].offsetTop - navOffset);
 
     // Safety timeout: guarantees isScrolling ALWAYS resets even if tween gets killed
     clearTimeout(safetyTimer);
@@ -44,11 +72,10 @@ export function initSectionScroll() {
 
     gsap.to(window, {
       scrollTo: { y: targetY, autoKill: false },
-      duration: 0.42,
+      duration: isMobileOrTablet() ? 0.55 : 0.42,
       ease: 'power2.inOut',
       overwrite: 'auto',
       onComplete: () => {
-        window.scrollTo(0, targetY);
         setTimeout(() => {
           isScrolling = false;
         }, 60);
@@ -61,9 +88,10 @@ export function initSectionScroll() {
     return document.querySelector('.project-modal.is-open, .timeline-modal.is-open, .experience-lightbox.is-open, [role="dialog"].is-open');
   }
 
-  // --- Wheel: 1 scroll gesture = strictly 1 section ---
+  // --- Wheel: 1 scroll gesture = strictly 1 section (Desktop only) ---
   function onWheel(e) {
     if (e.ctrlKey || e.metaKey) return;
+    if (isMobileOrTablet()) return;
 
     // If any modal dialog is open, NEVER scroll background sections!
     const activeModal = getActiveModal();
@@ -175,6 +203,12 @@ export function initSectionScroll() {
       }
     }
 
+    // On mobile / tablet, do not hijack vertical swipes: allow native fluid scrolling!
+    if (isMobileOrTablet()) {
+      touchStartY = 0;
+      return;
+    }
+
     if (Math.abs(deltaY) > 40) {
       scrollToSection(deltaY > 0 ? currentIndex + 1 : currentIndex - 1);
     }
@@ -182,16 +216,22 @@ export function initSectionScroll() {
   }, { passive: true });
 
   // --- Nav links click ---
-  navLinks.forEach((link) => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const secId = link.getAttribute('data-section');
-      const idx = sections.findIndex(s => s.id === secId);
-      if (idx !== -1) {
-        scrollToSection(idx);
-      }
+  function bindLinkClicks(links) {
+    links.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const secId = link.getAttribute('data-section');
+        const idx = sections.findIndex(s => s.id === secId);
+        if (idx !== -1) {
+          scrollToSection(idx);
+        }
+      });
     });
-  });
+  }
+
+  bindLinkClicks(navLinks);
+  bindLinkClicks(drawerLinks);
+
 
   const logoLink = document.querySelector('.site-nav__logo');
   if (logoLink) {
