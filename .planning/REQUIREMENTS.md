@@ -54,20 +54,20 @@
 
 ### Education Section
 
-- [ ] **EDU-01**: IIT Bombay B.Tech Aerospace Engineering prominently displayed
-- [ ] **EDU-02**: School achievements (ISC 98.25% Gold Medal, ICSE 98% Gold Medal)
-- [ ] **EDU-03**: Extracurriculars: Dramatics awards, stand-up comedy, sports achievements
-- [ ] **EDU-04**: Skills list: Storyboarding, Python, Power BI, Alteryx, AI Automation, etc.
-- [ ] **EDU-05**: Section visual consistent with Structured Intensity (editorial rules, organic contours)
+- [x] **EDU-01**: IIT Bombay B.Tech Aerospace Engineering prominently displayed
+- [x] **EDU-02**: School achievements (ISC 98.25% Gold Medal, ICSE 98% Gold Medal)
+- [x] **EDU-03**: Extracurriculars: Dramatics awards, stand-up comedy, sports achievements
+- [x] **EDU-04**: Skills list: Storyboarding, Python, Power BI, Alteryx, AI Automation, etc.
+- [x] **EDU-05**: Section visual consistent with Structured Intensity (editorial rules, organic contours)
 
 ### Contact Section
 
-- [ ] **CONT-01**: LinkedIn link (linkedin.com/in/prashantmanishukla)
-- [ ] **CONT-02**: GitHub link (github.com/Prashant1873)
-- [ ] **CONT-03**: Email link (shuklaprashant847@gmail.com)
-- [ ] **CONT-04**: Phone number display (+91-9696721493)
-- [ ] **CONT-05**: Downloadable resume PDF button
-- [ ] **CONT-06**: Contact section has Newsreader editorial statement as closing
+- [x] **CONT-01**: LinkedIn link (linkedin.com/in/prashantmanishukla)
+- [x] **CONT-02**: GitHub link (github.com/Prashant1873)
+- [x] **CONT-03**: Email link (shuklaprashant847@gmail.com)
+- [x] **CONT-04**: Phone number display (+91-9696721493)
+- [x] **CONT-05**: Downloadable resume PDF button
+- [x] **CONT-06**: Contact section has Newsreader editorial statement as closing
 
 ### 3D & Animation
 
@@ -157,17 +157,17 @@
 | PROJ-05 | Phase 6 | Pending |
 | PROJ-06 | Phase 6 | Pending |
 | PROJ-07 | Phase 6 | Pending |
-| EDU-01 | Phase 7 | Pending |
-| EDU-02 | Phase 7 | Pending |
-| EDU-03 | Phase 7 | Pending |
-| EDU-04 | Phase 7 | Pending |
-| EDU-05 | Phase 7 | Pending |
-| CONT-01 | Phase 7 | Pending |
-| CONT-02 | Phase 7 | Pending |
-| CONT-03 | Phase 7 | Pending |
-| CONT-04 | Phase 7 | Pending |
-| CONT-05 | Phase 7 | Pending |
-| CONT-06 | Phase 7 | Pending |
+| EDU-01 | Phase 7 | Complete |
+| EDU-02 | Phase 7 | Complete |
+| EDU-03 | Phase 7 | Complete |
+| EDU-04 | Phase 7 | Complete |
+| EDU-05 | Phase 7 | Complete |
+| CONT-01 | Phase 7 | Complete |
+| CONT-02 | Phase 7 | Complete |
+| CONT-03 | Phase 7 | Complete |
+| CONT-04 | Phase 7 | Complete |
+| CONT-05 | Phase 7 | Complete |
+| CONT-06 | Phase 7 | Complete |
 | 3D-01 | Phase 3 | Pending |
 | 3D-02 | Phase 9 | Pending |
 | 3D-03 | Phase 9 | Pending |

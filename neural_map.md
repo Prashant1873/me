@@ -38,6 +38,21 @@ Single-Page Scrollable Portfolio
 - **Two-Column Cinematic Cockpit:** 7-column interactive slideshow with chevrons, thumbnail filmstrip, and caption bar; 5-column punchy italic narrative statement, 3-item innovation proof grid with authentic metrics, tech pills, and secure CTAs (`rel="noopener noreferrer"`).
 - **Accessibility & Traversal Engine:** In-modal prev/next project navigation, keyboard `ArrowLeft`/`ArrowRight` slide navigation, `Escape` close, focus trapping with `inert` on `#site-nav` and `<main>`, and strict wheel/touch scroll isolation preventing background page movement.
 
+## Education Subsystem Architecture (`src/js/education.js` & `src/js/education-data.js`)
+- **Triple-Pillar Showcase Grid:** 3 structured cards with industrial dark elevated backgrounds and theme-specific accent borders:
+  - *Academics:* IIT Bombay Aerospace Engineering (B.Tech 2026) with authentic crest, plus dual Gold Medals for CMS (ISC 98.25%) and St. Francis (ICSE 98.00%) with institutional crests.
+  - *Campus Governance:* Quantified leadership chassis covering Abhyuday (Head, 7M+ reach, ₹10M+ budget, UNICEF/PETA patronages, ₹20M+ venture funding) and Placement Cell (Coordinator, 2000+ students, 40+ recruiters).
+  - *Creative & Athletics:* Writer/Director Dramatics (Inter IIT 2x Gold, Inter-Hostel 3x Gold), Stand-up Comedy Annual Showcase, and Captain/Winner in Basketball and Mixed Hockey.
+- **Categorized Skills Matrix:** Interactive micro-pills split across Strategy & Product, Data Analytics, and Automation & AI with micro-hover accent elevations.
+- **Strict 100vh Containment:** `y = 120.9px` to `650.0px` on 1280x720 laptop screens (70px bottom clearance) with internal scroll containment.
+
+## Contact Subsystem Architecture (`src/js/contact.js` & `src/js/contact-data.js`)
+- **4-Card Interactive Action Row:** Direct high-contrast cards for LinkedIn, GitHub, Email, and Phone with micro-hover physics.
+- **1-Click Clipboard Engine:** Clicking Email triggers clipboard copy with instant 2s visual confirmation toast and copy icon feedback.
+- **Resume Download Chassis:** Prominent CTA linking to authentic resume text/PDF asset with dual action buttons.
+- **Newsreader Editorial Statement:** Closing statement in expressive Newsreader italic serif with royal blue quotation mark: *"Engineering rigor meets behavioral empathy — building systems that outlast their creators and products people genuinely love."*
+- **Anchored Site Footer:** Minimalist footer with copyright, tech stack specs, and coordinates anchored inside the single 100vh screen.
+
 ## Page Flow (Top to Bottom)
 
 1. **Hero** → Full viewport, 3D orbital canvas, name + narrative statement

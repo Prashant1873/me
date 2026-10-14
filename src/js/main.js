@@ -4,6 +4,8 @@ import { initHeroCanvas } from './hero-canvas.js';
 import { initSectionScroll } from './section-scroll.js';
 import { initExperience } from './experience.js';
 import { initProjects } from './projects.js';
+import { initEducation } from './education.js';
+import { initContact } from './contact.js';
 
 // --------------------------------------------------------------------------
 // Theme Toggle
@@ -60,6 +62,16 @@ initExperience();
 // Projects Case Studies Showcase (Phase 6)
 // --------------------------------------------------------------------------
 initProjects();
+
+// --------------------------------------------------------------------------
+// Education & Achievements Showcase (Phase 7)
+// --------------------------------------------------------------------------
+initEducation();
+
+// --------------------------------------------------------------------------
+// Contact & Action Channels (Phase 7)
+// --------------------------------------------------------------------------
+initContact();
 
 // --------------------------------------------------------------------------
 // Dismiss Loading Skeleton & Trigger Orchestrated Entrance
