@@ -32,10 +32,11 @@ Single-Page Scrollable Portfolio
 - **Calendar Modal Subsystem:** Minimalist multi-year grid (2024–2026) with company theme color cells (`theme-iqvia`, `theme-revolut`, `theme-ketto`, `theme-kalam-labs`, `theme-faoud`) replacing bulky text.
 
 ## Projects Subsystem Architecture (`src/js/projects.js` & `src/js/projects-data.js`)
-- **Uniform 2x3 Grid:** 6 canonical projects (BickerBape, StrokeCRM, TRINET, Know Your Archetype, CareerLoom, Marcutie) with 16:9 screenshot hero cards, IBM Plex Mono status tags (`[● 98/98 TESTS]`, `[● 500+ MFRS]`, etc.), and tech micro-pills.
+- **Uniform 2x3 Grid:** 6 canonical projects (BickerBape, StrokeCRM, TRINET, Know Your Archetype, CareerLoom, Marcutie) with authentic screenshot hero cards, IBM Plex Mono status tags (`[● 98/98 TESTS]`, `[● 500+ MFRS]`, etc.), and tech micro-pills.
+- **Unified Section Typography & 100% Viewport Chassis:** Harmonized `--text-section` (clamp 1.75rem to 2.35rem) and `--text-section-sub` across all sections, keeping all 6 cards strictly contained within 100vh (`y = 187.9px` to `629.0px` in 720p screens with 91px bottom clearance).
 - **GSAP Origin-Aware Bounding Box Modal:** Expand/collapse tween (`power3.out`, 240ms) interpolating coordinates from clicked card `getBoundingClientRect()` to viewport modal chassis (`92vw × 88vh`).
-- **Two-Column Cinematic Cockpit:** 7-column interactive slideshow with chevrons, thumbnail filmstrip, and caption bar; 5-column editorial narrative, 3-item innovation proof grid, tech pills, and secure CTAs (`rel="noopener noreferrer"`).
-- **Accessibility & Traversal Engine:** In-modal prev/next project navigation, keyboard `ArrowLeft`/`ArrowRight` slide navigation, `Escape` close, focus trapping with `inert` on `#site-nav` and `<main>`, and body scroll lock with padding compensation.
+- **Two-Column Cinematic Cockpit:** 7-column interactive slideshow with chevrons, thumbnail filmstrip, and caption bar; 5-column punchy italic narrative statement, 3-item innovation proof grid with authentic metrics, tech pills, and secure CTAs (`rel="noopener noreferrer"`).
+- **Accessibility & Traversal Engine:** In-modal prev/next project navigation, keyboard `ArrowLeft`/`ArrowRight` slide navigation, `Escape` close, focus trapping with `inert` on `#site-nav` and `<main>`, and strict wheel/touch scroll isolation preventing background page movement.
 
 ## Page Flow (Top to Bottom)
 
