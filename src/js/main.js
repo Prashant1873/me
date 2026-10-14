@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { initHeroCanvas } from './hero-canvas.js';
 import { initSectionScroll } from './section-scroll.js';
 import { initExperience } from './experience.js';
+import { initProjects } from './projects.js';
 
 // --------------------------------------------------------------------------
 // Theme Toggle
@@ -54,6 +55,11 @@ const heroScene = initHeroCanvas(heroCanvasContainer);
 // Experience Showcase (Phase 4)
 // --------------------------------------------------------------------------
 initExperience();
+
+// --------------------------------------------------------------------------
+// Projects Case Studies Showcase (Phase 6)
+// --------------------------------------------------------------------------
+initProjects();
 
 // --------------------------------------------------------------------------
 // Dismiss Loading Skeleton & Trigger Orchestrated Entrance

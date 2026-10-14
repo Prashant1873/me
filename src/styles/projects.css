@@ -1,0 +1,647 @@
+/* ==========================================================================
+   Projects Section Styling: Uniform 2x3 Grid & Cinematic Modal Cockpit
+   Structured Intensity Design System — Phase 6
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Projects Grid (2x3 Uniform Matrix)
+   -------------------------------------------------------------------------- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 767px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Project Card Chassis
+   -------------------------------------------------------------------------- */
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+  outline: none;
+}
+
+.project-card:focus-visible {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px var(--accent-primary-glow);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 16px var(--accent-primary-glow);
+}
+
+/* --------------------------------------------------------------------------
+   3. Card Screenshot Hero Banner (16:9)
+   -------------------------------------------------------------------------- */
+.project-card__thumb-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #080808;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.project-card__thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.project-card:hover .project-card__thumb {
+  transform: scale(1.03);
+}
+
+.project-card__status-tag {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  background: rgba(10, 10, 10, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: var(--font-technical);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 2;
+}
+
+/* --------------------------------------------------------------------------
+   4. Card Body & Typography
+   -------------------------------------------------------------------------- */
+.project-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--space-4);
+  gap: var(--space-2);
+}
+
+.project-card__category {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  font-weight: var(--weight-medium);
+}
+
+.project-card__title {
+  font-family: var(--font-primary);
+  font-size: 1.25rem;
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.project-card__desc {
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.project-tag {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.project-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+  font-family: var(--font-technical);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.project-card__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent-primary);
+  font-weight: var(--weight-medium);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.project-card:hover .project-card__trigger {
+  transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   5. Fullscreen Cinematic Modal Takeover
+   -------------------------------------------------------------------------- */
+.project-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.24s ease, visibility 0.24s ease;
+}
+
+.project-modal.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.project-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.84);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+
+.project-modal__chassis {
+  position: relative;
+  z-index: 2;
+  width: 92vw;
+  max-width: 1360px;
+  height: 88vh;
+  max-height: 900px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.7);
+  outline: none;
+}
+
+/* --------------------------------------------------------------------------
+   6. Modal Header & Traversal Controls
+   -------------------------------------------------------------------------- */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+  flex-shrink: 0;
+}
+
+.modal-header__info {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.modal-header__title {
+  font-family: var(--font-primary);
+  font-size: 1.25rem;
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.modal-header__category {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  letter-spacing: 0.08em;
+  font-weight: var(--weight-medium);
+}
+
+.modal-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-traversal-btn {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-family: var(--font-technical);
+  font-size: 11px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.modal-traversal-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+  background: var(--bg-surface-elevated);
+}
+
+.modal-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.modal-close-btn:hover {
+  border-color: var(--accent-warm);
+  color: var(--accent-warm);
+  background: var(--bg-surface-elevated);
+}
+
+/* --------------------------------------------------------------------------
+   7. Modal Cockpit Body (7fr Left / 5fr Right)
+   -------------------------------------------------------------------------- */
+.modal-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  overflow: hidden;
+  min-height: 0;
+}
+
+@media (max-width: 960px) {
+  .modal-body {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. Left Pane: Interactive Screenshot Slideshow
+   -------------------------------------------------------------------------- */
+.modal-slideshow {
+  display: flex;
+  flex-direction: column;
+  background: #080808;
+  border-right: 1px solid var(--border-subtle);
+  padding: 24px;
+  gap: 14px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-slideshow__viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000000;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-slideshow__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.2s ease;
+}
+
+.modal-slideshow__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.modal-slideshow__nav:hover {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: #FFFFFF;
+}
+
+.modal-slideshow__nav--prev {
+  left: 12px;
+}
+
+.modal-slideshow__nav--next {
+  right: 12px;
+}
+
+.modal-slideshow__caption {
+  font-family: var(--font-technical);
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  min-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modal-slideshow__thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 2px;
+  scrollbar-width: thin;
+}
+
+.modal-slideshow__thumb {
+  flex-shrink: 0;
+  width: 72px;
+  height: 42px;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: #000000;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.65;
+  transition: border-color var(--duration-fast) var(--ease-out),
+              opacity var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+}
+
+.modal-slideshow__thumb:hover {
+  opacity: 0.9;
+  border-color: var(--border-strong);
+}
+
+.modal-slideshow__thumb.is-active {
+  opacity: 1;
+  border: 2px solid var(--accent-primary);
+  transform: scale(1.05);
+}
+
+.modal-slideshow__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   9. Right Pane: Editorial Narrative & Innovation Cockpit
+   -------------------------------------------------------------------------- */
+.modal-right-pane {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 32px;
+  overflow-y: auto;
+  gap: 22px;
+  min-height: 0;
+  background: var(--bg-surface);
+}
+
+.modal-narrative {
+  font-family: var(--font-expressive);
+  font-style: italic;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  border-left: 2px solid var(--accent-primary);
+  padding-left: 16px;
+  margin: 0;
+}
+
+.modal-section-title {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.modal-innovations-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-innovation-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modal-innovation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.modal-innovation-title {
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.modal-innovation-metric {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  font-weight: var(--weight-bold);
+  color: var(--accent-primary);
+  background: rgba(41, 98, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  border: 1px solid rgba(41, 98, 255, 0.2);
+  white-space: nowrap;
+}
+
+.modal-innovation-desc {
+  font-family: var(--font-primary);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.modal-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.modal-tech-pill {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.modal-tech-pill--primary {
+  border-color: rgba(41, 98, 255, 0.4);
+  color: var(--text-primary);
+}
+
+.modal-tech-pill__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  display: inline-block;
+}
+
+.modal-ctas {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.modal-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-technical);
+  font-size: 12px;
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  min-height: 44px;
+}
+
+.modal-cta--primary {
+  background: var(--accent-primary);
+  color: #FFFFFF;
+  border: 1px solid var(--accent-primary);
+}
+
+.modal-cta--primary:hover {
+  background: var(--accent-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px var(--accent-primary-glow);
+}
+
+.modal-cta--secondary {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+}
+
+.modal-cta--secondary:hover {
+  background: var(--bg-surface-elevated);
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   10. Light Theme Overrides
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .project-card__thumb-box {
+  background: #E2E8F0;
+}
+
+[data-theme="light"] .project-card__status-tag {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .modal-slideshow {
+  background: #F1F5F9;
+}
+
+[data-theme="light"] .modal-slideshow__viewport {
+  background: #0F172A;
+}
+
+[data-theme="light"] .project-modal__backdrop {
+  background: rgba(15, 23, 42, 0.7);
+}

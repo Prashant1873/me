@@ -209,10 +209,8 @@
             </p>
           </div>
           <div class="col-span-12">
-            <!-- Cinematic project cards — populated in Phase 6 -->
-            <div class="section__placeholder">
-              PROJECT CASE STUDIES // PHASE 6
-            </div>
+            <!-- Cinematic project cards grid -->
+            <div id="projects-grid" class="projects-grid" role="region" aria-label="Projects Showcase Grid"></div>
           </div>
         </div>
       </section>
@@ -269,6 +267,14 @@
         </footer>
       </section>
     </main>
+
+    <!-- ================================================================
+         PROJECT CASE STUDY FULLSCREEN MODAL TAKEOVER
+         ================================================================ -->
+    <div id="project-modal" class="project-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-project-title">
+      <div class="project-modal__backdrop" id="modal-backdrop"></div>
+      <div class="project-modal__chassis" id="modal-chassis"></div>
+    </div>
 
     <!-- ================================================================
          EXPERIENCE PHOTO LIGHTBOX MODAL
