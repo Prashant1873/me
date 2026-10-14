@@ -586,17 +586,17 @@ export function initExperienceCanvas(container, options = {}) {
     if (isIntersecting) {
       const elapsedTime = clock.getElapsedTime();
 
-      // Smooth mouse parallax damping
+      // Smooth horizontal mouse parallax damping only (Y is strictly locked)
       mouseX += (targetMouseX - mouseX) * 0.05;
-      mouseY += (targetMouseY - mouseY) * 0.05;
 
-      camera.position.y = mouseY * 0.08;
+      camera.position.y = 0;
       camera.lookAt(camera.position.x, 0, 0);
 
-      // Subtle organic floating tilt on nodes
+      // Horizontal floating tilt on nodes (Y is strictly fixed)
       milestoneNodes.forEach((node, k) => {
+        node.group.position.y = 0;
         node.group.rotation.y = Math.sin(elapsedTime * 0.7 + k) * 0.05 + mouseX * 0.08;
-        node.group.rotation.x = Math.cos(elapsedTime * 0.5 + k) * 0.04 - mouseY * 0.05;
+        node.group.rotation.x = 0;
         node.ring.rotation.z += 0.003;
         // Ring itself rotates throughout continuously in 3D
         node.orbitRing.rotation.y += 0.008;

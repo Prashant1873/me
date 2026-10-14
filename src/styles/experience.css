@@ -14,8 +14,8 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-block: clamp(6px, 1.2vh, 16px);
+  justify-content: flex-start;
+  padding-block: clamp(10px, 1.8vh, 22px);
 }
 
 .section--experience .grid-container {
@@ -24,7 +24,7 @@
   padding-inline: clamp(14px, 2vw, 32px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   box-sizing: border-box;
 }
 
@@ -255,6 +255,7 @@ html[data-theme="light"] .experience-canvas canvas {
   margin-inline: auto;
   display: flex;
   flex-direction: column;
+  min-height: clamp(270px, 34vh, 320px);
 }
 
 /* --------------------------------------------------------------------------
@@ -272,6 +273,7 @@ html[data-theme="light"] .experience-canvas canvas {
   gap: clamp(10px, 1.6vh, 16px);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
   height: auto;
+  min-height: clamp(270px, 34vh, 320px);
   box-sizing: border-box;
   overflow: hidden;
   scrollbar-width: none;
