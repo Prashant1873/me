@@ -342,10 +342,29 @@ export function createConstellations(scene, initialSection = 0) {
   let activeSection = initialSection;
   const morphState = { progress: 1.0 };
   let currentTween = null;
+  let reducedMotion = false;
+
+  function setReducedMotion(val) {
+    reducedMotion = !!val;
+    if (reducedMotion) {
+      if (currentTween) currentTween.kill();
+      morphState.progress = 1.0;
+      const posAttr = geometry.attributes.position;
+      const targets = getSectionPositions(activeSection);
+      for (let i = 0; i < PARTICLE_COUNT * 3; i++) {
+        sourcePositions[i] = targets[i];
+        targetPositions[i] = targets[i];
+        posAttr.array[i] = targets[i];
+      }
+      posAttr.needsUpdate = true;
+    }
+  }
 
   function morphToSection(targetIndex, duration = 0.75) {
     if (targetIndex < 0 || targetIndex > 4) return;
     activeSection = targetIndex;
+
+    const actualDuration = reducedMotion ? 0.05 : duration;
 
     // Snapshot current position as source
     const posAttr = geometry.attributes.position;
@@ -363,7 +382,7 @@ export function createConstellations(scene, initialSection = 0) {
     morphState.progress = 0.0;
     currentTween = gsap.to(morphState, {
       progress: 1.0,
-      duration,
+      duration: actualDuration,
       ease: 'power2.inOut',
     });
   }
@@ -373,11 +392,12 @@ export function createConstellations(scene, initialSection = 0) {
   }
 
   function update(time) {
+    if (reducedMotion && morphState.progress >= 1.0) return;
     const posAttr = geometry.attributes.position;
     const p = morphState.progress;
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const delay = delays[i];
+      const delay = reducedMotion ? 0 : delays[i];
       // Staggered progress window
       let localP = (p - delay) / (1.0 - delay);
       if (localP < 0) localP = 0;
@@ -386,10 +406,10 @@ export function createConstellations(scene, initialSection = 0) {
       const factor = easeInOutQuad(localP);
       const i3 = i * 3;
 
-      // Subtle breathing motion
-      const flutterX = Math.sin(time * 1.8 + i * 0.2) * 0.025;
-      const flutterY = Math.cos(time * 1.5 + i * 0.25) * 0.025;
-      const flutterZ = Math.sin(time * 1.2 + i * 0.15) * 0.025;
+      // Subtle breathing motion (halted in reduced motion)
+      const flutterX = reducedMotion ? 0 : Math.sin(time * 1.8 + i * 0.2) * 0.025;
+      const flutterY = reducedMotion ? 0 : Math.cos(time * 1.5 + i * 0.25) * 0.025;
+      const flutterZ = reducedMotion ? 0 : Math.sin(time * 1.2 + i * 0.15) * 0.025;
 
       posAttr.array[i3] = sourcePositions[i3] + (targetPositions[i3] - sourcePositions[i3]) * factor + flutterX;
       posAttr.array[i3 + 1] = sourcePositions[i3 + 1] + (targetPositions[i3 + 1] - sourcePositions[i3 + 1]) * factor + flutterY;
@@ -413,6 +433,7 @@ export function createConstellations(scene, initialSection = 0) {
     update,
     morphToSection,
     setTheme,
+    setReducedMotion,
     getActiveSection: () => activeSection,
     getParticleCount: () => PARTICLE_COUNT,
   };

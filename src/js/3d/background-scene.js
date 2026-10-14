@@ -114,6 +114,33 @@ export function initBackgroundScene() {
 
   window.addEventListener('pointermove', onPointerMove, { passive: true });
 
+  // --- Reduced Motion & Low-Power Adaptation (3D-09, RESP-07) ---
+  let reducedMotion = false;
+  let lowPowerMode = false;
+  let frameCount = 0;
+  let lastFPSCheck = performance.now();
+  let currentFPS = 60;
+  let slowFrameCount = 0;
+
+  function setReducedMotion(val) {
+    reducedMotion = !!val;
+    terrain.setReducedMotion(reducedMotion);
+    constellations.setReducedMotion(reducedMotion);
+  }
+
+  const motionMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  setReducedMotion(motionMediaQuery.matches);
+  motionMediaQuery.addEventListener('change', (e) => setReducedMotion(e.matches));
+
+  // WebGL context loss resilience
+  canvas.addEventListener('webglcontextlost', (e) => {
+    e.preventDefault();
+    canvas.style.opacity = '0';
+  });
+  canvas.addEventListener('webglcontextrestored', () => {
+    canvas.style.opacity = '1';
+  });
+
   // --- Camera Waypoint Spline Transitions (3D-07, 3D-08) ---
   let cameraTween = null;
 
@@ -122,6 +149,7 @@ export function initBackgroundScene() {
     activeSection = targetIndex;
 
     const targetWaypoint = CAMERA_WAYPOINTS[targetIndex];
+    const duration = reducedMotion ? 0.05 : 0.72;
 
     if (cameraTween) cameraTween.kill();
 
@@ -131,7 +159,7 @@ export function initBackgroundScene() {
       x: targetWaypoint.pos.x,
       y: targetWaypoint.pos.y,
       z: targetWaypoint.pos.z,
-      duration: 0.72,
+      duration,
       ease: 'power2.inOut',
     }, 0);
 
@@ -139,11 +167,11 @@ export function initBackgroundScene() {
       x: targetWaypoint.lookAt.x,
       y: targetWaypoint.lookAt.y,
       z: targetWaypoint.lookAt.z,
-      duration: 0.72,
+      duration,
       ease: 'power2.inOut',
     }, 0);
 
-    constellations.morphToSection(targetIndex, 0.78);
+    constellations.morphToSection(targetIndex, reducedMotion ? 0.05 : 0.78);
 
     // Update section active classes in DOM
     const domSections = document.querySelectorAll('section[id]');
@@ -197,18 +225,43 @@ export function initBackgroundScene() {
 
   window.addEventListener('resize', onResize);
 
-  // --- Render Loop (60fps Target) ---
+  // --- Render Loop (60fps Target with Low-Power & Reduced Motion Throttling) ---
   let clock = new THREE.Clock();
 
   function animate() {
     requestAnimationFrame(animate);
 
-    const elapsedTime = clock.getElapsedTime();
-    const delta = clock.getDelta();
+    const now = performance.now();
+    frameCount++;
 
-    // Mouse parallax spring smoothing
-    currentMouseX += (targetMouseX - currentMouseX) * 0.055;
-    currentMouseY += (targetMouseY - currentMouseY) * 0.055;
+    // Calculate rolling FPS metrics
+    if (now - lastFPSCheck >= 500) {
+      currentFPS = Math.round((frameCount * 1000) / (now - lastFPSCheck));
+      frameCount = 0;
+      lastFPSCheck = now;
+
+      // If FPS drops below 30 consistently, activate low-power mode
+      if (currentFPS < 30 && currentFPS > 0) {
+        slowFrameCount++;
+        if (slowFrameCount >= 3 && !lowPowerMode) {
+          lowPowerMode = true;
+          renderer.setPixelRatio(1.0);
+        }
+      } else {
+        slowFrameCount = Math.max(0, slowFrameCount - 1);
+      }
+    }
+
+    const elapsedTime = clock.getElapsedTime();
+
+    // Mouse parallax spring smoothing (freeze parallax when reduced motion is preferred)
+    if (!reducedMotion) {
+      currentMouseX += (targetMouseX - currentMouseX) * 0.055;
+      currentMouseY += (targetMouseY - currentMouseY) * 0.055;
+    } else {
+      currentMouseX = 0;
+      currentMouseY = 0;
+    }
 
     // Apply camera position with parallax offset
     camera.position.x = currentCameraPos.x + currentMouseX * 0.85;
@@ -221,22 +274,26 @@ export function initBackgroundScene() {
       currentLookAt.z
     );
 
-    // Update undulating terrain
-    terrain.update(elapsedTime);
+    // Update undulating terrain (skip alternate frames in low-power mode)
+    if (!lowPowerMode || frameCount % 2 === 0) {
+      terrain.update(elapsedTime);
+    }
 
     // Update morphing constellations
     constellations.update(elapsedTime);
 
     // Update cosmic dust motes
-    const dustPos = dustGeometry.attributes.position;
-    for (let i = 0; i < COSMIC_DUST_COUNT; i++) {
-      let py = dustPos.getY(i) + Math.sin(elapsedTime * 0.8 + i) * 0.003;
-      let pz = dustPos.getZ(i) + 0.015;
-      if (pz > 12) pz = -75;
-      dustPos.setY(i, py);
-      dustPos.setZ(i, pz);
+    if (!reducedMotion && (!lowPowerMode || frameCount % 2 === 0)) {
+      const dustPos = dustGeometry.attributes.position;
+      for (let i = 0; i < COSMIC_DUST_COUNT; i++) {
+        let py = dustPos.getY(i) + Math.sin(elapsedTime * 0.8 + i) * 0.003;
+        let pz = dustPos.getZ(i) + 0.015;
+        if (pz > 12) pz = -75;
+        dustPos.setY(i, py);
+        dustPos.setZ(i, pz);
+      }
+      dustPos.needsUpdate = true;
     }
-    dustPos.needsUpdate = true;
 
     renderer.render(scene, camera);
   }
@@ -259,6 +316,10 @@ export function initBackgroundScene() {
     getParallaxOffset: () => ({ x: currentMouseX, y: currentMouseY, targetX: targetMouseX, targetY: targetMouseY }),
     getCameraPosition: () => ({ x: camera.position.x, y: camera.position.y, z: camera.position.z }),
     getCurrentTheme: () => currentTheme,
+    setReducedMotion,
+    isReducedMotion: () => reducedMotion,
+    isLowPowerMode: () => lowPowerMode,
+    getFPSMetrics: () => ({ averageFPS: currentFPS, lowPowerMode, reducedMotion }),
     transitionToSection,
     getSectionPositions,
   };

@@ -47,8 +47,25 @@ export function createTerrain() {
   });
 
   const mesh = new THREE.Mesh(geometry, material);
+  let reducedMotion = false;
+
+  function setReducedMotion(val) {
+    reducedMotion = !!val;
+    if (reducedMotion) {
+      const pos = geometry.attributes.position;
+      for (let i = 0; i < count; i++) {
+        const x = baseCoords[i * 3];
+        const z = baseCoords[i * 3 + 2];
+        const baseY = baseCoords[i * 3 + 1];
+        const wave = Math.sin(x * 0.12) * 0.8 + Math.cos(z * 0.08) * 0.8;
+        pos.setY(i, baseY + wave);
+      }
+      pos.needsUpdate = true;
+    }
+  }
 
   function update(time) {
+    if (reducedMotion) return;
     const pos = geometry.attributes.position;
     for (let i = 0; i < count; i++) {
       const x = baseCoords[i * 3];
@@ -75,5 +92,6 @@ export function createTerrain() {
     mesh,
     update,
     setTheme,
+    setReducedMotion,
   };
 }

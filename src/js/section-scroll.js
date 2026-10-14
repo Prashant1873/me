@@ -79,10 +79,13 @@ export function initSectionScroll() {
       isScrolling = false;
     }, 600);
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const scrollDuration = prefersReducedMotion ? 0.05 : (isMobileOrTablet() ? 0.55 : 0.42);
+
     gsap.to(window, {
       scrollTo: { y: targetY, autoKill: false },
-      duration: isMobileOrTablet() ? 0.55 : 0.42,
-      ease: 'power2.inOut',
+      duration: scrollDuration,
+      ease: prefersReducedMotion ? 'none' : 'power2.inOut',
       overwrite: 'auto',
       onComplete: () => {
         setTimeout(() => {
