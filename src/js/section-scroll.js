@@ -56,9 +56,27 @@ export function initSectionScroll() {
     });
   }
 
+  // --- Modal check helper ---
+  function getActiveModal() {
+    return document.querySelector('.project-modal.is-open, .timeline-modal.is-open, .experience-lightbox.is-open, [role="dialog"].is-open');
+  }
+
   // --- Wheel: 1 scroll gesture = strictly 1 section ---
   function onWheel(e) {
     if (e.ctrlKey || e.metaKey) return;
+
+    // If any modal dialog is open, NEVER scroll background sections!
+    const activeModal = getActiveModal();
+    if (activeModal) {
+      // If scrolling directly inside modal content, allow native scrolling
+      if (e.target && activeModal.contains(e.target)) {
+        return;
+      }
+      // Otherwise prevent background page scroll
+      e.preventDefault();
+      return;
+    }
+
     e.preventDefault();
 
     if (Math.abs(e.deltaY) < 18) return;
@@ -94,6 +112,9 @@ export function initSectionScroll() {
   // --- Keyboard navigation ---
   function onKeyDown(e) {
     if (isScrolling) return;
+
+    // If a modal dialog is open, let modal handle keyboard navigation
+    if (getActiveModal()) return;
 
     // ArrowLeft / ArrowRight cycle milestones when on Experience section
     if (sections[currentIndex]?.id === 'experience' && window.experienceController) {
@@ -136,6 +157,10 @@ export function initSectionScroll() {
 
   window.addEventListener('touchend', (e) => {
     if (isScrolling || !touchStartY) return;
+    if (getActiveModal()) {
+      touchStartY = 0;
+      return;
+    }
     const deltaY = touchStartY - e.changedTouches[0].clientY;
     const deltaX = touchStartX - e.changedTouches[0].clientX;
 

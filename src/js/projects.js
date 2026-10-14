@@ -417,6 +417,7 @@ function lockBodyScroll() {
     document.body.style.paddingRight = `${scrollbarWidth}px`;
   }
   document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
 }
 
 /**
@@ -425,6 +426,7 @@ function lockBodyScroll() {
 function unlockBodyScroll() {
   document.body.style.paddingRight = '';
   document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
 }
 
 /**
