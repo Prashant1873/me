@@ -172,8 +172,8 @@ export const TIMELINE_YEARS = [
       { name: 'Aug', expId: 'iqvia' },
       { name: 'Sep', expId: 'iqvia' },
       { name: 'Oct', expId: 'iqvia' },
-      { name: 'Nov', expId: 'iqvia' },
-      { name: 'Dec', expId: 'iqvia' },
+      { name: 'Nov', expId: null, isFuture: true },
+      { name: 'Dec', expId: null, isFuture: true },
     ]
   }
 ];
@@ -183,5 +183,5 @@ export const CHRONOLOGICAL_ROLES = [
   { id: 'kalam-labs', company: 'Kalam Labs', logo: './images/logos/kalamLabsLogo.png', role: "Founder's Office Intern", period: 'May 2025 – Jul 2025', duration: '3 mos', category: 'product', color: 'coral' },
   { id: 'ketto', company: 'Ketto.org', logo: './images/logos/ketto_dark.png', role: 'Product & Strategy Intern', period: 'Sep 2025 – Nov 2025', duration: '3 mos', category: 'product', color: 'coral' },
   { id: 'revolut', company: 'Revolut', logo: './images/logos/revolut_white.png', role: "CEO's Office Product Strategy", period: 'Jan 2026 – Jun 2026', duration: '6 mos', category: 'strategy', color: 'royal-blue' },
-  { id: 'iqvia', company: 'IQVIA', logo: './images/logos/IQVIA.png', role: 'Analyst, Strategy Consulting', period: 'Jul 2026 – Present', duration: '6+ mos', category: 'strategy', color: 'royal-blue' },
+  { id: 'iqvia', company: 'IQVIA', logo: './images/logos/IQVIA.png', role: 'Analyst, Strategy Consulting', period: 'Jul 2026 – Present', duration: '4 mos', category: 'strategy', color: 'royal-blue' },
 ];

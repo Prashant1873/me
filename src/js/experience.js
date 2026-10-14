@@ -278,18 +278,20 @@ export function initExperience() {
 
       yrData.months.forEach((m) => {
         const cell = document.createElement('div');
+        const isFuture = !!m.isFuture;
         const isActive = m.expId !== null;
         const expData = isActive ? EXPERIENCES.find(e => e.id === m.expId) : null;
         const categoryClass = expData ? (expData.category === 'strategy' ? 'is-strategy' : 'is-product') : '';
         const companyClass = expData ? `theme-${expData.id}` : '';
 
-        cell.className = `timeline-month-cell ${isActive ? 'is-active ' + categoryClass + ' ' + companyClass : 'is-empty'}`;
+        const stateClass = isFuture ? 'is-future' : (isActive ? 'is-active ' + categoryClass + ' ' + companyClass : 'is-empty');
+        cell.className = `timeline-month-cell ${stateClass}`;
         if (m.expId) cell.setAttribute('data-exp-id', m.expId);
 
         let logoHtml = '';
         if (isActive && expData) {
           logoHtml = `<img src="${expData.logo}" alt="${expData.company} logo" class="timeline-month-logo" />`;
-        } else {
+        } else if (!isFuture) {
           logoHtml = `<img src="./images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp" alt="IIT Bombay logo" class="timeline-month-logo timeline-month-logo--iitb" />`;
         }
 

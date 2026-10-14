@@ -1015,6 +1015,25 @@ html[data-theme="light"] .experience-detail__metric {
   border-color: rgba(255, 255, 255, 0.12);
 }
 
+/* Future Months (Post-Graduation & Upcoming) */
+.timeline-month-cell.is-future {
+  opacity: 0.25;
+  background-color: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  cursor: default;
+  pointer-events: none;
+}
+
+.timeline-month-cell.is-future:hover {
+  opacity: 0.25;
+  transform: none;
+}
+
+.timeline-month-cell.is-future .timeline-month-abbr {
+  color: var(--text-muted);
+  opacity: 0.45;
+}
+
 .timeline-month-empty-text {
   font-family: var(--font-technical);
   font-size: 8.5px;
@@ -1374,4 +1393,15 @@ html[data-theme="light"] .timeline-month-cell.theme-faoud {
 }
 html[data-theme="light"] .timeline-month-cell.theme-faoud .timeline-month-abbr {
   color: #991B1B;
+}
+
+html[data-theme="light"] .timeline-month-cell.is-future {
+  border: 1px dashed #CBD5E1;
+  background-color: #F8FAFC;
+  opacity: 0.45;
+}
+
+html[data-theme="light"] .timeline-month-cell.is-future .timeline-month-abbr {
+  color: #94A3B8;
+  opacity: 0.6;
 }
