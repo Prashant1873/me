@@ -31,6 +31,12 @@ Single-Page Scrollable Portfolio
 - **Filter State Engine:** Non-matching company nodes dim to 15% opacity with 400ms bloom on filter restore.
 - **Calendar Modal Subsystem:** Minimalist multi-year grid (2024–2026) with company theme color cells (`theme-iqvia`, `theme-revolut`, `theme-ketto`, `theme-kalam-labs`, `theme-faoud`) replacing bulky text.
 
+## Projects Subsystem Architecture (`src/js/projects.js` & `src/js/projects-data.js`)
+- **Uniform 2x3 Grid:** 6 canonical projects (BickerBape, StrokeCRM, TRINET, Know Your Archetype, CareerLoom, Marcutie) with 16:9 screenshot hero cards, IBM Plex Mono status tags (`[● 98/98 TESTS]`, `[● 500+ MFRS]`, etc.), and tech micro-pills.
+- **GSAP Origin-Aware Bounding Box Modal:** Expand/collapse tween (`power3.out`, 240ms) interpolating coordinates from clicked card `getBoundingClientRect()` to viewport modal chassis (`92vw × 88vh`).
+- **Two-Column Cinematic Cockpit:** 7-column interactive slideshow with chevrons, thumbnail filmstrip, and caption bar; 5-column editorial narrative, 3-item innovation proof grid, tech pills, and secure CTAs (`rel="noopener noreferrer"`).
+- **Accessibility & Traversal Engine:** In-modal prev/next project navigation, keyboard `ArrowLeft`/`ArrowRight` slide navigation, `Escape` close, focus trapping with `inert` on `#site-nav` and `<main>`, and body scroll lock with padding compensation.
+
 ## Page Flow (Top to Bottom)
 
 1. **Hero** → Full viewport, 3D orbital canvas, name + narrative statement
