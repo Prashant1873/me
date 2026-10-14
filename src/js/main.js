@@ -1,6 +1,7 @@
 import '../styles/index.css';
 import gsap from 'gsap';
 import { initHeroCanvas } from './hero-canvas.js';
+import { initBackgroundScene } from './3d/background-scene.js';
 import { initSectionScroll } from './section-scroll.js';
 import { initExperience } from './experience.js';
 import { initProjects } from './projects.js';
@@ -141,6 +142,11 @@ function initMobileNav() {
 }
 
 initMobileNav();
+
+// --------------------------------------------------------------------------
+// Unified 3D Background Engine (Phase 9: 3D-02, 3D-03, 3D-04, 3D-05, 3D-07, 3D-08)
+// --------------------------------------------------------------------------
+const bgScene = initBackgroundScene();
 
 // --------------------------------------------------------------------------
 // Elastic Full-Viewport Section Scroll Controller

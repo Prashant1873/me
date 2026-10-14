@@ -3,6 +3,24 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   Background 3D Canvas & Stacking Context
+   -------------------------------------------------------------------------- */
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
    Base Section Pattern
    -------------------------------------------------------------------------- */
 .section {
@@ -18,6 +36,7 @@
   padding-bottom: clamp(12px, 2vh, 24px);
   box-sizing: border-box;
   overflow: hidden;
+  background-color: transparent;
 }
 
 .section--hero {
@@ -32,10 +51,17 @@
   padding-bottom: clamp(1rem, 3vh, 2rem);
   box-sizing: border-box;
   overflow: hidden;
+  background-color: transparent;
 }
 
 .section--alt {
-  background-color: var(--bg-secondary);
+  background-color: rgba(18, 18, 24, 0.42);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+[data-theme="light"] .section--alt {
+  background-color: rgba(245, 243, 237, 0.48);
 }
 
 @media (max-width: 1024px), (pointer: coarse) {
@@ -66,6 +92,15 @@
 .section__header {
   margin-bottom: clamp(6px, 1.2vh, 14px);
   flex-shrink: 0;
+  transition: opacity 0.26s ease-out, transform 0.26s ease-out;
+}
+
+.section:not(.is-active) .section__header {
+  opacity: 0.85;
+}
+
+.section.is-active .section__header {
+  opacity: 1;
 }
 
 .section__header .section-tag {

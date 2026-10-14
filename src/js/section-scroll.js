@@ -25,6 +25,7 @@ export function initSectionScroll() {
   }
 
   function updateNav(index) {
+    const prevIndex = currentIndex;
     currentIndex = index;
     const secId = sections[index]?.id;
     navLinks.forEach(link => {
@@ -33,6 +34,13 @@ export function initSectionScroll() {
     drawerLinks.forEach(link => {
       link.classList.toggle('is-active', link.getAttribute('data-section') === secId);
     });
+    sections.forEach((sec, idx) => {
+      sec.classList.toggle('is-active', idx === index);
+    });
+
+    if (prevIndex !== index) {
+      window.backgroundScene?.transitionToSection(index);
+    }
   }
 
   // Active section observer for mobile native scroll
@@ -60,6 +68,7 @@ export function initSectionScroll() {
     scrollDirection = index > currentIndex ? 1 : -1;
     isScrolling = true;
     updateNav(index);
+    window.backgroundScene?.transitionToSection(index);
 
     const navOffset = isMobileOrTablet() ? (window.innerWidth <= 768 ? 56 : 64) : 0;
     const targetY = Math.max(0, sections[index].offsetTop - navOffset);

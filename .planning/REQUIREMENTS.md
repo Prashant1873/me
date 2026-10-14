@@ -72,13 +72,13 @@
 ### 3D & Animation
 
 - [ ] **3D-01**: Three.js canvas in hero with orbital geometry (concentric circles, trajectories, intersecting axes)
-- [ ] **3D-02**: 3D terrain/landscape that user scrolls through as background narrative
-- [ ] **3D-03**: Interactive 3D objects per section (sphere for hero, architectural forms for experience)
-- [ ] **3D-04**: Particle systems as section backgrounds (subtle, not overwhelming)
-- [ ] **3D-05**: 3D parallax depth layers on scroll
+- [x] **3D-02**: 3D terrain/landscape that user scrolls through as background narrative
+- [x] **3D-03**: Interactive 3D objects per section (thematic particle constellations)
+- [x] **3D-04**: Particle systems as section backgrounds (subtle, not overwhelming)
+- [x] **3D-05**: 3D parallax depth layers on scroll
 - [ ] **3D-06**: Professional experience as 3D timeline floating in space
-- [ ] **3D-07**: Section transitions with cinematic scroll-triggered GSAP animations
-- [ ] **3D-08**: Motion timing follows design language: 160–280ms for UI, longer for narrative sequences
+- [x] **3D-07**: Section transitions with cinematic scroll-triggered GSAP animations
+- [x] **3D-08**: Motion timing follows design language: 160-280ms for UI, longer for narrative sequences
 - [ ] **3D-09**: Progressive enhancement: graceful degradation on low-power devices
 - [ ] **3D-10**: 60fps target for all 3D scenes on modern hardware
 
@@ -169,13 +169,13 @@
 | CONT-05 | Phase 7 | Complete |
 | CONT-06 | Phase 7 | Complete |
 | 3D-01 | Phase 3 | Pending |
-| 3D-02 | Phase 9 | Pending |
-| 3D-03 | Phase 9 | Pending |
-| 3D-04 | Phase 9 | Pending |
-| 3D-05 | Phase 9 | Pending |
+| 3D-02 | Phase 9 | Complete |
+| 3D-03 | Phase 9 | Complete |
+| 3D-04 | Phase 9 | Complete |
+| 3D-05 | Phase 9 | Complete |
 | 3D-06 | Phase 5 | Pending |
-| 3D-07 | Phase 9 | Pending |
-| 3D-08 | Phase 9 | Pending |
+| 3D-07 | Phase 9 | Complete |
+| 3D-08 | Phase 9 | Complete |
 | 3D-09 | Phase 10 | Pending |
 | 3D-10 | Phase 10 | Pending |
 | RESP-01 | Phase 8 | Complete |
