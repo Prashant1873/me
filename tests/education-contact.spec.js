@@ -85,9 +85,34 @@ test.describe('Education & Contact Sections (Phase 7)', () => {
   test('CONT-05 & CONT-06: Downloadable resume CTA and Newsreader editorial closing quote', async ({ page }) => {
     const contactSec = page.locator('#contact');
 
-    // Resume button
-    const resumeBtn = contactSec.locator('a[href*="Resume"], a[download*="Resume"], .resume-btn');
-    await expect(resumeBtn.first()).toBeVisible();
+    // Download Resume button (PDF)
+    const downloadBtn = contactSec.locator('a[download*="Resume"], #download-resume-btn');
+    await expect(downloadBtn).toBeVisible();
+    const downloadHref = await downloadBtn.getAttribute('href');
+    expect(downloadHref).toContain('Prashant_Shukla_Resume_IIT_Bombay.pdf');
+
+    // Preview Resume button (Within webpage modal)
+    const previewBtn = contactSec.locator('#preview-resume-btn');
+    await expect(previewBtn).toBeVisible();
+
+    // Open in-webpage preview modal
+    await previewBtn.click();
+    await page.waitForTimeout(300);
+
+    const resumeModal = page.locator('#resume-modal');
+    await expect(resumeModal).toBeVisible();
+    await expect(resumeModal).toHaveClass(/is-open/);
+
+    // Verify embedded PDF iframe
+    const resumeIframe = resumeModal.locator('#resume-modal-iframe');
+    await expect(resumeIframe).toBeVisible();
+    const iframeSrc = await resumeIframe.getAttribute('src');
+    expect(iframeSrc).toContain('Prashant_Shukla_Resume_IIT_Bombay.pdf');
+
+    // Close modal via ESC
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(300);
+    await expect(resumeModal).not.toHaveClass(/is-open/);
 
     // Editorial quote in Newsreader
     const editorialQuote = contactSec.locator('.contact__quote');

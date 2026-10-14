@@ -330,6 +330,36 @@
       </div>
     </div>
 
+    <!-- ================================================================
+         RESUME IN-WEBPAGE PREVIEW MODAL
+         ================================================================ -->
+    <div id="resume-modal" class="resume-modal" role="dialog" aria-modal="true" aria-label="Resume Preview Modal" hidden>
+      <div class="resume-modal__backdrop" id="resume-modal-backdrop"></div>
+      <div class="resume-modal__chassis" id="resume-modal-chassis">
+        <header class="resume-modal__header">
+          <div class="resume-modal__header-left">
+            <span class="resume-modal__tag">OFFICIAL CREDENTIALS // IIT BOMBAY</span>
+            <h3 class="resume-modal__title">Prashant Shukla - Verified Resume</h3>
+          </div>
+          <div class="resume-modal__header-actions">
+            <a href="/Prashant_Shukla_Resume_IIT_Bombay.pdf" download="Prashant Shukla Resume IIT Bombay.pdf" class="resume-btn resume-btn--primary" id="resume-modal-dl-btn" aria-label="Download resume PDF">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Download PDF</span>
+            </a>
+            <a href="/Prashant_Shukla_Resume_IIT_Bombay.pdf" target="_blank" rel="noopener noreferrer" class="resume-btn resume-btn--secondary" aria-label="Open resume in new tab">
+              <span>Open in Tab ↗</span>
+            </a>
+            <button type="button" class="resume-modal__close-btn" id="resume-modal-close" aria-label="Close resume preview (ESC)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+        </header>
+        <div class="resume-modal__body">
+          <iframe id="resume-modal-iframe" src="" data-src="/Prashant_Shukla_Resume_IIT_Bombay.pdf#toolbar=1&navpanes=0" class="resume-modal__iframe" title="Prashant Shukla Resume PDF Preview"></iframe>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>

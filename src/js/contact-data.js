@@ -47,7 +47,8 @@ export const EDITORIAL_STATEMENT = {
 
 export const RESUME_DATA = {
   label: 'Download Official Resume',
-  format: 'PDF / Text Verification',
-  fileName: 'Prashant_Shukla_Resume_IITB.txt',
-  url: '/Prashant_Shukla_Resume_IITB.txt'
+  format: 'PDF (IIT Bombay)',
+  fileName: 'Prashant Shukla Resume IIT Bombay.pdf',
+  url: '/Prashant_Shukla_Resume_IIT_Bombay.pdf'
 };
+

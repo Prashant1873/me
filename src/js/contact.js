@@ -64,25 +64,93 @@ export function initContact() {
     });
   }
 
-  // 2. Render Resume Download Bar
+  // 2. Render Resume Bar (Preview within webpage & Download)
   resumeContainer.innerHTML = `
     <div class="resume-chassis">
       <div class="resume-chassis__info">
         <span class="section-tag">OFFICIAL CREDENTIALS</span>
         <h4 class="resume-chassis__title">Verified IIT Bombay Resume</h4>
-        <p class="resume-chassis__sub">Download comprehensive 1-page technical &amp; leadership CV.</p>
+        <p class="resume-chassis__sub">Download comprehensive technical CV or preview directly within the webpage.</p>
       </div>
       <div class="resume-chassis__actions">
-        <a href="${RESUME_DATA.url}" download="${RESUME_DATA.fileName}" class="resume-btn resume-btn--primary" aria-label="Download resume">
+        <button type="button" class="resume-btn resume-btn--secondary" id="preview-resume-btn" aria-label="Preview resume within webpage">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span>Preview Resume</span>
+        </button>
+        <a href="${RESUME_DATA.url}" download="${RESUME_DATA.fileName}" class="resume-btn resume-btn--primary" id="download-resume-btn" aria-label="Download resume PDF">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>Download Resume</span>
-        </a>
-        <a href="${RESUME_DATA.url}" target="_blank" rel="noopener noreferrer" class="resume-btn resume-btn--secondary" aria-label="Preview resume in browser">
-          <span>Preview File ↗</span>
         </a>
       </div>
     </div>
   `;
+
+  // Attach Resume Modal Handlers (Within Webpage Preview)
+  const resumeModal = document.getElementById('resume-modal');
+  const previewBtn = document.getElementById('preview-resume-btn');
+  const closeBtn = document.getElementById('resume-modal-close');
+  const backdrop = document.getElementById('resume-modal-backdrop');
+  const resumeIframe = document.getElementById('resume-modal-iframe');
+
+  function openResumeModal() {
+    if (!resumeModal) return;
+    if (resumeIframe && !resumeIframe.getAttribute('src')) {
+      resumeIframe.setAttribute('src', resumeIframe.getAttribute('data-src') || RESUME_DATA.url);
+    }
+    resumeModal.removeAttribute('hidden');
+    void resumeModal.offsetWidth;
+    resumeModal.classList.add('is-open');
+    resumeModal.setAttribute('aria-hidden', 'false');
+    window.addEventListener('keydown', handleResumeKeyDown);
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeResumeModal() {
+    if (!resumeModal) return;
+    resumeModal.classList.remove('is-open');
+    resumeModal.setAttribute('aria-hidden', 'true');
+    window.removeEventListener('keydown', handleResumeKeyDown);
+    setTimeout(() => {
+      if (!resumeModal.classList.contains('is-open')) {
+        resumeModal.setAttribute('hidden', '');
+      }
+    }, 220);
+    if (previewBtn) previewBtn.focus();
+  }
+
+  function handleResumeKeyDown(e) {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeResumeModal();
+    }
+  }
+
+  if (previewBtn) {
+    previewBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openResumeModal();
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeResumeModal();
+    });
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeResumeModal();
+    });
+  }
+
+  if (resumeModal) {
+    resumeModal.addEventListener('wheel', (e) => {
+      e.stopPropagation();
+    }, { passive: false });
+  }
 
   // 3. Render Newsreader Editorial Statement
   editorialContainer.innerHTML = `
