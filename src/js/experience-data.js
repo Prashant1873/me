@@ -8,6 +8,8 @@ export const EXPERIENCES = [
     id: 'iqvia',
     company: 'IQVIA',
     logo: './images/logos/IQVIA.png',
+    logoDark: './images/logos/IQVIA.png',
+    logoLight: './images/logos/IQVIA.png',
     role: 'Analyst, Strategy Consulting',
     period: 'Jul 2026 – Present',
     category: 'strategy',
@@ -31,6 +33,8 @@ export const EXPERIENCES = [
     id: 'revolut',
     company: 'Revolut',
     logo: './images/logos/revolut_white.png',
+    logoDark: './images/logos/revolut_white.png',
+    logoLight: './images/logos/revolut_black.png',
     role: "CEO's Office Product Strategy Intern",
     period: 'Jan 2026 – Jun 2026',
     category: 'strategy',
@@ -53,6 +57,8 @@ export const EXPERIENCES = [
     id: 'ketto',
     company: 'Ketto.org',
     logo: './images/logos/ketto_dark.png',
+    logoDark: './images/logos/ketto_dark.png',
+    logoLight: './images/logos/Ketto.png',
     role: 'Product, Strategy & Operations Intern',
     period: 'Sep 2025 – Nov 2025',
     category: 'product',
@@ -76,6 +82,8 @@ export const EXPERIENCES = [
     id: 'kalam-labs',
     company: 'Kalam Labs (YC S21)',
     logo: './images/logos/kalamLabsLogo.png',
+    logoDark: './images/logos/kalamLabsLogo.png',
+    logoLight: './images/logos/kalamLabsLogo_dark.png',
     role: "Founder's Office Intern",
     period: 'May 2025 – Jul 2025',
     category: 'product',
@@ -97,6 +105,8 @@ export const EXPERIENCES = [
     id: 'faoud',
     company: 'FAOUD',
     logo: './images/logos/faoud_transparent.png',
+    logoDark: './images/logos/faoud_transparent.png',
+    logoLight: './images/logos/faoud_dark.png',
     role: 'Head of Product',
     period: 'Dec 2024 – Apr 2025',
     category: 'product',
@@ -179,9 +189,21 @@ export const TIMELINE_YEARS = [
 ];
 
 export const CHRONOLOGICAL_ROLES = [
-  { id: 'faoud', company: 'FAOUD', logo: './images/logos/faoud_transparent.png', role: 'Head of Product', period: 'Dec 2024 – Apr 2025', duration: '5 mos', category: 'product', color: 'coral' },
-  { id: 'kalam-labs', company: 'Kalam Labs', logo: './images/logos/kalamLabsLogo.png', role: "Founder's Office Intern", period: 'May 2025 – Jul 2025', duration: '3 mos', category: 'product', color: 'coral' },
-  { id: 'ketto', company: 'Ketto.org', logo: './images/logos/ketto_dark.png', role: 'Product & Strategy Intern', period: 'Sep 2025 – Nov 2025', duration: '3 mos', category: 'product', color: 'coral' },
-  { id: 'revolut', company: 'Revolut', logo: './images/logos/revolut_white.png', role: "CEO's Office Product Strategy", period: 'Jan 2026 – Jun 2026', duration: '6 mos', category: 'strategy', color: 'royal-blue' },
-  { id: 'iqvia', company: 'IQVIA', logo: './images/logos/IQVIA.png', role: 'Analyst, Strategy Consulting', period: 'Jul 2026 – Present', duration: '4 mos', category: 'strategy', color: 'royal-blue' },
+  { id: 'faoud', company: 'FAOUD', logo: './images/logos/faoud_transparent.png', logoDark: './images/logos/faoud_transparent.png', logoLight: './images/logos/faoud_dark.png', role: 'Head of Product', period: 'Dec 2024 – Apr 2025', duration: '5 mos', category: 'product', color: 'coral' },
+  { id: 'kalam-labs', company: 'Kalam Labs', logo: './images/logos/kalamLabsLogo.png', logoDark: './images/logos/kalamLabsLogo.png', logoLight: './images/logos/kalamLabsLogo_dark.png', role: "Founder's Office Intern", period: 'May 2025 – Jul 2025', duration: '3 mos', category: 'product', color: 'coral' },
+  { id: 'ketto', company: 'Ketto.org', logo: './images/logos/ketto_dark.png', logoDark: './images/logos/ketto_dark.png', logoLight: './images/logos/Ketto.png', role: 'Product & Strategy Intern', period: 'Sep 2025 – Nov 2025', duration: '3 mos', category: 'product', color: 'coral' },
+  { id: 'revolut', company: 'Revolut', logo: './images/logos/revolut_white.png', logoDark: './images/logos/revolut_white.png', logoLight: './images/logos/revolut_black.png', role: "CEO's Office Product Strategy", period: 'Jan 2026 – Jun 2026', duration: '6 mos', category: 'strategy', color: 'royal-blue' },
+  { id: 'iqvia', company: 'IQVIA', logo: './images/logos/IQVIA.png', logoDark: './images/logos/IQVIA.png', logoLight: './images/logos/IQVIA.png', role: 'Analyst, Strategy Consulting', period: 'Jul 2026 – Present', duration: '4 mos', category: 'strategy', color: 'royal-blue' },
 ];
+
+/**
+ * Resolve company logo based on theme
+ * @param {Object} exp - Experience or role object
+ * @param {boolean} isLight - Whether current active theme is light mode
+ * @returns {string} Logo URL
+ */
+export function getExperienceLogo(exp, isLight = false) {
+  if (!exp) return '';
+  return isLight ? (exp.logoLight || exp.logo) : (exp.logoDark || exp.logo);
+}
+

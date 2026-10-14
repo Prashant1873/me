@@ -12,7 +12,7 @@
 
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { EXPERIENCES, TIMELINE_YEARS, CHRONOLOGICAL_ROLES } from './experience-data.js';
+import { EXPERIENCES, TIMELINE_YEARS, CHRONOLOGICAL_ROLES, getExperienceLogo } from './experience-data.js';
 import { initExperienceCanvas } from './experience-canvas.js';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -91,11 +91,14 @@ export function initExperience() {
       `
       : '<div></div>';
 
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const logoSrc = getExperienceLogo(exp, isLight);
+
     detailContainer.innerHTML = `
       <div class="experience-detail__header">
         <div class="experience-detail__brand-row">
           <div class="experience-detail__logo-box">
-            <img src="${exp.logo}" alt="${exp.company} logo" />
+            <img id="experience-detail-company-logo" src="${logoSrc}" alt="${exp.company} logo" />
           </div>
           <div class="experience-detail__brand-text">
             <div class="experience-detail__top-row">
@@ -289,8 +292,10 @@ export function initExperience() {
         if (m.expId) cell.setAttribute('data-exp-id', m.expId);
 
         let logoHtml = '';
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
         if (isActive && expData) {
-          logoHtml = `<img src="${expData.logo}" alt="${expData.company} logo" class="timeline-month-logo" />`;
+          const logoSrc = getExperienceLogo(expData, isLight);
+          logoHtml = `<img src="${logoSrc}" alt="${expData.company} logo" class="timeline-month-logo" />`;
         } else if (!isFuture) {
           logoHtml = `<img src="./images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp" alt="IIT Bombay logo" class="timeline-month-logo timeline-month-logo--iitb" />`;
         }
@@ -321,14 +326,16 @@ export function initExperience() {
   function renderRoleTracks() {
     if (!timelineTracks) return;
     timelineTracks.innerHTML = '';
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
 
     CHRONOLOGICAL_ROLES.forEach((r) => {
       const card = document.createElement('div');
       card.className = `timeline-track-card ${r.category === 'strategy' ? 'is-strategy' : 'is-product'}`;
+      const logoSrc = getExperienceLogo(r, isLight);
 
       card.innerHTML = `
         <div class="timeline-track-card__logo-box">
-          <img src="${r.logo}" alt="${r.company} logo" class="timeline-track-card__logo" />
+          <img src="${logoSrc}" alt="${r.company} logo" class="timeline-track-card__logo" />
         </div>
         <div class="timeline-track-card__body">
           <div class="timeline-track-card__title-row">
@@ -385,11 +392,29 @@ export function initExperience() {
   });
 
   // ------------------------------------------------------------------------
-  // 9. Initial Boot
+  // 9. Initial Boot & Theme Reactivity
   // ------------------------------------------------------------------------
   renderDetail(EXPERIENCES[activeIndex]);
 
   if (experienceCanvas) {
     experienceCanvas.focusNode(0, 0.1);
   }
+
+  // Theme observer to re-sync logo images on theme switch
+  const themeObserver = new MutationObserver((mutations) => {
+    mutations.forEach((m) => {
+      if (m.attributeName === 'data-theme') {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const logoEl = document.getElementById('experience-detail-company-logo');
+        if (logoEl && EXPERIENCES[activeIndex]) {
+          logoEl.src = getExperienceLogo(EXPERIENCES[activeIndex], isLight);
+        }
+        if (timelineModal && timelineModal.classList.contains('is-open')) {
+          renderCalendarGrid();
+          renderRoleTracks();
+        }
+      }
+    });
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 }

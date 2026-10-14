@@ -208,19 +208,27 @@ html[data-theme="light"] .experience-filter-btn[data-category="all"].is-active .
    -------------------------------------------------------------------------- */
 .experience-timeline-track {
   position: relative;
-  width: 100%;
-  height: clamp(140px, 18vh, 180px);
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: clamp(185px, 23.5vh, 240px);
   overflow: visible;
   background: transparent;
   border: none;
   margin-top: 0;
-  margin-bottom: clamp(6px, 1.2vh, 12px);
+  margin-bottom: clamp(4px, 1vh, 10px);
   box-sizing: border-box;
 }
 
 html[data-theme="light"] .experience-timeline-track {
   background: transparent;
   border: none;
+}
+
+html[data-theme="light"] .experience-canvas canvas {
+  filter: drop-shadow(0 0 10px rgba(217, 119, 6, 0.38)) drop-shadow(0 0 2px rgba(217, 119, 6, 0.45));
 }
 
 .experience-canvas--horizontal {
@@ -392,9 +400,9 @@ html[data-theme="light"] .experience-detail {
 }
 
 html[data-theme="light"] .experience-detail__logo-box {
-  background-color: #0F172A;
-  border-color: rgba(0, 0, 0, 0.14);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
 }
 
 html[data-theme="light"] .experience-detail__period {
@@ -1301,7 +1309,7 @@ html[data-theme="light"] .experience-detail__metric {
   }
 
   .experience-timeline-track {
-    height: 140px;
+    height: 185px;
   }
 
   .experience-item {
@@ -1342,8 +1350,9 @@ html[data-theme="light"] .timeline-track-card:hover {
 }
 
 html[data-theme="light"] .timeline-track-card__logo-box {
-  background-color: #0F172A;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
 }
 
 html[data-theme="light"] .timeline-month-cell.is-empty {
@@ -1364,11 +1373,11 @@ html[data-theme="light"] .timeline-month-cell.theme-iqvia .timeline-month-logo {
 }
 
 html[data-theme="light"] .timeline-month-cell.theme-revolut {
-  background-color: #0E7490;
-  border-color: #0891B2;
+  background-color: #CFFAFE;
+  border-color: #06B6D4;
 }
 html[data-theme="light"] .timeline-month-cell.theme-revolut .timeline-month-abbr {
-  color: #ECFEFF;
+  color: #0E7490;
 }
 
 html[data-theme="light"] .timeline-month-cell.theme-ketto {

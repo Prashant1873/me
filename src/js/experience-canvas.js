@@ -14,11 +14,11 @@ import gsap from 'gsap';
 
 // 5 Commercial roles spaced linearly on the horizontal X-axis (Reverse CV Order: Left = 2026 IQVIA -> Right = 2024 FAOUD)
 export const MILESTONES = [
-  { id: 'iqvia', company: 'IQVIA', x: -12.0, logo: './images/logos/IQVIA.png', logoW: 2.15, logoH: 0.40, color: 0x2962FF },
-  { id: 'revolut', company: 'Revolut', x: -6.0, logo: './images/logos/revolut_white.png', logoW: 1.4, logoH: 1.4, color: 0x00D4FF },
-  { id: 'ketto', company: 'Ketto.org', x: 0.0, logo: './images/logos/ketto_dark.png', logoW: 1.8, logoH: 0.86, color: 0x00A86B },
-  { id: 'kalam-labs', company: 'Kalam Labs', x: 6.0, logo: './images/logos/kalamLabsLogo.png', logoW: 1.5, logoH: 1.33, color: 0x7C3AED },
-  { id: 'faoud', company: 'FAOUD', x: 12.0, logo: './images/logos/faoud_transparent.png', logoW: 1.45, logoH: 1.47, color: 0xE8655A }
+  { id: 'iqvia', company: 'IQVIA', x: -12.0, logoDark: './images/logos/IQVIA.png', logoLight: './images/logos/IQVIA.png', logo: './images/logos/IQVIA.png', logoW: 2.15, logoH: 0.40, color: 0x2962FF },
+  { id: 'revolut', company: 'Revolut', x: -6.0, logoDark: './images/logos/revolut_white.png', logoLight: './images/logos/revolut_black.png', logo: './images/logos/revolut_white.png', logoW: 1.4, logoH: 1.4, color: 0x00D4FF },
+  { id: 'ketto', company: 'Ketto.org', x: 0.0, logoDark: './images/logos/ketto_dark.png', logoLight: './images/logos/Ketto.png', logo: './images/logos/ketto_dark.png', logoW: 1.8, logoH: 0.86, color: 0x00A86B },
+  { id: 'kalam-labs', company: 'Kalam Labs', x: 6.0, logoDark: './images/logos/kalamLabsLogo.png', logoLight: './images/logos/kalamLabsLogo_dark.png', logo: './images/logos/kalamLabsLogo.png', logoW: 1.5, logoH: 1.33, color: 0x7C3AED },
+  { id: 'faoud', company: 'FAOUD', x: 12.0, logoDark: './images/logos/faoud_transparent.png', logoLight: './images/logos/faoud_dark.png', logo: './images/logos/faoud_transparent.png', logoW: 1.45, logoH: 1.47, color: 0xE8655A }
 ];
 
 export const MILESTONE_X = MILESTONES.map(m => m.x);
@@ -29,18 +29,48 @@ const PALETTES = {
     dustCyan: 0x4DD0E1,
     dustBlue: 0x2962FF,
     conduit: 0xC38B55,
+    conduitEmissiveIntensity: 0.65,
+    conduitRoughness: 0.25,
+    conduitMetalness: 0.85,
+    glowInnerOpacity: 0.35,
+    glowOuterOpacity: 0.16,
+    glowBlending: THREE.AdditiveBlending,
+    ringBlending: THREE.AdditiveBlending,
+    ringActiveOpacity: 0.95,
+    ringInactiveOpacity: 0.45,
+    orbitRingActiveOpacity: 0.85,
+    orbitRingInactiveOpacity: 0.35,
+    haloActiveOpacity: 0.6,
+    haloInactiveOpacity: 0.2,
     inactiveGhost: 0x334155,
     medallionRim: 0xC38B55,
-    medallionBack: 0x0E131F
+    medallionBack: 0x0E131F,    // Dark obsidian disc in dark mode
+    medallionMetalness: 0.85,
+    medallionRoughness: 0.3
   },
   light: {
-    activeAmber: 0xA87038,
-    dustCyan: 0x00838F,
-    dustBlue: 0x1948D1,
-    conduit: 0xA87038,
-    inactiveGhost: 0xCBD5E1,
-    medallionRim: 0xA87038,
-    medallionBack: 0x0E131F // High-contrast dark obsidian medallion in light mode
+    activeAmber: 0xD97706,      // Radiant Amber Gold
+    dustCyan: 0x0891B2,
+    dustBlue: 0x2563EB,
+    conduit: 0xD97706,          // Radiant warm gold beam
+    conduitEmissiveIntensity: 0.9,
+    conduitRoughness: 0.1,
+    conduitMetalness: 0.35,
+    glowInnerOpacity: 0.52,     // High-contrast gold glow halo in light mode
+    glowOuterOpacity: 0.24,     // Soft wide ambient gold bloom
+    glowBlending: THREE.NormalBlending,
+    ringBlending: THREE.NormalBlending,
+    ringActiveOpacity: 0.95,
+    ringInactiveOpacity: 0.65,  // Clearly visible rim
+    orbitRingActiveOpacity: 0.95,
+    orbitRingInactiveOpacity: 0.65, // High-contrast, clearly visible orbit rings for other companies
+    haloActiveOpacity: 0.35,
+    haloInactiveOpacity: 0.12,
+    inactiveGhost: 0x64748B,
+    medallionRim: 0xD97706,
+    medallionBack: 0xFFFFFF,    // Pure white medallion disc in light mode
+    medallionMetalness: 0.05,
+    medallionRoughness: 0.15
   }
 };
 
@@ -54,7 +84,7 @@ export function initExperienceCanvas(container, options = {}) {
 
   const onNodeClick = options.onNodeClick || (() => {});
   let width = container.clientWidth || 1000;
-  let height = container.clientHeight || 160;
+  let height = container.clientHeight || 215;
 
   let destroyed = false;
   let isIntersecting = true;
@@ -78,7 +108,7 @@ export function initExperienceCanvas(container, options = {}) {
 
   // 2. Camera & Scene (Orthographic projection prevents tangential elliptical distortion at horizon ends)
   const scene = new THREE.Scene();
-  const frustumHeight = 5.2;
+  const frustumHeight = 5.4;
   let frustumWidth = frustumHeight * (width / height);
   const camera = new THREE.OrthographicCamera(
     -frustumWidth / 2,
@@ -116,26 +146,39 @@ export function initExperienceCanvas(container, options = {}) {
   const conduitMat = new THREE.MeshStandardMaterial({
     color: colors.conduit,
     emissive: colors.conduit,
-    emissiveIntensity: 0.65,
-    roughness: 0.25,
-    metalness: 0.85
+    emissiveIntensity: colors.conduitEmissiveIntensity,
+    roughness: colors.conduitRoughness,
+    metalness: colors.conduitMetalness
   });
   const conduitMesh = new THREE.Mesh(conduitGeo, conduitMat);
   conduitMesh.position.set(0, 0, -0.4); // Strictly behind medallions & logos
   scene.add(conduitMesh);
 
-  // B. Outer luminous energy beam glow sleeve (160.0 units)
-  const glowGeo = new THREE.CylinderGeometry(0.18, 0.18, 160.0, 24);
-  glowGeo.rotateZ(Math.PI / 2);
-  const glowMat = new THREE.MeshBasicMaterial({
+  // B. Inner luminous energy beam glow sleeve (160.0 units)
+  const glowGeoInner = new THREE.CylinderGeometry(0.16, 0.16, 160.0, 24);
+  glowGeoInner.rotateZ(Math.PI / 2);
+  const glowMatInner = new THREE.MeshBasicMaterial({
     color: colors.activeAmber,
     transparent: true,
-    opacity: 0.22,
-    blending: THREE.AdditiveBlending
+    opacity: colors.glowInnerOpacity,
+    blending: colors.glowBlending
   });
-  const glowMesh = new THREE.Mesh(glowGeo, glowMat);
-  glowMesh.position.set(0, 0, -0.4); // Strictly behind medallions & logos
-  scene.add(glowMesh);
+  const glowMeshInner = new THREE.Mesh(glowGeoInner, glowMatInner);
+  glowMeshInner.position.set(0, 0, -0.4); // Strictly behind medallions & logos
+  scene.add(glowMeshInner);
+
+  // C. Outer wide radiant ambient glow sleeve (160.0 units)
+  const glowGeoOuter = new THREE.CylinderGeometry(0.32, 0.32, 160.0, 24);
+  glowGeoOuter.rotateZ(Math.PI / 2);
+  const glowMatOuter = new THREE.MeshBasicMaterial({
+    color: colors.activeAmber,
+    transparent: true,
+    opacity: colors.glowOuterOpacity,
+    blending: colors.glowBlending
+  });
+  const glowMeshOuter = new THREE.Mesh(glowGeoOuter, glowMatOuter);
+  glowMeshOuter.position.set(0, 0, -0.4); // Strictly behind medallions & logos
+  scene.add(glowMeshOuter);
 
   // 4. Subtle Cosmic Dust Motes (75 particles for zero lag)
   const dustCount = 75;
@@ -196,23 +239,25 @@ export function initExperienceCanvas(container, options = {}) {
   const raycastObjects = [];
 
   // Scaled up prominent geometries
-  const sharedRingGeo = new THREE.TorusGeometry(1.5, 0.04, 16, 48);
-  const sharedOrbitRingGeo = new THREE.TorusGeometry(1.82, 0.02, 16, 48);
+  const sharedRingGeo = new THREE.TorusGeometry(1.48, 0.038, 16, 48);
+  const sharedOrbitRingGeo = new THREE.TorusGeometry(1.82, 0.028, 16, 48);
   const sharedBackGeo = new THREE.CylinderGeometry(1.35, 1.35, 0.1, 32);
   sharedBackGeo.rotateX(Math.PI / 2);
   const sharedHaloGeo = new THREE.PlaneGeometry(3.6, 3.6);
   const sharedHitGeo = new THREE.SphereGeometry(1.8, 16, 16);
 
+  const isInitialLight = (document.documentElement.getAttribute('data-theme') || 'dark') === 'light';
+
   MILESTONES.forEach((milestone, idx) => {
     const nodeGroup = new THREE.Group();
     nodeGroup.position.set(milestone.x, 0, 0);
 
-    // A. Outer Glowing Ring / Halo
+    // A. Outer Stationary Ring / Rim
     const ringMat = new THREE.MeshBasicMaterial({
       color: idx === activeIndex ? colors.activeAmber : milestone.color,
       transparent: true,
-      opacity: idx === activeIndex ? 0.95 : 0.45,
-      blending: THREE.AdditiveBlending
+      opacity: idx === activeIndex ? colors.ringActiveOpacity : colors.ringInactiveOpacity,
+      blending: colors.ringBlending
     });
     const ring = new THREE.Mesh(sharedRingGeo, ringMat);
     nodeGroup.add(ring);
@@ -221,36 +266,44 @@ export function initExperienceCanvas(container, options = {}) {
     const orbitRingMat = new THREE.MeshBasicMaterial({
       color: colors.activeAmber,
       transparent: true,
-      opacity: idx === activeIndex ? 0.8 : 0.28,
-      blending: THREE.AdditiveBlending
+      opacity: idx === activeIndex ? colors.orbitRingActiveOpacity : colors.orbitRingInactiveOpacity,
+      blending: colors.ringBlending
     });
     const orbitRing = new THREE.Mesh(sharedOrbitRingGeo, orbitRingMat);
     orbitRing.rotation.x = 0.45; // ~25° celestial inclination
     orbitRing.rotation.y = idx * 0.7; // Staggered phase per milestone
     nodeGroup.add(orbitRing);
 
-    // C. Medallion Backing Disc
+    // C. Medallion Backing Disc (Pure white in light mode, dark obsidian in dark mode)
     const backMaterial = new THREE.MeshStandardMaterial({
       color: colors.medallionBack,
-      metalness: 0.85,
-      roughness: 0.3,
+      metalness: colors.medallionMetalness,
+      roughness: colors.medallionRoughness,
       transparent: true,
-      opacity: 0.95
+      opacity: 0.98
     });
     const backMesh = new THREE.Mesh(sharedBackGeo, backMaterial);
     nodeGroup.add(backMesh);
 
     // D. Front Logo Face (100% Upright Native Aspect Plane — No 90° Rotation!)
-    const logoTexture = textureLoader.load(milestone.logo);
-    logoTexture.colorSpace = THREE.SRGBColorSpace;
-    logoTexture.generateMipmaps = true;
-    logoTexture.minFilter = THREE.LinearMipmapLinearFilter;
-    logoTexture.magFilter = THREE.LinearFilter;
+    const logoDarkTexture = textureLoader.load(milestone.logoDark || milestone.logo);
+    logoDarkTexture.colorSpace = THREE.SRGBColorSpace;
+    logoDarkTexture.generateMipmaps = true;
+    logoDarkTexture.minFilter = THREE.LinearMipmapLinearFilter;
+    logoDarkTexture.magFilter = THREE.LinearFilter;
+
+    const logoLightTexture = textureLoader.load(milestone.logoLight || milestone.logo);
+    logoLightTexture.colorSpace = THREE.SRGBColorSpace;
+    logoLightTexture.generateMipmaps = true;
+    logoLightTexture.minFilter = THREE.LinearMipmapLinearFilter;
+    logoLightTexture.magFilter = THREE.LinearFilter;
+
+    const currentLogoTexture = isInitialLight ? logoLightTexture : logoDarkTexture;
 
     // PlaneGeometry in XY plane naturally faces camera (+Z) with standard upright orientation
     const logoPlaneGeo = new THREE.PlaneGeometry(milestone.logoW, milestone.logoH);
     const logoMat = new THREE.MeshBasicMaterial({
-      map: logoTexture,
+      map: currentLogoTexture,
       transparent: true,
       opacity: 1.0,
       depthWrite: false
@@ -264,8 +317,8 @@ export function initExperienceCanvas(container, options = {}) {
       map: particleMap,
       color: idx === activeIndex ? colors.activeAmber : milestone.color,
       transparent: true,
-      opacity: idx === activeIndex ? 0.6 : 0.2,
-      blending: THREE.AdditiveBlending,
+      opacity: idx === activeIndex ? colors.haloActiveOpacity : colors.haloInactiveOpacity,
+      blending: colors.ringBlending,
       depthWrite: false
     });
     const halo = new THREE.Mesh(sharedHaloGeo, haloMat);
@@ -293,6 +346,8 @@ export function initExperienceCanvas(container, options = {}) {
       backMaterial,
       logoMesh,
       logoMat,
+      logoDarkTexture,
+      logoLightTexture,
       halo,
       hit: hitSphere,
       data: milestone
@@ -413,17 +468,17 @@ export function initExperienceCanvas(container, options = {}) {
       node.halo.material.color.setHex(ringCol);
 
       gsap.to(node.ring.material, {
-        opacity: isActive ? 0.95 : 0.45,
+        opacity: isActive ? colors.ringActiveOpacity : colors.ringInactiveOpacity,
         duration: 0.25,
         overwrite: 'auto'
       });
       gsap.to(node.orbitRing.material, {
-        opacity: isActive ? 0.8 : 0.28,
+        opacity: isActive ? colors.orbitRingActiveOpacity : colors.orbitRingInactiveOpacity,
         duration: 0.25,
         overwrite: 'auto'
       });
       gsap.to(node.halo.material, {
-        opacity: isActive ? 0.6 : 0.2,
+        opacity: isActive ? colors.haloActiveOpacity : colors.haloInactiveOpacity,
         duration: 0.25,
         overwrite: 'auto'
       });
@@ -441,16 +496,50 @@ export function initExperienceCanvas(container, options = {}) {
   // 8. Theme Reactivity
   function updateThemeColors() {
     colors = getThemePalette();
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+
     conduitMat.color.setHex(colors.conduit);
     conduitMat.emissive.setHex(colors.conduit);
-    glowMat.color.setHex(colors.activeAmber);
+    conduitMat.emissiveIntensity = colors.conduitEmissiveIntensity;
+    conduitMat.roughness = colors.conduitRoughness;
+    conduitMat.metalness = colors.conduitMetalness;
+
+    glowMatInner.color.setHex(colors.activeAmber);
+    glowMatInner.opacity = colors.glowInnerOpacity;
+    glowMatInner.blending = colors.glowBlending;
+    glowMatInner.needsUpdate = true;
+
+    glowMatOuter.color.setHex(colors.activeAmber);
+    glowMatOuter.opacity = colors.glowOuterOpacity;
+    glowMatOuter.blending = colors.glowBlending;
+    glowMatOuter.needsUpdate = true;
 
     milestoneNodes.forEach((node, k) => {
       const isActive = k === activeIndex;
-      node.ring.material.color.setHex(isActive ? colors.activeAmber : node.data.color);
-      node.halo.material.color.setHex(isActive ? colors.activeAmber : node.data.color);
+      const ringCol = isActive ? colors.activeAmber : node.data.color;
+
+      node.ring.material.color.setHex(ringCol);
+      node.ring.material.blending = colors.ringBlending;
+      node.ring.material.opacity = isActive ? colors.ringActiveOpacity : colors.ringInactiveOpacity;
+      node.ring.material.needsUpdate = true;
+
       node.orbitRing.material.color.setHex(colors.activeAmber);
+      node.orbitRing.material.blending = colors.ringBlending;
+      node.orbitRing.material.opacity = isActive ? colors.orbitRingActiveOpacity : colors.orbitRingInactiveOpacity;
+      node.orbitRing.material.needsUpdate = true;
+
       node.backMaterial.color.setHex(colors.medallionBack);
+      node.backMaterial.metalness = colors.medallionMetalness;
+      node.backMaterial.roughness = colors.medallionRoughness;
+
+      // Swap to black Revolut / dark logos in light mode, and white in dark mode
+      node.logoMat.map = isLight ? node.logoLightTexture : node.logoDarkTexture;
+      node.logoMat.needsUpdate = true;
+
+      node.halo.material.color.setHex(ringCol);
+      node.halo.material.blending = colors.ringBlending;
+      node.halo.material.opacity = isActive ? colors.haloActiveOpacity : colors.haloInactiveOpacity;
+      node.halo.material.needsUpdate = true;
     });
   }
 
@@ -467,7 +556,7 @@ export function initExperienceCanvas(container, options = {}) {
   function onResize() {
     if (!container || destroyed) return;
     width = container.clientWidth || 1000;
-    height = container.clientHeight || 160;
+    height = container.clientHeight || 215;
     frustumWidth = frustumHeight * (width / height);
     camera.left = -frustumWidth / 2;
     camera.right = frustumWidth / 2;
@@ -501,7 +590,7 @@ export function initExperienceCanvas(container, options = {}) {
       mouseX += (targetMouseX - mouseX) * 0.05;
       mouseY += (targetMouseY - mouseY) * 0.05;
 
-      camera.position.y = mouseY * 0.15;
+      camera.position.y = mouseY * 0.08;
       camera.lookAt(camera.position.x, 0, 0);
 
       // Subtle organic floating tilt on nodes
@@ -539,8 +628,10 @@ export function initExperienceCanvas(container, options = {}) {
 
     conduitGeo.dispose();
     conduitMat.dispose();
-    glowGeo.dispose();
-    glowMat.dispose();
+    glowGeoInner.dispose();
+    glowMatInner.dispose();
+    glowGeoOuter.dispose();
+    glowMatOuter.dispose();
     dustGeo.dispose();
     dustMat.dispose();
     particleMap.dispose();
@@ -555,7 +646,8 @@ export function initExperienceCanvas(container, options = {}) {
       node.orbitRing.material.dispose();
       node.backMesh.material.dispose();
       node.logoMesh.geometry.dispose();
-      if (node.logoMat.map) node.logoMat.map.dispose();
+      if (node.logoDarkTexture) node.logoDarkTexture.dispose();
+      if (node.logoLightTexture) node.logoLightTexture.dispose();
       node.logoMat.dispose();
       node.halo.material.dispose();
       node.hit.material.dispose();
