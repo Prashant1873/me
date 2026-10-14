@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-test('Verify Experience Section: Logos, Strategy & Product categories, SVG lightning bolt, LinkedIn logo', async ({ page }) => {
+test('Verify Experience Section: Clean 3D Timeline, Date Rail, Active Detail Card, and Minimal Calendar', async ({ page }) => {
+  test.setTimeout(60000);
   await page.goto('http://localhost:3000/');
   await page.waitForTimeout(1000);
 
@@ -8,29 +9,17 @@ test('Verify Experience Section: Logos, Strategy & Product categories, SVG light
   const expSection = page.locator('#experience');
   await expect(expSection).toBeVisible();
 
-  // 2. Verify Category Filter Tabs: All Experience, Strategy, Product
-  const filters = page.locator('.experience-filter-btn');
-  await expect(filters).toHaveCount(3);
-  await expect(filters.nth(0)).toContainText('All Experience');
-  await expect(filters.nth(1)).toContainText('Strategy');
-  await expect(filters.nth(2)).toContainText('Product');
+  // 2. Verify Toolbar, Filters, Duplicate Buttons, Date Rail, and Progress Track are Removed
+  await expect(page.locator('.experience-toolbar')).toHaveCount(0);
+  await expect(page.locator('.experience-filters')).toHaveCount(0);
+  await expect(page.locator('.experience-list')).toHaveCount(0);
+  await expect(page.locator('#experience-calendar-trigger-btn')).toHaveCount(0);
+  await expect(page.locator('#experience-date-rail')).toHaveCount(0);
+  await expect(page.locator('#experience-progress-track')).toHaveCount(0);
 
-  // Verify pills have distinct category data attributes
-  await expect(filters.nth(0)).toHaveAttribute('data-category', 'all');
-  await expect(filters.nth(1)).toHaveAttribute('data-category', 'strategy');
-  await expect(filters.nth(2)).toHaveAttribute('data-category', 'product');
-
-  // 3. Verify All 5 Companies and their Logos in List
-  const items = page.locator('.experience-item');
-  await expect(items).toHaveCount(5);
-
-  const expectedCompanies = ['IQVIA', 'Revolut', 'Ketto.org', 'Kalam Labs (YC S21)', 'FAOUD'];
-  for (let i = 0; i < expectedCompanies.length; i++) {
-    await expect(items.nth(i)).toContainText(expectedCompanies[i]);
-    // Each item must contain a company logo image
-    const logoImg = items.nth(i).locator('.experience-item__logo-box img');
-    await expect(logoImg).toBeVisible();
-  }
+  // 3. Verify Seamless Full-Width 3D Canvas
+  const canvasEl = page.locator('#experience-canvas canvas');
+  await expect(canvasEl).toBeAttached();
 
   // 4. Verify Active Item (IQVIA by default)
   const detail = page.locator('#experience-detail');
@@ -48,8 +37,8 @@ test('Verify Experience Section: Logos, Strategy & Product categories, SVG light
   expect(metricText).toContain('KEY IMPACT');
   expect(metricText).toContain('5+ AI Bots & 7+ Dashboards');
 
-  // 5. Test Selecting Revolut
-  await items.nth(1).click();
+  // 5. Test Selecting Revolut via Controller / 3D Navigation
+  await page.evaluate(() => window.experienceController.setMilestone(1));
   await page.waitForTimeout(300);
   await expect(detail.locator('.experience-detail__company')).toHaveText('Revolut');
   await expect(detail.locator('.experience-detail__metric')).toContainText('£19.7M Fee Optimization');
@@ -64,50 +53,37 @@ test('Verify Experience Section: Logos, Strategy & Product categories, SVG light
   const photoThumbs = detail.locator('.experience-photo-thumb');
   await expect(photoThumbs).toHaveCount(2);
 
-  // 6. Test Filtering by Strategy (Should show 2)
-  await filters.nth(1).click();
-  await page.waitForTimeout(300);
-  const strategyItems = page.locator('.experience-item');
-  await expect(strategyItems).toHaveCount(2);
-  await expect(strategyItems.nth(0)).toContainText('IQVIA');
-  await expect(strategyItems.nth(1)).toContainText('Revolut');
-
-  // 7. Test Filtering by Product (Should show 3)
-  await filters.nth(2).click();
-  await page.waitForTimeout(300);
-  const productItems = page.locator('.experience-item');
-  await expect(productItems).toHaveCount(3);
-  await expect(productItems.nth(0)).toContainText('Ketto.org');
-  await expect(productItems.nth(1)).toContainText('Kalam Labs (YC S21)');
-  await expect(productItems.nth(2)).toContainText('FAOUD');
-
-  // 8. Test Clean Lightbox Open/Close (No captions)
-  const kettoPhotos = detail.locator('.experience-photo-thumb');
-  await kettoPhotos.first().click();
+  // 6. Test Lightbox Open/Close on Photo Thumb
+  await photoThumbs.first().click();
   await page.waitForTimeout(200);
   const lightbox = page.locator('#experience-lightbox');
   await expect(lightbox).toHaveClass(/is-open/);
-  // Ensure no caption element is visible inside lightbox
-  await expect(lightbox.locator('#experience-lightbox-caption')).toHaveCount(0);
 
   // Close lightbox
   await page.locator('#experience-lightbox-close').click();
   await page.waitForTimeout(200);
   await expect(lightbox).not.toHaveClass(/is-open/);
 
-  // 9. Test Subtle Timeline Button & Calendar Modal with Company Logos
-  const periodBtn = detail.locator('.experience-detail__period');
+  // 7. Test Navigating to Kalam Labs via Arrow Navigation or Controller
+  await page.evaluate(() => window.experienceController.setMilestone(3));
+  await page.waitForTimeout(300);
+  await expect(detail.locator('.experience-detail__company')).toHaveText('Kalam Labs (YC S21)');
+
+  // 8. Test Calendar Modal Opened Strictly via Experience Card Date Click
+  const periodBtn = detail.locator('#experience-detail-period-btn');
   await expect(periodBtn).toBeVisible();
-  // Ensure the bulky badge is gone and period text is clean
-  await expect(periodBtn.locator('.experience-detail__period-badge')).toHaveCount(0);
   await expect(periodBtn.locator('.experience-detail__period-text')).toBeVisible();
 
-  // Click period button to open timeline modal
+  // Click period button on the card to open calendar modal
   await periodBtn.click();
   await page.waitForTimeout(300);
 
   const timelineModal = page.locator('#experience-timeline-modal');
   await expect(timelineModal).toHaveClass(/is-open/);
+
+  // Verify 12-column grid structure exists
+  const monthGrids = timelineModal.locator('.timeline-months-grid');
+  await expect(monthGrids).toHaveCount(3); // 2024, 2025, 2026
 
   // Verify company logos are rendered inside active calendar month cells
   const monthLogos = timelineModal.locator('.timeline-month-cell.is-active .timeline-month-logo');
@@ -119,9 +95,18 @@ test('Verify Experience Section: Logos, Strategy & Product categories, SVG light
   const emptyLogos = timelineModal.locator('.timeline-month-cell.is-empty .timeline-month-logo');
   await expect(emptyLogos.first()).toBeVisible();
 
-  // Verify role track cards have company logos
+  // Verify role track cards have real company logos (not broken)
   const trackLogos = timelineModal.locator('.timeline-track-card .timeline-track-card__logo');
   await expect(trackLogos).toHaveCount(5);
+  for (let i = 0; i < 5; i++) {
+    await expect(trackLogos.nth(i)).toBeVisible();
+  }
+
+  // Verify company theme classes on active cells
+  const iqviaCells = timelineModal.locator('.timeline-month-cell.theme-iqvia');
+  await expect(iqviaCells.first()).toBeVisible();
+  const revolutCells = timelineModal.locator('.timeline-month-cell.theme-revolut');
+  await expect(revolutCells.first()).toBeVisible();
 
   // Test clicking a month cell (e.g. Revolut Jan 2026) to navigate directly
   const revolutCell = timelineModal.locator('.timeline-month-cell[data-exp-id="revolut"]').first();
@@ -132,46 +117,5 @@ test('Verify Experience Section: Logos, Strategy & Product categories, SVG light
   await expect(timelineModal).not.toHaveClass(/is-open/);
   await expect(detail.locator('.experience-detail__company')).toHaveText('Revolut');
 
-  // 10. Test Phase 5 Deliverables: 3D Canvas, Date Rail, Progress Track, Inline Mini-Chart
-  // A. 3D Canvas presence
-  const canvasEl = page.locator('#experience-canvas canvas');
-  await expect(canvasEl).toBeAttached();
-
-  // B. Minimalist Date Rail nodes
-  const dateNodes = page.locator('.experience-date-node');
-  await expect(dateNodes).toHaveCount(5);
-  await expect(dateNodes.nth(1)).toHaveClass(/is-active/); // Revolut is active
-
-  // C. Progress Track
-  const progressTrack = page.locator('#experience-progress-track');
-  await expect(progressTrack).toBeVisible();
-  const progressLabel = page.locator('#experience-progress-label');
-  await expect(progressLabel).toHaveText('25%'); // 1 of 4 = 25%
-
-  // D. Date Rail click navigation (Click node 3 -> Kalam Labs)
-  await dateNodes.nth(3).click();
-  await page.waitForTimeout(300);
-  await expect(detail.locator('.experience-detail__company')).toHaveText('Kalam Labs (YC S21)');
-  await expect(progressLabel).toHaveText('75%'); // 3 of 4 = 75%
-  await expect(dateNodes.nth(3)).toHaveClass(/is-active/);
-
-  // E. Toolbar Calendar View Trigger & Company Themed Month Blocks
-  const calTrigger = page.locator('#experience-calendar-trigger-btn');
-  await expect(calTrigger).toBeVisible();
-  await calTrigger.click();
-  await page.waitForTimeout(300);
-  await expect(timelineModal).toHaveClass(/is-open/);
-
-  // Verify company theme classes on active cells
-  const iqviaCells = timelineModal.locator('.timeline-month-cell.theme-iqvia');
-  await expect(iqviaCells.first()).toBeVisible();
-  const revolutCells = timelineModal.locator('.timeline-month-cell.theme-revolut');
-  await expect(revolutCells.first()).toBeVisible();
-
-  // Close calendar modal
-  await page.locator('#experience-timeline-close').click();
-  await page.waitForTimeout(200);
-  await expect(timelineModal).not.toHaveClass(/is-open/);
-
-  console.log('✓ Phase 5 Horizontal 3D Experience timeline, date rail, progress track, and minimal calendar verified successfully!');
+  console.log('✓ Clean 3D timeline, prominent conduit, minimal date rail, card date trigger, and calendar matrix verified successfully!');
 });

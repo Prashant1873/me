@@ -181,43 +181,14 @@
           </div>
 
           <div class="col-span-12">
-            <!-- Top Controls Toolbar: Category Filter Tabs + Calendar View Button -->
-            <div class="experience-toolbar">
-              <div class="experience-filters" id="experience-filters" role="tablist" aria-label="Experience category filters"></div>
-              
-              <div class="experience-toolbar__actions">
-                <button type="button" class="experience-calendar-btn text-mono" id="experience-calendar-trigger-btn" aria-label="Open Work Experience Calendar Timeline">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                    <line x1="16" y1="2" x2="16" y2="6"/>
-                    <line x1="8" y1="2" x2="8" y2="6"/>
-                    <line x1="3" y1="10" x2="21" y2="10"/>
-                  </svg>
-                  <span>CALENDAR VIEW</span>
-                </button>
-              </div>
-            </div>
-
             <!-- Integrated Horizontal 3D Timeline Track (Full Width, Left-to-Right Chain) -->
             <div class="experience-timeline-track" id="experience-timeline-track">
               <!-- Full-width 3D WebGL Canvas Viewport -->
               <div id="experience-canvas" class="experience-canvas experience-canvas--horizontal" role="region" aria-label="3D Experience Timeline Canvas"></div>
-
-              <!-- Minimalist IBM Plex Mono Date Rail Along the Track -->
-              <div id="experience-date-rail" class="experience-date-rail text-mono" aria-label="Chronological date rail"></div>
-
-              <!-- Track Progress Bar -->
-              <div id="experience-progress-track" class="experience-progress-track" aria-hidden="true">
-                <div class="experience-progress-bar" id="experience-progress-bar"></div>
-                <span class="experience-progress-label text-mono" id="experience-progress-label">0%</span>
-              </div>
             </div>
 
             <!-- Attached Active Company Card Panel (Centered directly below active orb) -->
             <div class="experience-detail-container" id="experience-canvas-container">
-              <!-- Accessible Company Selector List -->
-              <div class="experience-list" id="experience-list" role="tablist" aria-label="Companies list"></div>
-
               <!-- Synchronized Detailed Card -->
               <div class="experience-detail" id="experience-detail" role="tabpanel" aria-live="polite"></div>
             </div>

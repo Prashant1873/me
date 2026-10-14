@@ -29,7 +29,7 @@
 }
 
 .section--experience .section__header {
-  margin-bottom: clamp(8px, 1.4vh, 14px);
+  margin-bottom: clamp(2px, 0.4vh, 6px);
   flex-shrink: 0;
 }
 
@@ -49,7 +49,7 @@
   letter-spacing: var(--tracking-tight);
   color: var(--text-primary);
   margin-top: 2px;
-  margin-bottom: clamp(4px, 0.8vh, 8px);
+  margin-bottom: clamp(2px, 0.5vh, 4px);
   line-height: 1.15;
 }
 
@@ -58,6 +58,8 @@
   line-height: 1.48;
   color: var(--text-secondary);
   max-width: 980px;
+  margin-top: 2px;
+  margin-bottom: 0;
 }
 
 /* --------------------------------------------------------------------------
@@ -202,63 +204,23 @@ html[data-theme="light"] .experience-filter-btn[data-category="all"].is-active .
 }
 
 /* --------------------------------------------------------------------------
-   Top Controls Toolbar: Category Filters & Calendar Trigger
-   -------------------------------------------------------------------------- */
-.experience-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: clamp(6px, 1vh, 10px);
-  flex-wrap: wrap;
-}
-
-.experience-calendar-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 6px 14px;
-  border-radius: var(--radius-full, 9999px);
-  font-family: var(--font-technical);
-  font-size: 11px;
-  letter-spacing: var(--tracking-wider);
-  color: var(--color-accent-amber, #C38B55);
-  background-color: rgba(195, 139, 85, 0.08);
-  border: 1px solid rgba(195, 139, 85, 0.3);
-  cursor: pointer;
-  transition: all var(--duration-fast, 160ms) ease;
-}
-
-.experience-calendar-btn:hover {
-  background-color: rgba(195, 139, 85, 0.18);
-  border-color: var(--color-accent-amber, #C38B55);
-  box-shadow: 0 0 14px rgba(195, 139, 85, 0.3);
-  transform: translateY(-1px);
-}
-
-.experience-calendar-btn svg {
-  width: 13px;
-  height: 13px;
-}
-
-/* --------------------------------------------------------------------------
    Integrated Horizontal 3D Timeline Track (Full Width, Left-to-Right Chain)
    -------------------------------------------------------------------------- */
 .experience-timeline-track {
   position: relative;
   width: 100%;
-  height: clamp(140px, 17vh, 185px);
-  border-radius: var(--radius-lg, 12px);
-  overflow: hidden;
-  background: radial-gradient(ellipse at 50% 50%, rgba(195, 139, 85, 0.05) 0%, rgba(0, 0, 0, 0.28) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  margin-bottom: clamp(6px, 1vh, 10px);
+  height: clamp(140px, 18vh, 180px);
+  overflow: visible;
+  background: transparent;
+  border: none;
+  margin-top: 0;
+  margin-bottom: clamp(6px, 1.2vh, 12px);
   box-sizing: border-box;
 }
 
 html[data-theme="light"] .experience-timeline-track {
-  background: radial-gradient(ellipse at 50% 50%, rgba(168, 112, 56, 0.05) 0%, rgba(247, 245, 240, 0.5) 100%);
-  border-color: rgba(0, 0, 0, 0.06);
+  background: transparent;
+  border: none;
 }
 
 .experience-canvas--horizontal {
@@ -275,120 +237,8 @@ html[data-theme="light"] .experience-timeline-track {
   display: block;
 }
 
-/* Minimalist IBM Plex Mono Date Rail Along the Track */
-.experience-date-rail {
-  position: absolute;
-  bottom: 8px;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(8px, 2.5vw, 24px);
-  z-index: 2;
-  pointer-events: none;
-}
-
-.experience-date-node {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-family: var(--font-technical);
-  font-size: 11px;
-  letter-spacing: var(--tracking-wider);
-  color: var(--text-muted);
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(8px);
-  padding: 3px 10px;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  pointer-events: auto;
-  cursor: pointer;
-  transition: all var(--duration-fast, 160ms) ease;
-}
-
-html[data-theme="light"] .experience-date-node {
-  background: rgba(255, 255, 255, 0.7);
-  border-color: rgba(0, 0, 0, 0.08);
-  color: var(--text-secondary);
-}
-
-.experience-date-node__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--text-muted);
-  transition: all var(--duration-fast, 160ms) ease;
-}
-
-.experience-date-node:hover {
-  color: var(--text-primary);
-  border-color: var(--color-accent-amber, #C38B55);
-}
-
-.experience-date-node.is-active {
-  color: var(--color-accent-amber, #C38B55);
-  border-color: var(--color-accent-amber, #C38B55);
-  box-shadow: 0 0 12px rgba(195, 139, 85, 0.3);
-  font-weight: var(--weight-bold);
-}
-
-.experience-date-node.is-active .experience-date-node__dot {
-  background-color: var(--color-accent-amber, #C38B55);
-  box-shadow: 0 0 8px var(--color-accent-amber, #C38B55);
-  transform: scale(1.3);
-}
-
-/* Track Progress Bar Overlay */
-.experience-progress-track {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  z-index: 2;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(8px);
-  padding: 3px 9px;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-html[data-theme="light"] .experience-progress-track {
-  background: rgba(255, 255, 255, 0.75);
-  border-color: rgba(0, 0, 0, 0.08);
-}
-
-.experience-progress-bar {
-  width: 44px;
-  height: 3px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.15);
-  overflow: hidden;
-  position: relative;
-}
-
-.experience-progress-bar::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: var(--progress-pct, 0%);
-  background-color: var(--color-accent-amber, #C38B55);
-  transition: width 0.1s linear;
-}
-
-.experience-progress-label {
-  font-family: var(--font-technical);
-  font-size: 10px;
-  color: var(--color-accent-amber, #C38B55);
-  font-weight: var(--weight-bold);
-}
-
 /* --------------------------------------------------------------------------
-   Attached Active Company Card & Sleek Selector Dock
+   Attached Active Company Card Container
    -------------------------------------------------------------------------- */
 .experience-detail-container {
   position: relative;
@@ -397,109 +247,6 @@ html[data-theme="light"] .experience-progress-track {
   margin-inline: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-}
-
-.experience-list {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  z-index: 2;
-}
-
-.experience-item {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 12px;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-full, 9999px);
-  cursor: pointer;
-  transition: all var(--duration-fast, 160ms) ease;
-  flex-shrink: 0;
-}
-
-.experience-item:hover {
-  background-color: var(--bg-surface-elevated);
-  border-color: var(--border-strong);
-  transform: translateY(-1px);
-}
-
-.experience-item.is-active {
-  background-color: var(--bg-surface-elevated);
-  border-color: var(--color-royal-blue);
-  box-shadow: 0 0 12px rgba(41, 98, 255, 0.25);
-}
-
-.experience-item[data-badge="coral"].is-active {
-  border-color: var(--color-coral);
-  box-shadow: 0 0 12px rgba(232, 101, 90, 0.25);
-}
-
-/* Company Logo Container in List — Clean Transparent Native Surface */
-.experience-item__logo-box {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: border-color var(--duration-fast, 160ms) ease;
-}
-
-.experience-item:hover .experience-item__logo-box {
-  border-color: rgba(255, 255, 255, 0.16);
-}
-
-.experience-item__logo-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.experience-item__info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-  flex: 1;
-}
-
-.experience-item__company {
-  font-family: var(--font-primary);
-  font-size: 0.86rem;
-  font-weight: var(--weight-bold);
-  color: var(--text-primary);
-  letter-spacing: var(--tracking-tight);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.25;
-}
-
-.experience-item__role {
-  font-family: var(--font-primary);
-  font-size: 11px;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.25;
-}
-
-.experience-item__period {
-  font-family: var(--font-technical);
-  font-size: 10px;
-  color: var(--text-muted);
-  line-height: 1.2;
 }
 
 /* --------------------------------------------------------------------------
@@ -1496,11 +1243,7 @@ html[data-theme="light"] .experience-detail__metric {
   }
 
   .experience-timeline-track {
-    height: 150px;
-  }
-
-  .experience-date-rail {
-    display: none;
+    height: 140px;
   }
 
   .experience-item {

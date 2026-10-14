@@ -1,19 +1,18 @@
 /**
- * Experience Section Showcase & 3D Horizontal Spatial Timeline Controller
+ * Experience Section Showcase & 3D Horizontal Spatial Timeline Controller (Refactored)
  *
  * Implements:
- * - Option A: Integrated Upper 3D Track + Attached Card Below
- * - Option B: Linear X-Axis reverse CV chronology (IQVIA -> Revolut -> Ketto -> Kalam Labs -> FAOUD)
- * - 3D Company Logo Medallions centered inside each glowing celestial orb
- * - Full-width horizontal cosmic conduit across left to right of the page
- * - Minimalist, color-coded calendar modal with company theme blocks (zero heavy text)
- * - Spatial category filtering with 15% inactive node dimming and 400ms bloom restoration
+ * - Linear X-Axis reverse CV chronology (IQVIA -> Revolut -> Ketto -> Kalam Labs -> FAOUD)
+ * - Prominent 3D glowing energy conduit track spanning left to right
+ * - Upright, proportional 3D company logo medallions centered inside glowing orbs
+ * - Minimal, non-redundant timeline navigation: single clean date rail + 3D orb click
+ * - Minimalist, color-coded multi-year calendar modal (opened strictly via card period click)
  * - Synchronized detail card crossfade (200ms) with metric ticker animation
  */
 
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { EXPERIENCES, CATEGORIES, TIMELINE_YEARS, CHRONOLOGICAL_ROLES } from './experience-data.js';
+import { EXPERIENCES, TIMELINE_YEARS, CHRONOLOGICAL_ROLES } from './experience-data.js';
 import { initExperienceCanvas } from './experience-canvas.js';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -22,14 +21,9 @@ export function initExperience() {
   const container = document.getElementById('experience');
   if (!container) return;
 
-  const filtersContainer = document.getElementById('experience-filters');
-  const calendarTriggerBtn = document.getElementById('experience-calendar-trigger-btn');
-  const listContainer = document.getElementById('experience-list');
   const detailContainer = document.getElementById('experience-detail');
   const canvasContainer = document.getElementById('experience-canvas');
-  const dateRailContainer = document.getElementById('experience-date-rail');
-  const progressBar = document.getElementById('experience-progress-bar');
-  const progressLabel = document.getElementById('experience-progress-label');
+
 
   // Lightbox elements
   const lightbox = document.getElementById('experience-lightbox');
@@ -45,17 +39,15 @@ export function initExperience() {
   const timelineGrid = document.getElementById('timeline-calendar-grid') || document.getElementById('experience-timeline-grid');
   const timelineTracks = document.getElementById('timeline-role-tracks') || document.getElementById('experience-timeline-tracks');
 
-  if (!filtersContainer || !detailContainer) return;
+  if (!detailContainer) return;
 
   // State
-  let currentCategory = 'all';
-  let activeIndex = 0; // Index in full EXPERIENCES (0 to 4: IQVIA -> Revolut -> Ketto -> Kalam Labs -> FAOUD)
-  let filteredExperiences = [...EXPERIENCES];
+  let activeIndex = 0; // 0 to 4: IQVIA -> Revolut -> Ketto -> Kalam Labs -> FAOUD
   let activePhotos = [];
   let currentPhotoIdx = 0;
 
   // ------------------------------------------------------------------------
-  // 1. Initialize 3D Experience Canvas (Horizontal X-Axis Rail)
+  // 1. Initialize 3D Experience Canvas (Prominent Horizontal Conduit)
   // ------------------------------------------------------------------------
   let experienceCanvas = null;
   if (canvasContainer) {
@@ -66,172 +58,10 @@ export function initExperience() {
     });
   }
 
-  // ------------------------------------------------------------------------
-  // 2. Render Minimalist Mono Date Rail
-  // ------------------------------------------------------------------------
-  function renderDateRail() {
-    if (!dateRailContainer) return;
-    dateRailContainer.innerHTML = '';
 
-    EXPERIENCES.forEach((exp, idx) => {
-      const btn = document.createElement('button');
-      btn.className = `experience-date-node ${idx === activeIndex ? 'is-active' : ''}`;
-      btn.setAttribute('type', 'button');
-      btn.setAttribute('data-index', idx);
-      btn.setAttribute('aria-label', `Navigate to ${exp.company} (${exp.period})`);
-
-      const yearMatch = exp.period.match(/\d{4}/);
-      const year = yearMatch ? yearMatch[0] : '2026';
-
-      btn.innerHTML = `
-        <span class="experience-date-node__dot"></span>
-        <span class="experience-date-node__text">${year} // ${exp.company}</span>
-      `;
-
-      btn.addEventListener('click', () => {
-        navigateToIndex(idx);
-      });
-
-      dateRailContainer.appendChild(btn);
-    });
-  }
-
-  function updateDateRail() {
-    if (!dateRailContainer) return;
-    const nodes = dateRailContainer.querySelectorAll('.experience-date-node');
-    nodes.forEach((node, idx) => {
-      node.classList.toggle('is-active', idx === activeIndex);
-    });
-  }
 
   // ------------------------------------------------------------------------
-  // 3. Update Progress Track Bar
-  // ------------------------------------------------------------------------
-  function updateProgressTrack() {
-    const total = EXPERIENCES.length - 1;
-    const pct = Math.round((activeIndex / (total || 1)) * 100);
-
-    if (progressBar) {
-      progressBar.style.setProperty('--progress-pct', `${pct}%`);
-    }
-    if (progressLabel) {
-      progressLabel.textContent = `${pct}%`;
-    }
-  }
-
-  // ------------------------------------------------------------------------
-  // 4. Render Filter Buttons
-  // ------------------------------------------------------------------------
-  function renderFilters() {
-    filtersContainer.innerHTML = '';
-    CATEGORIES.forEach((cat) => {
-      const btn = document.createElement('button');
-      btn.className = `experience-filter-btn ${cat.id === currentCategory ? 'is-active' : ''}`;
-      btn.setAttribute('type', 'button');
-      btn.setAttribute('data-category', cat.id);
-      btn.innerHTML = `
-        <span>${cat.label}</span>
-        <span class="experience-filter-btn__count">${cat.count}</span>
-      `;
-      btn.addEventListener('click', () => setCategory(cat.id));
-      filtersContainer.appendChild(btn);
-    });
-  }
-
-  // ------------------------------------------------------------------------
-  // 5. Category Filter Handler (Dim inactive 3D nodes to 15%, 400ms bloom)
-  // ------------------------------------------------------------------------
-  function setCategory(catId) {
-    if (currentCategory === catId) return;
-    currentCategory = catId;
-
-    // Update active filter button styling
-    filtersContainer.querySelectorAll('.experience-filter-btn').forEach((btn) => {
-      btn.classList.toggle('is-active', btn.getAttribute('data-category') === catId);
-    });
-
-    // Compute filtered list and active indices
-    if (catId === 'all') {
-      filteredExperiences = [...EXPERIENCES];
-    } else {
-      filteredExperiences = EXPERIENCES.filter((exp) => exp.category === catId);
-    }
-
-    const activeIndices = filteredExperiences.map(exp => EXPERIENCES.indexOf(exp));
-
-    // Tell 3D canvas to dim inactive nodes or bloom back to 100%
-    if (experienceCanvas) {
-      experienceCanvas.setCategoryFilter(catId, activeIndices);
-    }
-
-    // Switch activeIndex to the first visible role in this category
-    if (activeIndices.length > 0) {
-      if (!activeIndices.includes(activeIndex)) {
-        activeIndex = activeIndices[0];
-      }
-    }
-
-    renderList();
-    renderDetail(EXPERIENCES[activeIndex], true);
-    updateDateRail();
-    updateProgressTrack();
-
-    if (experienceCanvas) {
-      experienceCanvas.focusNode(activeIndex);
-    }
-  }
-
-  // ------------------------------------------------------------------------
-  // 6. Render Accessible Company List (with Logos)
-  // ------------------------------------------------------------------------
-  function renderList() {
-    if (!listContainer) return;
-    listContainer.innerHTML = '';
-
-    filteredExperiences.forEach((exp) => {
-      const originalIdx = EXPERIENCES.indexOf(exp);
-      const isCurrentActive = originalIdx === activeIndex;
-
-      const item = document.createElement('button');
-      item.className = `experience-item ${isCurrentActive ? 'is-active' : ''}`;
-      item.setAttribute('type', 'button');
-      item.setAttribute('data-index', originalIdx);
-      item.setAttribute('data-badge', exp.badgeColor);
-      item.setAttribute('role', 'tab');
-      item.setAttribute('aria-selected', isCurrentActive);
-      item.setAttribute('aria-label', `Select ${exp.company}`);
-
-      item.innerHTML = `
-        <div class="experience-item__logo-box">
-          <img src="${exp.logo}" alt="${exp.company} logo" loading="lazy" />
-        </div>
-        <div class="experience-item__info">
-          <span class="experience-item__company">${exp.company}</span>
-          <span class="experience-item__period">${exp.period}</span>
-        </div>
-      `;
-
-      item.addEventListener('click', () => {
-        navigateToIndex(originalIdx);
-      });
-
-      listContainer.appendChild(item);
-    });
-  }
-
-  function updateActiveListItem() {
-    if (!listContainer) return;
-    const items = listContainer.querySelectorAll('.experience-item');
-    items.forEach((item) => {
-      const idx = parseInt(item.getAttribute('data-index'), 10);
-      const isActive = idx === activeIndex;
-      item.classList.toggle('is-active', isActive);
-      item.setAttribute('aria-selected', isActive);
-    });
-  }
-
-  // ------------------------------------------------------------------------
-  // 7. Render Synchronized Detail Card (Attached Below Active 3D Orb)
+  // 4. Render Synchronized Detail Card (Attached Below Active 3D Orb)
   // ------------------------------------------------------------------------
   function renderDetail(exp, animate = false) {
     if (!detailContainer || !exp) return;
@@ -242,17 +72,14 @@ export function initExperience() {
     const photosHtml = hasPhotos
       ? `
         <div class="experience-detail__photos-group">
-          <span class="experience-detail__photos-label">Workplace Artifacts</span>
           <div class="experience-detail__photo-strip">
             ${exp.photos.map((photoUrl, i) => `
-              <div class="experience-photo-thumb" data-photo-idx="${i}" title="View workplace snapshot">
+              <div class="experience-photo-thumb" data-photo-idx="${i}" title="View workplace snapshot" role="button" tabindex="0" aria-label="View photo ${i + 1}">
                 <img src="${photoUrl}" alt="${exp.company} workplace photo" loading="lazy" />
                 <div class="experience-photo-thumb__overlay">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="11" cy="11" r="8"/>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                    <line x1="11" y1="8" x2="11" y2="14"/>
-                    <line x1="8" y1="11" x2="14" y2="11"/>
                   </svg>
                 </div>
               </div>
@@ -331,7 +158,6 @@ export function initExperience() {
       });
     }
 
-    // Editorial Crossfade & Metric Ticker Animation (200ms)
     if (animate) {
       gsap.fromTo(detailContainer,
         { opacity: 0.8, y: 4 },
@@ -349,16 +175,13 @@ export function initExperience() {
   }
 
   // ------------------------------------------------------------------------
-  // 8. Navigation & Milestone Switching Helper
+  // 5. Navigation & Milestone Switching Helper
   // ------------------------------------------------------------------------
   function navigateToIndex(targetIdx) {
     if (targetIdx < 0 || targetIdx >= EXPERIENCES.length) return;
     if (targetIdx === activeIndex) return;
 
     activeIndex = targetIdx;
-    updateActiveListItem();
-    updateDateRail();
-    updateProgressTrack();
     renderDetail(EXPERIENCES[activeIndex], true);
 
     if (experienceCanvas) {
@@ -367,7 +190,7 @@ export function initExperience() {
   }
 
   // ------------------------------------------------------------------------
-  // 9. Lightbox Handlers
+  // 6. Lightbox Handlers
   // ------------------------------------------------------------------------
   function openLightbox(idx) {
     if (!lightbox || !lightboxImg || !activePhotos.length) return;
@@ -411,7 +234,7 @@ export function initExperience() {
   }
 
   // ------------------------------------------------------------------------
-  // 10. Minimalist Thematic Calendar Modal Handlers
+  // 7. Minimalist Thematic Calendar Modal Handlers
   // ------------------------------------------------------------------------
   function openTimelineModal() {
     if (!timelineModal) return;
@@ -427,9 +250,6 @@ export function initExperience() {
     document.body.style.overflow = '';
   }
 
-  if (calendarTriggerBtn) {
-    calendarTriggerBtn.addEventListener('click', openTimelineModal);
-  }
   if (timelineClose) timelineClose.addEventListener('click', closeTimelineModal);
   if (timelineModal) {
     timelineModal.addEventListener('click', (e) => {
@@ -447,12 +267,12 @@ export function initExperience() {
       yearRow.className = 'timeline-year-row';
 
       const label = document.createElement('div');
-      label.className = 'timeline-year-label';
+      label.className = 'timeline-year-badge';
       label.textContent = yrData.year;
       yearRow.appendChild(label);
 
       const monthsContainer = document.createElement('div');
-      monthsContainer.className = 'timeline-months-container';
+      monthsContainer.className = 'timeline-months-grid';
 
       yrData.months.forEach((m) => {
         const cell = document.createElement('div');
@@ -468,12 +288,12 @@ export function initExperience() {
         if (isActive && expData) {
           logoHtml = `<img src="${expData.logo}" alt="${expData.company} logo" class="timeline-month-logo" />`;
         } else {
-          logoHtml = `<img src="./Indian_Institute_of_Technology_Bombay_Logo.svg.webp" alt="IIT Bombay logo" class="timeline-month-logo" />`;
+          logoHtml = `<img src="./images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp" alt="IIT Bombay logo" class="timeline-month-logo timeline-month-logo--iitb" />`;
         }
 
         cell.innerHTML = `
-          <span class="timeline-month-name">${m.name}</span>
-          ${logoHtml}
+          <span class="timeline-month-abbr">${m.name}</span>
+          <div class="timeline-month-logo-box">${logoHtml}</div>
         `;
 
         if (isActive && expData) {
@@ -500,11 +320,13 @@ export function initExperience() {
 
     CHRONOLOGICAL_ROLES.forEach((r) => {
       const card = document.createElement('div');
-      card.className = `timeline-track-card ${r.type === 'strategy' ? 'is-strategy' : 'is-product'}`;
+      card.className = `timeline-track-card ${r.category === 'strategy' ? 'is-strategy' : 'is-product'}`;
 
       card.innerHTML = `
-        <img src="${r.logo}" alt="${r.company} logo" class="timeline-track-card__logo" />
-        <div class="timeline-track-card__info">
+        <div class="timeline-track-card__logo-box">
+          <img src="${r.logo}" alt="${r.company} logo" class="timeline-track-card__logo" />
+        </div>
+        <div class="timeline-track-card__body">
           <div class="timeline-track-card__title-row">
             <span class="timeline-track-card__company">${r.company}</span>
             <span class="timeline-track-card__duration">${r.duration}</span>
@@ -527,23 +349,19 @@ export function initExperience() {
   }
 
   // ------------------------------------------------------------------------
-  // 11. Coordinate with Global Section Scroll Controller
+  // 8. Coordinate with Global Section Scroll Controller
   // ------------------------------------------------------------------------
   window.experienceController = {
     next: () => {
-      const currentFilteredIdx = filteredExperiences.findIndex(e => EXPERIENCES.indexOf(e) === activeIndex);
-      if (currentFilteredIdx !== -1 && currentFilteredIdx < filteredExperiences.length - 1) {
-        const nextExp = filteredExperiences[currentFilteredIdx + 1];
-        navigateToIndex(EXPERIENCES.indexOf(nextExp));
+      if (activeIndex < EXPERIENCES.length - 1) {
+        navigateToIndex(activeIndex + 1);
         return true;
       }
       return false;
     },
     prev: () => {
-      const currentFilteredIdx = filteredExperiences.findIndex(e => EXPERIENCES.indexOf(e) === activeIndex);
-      if (currentFilteredIdx > 0) {
-        const prevExp = filteredExperiences[currentFilteredIdx - 1];
-        navigateToIndex(EXPERIENCES.indexOf(prevExp));
+      if (activeIndex > 0) {
+        navigateToIndex(activeIndex - 1);
         return true;
       }
       return false;
@@ -563,13 +381,9 @@ export function initExperience() {
   });
 
   // ------------------------------------------------------------------------
-  // 12. Initial Boot
+  // 9. Initial Boot
   // ------------------------------------------------------------------------
-  renderFilters();
-  renderDateRail();
-  renderList();
   renderDetail(EXPERIENCES[activeIndex]);
-  updateProgressTrack();
 
   if (experienceCanvas) {
     experienceCanvas.focusNode(0, 0.1);
