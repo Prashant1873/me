@@ -119,3 +119,88 @@ test('Verify Experience Section: Clean 3D Timeline, Date Rail, Active Detail Car
 
   console.log('✓ Clean 3D timeline, prominent conduit, minimal date rail, card date trigger, and calendar matrix verified successfully!');
 });
+
+test('Verify Light Mode Contrast Overhaul & Logo Visibility', async ({ page }) => {
+  test.setTimeout(60000);
+  await page.goto('http://localhost:3000/');
+  await page.waitForTimeout(1000);
+
+  // 1. Toggle to Light Mode
+  const themeToggle = page.locator('#theme-toggle');
+  await themeToggle.click();
+  await page.waitForTimeout(500);
+
+  // 2. Verify Root and Body Colors
+  const themeAttr = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
+  expect(themeAttr).toBe('light');
+
+  const bodyBg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+  // Should be rgb(255, 255, 255), definitely NOT muddy rgb(241, 238, 229)
+  expect(bodyBg).toBe('rgb(255, 255, 255)');
+
+  // 3. Verify Heading Contrast
+  const heroHeadingColor = await page.evaluate(() => {
+    const el = document.querySelector('.hero__name');
+    return el ? getComputedStyle(el).color : null;
+  });
+  // Deep slate rgb(15, 23, 42)
+  expect(heroHeadingColor).toBe('rgb(15, 23, 42)');
+
+  // 4. Verify Experience Section in Light Mode
+  const expSection = page.locator('#experience');
+  await expSection.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(400);
+
+  // Verify Experience Detail Card Surface & Border
+  const detailCard = page.locator('#experience-detail');
+  const cardBg = await page.evaluate(() => {
+    const el = document.getElementById('experience-detail');
+    return el ? getComputedStyle(el).backgroundColor : null;
+  });
+  expect(cardBg).toBe('rgb(255, 255, 255)');
+
+  // 5. Verify White Logos have High-Contrast Dark Badge Container in Light Mode
+  await page.evaluate(() => window.experienceController.setMilestone(1)); // Revolut (white logo)
+  await page.waitForTimeout(300);
+
+  const logoBoxBg = await page.evaluate(() => {
+    const el = document.querySelector('.experience-detail__logo-box');
+    return el ? getComputedStyle(el).backgroundColor : null;
+  });
+  // Obsidian dark badge #0F172A = rgb(15, 23, 42) ensures white Revolut logo is 100% visible
+  expect(logoBoxBg).toBe('rgb(15, 23, 42)');
+
+  const revolutImg = detailCard.locator('.experience-detail__logo-box img');
+  await expect(revolutImg).toBeVisible();
+
+  // 6. Verify Calendar Modal in Light Mode
+  const periodBtn = detailCard.locator('#experience-detail-period-btn');
+  await periodBtn.click();
+  await page.waitForTimeout(400);
+
+  const modal = page.locator('#experience-timeline-modal');
+  await expect(modal).toHaveClass(/is-open/);
+
+  // Verify calendar cells have opaquer backgrounds and visible logos
+  const revolutMonthCell = modal.locator('.timeline-month-cell.theme-revolut').first();
+  await expect(revolutMonthCell).toBeVisible();
+
+  const monthAbbr = revolutMonthCell.locator('.timeline-month-abbr');
+  await expect(monthAbbr).toBeVisible();
+  const abbrFontSize = await page.evaluate(() => {
+    const el = document.querySelector('.timeline-month-abbr');
+    return el ? parseFloat(getComputedStyle(el).fontSize) : null;
+  });
+  expect(abbrFontSize).toBeLessThanOrEqual(9.5); // Compact month name (8.5px)
+
+  const monthLogo = revolutMonthCell.locator('.timeline-month-logo');
+  await expect(monthLogo).toBeVisible();
+
+  // Close modal
+  await page.locator('#experience-timeline-close').click();
+  await page.waitForTimeout(300);
+  await expect(modal).not.toHaveClass(/is-open/);
+
+  console.log('✓ High-contrast light mode, crisp typography, and 100% logo visibility verified successfully!');
+});
+
