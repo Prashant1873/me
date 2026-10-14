@@ -1,6 +1,6 @@
 /**
  * Canonical Project Records for Prashant Shukla's Portfolio
- * Structured Intensity Portfolio — Phase 6 Projects Section
+ * Structured Intensity Portfolio - Phase 6 Projects Section
  */
 
 export const PROJECTS = [

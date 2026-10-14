@@ -24,18 +24,18 @@ requirements:
 user_setup: []
 must_haves:
   truths:
-    - "D-01: Uniform 2x3 Grid Layout — All 6 project cards share identical dimensions, visual weight, and modular layout"
-    - "D-02: Screenshot Hero Card Composition — 16:9 screenshot banner at top with subtle hover depth, followed by project title, category tag in IBM Plex Mono, one-line summary, tech pills, and expand arrow"
-    - "D-03: Industrial Lift & Accent Border Glow — Card elevates -4px Y on hover, border highlights in Royal Blue (#2962FF) or Tungsten Amber (#C38B55), screenshot gently scales 1.03x with 200ms Structured Intensity timing"
-    - "D-04: Curated Story Sequence with Category Badges — Fixed narrative order: BickerBape → StrokeCRM → TRINET → Know Your Archetype → CareerLoom → Marcutie with category tags"
-    - "D-05: Immersive Fullscreen Modal Overlay — Card click expands into a focused cinematic viewport overlay with backdrop blur, locking background scroll for deep narrative focus"
-    - "D-06: Two-Column Cinematic Cockpit Layout — Left column (7 cols on 12-col grid) features interactive screenshot slideshow with caption strip; Right column (5 cols) features personal motivation, key innovations 3-bullet proof block, tech architecture badges, and live action links"
-    - "D-07: Origin-Aware Bounding Box GSAP Animation — Modal springs smoothly from the clicked card's exact grid coordinates to full modal bounds using GSAP power3.out (240ms), collapsing back into its exact grid position upon close"
-    - "D-08: Direct Modal Traversal & Keyboard Controls — Previous/Next project arrows and keyboard ArrowLeft/ArrowRight to cycle between projects directly inside the modal, plus ESC, backdrop click, or ✕ button to close"
-    - "D-09: Monospace Technical Status Tags & Proof Grid — Live technical tag on card thumbnail ([● 98/98 TESTS], [500+ MFRS]) and dedicated 3-item Innovation & Proof grid inside modal"
-    - "D-10: Dual Action CTAs — Card click opens full case study modal; discrete external link icon (↗) on card allows instant direct jump; inside modal, high-contrast primary 'Launch Live App ↗' and secondary 'View on GitHub ↗' buttons"
-    - "D-11: Industrial Monospace Micro-Pills — Tech stack badges rendered in IBM Plex Mono 11px with dark graphite background, stone border, and framework accent dots"
-    - "D-12: Integrated Narrative Flow — Personal motivation woven seamlessly into the opening lines of each project summary"
+    - "D-01: Uniform 2x3 Grid Layout - All 6 project cards share identical dimensions, visual weight, and modular layout"
+    - "D-02: Screenshot Hero Card Composition - 16:9 screenshot banner at top with subtle hover depth, followed by project title, category tag in IBM Plex Mono, one-line summary, tech pills, and expand arrow"
+    - "D-03: Industrial Lift & Accent Border Glow - Card elevates -4px Y on hover, border highlights in Royal Blue (#2962FF) or Tungsten Amber (#C38B55), screenshot gently scales 1.03x with 200ms Structured Intensity timing"
+    - "D-04: Curated Story Sequence with Category Badges - Fixed narrative order: BickerBape → StrokeCRM → TRINET → Know Your Archetype → CareerLoom → Marcutie with category tags"
+    - "D-05: Immersive Fullscreen Modal Overlay - Card click expands into a focused cinematic viewport overlay with backdrop blur, locking background scroll for deep narrative focus"
+    - "D-06: Two-Column Cinematic Cockpit Layout - Left column (7 cols on 12-col grid) features interactive screenshot slideshow with caption strip; Right column (5 cols) features personal motivation, key innovations 3-bullet proof block, tech architecture badges, and live action links"
+    - "D-07: Origin-Aware Bounding Box GSAP Animation - Modal springs smoothly from the clicked card's exact grid coordinates to full modal bounds using GSAP power3.out (240ms), collapsing back into its exact grid position upon close"
+    - "D-08: Direct Modal Traversal & Keyboard Controls - Previous/Next project arrows and keyboard ArrowLeft/ArrowRight to cycle between projects directly inside the modal, plus ESC, backdrop click, or ✕ button to close"
+    - "D-09: Monospace Technical Status Tags & Proof Grid - Live technical tag on card thumbnail ([● 98/98 TESTS], [500+ MFRS]) and dedicated 3-item Innovation & Proof grid inside modal"
+    - "D-10: Dual Action CTAs - Card click opens full case study modal; discrete external link icon (↗) on card allows instant direct jump; inside modal, high-contrast primary 'Launch Live App ↗' and secondary 'View on GitHub ↗' buttons"
+    - "D-11: Industrial Monospace Micro-Pills - Tech stack badges rendered in IBM Plex Mono 11px with dark graphite background, stone border, and framework accent dots"
+    - "D-12: Integrated Narrative Flow - Personal motivation woven seamlessly into the opening lines of each project summary"
   artifacts:
     - src/js/projects-data.js
     - src/js/projects.js
@@ -203,7 +203,7 @@ Origin-aware GSAP modal takeover with focus trapping, body scroll lock, and proj
      - Main viewport container with strict `aspect-ratio: 16 / 9`, relative, overflow hidden, background `#080808`.
      - Main image element `<img>` with `object-fit: contain`, alt text, and fallback `onerror` handler that renders an accessible SVG wireframe if an asset fails to load.
      - Navigation chevron buttons overlay (Prev `←` / Next `→`) with `aria-label="View Previous Screenshot ←"` and `aria-label="View Next Screenshot →"`.
-     - Caption bar below viewport: IBM Plex Mono 12px, showing `[1 / N] — {Caption text}`.
+     - Caption bar below viewport: IBM Plex Mono 12px, showing `[1 / N] - {Caption text}`.
      - Filmstrip thumbnail track: row of thumbnail buttons, each with active border indicator (`var(--color-accent-blue)`), clickable to jump directly to any screenshot.
    - Slideshow state machine:
      - `activeSlideIndex` (0 to N-1).

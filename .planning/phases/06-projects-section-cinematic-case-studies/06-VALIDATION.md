@@ -7,7 +7,7 @@ wave_0_complete: false
 created: 2026-10-14
 ---
 
-# Phase 6 — Validation Strategy: Projects Section — Cinematic Case Studies
+# Phase 6 - Validation Strategy: Projects Section - Cinematic Case Studies
 
 > Per-phase validation contract for feedback sampling during execution.
 
@@ -38,10 +38,10 @@ created: 2026-10-14
 
 | Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
-| 06-01-01 | 01 | 1 | PROJ-01, PROJ-02 | — | Escaped markup; authentic metadata | e2e | `npx playwright test tests/projects.spec.js -g "all 6 project cards"` | ❌ W0 | ⬜ pending |
-| 06-01-02 | 01 | 1 | PROJ-03, PROJ-07 | — | Scroll lock; focus trap with inert | e2e | `npx playwright test tests/projects.spec.js -g "modal expansion and collapse"` | ❌ W0 | ⬜ pending |
+| 06-01-01 | 01 | 1 | PROJ-01, PROJ-02 | - | Escaped markup; authentic metadata | e2e | `npx playwright test tests/projects.spec.js -g "all 6 project cards"` | ❌ W0 | ⬜ pending |
+| 06-01-02 | 01 | 1 | PROJ-03, PROJ-07 | - | Scroll lock; focus trap with inert | e2e | `npx playwright test tests/projects.spec.js -g "modal expansion and collapse"` | ❌ W0 | ⬜ pending |
 | 06-01-03 | 01 | 2 | PROJ-04 | T-06-01 | `rel="noopener noreferrer"` on external URLs | e2e | `npx playwright test tests/projects.spec.js -g "modal content and links"` | ❌ W0 | ⬜ pending |
-| 06-01-04 | 01 | 2 | PROJ-05, PROJ-06 | — | Image fallback on error; smooth transitions | e2e | `npx playwright test tests/projects.spec.js -g "slideshow rendering and controls"` | ❌ W0 | ⬜ pending |
+| 06-01-04 | 01 | 2 | PROJ-05, PROJ-06 | - | Image fallback on error; smooth transitions | e2e | `npx playwright test tests/projects.spec.js -g "slideshow rendering and controls"` | ❌ W0 | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -49,7 +49,7 @@ created: 2026-10-14
 
 ## Wave 0 Requirements
 
-- [ ] `tests/projects.spec.js` — test suite covering all 6 cards, modal expansion, keyboard traversal, and slideshow controls
+- [ ] `tests/projects.spec.js` - test suite covering all 6 cards, modal expansion, keyboard traversal, and slideshow controls
 
 ---
 

@@ -1,4 +1,4 @@
-# Phase 6: Projects Section — Cinematic Case Studies - Research
+# Phase 6: Projects Section - Cinematic Case Studies - Research
 
 **Researched:** 2026-10-14  
 **Domain:** Client-side Web Architecture, GSAP Bounding-Box Transitions, Accessible Slideshows, Modal Viewport Takeovers  
@@ -18,18 +18,18 @@ Instead of heavy external modal or carousel dependencies, the section utilizes s
 ## User Constraints (from CONTEXT.md)
 
 ### Locked Decisions
-- **D-01: Uniform 2x3 Grid Layout** — All 6 project cards share identical dimensions, visual weight, and modular layout (2 rows of 3 columns on desktop, 2 columns on tablet, single column on mobile).
-- **D-02: Screenshot Hero Card Composition** — 16:9 screenshot banner at top with subtle hover depth, followed by project title, category tag in IBM Plex Mono, one-line summary, tech pills, and expand arrow.
-- **D-03: Industrial Lift & Accent Border Glow** — Card elevates -4px Y on hover, border highlights in Royal Blue (`#2962FF`) or Tungsten Amber (`#C38B55`), screenshot gently scales 1.03x with 200ms Structured Intensity timing.
-- **D-04: Curated Story Sequence with Category Badges** — Fixed narrative order: BickerBape → StrokeCRM → TRINET → Know Your Archetype → CareerLoom → Marcutie with category tags (`Fintech & Compounding`, `Cold Outreach`, `Manufacturing Intel`, `Behavioral Psych`, `Career Discovery`, `Creative Automation`), avoiding sparse filter tabs for 6 projects.
-- **D-05: Immersive Fullscreen Modal Overlay** — Card click expands into a focused cinematic viewport overlay with backdrop blur (`backdrop-filter: blur(12px)`), locking background scroll for deep narrative focus (ESC key or ✕ button to dismiss).
-- **D-06: Two-Column Cinematic Cockpit Layout** — Left column (7 cols on 12-col desktop grid) features the interactive screenshot slideshow with thumbnail/caption strip; Right column (5 cols) features the integrated narrative flow (personal motivation opening, core problem, key innovations 3-bullet proof block, tech architecture badges, and live action links).
-- **D-07: Origin-Aware Bounding Box GSAP Animation** — Modal springs smoothly from the clicked card's exact grid coordinates (`getBoundingClientRect()`) to full modal bounds using GSAP ease (`power3.out`, ~240ms), collapsing back into its exact grid position upon close.
-- **D-08: Direct Modal Traversal & Keyboard Controls** — Previous/Next project arrows and keyboard ArrowLeft / ArrowRight to cycle between projects directly inside the modal without returning to the grid, plus ESC, backdrop click, or ✕ button to close.
-- **D-09: Monospace Technical Status Tags & Proof Grid** — Live technical tag on card thumbnail (e.g. `[● 98/98 TESTS]`, `[500+ MFRS]`, `[18 SCENARIOS]`) in IBM Plex Mono; inside modal, a dedicated 3-item Innovation & Proof grid highlights key innovations with metrics.
-- **D-10: Dual Action CTAs** — Card click opens full case study modal; small discrete external link icon (`↗`) on card allows instant direct jump to demo/repo; inside modal, prominent high-contrast buttons: Primary "Launch Live App ↗" (Royal Blue/Amber) and Secondary "View on GitHub ↗" (dark graphite with GitHub icon).
-- **D-11: Industrial Monospace Micro-Pills** — Tech stack badges rendered in IBM Plex Mono 11px with dark graphite background (`var(--color-bg-alt)`), stone border, and subtle accent dot for primary language/framework.
-- **D-12: Integrated Narrative Flow** — Weave personal motivation seamlessly into the opening lines of the project summary (e.g., BickerBape: wanting to invest first salary without relying on black-box ratings; StrokeCRM: frustration with recurring SaaS fees and opaque spam algorithms; Archetype: deep behavioral psychology obsession mapping charisma into continuous vector math).
+- **D-01: Uniform 2x3 Grid Layout** - All 6 project cards share identical dimensions, visual weight, and modular layout (2 rows of 3 columns on desktop, 2 columns on tablet, single column on mobile).
+- **D-02: Screenshot Hero Card Composition** - 16:9 screenshot banner at top with subtle hover depth, followed by project title, category tag in IBM Plex Mono, one-line summary, tech pills, and expand arrow.
+- **D-03: Industrial Lift & Accent Border Glow** - Card elevates -4px Y on hover, border highlights in Royal Blue (`#2962FF`) or Tungsten Amber (`#C38B55`), screenshot gently scales 1.03x with 200ms Structured Intensity timing.
+- **D-04: Curated Story Sequence with Category Badges** - Fixed narrative order: BickerBape → StrokeCRM → TRINET → Know Your Archetype → CareerLoom → Marcutie with category tags (`Fintech & Compounding`, `Cold Outreach`, `Manufacturing Intel`, `Behavioral Psych`, `Career Discovery`, `Creative Automation`), avoiding sparse filter tabs for 6 projects.
+- **D-05: Immersive Fullscreen Modal Overlay** - Card click expands into a focused cinematic viewport overlay with backdrop blur (`backdrop-filter: blur(12px)`), locking background scroll for deep narrative focus (ESC key or ✕ button to dismiss).
+- **D-06: Two-Column Cinematic Cockpit Layout** - Left column (7 cols on 12-col desktop grid) features the interactive screenshot slideshow with thumbnail/caption strip; Right column (5 cols) features the integrated narrative flow (personal motivation opening, core problem, key innovations 3-bullet proof block, tech architecture badges, and live action links).
+- **D-07: Origin-Aware Bounding Box GSAP Animation** - Modal springs smoothly from the clicked card's exact grid coordinates (`getBoundingClientRect()`) to full modal bounds using GSAP ease (`power3.out`, ~240ms), collapsing back into its exact grid position upon close.
+- **D-08: Direct Modal Traversal & Keyboard Controls** - Previous/Next project arrows and keyboard ArrowLeft / ArrowRight to cycle between projects directly inside the modal without returning to the grid, plus ESC, backdrop click, or ✕ button to close.
+- **D-09: Monospace Technical Status Tags & Proof Grid** - Live technical tag on card thumbnail (e.g. `[● 98/98 TESTS]`, `[500+ MFRS]`, `[18 SCENARIOS]`) in IBM Plex Mono; inside modal, a dedicated 3-item Innovation & Proof grid highlights key innovations with metrics.
+- **D-10: Dual Action CTAs** - Card click opens full case study modal; small discrete external link icon (`↗`) on card allows instant direct jump to demo/repo; inside modal, prominent high-contrast buttons: Primary "Launch Live App ↗" (Royal Blue/Amber) and Secondary "View on GitHub ↗" (dark graphite with GitHub icon).
+- **D-11: Industrial Monospace Micro-Pills** - Tech stack badges rendered in IBM Plex Mono 11px with dark graphite background (`var(--color-bg-alt)`), stone border, and subtle accent dot for primary language/framework.
+- **D-12: Integrated Narrative Flow** - Weave personal motivation seamlessly into the opening lines of the project summary (e.g., BickerBape: wanting to invest first salary without relying on black-box ratings; StrokeCRM: frustration with recurring SaaS fees and opaque spam algorithms; Archetype: deep behavioral psychology obsession mapping charisma into continuous vector math).
 
 ### The Agent's Discretion
 - **Slideshow Controls & Transitions:** Integrated screenshot carousel uses next/prev chevron buttons, thumbnail navigation strip, and swipe/arrow-key support with smooth 200ms crossfade transitions conforming to Structured Intensity motion specs.
@@ -37,8 +37,8 @@ Instead of heavy external modal or carousel dependencies, the section utilizes s
 - **Image Fallback:** High-fidelity SVG wireframes if any screenshot fails to load or during offline testing.
 
 ### Deferred Ideas (OUT OF SCOPE)
-- Interactive embedded iframes / live sandbox playgrounds (V2-08) — deferred to v2.
-- Video preview walkthroughs — deferred to v2.
+- Interactive embedded iframes / live sandbox playgrounds (V2-08) - deferred to v2.
+- Video preview walkthroughs - deferred to v2.
 </user_constraints>
 
 ---
@@ -214,7 +214,7 @@ function unlockScroll() {
 | PROJ-07 | GSAP animation runs and ESC key closes modal smoothly | E2E | `npx playwright test tests/projects.spec.js -g "modal collapse on ESC"` | ❌ Wave 0 |
 
 ### Wave 0 Gaps
-- [ ] `tests/projects.spec.js` — comprehensive test suite covering all PROJ-01 through PROJ-07 requirements.
+- [ ] `tests/projects.spec.js` - comprehensive test suite covering all PROJ-01 through PROJ-07 requirements.
 
 ---
 
@@ -238,9 +238,9 @@ function unlockScroll() {
 
 ## Metadata
 **Confidence breakdown:**
-- Standard stack: HIGH — using verified local dependencies.
-- Architecture: HIGH — verified pattern based on existing experience section.
-- Pitfalls: HIGH — well-understood DOM modal and carousel gotchas.
+- Standard stack: HIGH - using verified local dependencies.
+- Architecture: HIGH - verified pattern based on existing experience section.
+- Pitfalls: HIGH - well-understood DOM modal and carousel gotchas.
 
 **Research date:** 2026-10-14  
 **Valid until:** 2026-11-14 (30 days)  

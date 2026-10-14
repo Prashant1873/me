@@ -3,7 +3,7 @@
 Valuable concepts, design directions, and feature ideas for Marcutie.
 
 ## Core Concepts
-- **Brag-Grade Launch Videos Without Codebases**: Generating viral, high-converting product launch videos from just a long marketing prompt and/or uploaded product screenshots, mockups, or photos—eliminating the GitHub repo / source code requirement of Hyperframes.
+- **Brag-Grade Launch Videos Without Codebases**: Generating viral, high-converting product launch videos from just a long marketing prompt and/or uploaded product screenshots, mockups, or photos-eliminating the GitHub repo / source code requirement of Hyperframes.
 - **Local-First Zero Server Cost Rendering**: Using local Node.js and browser-based Remotion / WebCodecs / Canvas rendering on the user's machine so rendering is 100% free of cloud GPU bills, making the software infinitely scalable and easily hostable.
 - **BYOK (Bring Your Own Key) Multimodal Architecture**: Users supply their own Gemini, Claude, or OpenAI API key. This unlocks frontier vision and reasoning without requiring the user to run heavy local vision models or the host to pay subscription API bills.
 

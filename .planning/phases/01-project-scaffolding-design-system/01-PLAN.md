@@ -11,7 +11,7 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
 ## Plans
 
 ### Plan 1: Vite Project Initialization
-**Priority:** P0 — everything depends on this
+**Priority:** P0 - everything depends on this
 **Type:** setup
 **Estimated effort:** small
 
@@ -76,7 +76,7 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
 ---
 
 ### Plan 2: CSS Reset & Google Fonts
-**Priority:** P0 — typography is the spine of Structured Intensity
+**Priority:** P0 - typography is the spine of Structured Intensity
 **Type:** implementation
 **Estimated effort:** small
 **Depends on:** Plan 1
@@ -93,7 +93,7 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
    ```html
    <link href="https://fonts.cdnfonts.com/css/horizon" rel="stylesheet">
    ```
-   - **Horizon** — geometric display font for hero headlines only (uppercase)
+   - **Horizon** - geometric display font for hero headlines only (uppercase)
 
 3. **Load Google Fonts in `index.html`**
    - Add preconnect hints and font links in `<head>`:
@@ -103,9 +103,9 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
      <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
      ```
    - Fonts:
-     - **Plus Jakarta Sans** (400 regular, 500 medium, 600 semibold, 700 bold) — body, headings, UI
-     - **IBM Plex Mono** (400 regular, 500 medium) — technical metadata
-     - **Newsreader** (400 regular, 400 italic) — editorial statements
+     - **Plus Jakarta Sans** (400 regular, 500 medium, 600 semibold, 700 bold) - body, headings, UI
+     - **IBM Plex Mono** (400 regular, 500 medium) - technical metadata
+     - **Newsreader** (400 regular, 400 italic) - editorial statements
 
 4. **Set up barrel import** (`src/styles/index.css`)
    ```css
@@ -122,12 +122,12 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
 - [ ] Horizon font renders from CDN (geometric uppercase display)
 - [ ] Plus Jakarta Sans, IBM Plex Mono, Newsreader load from Google Fonts
 - [ ] Font weights match the design language spec
-- [ ] No FOUT (flash of unstyled text) — `display=swap` in font URLs
+- [ ] No FOUT (flash of unstyled text) - `display=swap` in font URLs
 
 ---
 
-### Plan 3: Design System — Color Tokens & Dark/Light Mode Foundation
-**Priority:** P0 — colors define the visual identity
+### Plan 3: Design System - Color Tokens & Dark/Light Mode Foundation
+**Priority:** P0 - colors define the visual identity
 **Type:** implementation
 **Estimated effort:** medium
 **Depends on:** Plan 2
@@ -206,8 +206,8 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
 
 ---
 
-### Plan 4: Design System — Typography Scale
-**Priority:** P0 — typography carries the system per design doc
+### Plan 4: Design System - Typography Scale
+**Priority:** P0 - typography carries the system per design doc
 **Type:** implementation
 **Estimated effort:** medium
 **Depends on:** Plan 3
@@ -225,7 +225,7 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
      --font-technical: 'IBM Plex Mono', 'Fira Code', monospace;
      --font-expressive: 'Newsreader', 'Georgia', serif;
 
-     /* Font sizes — desktop reference (will scale responsively) */
+     /* Font sizes - desktop reference (will scale responsively) */
      --text-hero: clamp(3rem, 5vw, 5rem);        /* 48-80px */
      --text-section: clamp(1.75rem, 3vw, 2.5rem); /* 28-40px */
      --text-subsection: clamp(1.25rem, 2vw, 1.5rem); /* 20-24px */
@@ -306,8 +306,8 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
 
 ---
 
-### Plan 5: Design System — Spacing, Grid & Layout Tokens
-**Priority:** P0 — the grid is the skeleton
+### Plan 5: Design System - Spacing, Grid & Layout Tokens
+**Priority:** P0 - the grid is the skeleton
 **Type:** implementation
 **Estimated effort:** medium
 **Depends on:** Plan 3
@@ -332,19 +332,19 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
      /* === Layout === */
      --grid-columns: 12;
      --grid-gap: var(--space-5);         /* 24px */
-     --grid-margin: var(--space-10);     /* 64px — generous outer margins */
+     --grid-margin: var(--space-10);     /* 64px - generous outer margins */
      --grid-margin-mobile: var(--space-4); /* 16px on mobile */
 
      /* Section heights */
      --section-min-height: 100vh;
 
-     /* Corner radii — mostly 4-8px per design doc */
+     /* Corner radii - mostly 4-8px per design doc */
      --radius-sm: 4px;
      --radius-md: 6px;
      --radius-lg: 8px;
      --radius-xl: 12px;
 
-     /* Borders — thin 1px in muted grey per design doc */
+     /* Borders - thin 1px in muted grey per design doc */
      --border-width: 1px;
      --border-style: solid;
    }
@@ -396,7 +396,7 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
 ---
 
 ### Plan 6: Design System Demo Page
-**Priority:** P1 — proves the system works visually before building sections
+**Priority:** P1 - proves the system works visually before building sections
 **Type:** verification
 **Estimated effort:** medium
 **Depends on:** Plans 2, 3, 4, 5
@@ -415,7 +415,7 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
      - Hero headline: "PRECISION IN THOUGHT."
      - Section heading: "Professional Experience"
      - Body text: Sample paragraph about Prashant
-     - UI label: "2026 — Present"
+     - UI label: "2026 - Present"
      - Technical metadata: "48.8566° N, 2.3522° E"
      - Editorial statement: *"Depth in Expression."*
 
@@ -436,14 +436,14 @@ FOUND-01, FOUND-02, FOUND-03, FOUND-05, FOUND-06
    - Button styled with Structured Intensity tokens
    - Transitions use `--duration-normal` (220ms)
 
-3. **Take screenshots for review** — visual proof of the system
+3. **Take screenshots for review** - visual proof of the system
 
 #### Must-haves
 - [ ] All color swatches render correctly in both themes
 - [ ] All 7 typography roles visible and correctly styled
 - [ ] Grid overlay shows 12 columns with correct margins
 - [ ] Theme toggle transitions smoothly (220ms)
-- [ ] Page looks and feels like "Structured Intensity" — not generic
+- [ ] Page looks and feels like "Structured Intensity" - not generic
 
 ---
 
@@ -459,7 +459,7 @@ After all plans are executed:
 - [ ] Dark mode is default, light mode toggleable
 - [ ] WCAG 2.2 AA contrast ratios pass for all text/bg combinations
 - [ ] Design system demo page renders all tokens visually
-- [ ] The page "feels" like Structured Intensity — industrial, editorial, warm, not generic
+- [ ] The page "feels" like Structured Intensity - industrial, editorial, warm, not generic
 
 ---
 
@@ -474,4 +474,4 @@ After all plans are executed:
 
 ---
 *Plan created: 2026-10-13*
-*Phase: 01 — Project Scaffolding & Design System*
+*Phase: 01 - Project Scaffolding & Design System*

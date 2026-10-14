@@ -1,9 +1,9 @@
-# Phase 4: Professional Experience — Content & Layout
+# Phase 4: Professional Experience - Content & Layout
 
 ## Goal
 The 5 commercial, startup, and venture experience entries laid out with company details, roles, bullets, quantified metrics, authentic workplace photos from `Portfolio_images/`, and LinkedIn links, complete with category filter tabs matching Structured Intensity design standards.
 
-*(Note: IIT Bombay institutional leadership bodies — Abhyuday and Placement Cell — have been strategically promoted to Section 03 "Education & Campus Impact" to elevate the IIT Bombay section into a high-stakes governance showcase).*
+*(Note: IIT Bombay institutional leadership bodies - Abhyuday and Placement Cell - have been strategically promoted to Section 03 "Education & Campus Impact" to elevate the IIT Bombay section into a high-stakes governance showcase).*
 
 ## Delivers
 - EXP-02: Company cards for the 5 commercial/venture roles (IQVIA, Revolut, Ketto, Kalam Labs, FAOUD)
@@ -16,11 +16,11 @@ The 5 commercial, startup, and venture experience entries laid out with company 
 
 ### PLAN-01: Centralized Commercial Experience Data Model & Asset Integration
 - Create `src/js/experience-data.js` containing the 5 commercial entries:
-  1. **IQVIA** (Strategy Consulting) — Analyst, Strategy Consulting [Jul 2026 – Present]
-  2. **Revolut** (FinTech / CEO's Office) — CEO's Office Product Strategy Intern [Jan 2026 – Jun 2026]
-  3. **Ketto.org** (HealthTech / Social Impact) — Product, Strategy & Operations Intern [Sep 2025 – Nov 2025]
-  4. **Kalam Labs (YC S21)** (DeepTech / EdTech) — Founder's Office Intern [May 2025 – Jul 2025]
-  5. **FAOUD** (0→1 Venture) — Head of Product [Dec 2024 – Apr 2025]
+  1. **IQVIA** (Strategy Consulting) - Analyst, Strategy Consulting [Jul 2026 – Present]
+  2. **Revolut** (FinTech / CEO's Office) - CEO's Office Product Strategy Intern [Jan 2026 – Jun 2026]
+  3. **Ketto.org** (HealthTech / Social Impact) - Product, Strategy & Operations Intern [Sep 2025 – Nov 2025]
+  4. **Kalam Labs (YC S21)** (DeepTech / EdTech) - Founder's Office Intern [May 2025 – Jul 2025]
+  5. **FAOUD** (0→1 Venture) - Head of Product [Dec 2024 – Apr 2025]
 - Copy and wire photos from `Portfolio_images/` into `public/images/experience/`.
 - Include verified LinkedIn URLs and key impact metrics for each entry.
 

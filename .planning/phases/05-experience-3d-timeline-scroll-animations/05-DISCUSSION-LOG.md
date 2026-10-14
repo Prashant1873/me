@@ -1,7 +1,7 @@
-# Phase 5: Experience — 3D Timeline & Scroll Animations - Discussion Log
+# Phase 5: Experience - 3D Timeline & Scroll Animations - Discussion Log
 
 > **Audit trail only.** Do not use as input to planning, research, or execution agents.
-> Decisions are captured in CONTEXT.md — this log preserves the alternatives considered.
+> Decisions are captured in CONTEXT.md - this log preserves the alternatives considered.
 
 **Date:** 2026-10-13
 **Phase:** 5-experience-3d-timeline-scroll-animations

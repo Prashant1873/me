@@ -19,7 +19,7 @@ Deliver the complete Education Section (`#education`) and Contact Section (`#con
 | **CONT-03** | Email link with click-to-copy | `shuklaprashant847@gmail.com` (`mailto:shuklaprashant847@gmail.com`) |
 | **CONT-04** | Phone number display | `+91-9696721493` (`tel:+919696721493`) |
 | **CONT-05** | Downloadable resume PDF button | Resume download action triggering clean resume asset |
-| **CONT-06** | Contact section has Newsreader editorial statement as closing | Serif quote: *"Engineering rigor meets behavioral empathy — building systems that outlast their creators and products people genuinely love."* |
+| **CONT-06** | Contact section has Newsreader editorial statement as closing | Serif quote: *"Engineering rigor meets behavioral empathy - building systems that outlast their creators and products people genuinely love."* |
 
 ---
 

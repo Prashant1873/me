@@ -1,4 +1,4 @@
-# Phase 5: Experience — 3D Timeline & Scroll Animations Summary
+# Phase 5: Experience - 3D Timeline & Scroll Animations Summary
 
 ## Overview
 Executed Phase 5 with the spatial timeline track, pivoting from an isolated box to a unified, full-width horizontal X-axis 3D timeline spanning the section from left to right. Attached detailed milestone cards anchor beneath the active company orb, coupled with a minimal, color-coded calendar modal and seamless 1-swipe full-viewport navigation.

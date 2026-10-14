@@ -1,5 +1,5 @@
 /**
- * Hero Orbital Canvas — Three.js 3D scene
+ * Hero Orbital Canvas - Three.js 3D scene
  * Wireframe core + floating particles (no rings)
  * Aerospace metaphor: coherent center with orbiting ideas
  */

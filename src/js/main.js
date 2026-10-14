@@ -28,7 +28,7 @@ if (themeToggleBtn) {
 }
 
 // --------------------------------------------------------------------------
-// Sticky Nav — Compact on Scroll
+// Sticky Nav - Compact on Scroll
 // --------------------------------------------------------------------------
 const siteNav = document.getElementById('site-nav');
 const COMPACT_THRESHOLD = 60;
@@ -86,7 +86,7 @@ function revealSite() {
     }, 400);
   }
 
-  // Entrance Animation (GSAP) — staggered reveal with 3D fade-in
+  // Entrance Animation (GSAP) - staggered reveal with 3D fade-in
   gsap.fromTo('.site-nav',
     { y: -20, opacity: 0 },
     { y: 0, opacity: 1, duration: 0.5, delay: 0.05, ease: 'power2.out' }

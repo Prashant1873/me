@@ -1,5 +1,5 @@
 /**
- * Authentic Education & Achievements Data Model — Phase 7
+ * Authentic Education & Achievements Data Model - Phase 7
  * Pedigree: IIT Bombay B.Tech Aerospace, CMS Gold Medal, St. Francis Gold Medal
  * Leadership: Abhyuday (Head, ₹10M+ Budget), Placement Cell (Coordinator, 2000+ Students)
  * Arts & Sports: Dramatics Inter IIT Culturals 2x Gold, Stand-up Comedy, Basketball & Hockey
@@ -11,7 +11,7 @@ export const ACADEMICS = [
     institution: 'Indian Institute of Technology Bombay',
     shortName: 'IIT Bombay',
     degree: 'B.Tech in Aerospace Engineering',
-    timeline: '2022 — 2026',
+    timeline: '2022 - 2026',
     badge: 'UNDERGRADUATE',
     logo: '/images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp',
     details: 'Focus on flight mechanics, aerodynamics, autonomous control, and quantitative engineering optimization.',
@@ -25,7 +25,7 @@ export const ACADEMICS = [
     institution: 'City Montessori School (CMS), Lucknow',
     shortName: 'City Montessori School (CMS)',
     degree: 'ISC Examination (Class XII)',
-    timeline: '2020 — 2022',
+    timeline: '2020 - 2022',
     badge: 'GOLD MEDAL',
     score: '98.25%',
     logo: '/images/logos/cms.png',
@@ -57,7 +57,7 @@ export const GOVERNANCE = [
     id: 'abhyuday',
     title: 'Operations & Marketing Head',
     organization: 'Abhyuday, IIT Bombay',
-    timeline: 'Apr 2024 — Apr 2025',
+    timeline: 'Apr 2024 - Apr 2025',
     scale: "Asia's Largest Student Social Body",
     patronages: 'UNICEF, PETA, UNESCO',
     impactBullets: [
@@ -72,7 +72,7 @@ export const GOVERNANCE = [
     id: 'placement-cell',
     title: 'Department Placement Coordinator',
     organization: 'Placement Cell, IIT Bombay',
-    timeline: 'Jul 2025 — May 2026',
+    timeline: 'Jul 2025 - May 2026',
     scale: 'Aerospace Engineering Department',
     impactBullets: [
       'Facilitated recruitment operations for 2,000+ graduating students in collaboration with 65+ coordinators.',

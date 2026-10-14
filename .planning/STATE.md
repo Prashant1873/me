@@ -18,8 +18,8 @@ progress:
 
 See: .planning/PROJECT.md (updated 2026-10-12)
 
-**Core value:** The website must feel unmistakably personal — like meeting Prashant, not reading his resume.
-**Current focus:** Phase 8 — Responsive Design & Mobile Adaptation
+**Core value:** The website must feel unmistakably personal - like meeting Prashant, not reading his resume.
+**Current focus:** Phase 8 - Responsive Design & Mobile Adaptation
 
 ## Current Milestone
 
@@ -32,9 +32,9 @@ Milestone 1: Design Foundation & Living Skeleton
 | 1 | Project Scaffolding & Design System | **Complete** |
 | 2 | Navigation & Page Structure | **Complete** |
 | 3 | Hero Section with 3D Orbital Canvas | **Complete** |
-| 4 | Professional Experience — Content & Layout | **Complete** |
-| 5 | Experience — 3D Timeline & Scroll Animations | **Complete** |
-| 6 | Projects Section — Cinematic Case Studies | **Complete** |
+| 4 | Professional Experience - Content & Layout | **Complete** |
+| 5 | Experience - 3D Timeline & Scroll Animations | **Complete** |
+| 6 | Projects Section - Cinematic Case Studies | **Complete** |
 | 7 | Education & Contact Sections | **Complete** |
 | 8 | Responsive Design & Mobile Adaptation | **Next** |
 | 9 | Advanced 3D & Section Transitions | Pending |

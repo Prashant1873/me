@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Projects Section — Cinematic Case Studies (Phase 6)', () => {
+test.describe('Projects Section - Cinematic Case Studies (Phase 6)', () => {
   test.beforeEach(async ({ page }) => {
     test.setTimeout(60000);
     await page.goto('http://localhost:3000/');

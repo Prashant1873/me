@@ -3,7 +3,7 @@ import { PROJECTS } from './projects-data.js';
 
 /**
  * Projects Section & Cinematic Modal Controller
- * Structured Intensity Portfolio — Phase 6
+ * Structured Intensity Portfolio - Phase 6
  */
 
 let activeProjectIndex = 0;
@@ -232,7 +232,7 @@ function renderModalContent(project) {
           </button>
         </div>
         <div id="slideshow-caption" class="modal-slideshow__caption">
-          [1 / ${totalSlides}] — ${escapeHtml(currentSlide.caption)}
+          [1 / ${totalSlides}] - ${escapeHtml(currentSlide.caption)}
         </div>
         <div class="modal-slideshow__thumbs" role="tablist" aria-label="Screenshot thumbnails">
           ${thumbsHtml}
@@ -344,7 +344,7 @@ function setSlide(index) {
   const captionEl = chassisEl.querySelector('#slideshow-caption');
 
   if (captionEl) {
-    captionEl.textContent = `[${activeSlideIndex + 1} / ${total}] — ${slide.caption}`;
+    captionEl.textContent = `[${activeSlideIndex + 1} / ${total}] - ${slide.caption}`;
   }
 
   // Update thumbnail states

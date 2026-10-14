@@ -10,7 +10,7 @@
 
 ## 🌟 Overview
 
-True charisma isn’t loud performance—it’s how you handle spontaneous dinner debates, hijacked meetings, and high-stakes emergencies. **Know Your Archetype** replaces self-aggrandizing personality quizzes with an empirical, indirect behavioral assessment engine.
+True charisma isn’t loud performance-it’s how you handle spontaneous dinner debates, hijacked meetings, and high-stakes emergencies. **Know Your Archetype** replaces self-aggrandizing personality quizzes with an empirical, indirect behavioral assessment engine.
 
 Respondents navigate **18 everyday situational scenarios** to uncover their dominant archetype and secondary hybrid blend:
 

@@ -1,5 +1,5 @@
 /**
- * Experience 3D Canvas — Three.js Horizontal Spatial Timeline (Refactored)
+ * Experience 3D Canvas - Three.js Horizontal Spatial Timeline (Refactored)
  *
  * Implements:
  * - Prominent, thick 3D glowing energy conduit line spanning across left-to-right of page
@@ -285,7 +285,7 @@ export function initExperienceCanvas(container, options = {}) {
     const backMesh = new THREE.Mesh(sharedBackGeo, backMaterial);
     nodeGroup.add(backMesh);
 
-    // D. Front Logo Face (100% Upright Native Aspect Plane — No 90° Rotation!)
+    // D. Front Logo Face (100% Upright Native Aspect Plane - No 90° Rotation!)
     const logoDarkTexture = textureLoader.load(milestone.logoDark || milestone.logo);
     logoDarkTexture.colorSpace = THREE.SRGBColorSpace;
     logoDarkTexture.generateMipmaps = true;

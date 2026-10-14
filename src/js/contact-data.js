@@ -1,5 +1,5 @@
 /**
- * Contact & Channels Data Model — Phase 7
+ * Contact & Channels Data Model - Phase 7
  * Authentic links, phone, email, resume, and Newsreader editorial statement
  */
 
@@ -40,7 +40,7 @@ export const CONTACT_CHANNELS = [
 ];
 
 export const EDITORIAL_STATEMENT = {
-  quote: 'Engineering rigor meets behavioral empathy — building systems that outlast their creators and products people genuinely love.',
+  quote: 'Engineering rigor meets behavioral empathy - building systems that outlast their creators and products people genuinely love.',
   author: 'Prashant Shukla',
   sub: 'IIT Bombay Aerospace // Product, Strategy & AI Automation'
 };

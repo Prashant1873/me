@@ -1,5 +1,5 @@
 /**
- * Contact Section Component — Phase 7
+ * Contact Section Component - Phase 7
  * Interactive Contact Channels, One-Click Clipboard Copy, Resume CTA & Newsreader Quote
  */
 
@@ -89,7 +89,7 @@ export function initContact() {
     <blockquote class="contact__quote">
       <p class="contact__quote-text">"${EDITORIAL_STATEMENT.quote}"</p>
       <footer class="contact__quote-footer">
-        <cite class="contact__quote-author">— ${EDITORIAL_STATEMENT.author}</cite>
+        <cite class="contact__quote-author">- ${EDITORIAL_STATEMENT.author}</cite>
         <span class="contact__quote-sub">${EDITORIAL_STATEMENT.sub}</span>
       </footer>
     </blockquote>

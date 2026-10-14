@@ -1,4 +1,4 @@
-# Phase 6: Projects Section — Cinematic Case Studies Summary
+# Phase 6: Projects Section - Cinematic Case Studies Summary
 
 ## Overview
 Executed Phase 6 delivering the complete `#projects` section featuring all 6 commercial and deep-tech products (BickerBape, StrokeCRM, TRINET, Know Your Archetype, CareerLoom, and Marcutie). The implementation follows an industrial editorial aesthetic ("Structured Intensity") utilizing native Vanilla JS ES modules, modular CSS, and GSAP 3.12 for fluid, origin-aware bounding-box transitions.
@@ -9,12 +9,12 @@ Executed Phase 6 delivering the complete `#projects` section featuring all 6 com
 - **Grid Layout (D-01):** CSS Grid with `repeat(3, 1fr)` on desktop (min-width 1024px), `repeat(2, 1fr)` on tablet (768px–1023px), and `1fr` on mobile (<768px), with `var(--space-8)` (32px) gap.
 - **Card Chassis & Elevation (D-02, D-03):** 16:9 screenshot hero banner at the top with subtle hover depth (`translateY(-4px)`), Royal Blue / Tungsten Amber border highlight, 1.03x thumbnail scale, and Structured Intensity timing (200ms).
 - **Curated Sequence & Monospace Status Tags (D-04, D-09):** Fixed canonical narrative order:
-  1. `BickerBape`: `Fintech & Compounding` — `[● 98/98 TESTS]`
-  2. `StrokeCRM`: `Cold Outreach` — `[● SELF-HOSTED]`
-  3. `TRINET`: `Manufacturing Intel` — `[● 500+ MFRS]`
-  4. `Know Your Archetype`: `Behavioral Psych` — `[● 18 SCENARIOS]`
-  5. `CareerLoom`: `Career Discovery` — `[● 200+ FIRMS]`
-  6. `Marcutie`: `Creative Automation` — `[● LOCAL-FIRST]`
+  1. `BickerBape`: `Fintech & Compounding` - `[● 98/98 TESTS]`
+  2. `StrokeCRM`: `Cold Outreach` - `[● SELF-HOSTED]`
+  3. `TRINET`: `Manufacturing Intel` - `[● 500+ MFRS]`
+  4. `Know Your Archetype`: `Behavioral Psych` - `[● 18 SCENARIOS]`
+  5. `CareerLoom`: `Career Discovery` - `[● 200+ FIRMS]`
+  6. `Marcutie`: `Creative Automation` - `[● LOCAL-FIRST]`
 - **Tech Stack Micro-Pills (D-11):** Rendered in IBM Plex Mono 11px with dark graphite background (`var(--bg-surface-elevated)`), subtle border, and framework accent dots.
 
 ### 2. Fullscreen Cinematic Modal Takeover with GSAP Animation (`src/js/projects.js`, `src/styles/projects.css`)
@@ -29,7 +29,7 @@ Executed Phase 6 delivering the complete `#projects` section featuring all 6 com
   - Main viewport container locked to 16:9 aspect ratio with `object-fit: contain` and dark backdrop.
   - Authentic high-resolution screenshots copied to `public/images/projects/{id}/slide-{N}.png`.
   - Next / Prev chevron navigation buttons with accessible touch targets (44px).
-  - Dynamic monospace caption bar: `[N / Total] — {Caption text}`.
+  - Dynamic monospace caption bar: `[N / Total] - {Caption text}`.
   - Clickable filmstrip thumbnail strip with active blue border indicator.
   - Keyboard navigation (`ArrowLeft` / `ArrowRight`) to cycle through screenshots.
   - High-fidelity SVG wireframe fallbacks on image loading errors.

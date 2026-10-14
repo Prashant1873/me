@@ -1,7 +1,7 @@
-# Phase 6: Projects Section — Cinematic Case Studies - Discussion Log
+# Phase 6: Projects Section - Cinematic Case Studies - Discussion Log
 
 > **Audit trail only.** Do not use as input to planning, research, or execution agents.
-> Decisions are captured in CONTEXT.md — this log preserves the alternatives considered.
+> Decisions are captured in CONTEXT.md - this log preserves the alternatives considered.
 
 **Date:** 2026-10-14
 **Phase:** 06-projects-section-cinematic-case-studies
@@ -18,7 +18,7 @@
 | Interactive Split-Screen Index | Left list/rail of 6 project titles with dynamic preview pane on right | |
 | You decide | Agent picks layout | |
 
-**User's choice:** Uniform 2x3 Grid — All 6 project cards share identical dimensions, visual weight, and layout
+**User's choice:** Uniform 2x3 Grid - All 6 project cards share identical dimensions, visual weight, and layout
 **Notes:** Provides a cohesive, balanced, modular aesthetic across the section.
 
 | Option | Description | Selected |
@@ -149,5 +149,5 @@
 
 ## Deferred Ideas
 
-- In-modal interactive live iframes/playgrounds (V2-08) — deferred to v2.
-- Video preview walkthroughs — deferred to v2.
+- In-modal interactive live iframes/playgrounds (V2-08) - deferred to v2.
+- Video preview walkthroughs - deferred to v2.

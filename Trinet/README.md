@@ -1,4 +1,4 @@
-# TRINET™ — India Manufacturing Intelligence & Discovery Platform
+# TRINET™ - India Manufacturing Intelligence & Discovery Platform
 
 TRINET™ is a comprehensive, persistent manufacturing discovery and intelligence platform engineered to discover, map, classify, enrich, and analyze manufacturers and industrial facilities operating across India.
 
@@ -61,8 +61,8 @@ TRINET™ is a comprehensive, persistent manufacturing discovery and intelligenc
   9. **HBIC** (Hyderabad-Bengaluru Industrial Corridor)
   10. **OEC** (Odisha Economic Corridor)
   11. **DNIC** (Delhi-Nagpur Industrial Corridor)
-  12. **UPDIC** (Uttar Pradesh Defence Industrial Corridor — 6 Nodes)
-  13. **TNDIC** (Tamil Nadu Defence Industrial Corridor — 5 Nodes)
+  12. **UPDIC** (Uttar Pradesh Defence Industrial Corridor - 6 Nodes)
+  13. **TNDIC** (Tamil Nadu Defence Industrial Corridor - 5 Nodes)
 * **National Coverage Score:** Real-time visibility into discovery progress across India's 36 States/UTs.
 * **Automated Corridor Scanning:** One-click multi-node discovery sweep along any industrial corridor.
 
@@ -197,4 +197,4 @@ TRINET (TM) Automated Test Suite
 ---
 
 ## 📄 License
-TRINET™ — Proprietary Intelligence Platform. All rights reserved.
+TRINET™ - Proprietary Intelligence Platform. All rights reserved.

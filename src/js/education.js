@@ -1,5 +1,5 @@
 /**
- * Education Section Component — Phase 7
+ * Education Section Component - Phase 7
  * Triple-Pillar Layout: Academics, Governance, Performing Arts & Skills Matrix
  */
 

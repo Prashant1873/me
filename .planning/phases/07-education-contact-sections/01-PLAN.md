@@ -31,13 +31,13 @@ requirements:
 user_setup: []
 must_haves:
   truths:
-    - "D-01: Triple-Pillar Education Showcase — Academics (IIT Bombay B.Tech, CMS 98.25% Gold, St. Francis 98% Gold), Campus Governance (Abhyuday & Placement Cell), and Creative Stage/Sports honours rendered in unified modular cards"
-    - "D-02: Categorized Interactive Skills Matrix — Strategy & Product, Data Analytics, and Automation/AI rendered in responsive micro-pills with hover states"
-    - "D-03: Instant Contact Channels — Direct interactive action cards for LinkedIn, GitHub, Email (with copy feedback), and Phone"
-    - "D-04: Authentic Resume Delivery — One-click resume download/view CTA wired directly to authentic resume artifact"
-    - "D-05: Expressive Newsreader Editorial Statement — Closing quote reflecting engineering rigor meets behavioral empathy"
-    - "D-06: Strict 100vh Viewport Containment — Both #education and #contact fit cleanly within 100vh on 1440x900 and 1280x720 laptops without overflow"
-    - "D-07: Harmonized Section Headers — Identical typography tokens (--text-section, --text-section-sub, --tracking-wider) across both sections"
+    - "D-01: Triple-Pillar Education Showcase - Academics (IIT Bombay B.Tech, CMS 98.25% Gold, St. Francis 98% Gold), Campus Governance (Abhyuday & Placement Cell), and Creative Stage/Sports honours rendered in unified modular cards"
+    - "D-02: Categorized Interactive Skills Matrix - Strategy & Product, Data Analytics, and Automation/AI rendered in responsive micro-pills with hover states"
+    - "D-03: Instant Contact Channels - Direct interactive action cards for LinkedIn, GitHub, Email (with copy feedback), and Phone"
+    - "D-04: Authentic Resume Delivery - One-click resume download/view CTA wired directly to authentic resume artifact"
+    - "D-05: Expressive Newsreader Editorial Statement - Closing quote reflecting engineering rigor meets behavioral empathy"
+    - "D-06: Strict 100vh Viewport Containment - Both #education and #contact fit cleanly within 100vh on 1440x900 and 1280x720 laptops without overflow"
+    - "D-07: Harmonized Section Headers - Identical typography tokens (--text-section, --text-section-sub, --tracking-wider) across both sections"
   artifacts:
     - src/js/education-data.js
     - src/js/contact-data.js
@@ -72,7 +72,7 @@ Build the complete Education Section (#education) and Contact Section (#contact)
      - Abhyuday, IIT Bombay: Operations & Marketing Head (2024–2025). Metrics: Reach: 7M+, Budget: ₹10M+, UNICEF/PETA patronages, Advitya 50K+ footfall, ₹20M+ venture funding.
      - Placement Cell, IIT Bombay: Department Placement Coordinator (2025–2026). Facilitating recruitment for 2,000+ students, 65+ coordinators, 40+ recruiters.
    - `EXTRACURRICULARS`:
-     - Dramatics: Writer & Director — 2024 & 2025 Gold Medal at Inter IIT Cultural Meet; 2023–2025 Triple Gold at Inter-Hostel Dramatics.
+     - Dramatics: Writer & Director - 2024 & 2025 Gold Medal at Inter IIT Cultural Meet; 2023–2025 Triple Gold at Inter-Hostel Dramatics.
      - Speaking: Stand-up comedy Annual Showcase (2023); Hosted Abhyuday CSR+ESG Conclave.
      - Athletics: Winner, Freshiesta Basketball League (2023); Captain, Mixed Hockey Championship Team (2024).
    - `SKILLS`:
@@ -83,7 +83,7 @@ Build the complete Education Section (#education) and Contact Section (#contact)
      - GitHub: `https://github.com/Prashant1873`, label: `GitHub`, handle: `@Prashant1873`
      - Email: `shuklaprashant847@gmail.com`, label: `Email`
      - Phone: `+91-9696721493`, label: `Phone`
-   - `EDITORIAL_STATEMENT`: *"Engineering rigor meets behavioral empathy — building systems that outlast their creators and products people genuinely love."*
+   - `EDITORIAL_STATEMENT`: *"Engineering rigor meets behavioral empathy - building systems that outlast their creators and products people genuinely love."*
    - `RESUME_URL`: Link to downloadable resume asset.
 3. Create `tests/education-contact.spec.js` asserting all 11 requirements:
    - EDU-01: IIT Bombay Aerospace Engineering and crest visible.

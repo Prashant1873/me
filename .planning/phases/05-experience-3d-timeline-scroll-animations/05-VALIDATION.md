@@ -7,7 +7,7 @@ wave_0_complete: false
 created: 2026-10-13
 ---
 
-# Phase 5 — Validation Strategy
+# Phase 5 - Validation Strategy
 
 > Per-phase validation contract for feedback sampling during execution.
 
@@ -38,11 +38,11 @@ created: 2026-10-13
 
 | Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
-| 05-01-01 | 01 | 1 | EXP-01, 3D-06 | — | N/A | unit/e2e | `npx playwright test tests/experience.spec.js` | ✅ | ⬜ pending |
-| 05-01-02 | 01 | 1 | EXP-07, 3D-06 | — | N/A | integration | `npx playwright test tests/experience.spec.js` | ✅ | ⬜ pending |
-| 05-01-03 | 01 | 2 | EXP-08 | — | N/A | integration | `npx playwright test tests/experience.spec.js` | ✅ | ⬜ pending |
-| 05-01-04 | 01 | 2 | EXP-06, 3D-10 | — | N/A | e2e | `npx playwright test tests/experience.spec.js` | ✅ | ⬜ pending |
-| 05-01-05 | 01 | 3 | EXP-01..08 | — | N/A | regression | `npm test` | ✅ | ⬜ pending |
+| 05-01-01 | 01 | 1 | EXP-01, 3D-06 | - | N/A | unit/e2e | `npx playwright test tests/experience.spec.js` | ✅ | ⬜ pending |
+| 05-01-02 | 01 | 1 | EXP-07, 3D-06 | - | N/A | integration | `npx playwright test tests/experience.spec.js` | ✅ | ⬜ pending |
+| 05-01-03 | 01 | 2 | EXP-08 | - | N/A | integration | `npx playwright test tests/experience.spec.js` | ✅ | ⬜ pending |
+| 05-01-04 | 01 | 2 | EXP-06, 3D-10 | - | N/A | e2e | `npx playwright test tests/experience.spec.js` | ✅ | ⬜ pending |
+| 05-01-05 | 01 | 3 | EXP-01..08 | - | N/A | regression | `npm test` | ✅ | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -50,7 +50,7 @@ created: 2026-10-13
 
 ## Wave 0 Requirements
 
-- [x] `tests/experience.spec.js` — updated with assertions for `#experience-canvas`, WebGL initialization, and pinned scroll traversal.
+- [x] `tests/experience.spec.js` - updated with assertions for `#experience-canvas`, WebGL initialization, and pinned scroll traversal.
 - [x] Existing infrastructure covers all phase requirements.
 
 ---

@@ -6,7 +6,7 @@ Immersive full-viewport hero with Three.js orbital geometry, personal narrative 
 ## Plans
 
 ### PLAN-01: Three.js orbital geometry canvas module
-- New file `src/js/hero-canvas.js` — self-contained Three.js scene
+- New file `src/js/hero-canvas.js` - self-contained Three.js scene
 - Concentric orbital rings (aerospace metaphor): 3 nested rings at different tilts
 - Central icosahedron wireframe core (coral accent)
 - Floating orbital dots/particles along ring paths

@@ -50,7 +50,7 @@ Single-Page Scrollable Portfolio
 - **4-Card Interactive Action Row:** Direct high-contrast cards for LinkedIn, GitHub, Email, and Phone with micro-hover physics.
 - **1-Click Clipboard Engine:** Clicking Email triggers clipboard copy with instant 2s visual confirmation toast and copy icon feedback.
 - **Resume Download Chassis:** Prominent CTA linking to authentic resume text/PDF asset with dual action buttons.
-- **Newsreader Editorial Statement:** Closing statement in expressive Newsreader italic serif with royal blue quotation mark: *"Engineering rigor meets behavioral empathy — building systems that outlast their creators and products people genuinely love."*
+- **Newsreader Editorial Statement:** Closing statement in expressive Newsreader italic serif with royal blue quotation mark: *"Engineering rigor meets behavioral empathy - building systems that outlast their creators and products people genuinely love."*
 - **Anchored Site Footer:** Minimalist footer with copyright, tech stack specs, and coordinates anchored inside the single 100vh screen.
 
 ## Page Flow (Top to Bottom)

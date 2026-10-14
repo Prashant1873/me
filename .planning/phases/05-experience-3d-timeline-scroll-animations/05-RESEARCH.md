@@ -1,4 +1,4 @@
-# Phase 5: Experience — 3D Timeline & Scroll Animations - Research
+# Phase 5: Experience - 3D Timeline & Scroll Animations - Research
 
 **Researched:** 2026-10-13  
 **Domain:** Three.js WebGL Particle Systems, GSAP ScrollTrigger Section Pinning, Z-Depth Dolly Camera Math, Hybrid DOM/WebGL Synchronization  
@@ -8,22 +8,22 @@
 ## User Constraints (from CONTEXT.md)
 
 ### Locked Decisions
-- **D-01 (Spatial Architecture):** Dedicated 3D timeline canvas paired side-by-side with synchronized interactive card panel (preserves photos, metrics, and links) — Reversibility: costly.
-- **D-02 (Grid Allocation):** 12-column grid apportionment: 5-column 3D spatial canvas on the left, 7-column detail card on the right — Reversibility: reversible.
-- **D-03 (Navigation):** 3D nodes serve as primary navigation with hover raycasting and click-to-travel, paired with a minimalist IBM Plex Mono date rail (2024–2026) overlaid along the canvas edge — Reversibility: reversible.
-- **D-04 (Responsive):** Responsive vertical stack on tablet/mobile (<1024px) with sticky/anchored compact 3D canvas header (~240px height) above active card with touch dragging — Reversibility: reversible.
-- **D-05 (Scroll Scrubbing):** Pinned scroll scrubbing via GSAP ScrollTrigger: section pins while user scrubs through all 5 roles in z-depth, unpinning smoothly to continue down to #projects — Reversibility: costly.
-- **D-06 (Camera Trajectory):** Linear Z-depth dolly: camera tracks straight along the Z-axis, flying past previous nodes that dissolve behind the camera plane — Reversibility: reversible.
-- **D-07 (Card Sync):** Crisp editorial crossfade & metric ticker: 200ms subtle fade + 6px Y-offset with animated metric counters and staggered bullets (Structured Intensity motion timings) — Reversibility: reversible.
-- **D-08 (Nav Sync):** Seamless navigation sync & progress tracking: header nav click smoothly navigates to entry point; scroll scrubber includes a subtle % progress bar and keyboard ArrowUp/Down support — Reversibility: reversible.
-- **D-09 (3D Geometry):** Particle stream & cosmic dust conduits: glowing particle ribbon with concentrated star-clusters at each role milestone along the Z-axis — Reversibility: costly.
-- **D-10 (Color Palette):** Tungsten Amber (#C38B55) primary highlight for active milestone star-cluster glow with subtle cool cyan/blue cosmic dust particles; adapts with muted deep amber in light mode — Reversibility: reversible.
-- **D-11 (Interactivity):** Mouse parallax + raycast hover bloom: subtle camera offset following cursor with expanding halo bloom on hovered milestone nodes (clickable to travel) — Reversibility: reversible.
-- **D-12 (Performance Budget):** Adaptive particle budget (400–600 particles) + IntersectionObserver pausing: pixelRatio capped at 2, RAF loop stopped when section is off-screen for 0% idle CPU/GPU load — Reversibility: reversible.
-- **D-13 (Spatial Filtering):** Spatial focus & dimming with camera dolly: inactive nodes dim to 15% ghost opacity; 3D camera smoothly glides to the first matching role; scroll limits to matching milestones — Reversibility: reversible.
-- **D-14 (Integrated Date Mini-Chart):** Replace 2D calendar modal with inline toggle in detail card: add a small "View Dates" mini-chart inside the detail card instead of a separate overlay modal — Reversibility: reversible.
-- **D-15 (Keyboard Traversal):** Keyboard arrow keys navigate strictly through filtered milestones — Reversibility: reversible.
-- **D-16 (Filter Reset):** Smooth bloom & restore opacities: all dimmed star-clusters and paths fade back to full brilliance over 400ms without displacing current camera position when resetting to All Experience — Reversibility: reversible.
+- **D-01 (Spatial Architecture):** Dedicated 3D timeline canvas paired side-by-side with synchronized interactive card panel (preserves photos, metrics, and links) - Reversibility: costly.
+- **D-02 (Grid Allocation):** 12-column grid apportionment: 5-column 3D spatial canvas on the left, 7-column detail card on the right - Reversibility: reversible.
+- **D-03 (Navigation):** 3D nodes serve as primary navigation with hover raycasting and click-to-travel, paired with a minimalist IBM Plex Mono date rail (2024–2026) overlaid along the canvas edge - Reversibility: reversible.
+- **D-04 (Responsive):** Responsive vertical stack on tablet/mobile (<1024px) with sticky/anchored compact 3D canvas header (~240px height) above active card with touch dragging - Reversibility: reversible.
+- **D-05 (Scroll Scrubbing):** Pinned scroll scrubbing via GSAP ScrollTrigger: section pins while user scrubs through all 5 roles in z-depth, unpinning smoothly to continue down to #projects - Reversibility: costly.
+- **D-06 (Camera Trajectory):** Linear Z-depth dolly: camera tracks straight along the Z-axis, flying past previous nodes that dissolve behind the camera plane - Reversibility: reversible.
+- **D-07 (Card Sync):** Crisp editorial crossfade & metric ticker: 200ms subtle fade + 6px Y-offset with animated metric counters and staggered bullets (Structured Intensity motion timings) - Reversibility: reversible.
+- **D-08 (Nav Sync):** Seamless navigation sync & progress tracking: header nav click smoothly navigates to entry point; scroll scrubber includes a subtle % progress bar and keyboard ArrowUp/Down support - Reversibility: reversible.
+- **D-09 (3D Geometry):** Particle stream & cosmic dust conduits: glowing particle ribbon with concentrated star-clusters at each role milestone along the Z-axis - Reversibility: costly.
+- **D-10 (Color Palette):** Tungsten Amber (#C38B55) primary highlight for active milestone star-cluster glow with subtle cool cyan/blue cosmic dust particles; adapts with muted deep amber in light mode - Reversibility: reversible.
+- **D-11 (Interactivity):** Mouse parallax + raycast hover bloom: subtle camera offset following cursor with expanding halo bloom on hovered milestone nodes (clickable to travel) - Reversibility: reversible.
+- **D-12 (Performance Budget):** Adaptive particle budget (400–600 particles) + IntersectionObserver pausing: pixelRatio capped at 2, RAF loop stopped when section is off-screen for 0% idle CPU/GPU load - Reversibility: reversible.
+- **D-13 (Spatial Filtering):** Spatial focus & dimming with camera dolly: inactive nodes dim to 15% ghost opacity; 3D camera smoothly glides to the first matching role; scroll limits to matching milestones - Reversibility: reversible.
+- **D-14 (Integrated Date Mini-Chart):** Replace 2D calendar modal with inline toggle in detail card: add a small "View Dates" mini-chart inside the detail card instead of a separate overlay modal - Reversibility: reversible.
+- **D-15 (Keyboard Traversal):** Keyboard arrow keys navigate strictly through filtered milestones - Reversibility: reversible.
+- **D-16 (Filter Reset):** Smooth bloom & restore opacities: all dimmed star-clusters and paths fade back to full brilliance over 400ms without displacing current camera position when resetting to All Experience - Reversibility: reversible.
 
 ### the agent's Discretion
 - Three.js particle geometry layout math (distribution equations along Z, spline vs ribbon jitter).
@@ -32,20 +32,20 @@
 - Shader vs `PointsMaterial` implementation (PointsMaterial with generated circular canvas texture or custom point sprite).
 
 ### Deferred Ideas (OUT OF SCOPE)
-None — discussion stayed strictly within Phase 5 scope.
+None - discussion stayed strictly within Phase 5 scope.
 </user_constraints>
 
 <architectural_responsibility_map>
 ## Architectural Responsibility Map
 
-Single-tier client-side Web application — all capabilities reside in Browser/Client.
+Single-tier client-side Web application - all capabilities reside in Browser/Client.
 
 | Capability | Primary Tier | Secondary Tier | Rationale |
 |------------|-------------|----------------|-----------|
-| 3D WebGL Rendering (Three.js) | Browser/Client (WebGL) | — | Hardware-accelerated canvas rendering for particle conduits and camera dolly |
-| Scroll Pinning & Scrubbing (GSAP ScrollTrigger) | Browser/Client (DOM/JS) | — | Viewport scroll observation, pinning layout calculations, scrub interpolation |
-| Synchronized Detail Card & DOM Updates | Browser/Client (DOM/CSS) | — | Editorial typography, metric tickers, accessibility, outbound links |
-| Raycasting & Touch Interaction | Browser/Client (JS Events) | — | Mouse pointer/touch coordinate normalization to Three.js NDC space |
+| 3D WebGL Rendering (Three.js) | Browser/Client (WebGL) | - | Hardware-accelerated canvas rendering for particle conduits and camera dolly |
+| Scroll Pinning & Scrubbing (GSAP ScrollTrigger) | Browser/Client (DOM/JS) | - | Viewport scroll observation, pinning layout calculations, scrub interpolation |
+| Synchronized Detail Card & DOM Updates | Browser/Client (DOM/CSS) | - | Editorial typography, metric tickers, accessibility, outbound links |
+| Raycasting & Touch Interaction | Browser/Client (JS Events) | - | Mouse pointer/touch coordinate normalization to Three.js NDC space |
 </architectural_responsibility_map>
 
 <research_summary>

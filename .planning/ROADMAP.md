@@ -2,7 +2,7 @@
 
 ## Milestone 1: Design Foundation & Living Skeleton
 
-**Goal:** A fully scrollable single-page portfolio with all sections laid out, the Structured Intensity design system implemented, navigation working, and the hero section's 3D orbital geometry alive. Every section has real content but basic layout — this skeleton becomes the canvas that subsequent milestones paint on.
+**Goal:** A fully scrollable single-page portfolio with all sections laid out, the Structured Intensity design system implemented, navigation working, and the hero section's 3D orbital geometry alive. Every section has real content but basic layout - this skeleton becomes the canvas that subsequent milestones paint on.
 
 **Success Criteria:** A recruiter could scroll through the entire page top-to-bottom, see Prashant's story in order, navigate via sticky header, and feel the design language immediately. The hero 3D canvas runs at 60fps. Dark/light mode works.
 
@@ -46,7 +46,7 @@
 - Scroll indicator visible and animated at bottom of hero
 - 3D scene responds to gentle mouse movement (parallax)
 
-### Phase 4: Professional Experience — Content & Layout
+### Phase 4: Professional Experience - Content & Layout
 
 **Goal:** All 7 experience entries laid out with company details, logos, roles, bullets, and LinkedIn links. Category filter tabs (Work, Entrepreneurship, Leadership, Creative).
 
@@ -59,7 +59,7 @@
 - LinkedIn links open correct company pages in new tab
 - Typography and colors match Structured Intensity
 
-### Phase 5: Experience — 3D Timeline & Scroll Animations
+### Phase 5: Experience - 3D Timeline & Scroll Animations
 
 **Goal:** Transform the experience section from flat cards to an interactive 3D timeline floating in space. Scroll-triggered animations reveal each entry.
 
@@ -73,7 +73,7 @@
 - Category filters still work within the 3D timeline
 - Performance: 60fps on modern desktop
 
-### Phase 6: Projects Section — Cinematic Case Studies
+### Phase 6: Projects Section - Cinematic Case Studies
 
 **Goal:** All 6 projects as cinematic cards with click-to-expand showcases, screenshot slideshows integrated into the design.
 

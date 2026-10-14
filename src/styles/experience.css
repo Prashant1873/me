@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Experience Section Styles — Structured Intensity
+   Experience Section Styles - Structured Intensity
    Strict 1-Viewport Viewport-Constrained Master-Detail Showcase
    ========================================================================== */
 
@@ -61,7 +61,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Filter Navigation Tabs — Subtle Thematic Color Hints
+   Filter Navigation Tabs - Subtle Thematic Color Hints
    -------------------------------------------------------------------------- */
 .experience-filters {
   display: flex;
@@ -257,7 +257,7 @@ html[data-theme="light"] .experience-canvas canvas {
 }
 
 /* --------------------------------------------------------------------------
-   Right: Experience Detail Panel (Balanced, Cohesive Flow — No Empty Voids)
+   Right: Experience Detail Panel (Balanced, Cohesive Flow - No Empty Voids)
    -------------------------------------------------------------------------- */
 .experience-detail {
   position: relative;
@@ -431,7 +431,7 @@ html[data-theme="light"] .experience-detail__period:hover {
   color: var(--text-muted);
 }
 
-/* Key Impact Block — Clean Editorial Container (No thick AI slop border) */
+/* Key Impact Block - Clean Editorial Container (No thick AI slop border) */
 .experience-detail__metric {
   display: inline-flex;
   align-items: center;
@@ -476,7 +476,7 @@ html[data-theme="light"] .experience-detail__metric {
   letter-spacing: var(--tracking-wide);
 }
 
-/* Bullet Points — Natural Reading Flow without artificial middle stretching */
+/* Bullet Points - Natural Reading Flow without artificial middle stretching */
 .experience-detail__bullets {
   list-style: none;
   display: flex;
@@ -624,7 +624,7 @@ html[data-theme="light"] .experience-detail__metric {
 }
 
 /* --------------------------------------------------------------------------
-   Photo Lightbox Modal (Clean Photo Viewer — No Captions)
+   Photo Lightbox Modal (Clean Photo Viewer - No Captions)
    -------------------------------------------------------------------------- */
 .experience-lightbox {
   position: fixed;
@@ -1050,7 +1050,7 @@ html[data-theme="light"] .experience-detail__metric {
   text-align: center;
 }
 
-/* Active Color-Coded Months with Specific Company Brand Themes — Rich High-Contrast Opaque Blocks */
+/* Active Color-Coded Months with Specific Company Brand Themes - Rich High-Contrast Opaque Blocks */
 .timeline-month-cell.is-active {
   cursor: pointer;
   box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.35);
@@ -1061,7 +1061,7 @@ html[data-theme="light"] .experience-detail__metric {
   z-index: 2;
 }
 
-/* IQVIA Theme (Royal Blue — Deep & Vivid) */
+/* IQVIA Theme (Royal Blue - Deep & Vivid) */
 .timeline-month-cell.theme-iqvia {
   background-color: rgba(30, 64, 175, 0.78);
   border-color: rgba(96, 165, 250, 0.7);

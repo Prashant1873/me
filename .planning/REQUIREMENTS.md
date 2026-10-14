@@ -1,7 +1,7 @@
 # Requirements: Prashant Shukla Portfolio
 
 **Defined:** 2026-10-12
-**Core Value:** The website must feel unmistakably personal — like meeting Prashant, not reading his resume.
+**Core Value:** The website must feel unmistakably personal - like meeting Prashant, not reading his resume.
 
 ## v1 Requirements
 
