@@ -122,18 +122,6 @@ export function initExperience() {
         </div>
       </div>
 
-      <div class="experience-detail__stepper">
-        <button type="button" class="experience-stepper-btn experience-stepper-btn--prev" id="exp-stepper-prev" aria-label="Previous role" ${activeIndex === 0 ? 'disabled' : ''}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-          <span>Prev Role</span>
-        </button>
-        <span class="experience-stepper-counter text-mono">${activeIndex + 1} / ${EXPERIENCES.length}</span>
-        <button type="button" class="experience-stepper-btn experience-stepper-btn--next" id="exp-stepper-next" aria-label="Next role" ${activeIndex === EXPERIENCES.length - 1 ? 'disabled' : ''}>
-          <span>Next Role</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-
       <div class="experience-detail__metric" data-badge="${exp.badgeColor}">
         <svg class="experience-detail__metric-icon" viewBox="0 0 24 24" fill="currentColor">
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
@@ -155,20 +143,6 @@ export function initExperience() {
         </a>
       </div>
     `;
-
-    // Bind stepper buttons
-    const stepperPrev = document.getElementById('exp-stepper-prev');
-    const stepperNext = document.getElementById('exp-stepper-next');
-    if (stepperPrev) {
-      stepperPrev.addEventListener('click', () => {
-        if (activeIndex > 0) navigateToIndex(activeIndex - 1);
-      });
-    }
-    if (stepperNext) {
-      stepperNext.addEventListener('click', () => {
-        if (activeIndex < EXPERIENCES.length - 1) navigateToIndex(activeIndex + 1);
-      });
-    }
 
     // Bind period button to open timeline calendar modal
     const periodBtn = document.getElementById('experience-detail-period-btn');

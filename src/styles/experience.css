@@ -15,8 +15,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: calc(64px + clamp(18px, 2.8vh, 36px));
-  padding-bottom: clamp(12px, 2vh, 24px);
+  padding-top: calc(56px + clamp(10px, 1.6vh, 22px));
+  padding-bottom: clamp(8px, 1.2vh, 16px);
 }
 
 .section--experience .grid-container {
@@ -211,12 +211,12 @@ html[data-theme="light"] .experience-filter-btn[data-category="all"].is-active .
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  height: clamp(185px, 23.5vh, 240px);
+  height: clamp(160px, 20vh, 205px);
   overflow: visible;
   background: transparent;
   border: none;
   margin-top: 0;
-  margin-bottom: clamp(4px, 1vh, 10px);
+  margin-bottom: clamp(2px, 0.6vh, 8px);
   box-sizing: border-box;
 }
 
@@ -253,7 +253,7 @@ html[data-theme="light"] .experience-canvas canvas {
   margin-inline: auto;
   display: flex;
   flex-direction: column;
-  min-height: clamp(270px, 34vh, 320px);
+  min-height: 0;
 }
 
 /* --------------------------------------------------------------------------
@@ -264,14 +264,14 @@ html[data-theme="light"] .experience-canvas canvas {
   background-color: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md, 8px);
-  padding: clamp(16px, 2.4vh, 24px) clamp(20px, 2.4vw, 28px);
+  padding: clamp(14px, 1.8vh, 20px) clamp(18px, 2vw, 26px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: clamp(10px, 1.6vh, 16px);
+  gap: clamp(8px, 1.2vh, 12px);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
   height: auto;
-  min-height: clamp(270px, 34vh, 320px);
+  min-height: 0;
   box-sizing: border-box;
   overflow: hidden;
   scrollbar-width: none;
@@ -400,9 +400,9 @@ html[data-theme="light"] .experience-detail {
 }
 
 html[data-theme="light"] .experience-detail__logo-box {
-  background-color: #0F172A;
-  border: 1px solid #1E293B;
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05);
 }
 
 html[data-theme="light"] .experience-detail__period {
@@ -1341,53 +1341,7 @@ html[data-theme="light"] .experience-detail__metric {
   }
 }
 
-.experience-detail__stepper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-2) 0;
-  margin-bottom: var(--space-3);
-  border-bottom: 1px solid var(--border-subtle);
-}
 
-.experience-stepper-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  min-height: 44px;
-  padding: var(--space-2) var(--space-3);
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  color: var(--text-secondary);
-  font-family: var(--font-technical);
-  font-size: 11px;
-  letter-spacing: var(--tracking-mono);
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-default);
-}
-
-.experience-stepper-btn:hover:not(:disabled) {
-  color: var(--text-primary);
-  border-color: var(--accent-primary);
-  background: var(--bg-surface-elevated);
-}
-
-.experience-stepper-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-.experience-stepper-btn svg {
-  width: 16px;
-  height: 16px;
-}
-
-.experience-stepper-counter {
-  font-size: 12px;
-  color: var(--accent-primary);
-}
 
 /* --------------------------------------------------------------------------
    Light Mode Calendar Modal Enhancements

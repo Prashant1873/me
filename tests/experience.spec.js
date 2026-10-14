@@ -159,19 +159,21 @@ test('Verify Light Mode Contrast Overhaul & Logo Visibility', async ({ page }) =
   });
   expect(cardBg).toBe('rgb(255, 255, 255)');
 
-  // 5. Verify White Logos have High-Contrast Dark Badge Container in Light Mode
-  await page.evaluate(() => window.experienceController.setMilestone(1)); // Revolut (white logo)
+  // 5. Verify Light Mode Logos: Black Revolut Logo on Clean White Box
+  await page.evaluate(() => window.experienceController.setMilestone(1)); // Revolut
   await page.waitForTimeout(300);
 
   const logoBoxBg = await page.evaluate(() => {
     const el = document.querySelector('.experience-detail__logo-box');
     return el ? getComputedStyle(el).backgroundColor : null;
   });
-  // Obsidian dark badge #0F172A = rgb(15, 23, 42) ensures white Revolut logo is 100% visible
-  expect(logoBoxBg).toBe('rgb(15, 23, 42)');
+  // Clean white badge rgb(255, 255, 255) ensures black Revolut logo is crisp and high-contrast
+  expect(logoBoxBg).toBe('rgb(255, 255, 255)');
 
   const revolutImg = detailCard.locator('.experience-detail__logo-box img');
   await expect(revolutImg).toBeVisible();
+  const revolutSrc = await revolutImg.getAttribute('src');
+  expect(revolutSrc).toContain('revolut_black.png');
 
   // 6. Verify Calendar Modal in Light Mode
   const periodBtn = detailCard.locator('#experience-detail-period-btn');

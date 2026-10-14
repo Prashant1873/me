@@ -173,29 +173,26 @@ test.describe('Responsive Design & Mobile Adaptation (Phase 8)', () => {
   });
 
   // --------------------------------------------------------------------------
-  // RESP-03: Mobile Milestone Stepper Controls
   // --------------------------------------------------------------------------
-  test('RESP-03: Mobile experience detail card provides functional 1-tap milestone steppers', async ({ page }) => {
+  // RESP-03: Mobile Milestone Navigation
+  // --------------------------------------------------------------------------
+  test('RESP-03: Mobile experience detail card provides functional milestone navigation', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto('http://localhost:3000/');
     await page.waitForTimeout(500);
 
-    const nextStepper = page.locator('#exp-stepper-next');
-    await expect(nextStepper).toBeVisible();
-
     // Verify initial active company is IQVIA
     await expect(page.locator('.experience-detail__company')).toContainText('IQVIA');
 
-    // Tap next milestone
-    await nextStepper.click();
+    // Tap next milestone via controller
+    await page.evaluate(() => window.experienceController.next());
     await page.waitForTimeout(300);
 
     // Should now show Revolut
     await expect(page.locator('.experience-detail__company')).toContainText('Revolut');
 
     // Tap prev milestone
-    const prevStepper = page.locator('#exp-stepper-prev');
-    await prevStepper.click();
+    await page.evaluate(() => window.experienceController.prev());
     await page.waitForTimeout(300);
     await expect(page.locator('.experience-detail__company')).toContainText('IQVIA');
   });
