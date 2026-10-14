@@ -25,25 +25,22 @@ export const MILESTONE_X = MILESTONES.map(m => m.x);
 
 const PALETTES = {
   dark: {
-    activeAmber: 0xC38B55,      // Tungsten Amber
+    activeAmber: 0xF59E0B,      // Radiant Tungsten Gold
     dustCyan: 0x4DD0E1,
     dustBlue: 0x2962FF,
-    conduit: 0xC38B55,
-    conduitEmissiveIntensity: 0.65,
-    conduitRoughness: 0.25,
-    conduitMetalness: 0.85,
-    glowInnerOpacity: 0.35,
-    glowOuterOpacity: 0.16,
+    conduit: 0xF59E0B,
+    beamCoreOpacity: 0.95,
+    beamFlowOpacity: 0.55,
     glowBlending: THREE.AdditiveBlending,
     ringBlending: THREE.AdditiveBlending,
-    ringActiveOpacity: 0.95,
-    ringInactiveOpacity: 0.45,
-    orbitRingActiveOpacity: 0.85,
-    orbitRingInactiveOpacity: 0.35,
-    haloActiveOpacity: 0.6,
-    haloInactiveOpacity: 0.2,
+    ringActiveOpacity: 1.0,
+    ringInactiveOpacity: 0.60,
+    orbitRingActiveOpacity: 0.95,
+    orbitRingInactiveOpacity: 0.50,
+    haloActiveOpacity: 0.45,
+    haloInactiveOpacity: 0.15,
     inactiveGhost: 0x334155,
-    medallionRim: 0xC38B55,
+    medallionRim: 0xF59E0B,
     medallionBack: 0x0E131F,    // Dark obsidian disc in dark mode
     medallionMetalness: 0.85,
     medallionRoughness: 0.3
@@ -53,17 +50,14 @@ const PALETTES = {
     dustCyan: 0x0891B2,
     dustBlue: 0x2563EB,
     conduit: 0xD97706,          // Radiant warm gold beam
-    conduitEmissiveIntensity: 0.9,
-    conduitRoughness: 0.1,
-    conduitMetalness: 0.35,
-    glowInnerOpacity: 0.52,     // High-contrast gold glow halo in light mode
-    glowOuterOpacity: 0.24,     // Soft wide ambient gold bloom
+    beamCoreOpacity: 0.95,
+    beamFlowOpacity: 0.45,
     glowBlending: THREE.NormalBlending,
     ringBlending: THREE.NormalBlending,
-    ringActiveOpacity: 0.95,
-    ringInactiveOpacity: 0.65,  // Clearly visible rim
+    ringActiveOpacity: 1.0,
+    ringInactiveOpacity: 0.75,  // Clearly visible rim
     orbitRingActiveOpacity: 0.95,
-    orbitRingInactiveOpacity: 0.65, // High-contrast, clearly visible orbit rings for other companies
+    orbitRingInactiveOpacity: 0.70, // High-contrast, clearly visible orbit rings for other companies
     haloActiveOpacity: 0.35,
     haloInactiveOpacity: 0.12,
     inactiveGhost: 0x64748B,
@@ -139,46 +133,81 @@ export function initExperienceCanvas(container, options = {}) {
   }
   let colors = getThemePalette();
 
-  // 3. Thick 3D Horizontal Glowing Energy Conduit Beam (Full Width End-to-End Behind Logos)
-  // A. Solid core cylinder beam spanning across the entire horizon (160.0 units)
-  const conduitGeo = new THREE.CylinderGeometry(0.075, 0.075, 160.0, 24);
-  conduitGeo.rotateZ(Math.PI / 2); // Lay horizontally along X-axis
-  const conduitMat = new THREE.MeshStandardMaterial({
+  function createParticleTexture() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0, 'rgba(255,255,255,1)');
+    grad.addColorStop(0.3, 'rgba(255,255,255,0.95)');
+    grad.addColorStop(0.65, 'rgba(255,255,255,0.4)');
+    grad.addColorStop(0.9, 'rgba(255,255,255,0.08)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(canvas);
+  }
+  const particleMap = createParticleTexture();
+
+  function createCircleParticleGeo(radius, count, jitter = 0) {
+    const geo = new THREE.BufferGeometry();
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const angle = (i / count) * Math.PI * 2;
+      const r = radius + (Math.random() - 0.5) * jitter;
+      pos[i * 3] = Math.cos(angle) * r;
+      pos[i * 3 + 1] = Math.sin(angle) * r;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * jitter;
+    }
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    return geo;
+  }
+
+  // 3. 3D Horizontal Glowing Particle Conduit Beam (End-to-End Behind Logos)
+  // A. Dense Core Particle Stream (2200 particles along X from -80 to +80)
+  const beamCoreCount = 2200;
+  const beamCorePositions = new Float32Array(beamCoreCount * 3);
+  for (let i = 0; i < beamCoreCount; i++) {
+    beamCorePositions[i * 3] = -80.0 + (i / beamCoreCount) * 160.0 + (Math.random() - 0.5) * 0.08;
+    beamCorePositions[i * 3 + 1] = (Math.random() - 0.5) * 0.06;
+    beamCorePositions[i * 3 + 2] = -0.4 + (Math.random() - 0.5) * 0.06;
+  }
+  const beamCoreGeo = new THREE.BufferGeometry();
+  beamCoreGeo.setAttribute('position', new THREE.BufferAttribute(beamCorePositions, 3));
+  const beamCoreMat = new THREE.PointsMaterial({
+    size: 0.28,
     color: colors.conduit,
-    emissive: colors.conduit,
-    emissiveIntensity: colors.conduitEmissiveIntensity,
-    roughness: colors.conduitRoughness,
-    metalness: colors.conduitMetalness
-  });
-  const conduitMesh = new THREE.Mesh(conduitGeo, conduitMat);
-  conduitMesh.position.set(0, 0, -0.4); // Strictly behind medallions & logos
-  scene.add(conduitMesh);
-
-  // B. Inner luminous energy beam glow sleeve (160.0 units)
-  const glowGeoInner = new THREE.CylinderGeometry(0.16, 0.16, 160.0, 24);
-  glowGeoInner.rotateZ(Math.PI / 2);
-  const glowMatInner = new THREE.MeshBasicMaterial({
-    color: colors.activeAmber,
+    map: particleMap,
     transparent: true,
-    opacity: colors.glowInnerOpacity,
-    blending: colors.glowBlending
+    opacity: colors.beamCoreOpacity,
+    blending: colors.glowBlending,
+    depthWrite: false
   });
-  const glowMeshInner = new THREE.Mesh(glowGeoInner, glowMatInner);
-  glowMeshInner.position.set(0, 0, -0.4); // Strictly behind medallions & logos
-  scene.add(glowMeshInner);
+  const beamCorePoints = new THREE.Points(beamCoreGeo, beamCoreMat);
+  scene.add(beamCorePoints);
 
-  // C. Outer wide radiant ambient glow sleeve (160.0 units)
-  const glowGeoOuter = new THREE.CylinderGeometry(0.32, 0.32, 160.0, 24);
-  glowGeoOuter.rotateZ(Math.PI / 2);
-  const glowMatOuter = new THREE.MeshBasicMaterial({
+  // B. Radiant Shimmer Flow Stream (700 flowing particles with subtle wider dispersion)
+  const beamFlowCount = 700;
+  const beamFlowPositions = new Float32Array(beamFlowCount * 3);
+  for (let i = 0; i < beamFlowCount; i++) {
+    beamFlowPositions[i * 3] = -80.0 + Math.random() * 160.0;
+    beamFlowPositions[i * 3 + 1] = (Math.random() - 0.5) * 0.22;
+    beamFlowPositions[i * 3 + 2] = -0.4 + (Math.random() - 0.5) * 0.18;
+  }
+  const beamFlowGeo = new THREE.BufferGeometry();
+  beamFlowGeo.setAttribute('position', new THREE.BufferAttribute(beamFlowPositions, 3));
+  const beamFlowMat = new THREE.PointsMaterial({
+    size: 0.44,
     color: colors.activeAmber,
+    map: particleMap,
     transparent: true,
-    opacity: colors.glowOuterOpacity,
-    blending: colors.glowBlending
+    opacity: colors.beamFlowOpacity,
+    blending: colors.glowBlending,
+    depthWrite: false
   });
-  const glowMeshOuter = new THREE.Mesh(glowGeoOuter, glowMatOuter);
-  glowMeshOuter.position.set(0, 0, -0.4); // Strictly behind medallions & logos
-  scene.add(glowMeshOuter);
+  const beamFlowPoints = new THREE.Points(beamFlowGeo, beamFlowMat);
+  scene.add(beamFlowPoints);
 
   // 4. Subtle Cosmic Dust Motes (75 particles for zero lag)
   const dustCount = 75;
@@ -205,22 +234,6 @@ export function initExperienceCanvas(container, options = {}) {
   dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
   dustGeo.setAttribute('color', new THREE.BufferAttribute(dustColors, 3));
 
-  function createParticleTexture() {
-    const canvas = document.createElement('canvas');
-    canvas.width = 32;
-    canvas.height = 32;
-    const ctx = canvas.getContext('2d');
-    const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
-    grad.addColorStop(0, 'rgba(255,255,255,1)');
-    grad.addColorStop(0.35, 'rgba(255,255,255,0.7)');
-    grad.addColorStop(0.8, 'rgba(255,255,255,0.12)');
-    grad.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 32, 32);
-    return new THREE.CanvasTexture(canvas);
-  }
-  const particleMap = createParticleTexture();
-
   const dustMat = new THREE.PointsMaterial({
     size: 0.14,
     vertexColors: true,
@@ -238,9 +251,9 @@ export function initExperienceCanvas(container, options = {}) {
   const milestoneNodes = [];
   const raycastObjects = [];
 
-  // Scaled up prominent geometries
-  const sharedRingGeo = new THREE.TorusGeometry(1.48, 0.038, 16, 48);
-  const sharedOrbitRingGeo = new THREE.TorusGeometry(1.82, 0.028, 16, 48);
+  // Scaled up prominent particle geometries
+  const sharedRingGeo = createCircleParticleGeo(1.48, 160, 0.015);
+  const sharedOrbitRingGeo = createCircleParticleGeo(1.82, 200, 0.025);
   const sharedBackGeo = new THREE.CylinderGeometry(1.35, 1.35, 0.1, 32);
   sharedBackGeo.rotateX(Math.PI / 2);
   const sharedHaloGeo = new THREE.PlaneGeometry(3.6, 3.6);
@@ -252,24 +265,31 @@ export function initExperienceCanvas(container, options = {}) {
     const nodeGroup = new THREE.Group();
     nodeGroup.position.set(milestone.x, 0, 0);
 
-    // A. Outer Stationary Ring / Rim
-    const ringMat = new THREE.MeshBasicMaterial({
+    // A. Outer Stationary Particle Rim
+    const ringMat = new THREE.PointsMaterial({
+      size: 0.24,
+      map: particleMap,
       color: idx === activeIndex ? colors.activeAmber : milestone.color,
       transparent: true,
       opacity: idx === activeIndex ? colors.ringActiveOpacity : colors.ringInactiveOpacity,
-      blending: colors.ringBlending
+      blending: colors.ringBlending,
+      depthWrite: false
     });
-    const ring = new THREE.Mesh(sharedRingGeo, ringMat);
+    const ring = new THREE.Points(sharedRingGeo, ringMat);
+    ring.position.z = 0.05;
     nodeGroup.add(ring);
 
-    // B. Outer Orbiting Ring (Continuously rotating 3D celestial orbit)
-    const orbitRingMat = new THREE.MeshBasicMaterial({
+    // B. Outer Orbiting Particle Ring (Continuously rotating 3D celestial orbit)
+    const orbitRingMat = new THREE.PointsMaterial({
+      size: 0.26,
+      map: particleMap,
       color: colors.activeAmber,
       transparent: true,
       opacity: idx === activeIndex ? colors.orbitRingActiveOpacity : colors.orbitRingInactiveOpacity,
-      blending: colors.ringBlending
+      blending: colors.ringBlending,
+      depthWrite: false
     });
-    const orbitRing = new THREE.Mesh(sharedOrbitRingGeo, orbitRingMat);
+    const orbitRing = new THREE.Points(sharedOrbitRingGeo, orbitRingMat);
     orbitRing.rotation.x = 0.45; // ~25° celestial inclination
     orbitRing.rotation.y = idx * 0.7; // Staggered phase per milestone
     nodeGroup.add(orbitRing);
@@ -498,21 +518,15 @@ export function initExperienceCanvas(container, options = {}) {
     colors = getThemePalette();
     const isLight = document.documentElement.getAttribute('data-theme') === 'light';
 
-    conduitMat.color.setHex(colors.conduit);
-    conduitMat.emissive.setHex(colors.conduit);
-    conduitMat.emissiveIntensity = colors.conduitEmissiveIntensity;
-    conduitMat.roughness = colors.conduitRoughness;
-    conduitMat.metalness = colors.conduitMetalness;
+    beamCoreMat.color.setHex(colors.conduit);
+    beamCoreMat.opacity = colors.beamCoreOpacity;
+    beamCoreMat.blending = colors.glowBlending;
+    beamCoreMat.needsUpdate = true;
 
-    glowMatInner.color.setHex(colors.activeAmber);
-    glowMatInner.opacity = colors.glowInnerOpacity;
-    glowMatInner.blending = colors.glowBlending;
-    glowMatInner.needsUpdate = true;
-
-    glowMatOuter.color.setHex(colors.activeAmber);
-    glowMatOuter.opacity = colors.glowOuterOpacity;
-    glowMatOuter.blending = colors.glowBlending;
-    glowMatOuter.needsUpdate = true;
+    beamFlowMat.color.setHex(colors.activeAmber);
+    beamFlowMat.opacity = colors.beamFlowOpacity;
+    beamFlowMat.blending = colors.glowBlending;
+    beamFlowMat.needsUpdate = true;
 
     milestoneNodes.forEach((node, k) => {
       const isActive = k === activeIndex;
@@ -602,6 +616,21 @@ export function initExperienceCanvas(container, options = {}) {
         node.orbitRing.rotation.y += 0.008;
       });
 
+      // Continuous particle conduit energy flow along X
+      const bCoreArr = beamCoreGeo.attributes.position.array;
+      for (let i = 0; i < beamCoreCount; i++) {
+        bCoreArr[i * 3] += 0.04;
+        if (bCoreArr[i * 3] > 80.0) bCoreArr[i * 3] -= 160.0;
+      }
+      beamCoreGeo.attributes.position.needsUpdate = true;
+
+      const bFlowArr = beamFlowGeo.attributes.position.array;
+      for (let i = 0; i < beamFlowCount; i++) {
+        bFlowArr[i * 3] += 0.02;
+        if (bFlowArr[i * 3] > 80.0) bFlowArr[i * 3] -= 160.0;
+      }
+      beamFlowGeo.attributes.position.needsUpdate = true;
+
       // Subtle particle drift
       dustPoints.rotation.y = Math.sin(elapsedTime * 0.1) * 0.03;
 
@@ -626,12 +655,10 @@ export function initExperienceCanvas(container, options = {}) {
     renderer.domElement.removeEventListener('pointerleave', onPointerLeave);
     renderer.domElement.removeEventListener('click', onClick);
 
-    conduitGeo.dispose();
-    conduitMat.dispose();
-    glowGeoInner.dispose();
-    glowMatInner.dispose();
-    glowGeoOuter.dispose();
-    glowMatOuter.dispose();
+    beamCoreGeo.dispose();
+    beamCoreMat.dispose();
+    beamFlowGeo.dispose();
+    beamFlowMat.dispose();
     dustGeo.dispose();
     dustMat.dispose();
     particleMap.dispose();
