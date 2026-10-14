@@ -15,7 +15,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-block: clamp(10px, 1.8vh, 22px);
+  padding-top: calc(64px + clamp(18px, 2.8vh, 36px));
+  padding-bottom: clamp(12px, 2vh, 24px);
 }
 
 .section--experience .grid-container {
@@ -1307,7 +1308,8 @@ html[data-theme="light"] .experience-detail__metric {
     min-height: 100vh;
     max-height: none;
     overflow-y: auto;
-    padding-block: 24px;
+    padding-top: calc(64px + 24px);
+    padding-bottom: 24px;
   }
 
   .experience-timeline-track {
