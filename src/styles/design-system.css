@@ -111,9 +111,9 @@
      ------------------------------------------------------------------------ */
   --grid-columns: 12;
   --grid-gap: var(--space-6);
-  --grid-margin: clamp(1.5rem, 4vw, 4rem);
+  --grid-margin: clamp(14px, 2vw, 32px);
   --grid-margin-mobile: var(--space-4);
-  --max-content-width: min(92vw, 1720px);
+  --max-content-width: min(96vw, 1540px);
 
   /* Radii */
   --radius-xs: 2px;

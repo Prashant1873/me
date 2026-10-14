@@ -58,7 +58,7 @@ test('Verify Experience Section: Logos, Strategy & Product categories, SVG light
   const linkedinBtn = detail.locator('.experience-detail__linkedin-btn');
   await expect(linkedinBtn).toHaveAttribute('href', 'https://www.linkedin.com/company/revolut/');
   await expect(linkedinBtn).toHaveAttribute('target', '_blank');
-  await expect(linkedinBtn.locator('svg')).toBeVisible();
+  await expect(linkedinBtn.locator('svg').first()).toBeVisible();
 
   // Verify Revolut photos
   const photoThumbs = detail.locator('.experience-photo-thumb');
@@ -95,5 +95,83 @@ test('Verify Experience Section: Logos, Strategy & Product categories, SVG light
   await page.waitForTimeout(200);
   await expect(lightbox).not.toHaveClass(/is-open/);
 
-  console.log('✓ Experience section updated with logos, Strategy/Product categories, SVG icon, and LinkedIn logo!');
+  // 9. Test Subtle Timeline Button & Calendar Modal with Company Logos
+  const periodBtn = detail.locator('.experience-detail__period');
+  await expect(periodBtn).toBeVisible();
+  // Ensure the bulky badge is gone and period text is clean
+  await expect(periodBtn.locator('.experience-detail__period-badge')).toHaveCount(0);
+  await expect(periodBtn.locator('.experience-detail__period-text')).toBeVisible();
+
+  // Click period button to open timeline modal
+  await periodBtn.click();
+  await page.waitForTimeout(300);
+
+  const timelineModal = page.locator('#experience-timeline-modal');
+  await expect(timelineModal).toHaveClass(/is-open/);
+
+  // Verify company logos are rendered inside active calendar month cells
+  const monthLogos = timelineModal.locator('.timeline-month-cell.is-active .timeline-month-logo');
+  const monthLogosCount = await monthLogos.count();
+  expect(monthLogosCount).toBeGreaterThanOrEqual(18); // 2024 (1), 2025 (10), 2026 (12) = 23 active months
+  await expect(monthLogos.first()).toBeVisible();
+
+  // Verify IIT-B academic watermark logos in empty months
+  const emptyLogos = timelineModal.locator('.timeline-month-cell.is-empty .timeline-month-logo');
+  await expect(emptyLogos.first()).toBeVisible();
+
+  // Verify role track cards have company logos
+  const trackLogos = timelineModal.locator('.timeline-track-card .timeline-track-card__logo');
+  await expect(trackLogos).toHaveCount(5);
+
+  // Test clicking a month cell (e.g. Revolut Jan 2026) to navigate directly
+  const revolutCell = timelineModal.locator('.timeline-month-cell[data-exp-id="revolut"]').first();
+  await revolutCell.click();
+  await page.waitForTimeout(300);
+
+  // Modal should close and active detail should now be Revolut
+  await expect(timelineModal).not.toHaveClass(/is-open/);
+  await expect(detail.locator('.experience-detail__company')).toHaveText('Revolut');
+
+  // 10. Test Phase 5 Deliverables: 3D Canvas, Date Rail, Progress Track, Inline Mini-Chart
+  // A. 3D Canvas presence
+  const canvasEl = page.locator('#experience-canvas canvas');
+  await expect(canvasEl).toBeAttached();
+
+  // B. Minimalist Date Rail nodes
+  const dateNodes = page.locator('.experience-date-node');
+  await expect(dateNodes).toHaveCount(5);
+  await expect(dateNodes.nth(1)).toHaveClass(/is-active/); // Revolut is active
+
+  // C. Progress Track
+  const progressTrack = page.locator('#experience-progress-track');
+  await expect(progressTrack).toBeVisible();
+  const progressLabel = page.locator('#experience-progress-label');
+  await expect(progressLabel).toHaveText('25%'); // 1 of 4 = 25%
+
+  // D. Date Rail click navigation (Click node 3 -> Kalam Labs)
+  await dateNodes.nth(3).click();
+  await page.waitForTimeout(300);
+  await expect(detail.locator('.experience-detail__company')).toHaveText('Kalam Labs (YC S21)');
+  await expect(progressLabel).toHaveText('75%'); // 3 of 4 = 75%
+  await expect(dateNodes.nth(3)).toHaveClass(/is-active/);
+
+  // E. Toolbar Calendar View Trigger & Company Themed Month Blocks
+  const calTrigger = page.locator('#experience-calendar-trigger-btn');
+  await expect(calTrigger).toBeVisible();
+  await calTrigger.click();
+  await page.waitForTimeout(300);
+  await expect(timelineModal).toHaveClass(/is-open/);
+
+  // Verify company theme classes on active cells
+  const iqviaCells = timelineModal.locator('.timeline-month-cell.theme-iqvia');
+  await expect(iqviaCells.first()).toBeVisible();
+  const revolutCells = timelineModal.locator('.timeline-month-cell.theme-revolut');
+  await expect(revolutCells.first()).toBeVisible();
+
+  // Close calendar modal
+  await page.locator('#experience-timeline-close').click();
+  await page.waitForTimeout(200);
+  await expect(timelineModal).not.toHaveClass(/is-open/);
+
+  console.log('✓ Phase 5 Horizontal 3D Experience timeline, date rail, progress track, and minimal calendar verified successfully!');
 });

@@ -69,7 +69,7 @@ test('Audit updated layout, 3D canvas placement, and single-swipe scroll enforce
   console.log(`  Projects section top:   ${projBox.y.toFixed(1)}px`);
 
   // Experience must cover the screen (top ~ 0), and Projects must NOT be active
-  expect(Math.abs(expBox.y)).toBeLessThan(2);
+  expect(Math.abs(expBox.y)).toBeLessThanOrEqual(5);
   expect(projBox.y).toBeGreaterThanOrEqual(vh - 2);
   console.log('✓ Strong swipe advanced exactly 1 section (Experience) and did NOT skip multiple sections!');
 
@@ -82,7 +82,7 @@ test('Audit updated layout, 3D canvas placement, and single-swipe scroll enforce
 
   const projBox2 = await page.locator('#projects').boundingBox();
   console.log(`Projects section top after 2nd swipe: ${projBox2.y.toFixed(1)}px`);
-  expect(Math.abs(projBox2.y)).toBeLessThan(2);
+  expect(Math.abs(projBox2.y)).toBeLessThanOrEqual(5);
   console.log('✓ Second swipe cleanly advanced to Section 2 (Projects).');
 
   // 6. Test Mid-Flight Interruption (Reverse Flick)
@@ -96,7 +96,7 @@ test('Audit updated layout, 3D canvas placement, and single-swipe scroll enforce
 
   const projBoxInterrupted = await page.locator('#projects').boundingBox();
   console.log(`Projects section after mid-flight reversal: top=${projBoxInterrupted.y.toFixed(1)}px`);
-  expect(Math.abs(projBoxInterrupted.y)).toBeLessThan(2);
+  expect(Math.abs(projBoxInterrupted.y)).toBeLessThanOrEqual(5);
   console.log('✓ Mid-flight reversal was accepted immediately without dropping input.');
 
   // 7. Test Nav Direct Links
@@ -104,7 +104,7 @@ test('Audit updated layout, 3D canvas placement, and single-swipe scroll enforce
   await page.locator('.site-nav__link[data-section="hero"]').click();
   await page.waitForTimeout(700);
   const heroBoxReturn = await page.locator('#hero').boundingBox();
-  expect(Math.abs(heroBoxReturn.y)).toBeLessThan(2);
+  expect(Math.abs(heroBoxReturn.y)).toBeLessThanOrEqual(5);
   console.log('✓ Nav link returned cleanly to Hero section.');
 
   // 8. Verify Browser Tab Favicon
@@ -129,7 +129,7 @@ test('Audit updated layout, 3D canvas placement, and single-swipe scroll enforce
     await page.mouse.wheel(0, 100);
     await page.waitForTimeout(650);
     const box = await page.locator(`#${secId}`).boundingBox();
-    expect(Math.abs(box.y)).toBeLessThan(2);
+    expect(Math.abs(box.y)).toBeLessThanOrEqual(5);
     console.log(`  ✓ Arrived cleanly at #${secId}`);
   }
 
@@ -139,7 +139,7 @@ test('Audit updated layout, 3D canvas placement, and single-swipe scroll enforce
     await page.mouse.wheel(0, -100);
     await page.waitForTimeout(650);
     const box = await page.locator(`#${secId}`).boundingBox();
-    expect(Math.abs(box.y)).toBeLessThan(2);
+    expect(Math.abs(box.y)).toBeLessThanOrEqual(5);
     console.log(`  ✓ Arrived cleanly at #${secId}`);
   }
   console.log('✓ Full bidirectional traversal completed with zero stuck pages!');

@@ -8,21 +8,28 @@ Single-Page Scrollable Portfolio
 ├── Vanilla JS (no framework)
 ├── Three.js (3D rendering)
 │   ├── Hero: Orbital geometry canvas (concentric circles, trajectories)
-│   ├── Experience: 3D timeline floating in space
+│   ├── Experience: Horizontal X-axis linear spatial track (company logo medallions, orbs, conduit)
 │   ├── Per-section: Interactive 3D objects
 │   ├── Background: Terrain landscape + particle systems
 │   └── Global: Parallax depth layers on scroll
 ├── GSAP (animation engine)
-│   ├── ScrollTrigger (scroll-linked animations)
-│   ├── Timeline (entrance sequences)
+│   ├── ScrollToPlugin (1 swipe = 1 page full viewport navigation)
+│   ├── Timeline (entrance sequences, bloom, milestone transitions)
 │   ├── Section transitions (cinematic reveals)
 │   └── UI micro-interactions (hover, expand/collapse)
 └── CSS (Structured Intensity design system)
-    ├── Custom properties (tokens)
+    ├── Custom properties (tokens, standardized grid margins)
     ├── 12-column grid
     ├── Dark/light mode
-    └── Typography scale (Horizon / Plus Jakarta Sans / IBM Plex Mono / Newsreader)
+    └── Typography scale (Manrope / IBM Plex Mono / Newsreader)
 ```
+
+## Experience Subsystem Architecture (`src/js/experience-canvas.js` & `src/js/experience.js`)
+- **Spatial X-Axis Traversal:** Reverse CV order `[x = -12 (IQVIA 2026), -6 (Revolut 2025), 0 (Ketto 2025), 6 (Kalam Labs 2024), 12 (FAOUD 2024)]`. Strict linear bounds, no infinite loop.
+- **Visual Nodes:** Company medallions with double-sided transparent logo textures, translucent outer energy spheres (`MeshPhysicalMaterial`), specular rim rings, pulsing core halos, and interconnecting energy conduit.
+- **Attached Detailed Card (Option A):** Anchored directly below the centered 3D orb with live progress track and date rail markers.
+- **Filter State Engine:** Non-matching company nodes dim to 15% opacity with 400ms bloom on filter restore.
+- **Calendar Modal Subsystem:** Minimalist multi-year grid (2024–2026) with company theme color cells (`theme-iqvia`, `theme-revolut`, `theme-ketto`, `theme-kalam-labs`, `theme-faoud`) replacing bulky text.
 
 ## Page Flow (Top to Bottom)
 

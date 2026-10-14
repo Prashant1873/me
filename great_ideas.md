@@ -10,9 +10,10 @@ Valuable concepts, design directions, and feature ideas for the portfolio.
 
 ## 3D Vision
 - Hero orbital canvas: concentric circles with intersecting trajectories — feels like a command center
-- Experience 3D timeline: literally floating in space, scroll through time as z-depth traversal
+- Experience 3D horizontal spatial timeline: integrated full-width X-axis linear track with authentic company brand logo medallions, rim lighting, specular depth, energy conduit, and attached active milestone cards
+- Minimalist color-coded calendar modal: clean year-by-year 2024-2026 month blocks styled with signature company brand palettes, eliminating heavy text clutter
 - Terrain landscape: weathered stone aesthetic as scrollable background narrative
-- Particle systems: subtle, ethereal royal blue and silver particles that drift like dust motes in directional light
+- Particle systems: subtle, ethereal cosmic dust motes (300 motes) and luminous energy pulses along conduit
 - Per-section objects: architectural/geometric forms that reinforce each section's theme
 
 ## Storytelling Arc

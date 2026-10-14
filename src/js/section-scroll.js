@@ -72,6 +72,16 @@ export function initSectionScroll() {
       return;
     }
 
+    // If horizontal scrolling specifically over the 3D timeline track, scrub experience milestones
+    const isOverTimelineTrack = e.target && e.target.closest && e.target.closest('#experience-timeline-track');
+    if (isOverTimelineTrack && window.experienceController && Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      if (e.deltaX > 0) {
+        if (window.experienceController.next()) return;
+      } else if (e.deltaX < 0) {
+        if (window.experienceController.prev()) return;
+      }
+    }
+
     if (e.deltaY > 0) {
       scrollToSection(currentIndex + 1);
     } else {
@@ -84,6 +94,19 @@ export function initSectionScroll() {
   // --- Keyboard navigation ---
   function onKeyDown(e) {
     if (isScrolling) return;
+
+    // ArrowLeft / ArrowRight cycle milestones when on Experience section
+    if (sections[currentIndex]?.id === 'experience' && window.experienceController) {
+      if (e.key === 'ArrowRight' && window.experienceController.next()) {
+        e.preventDefault();
+        return;
+      }
+      if (e.key === 'ArrowLeft' && window.experienceController.prev()) {
+        e.preventDefault();
+        return;
+      }
+    }
+
     if (['ArrowDown', 'PageDown', ' '].includes(e.key) && !e.target.matches('input, textarea')) {
       e.preventDefault();
       scrollToSection(currentIndex + 1);
@@ -102,9 +125,11 @@ export function initSectionScroll() {
   window.addEventListener('keydown', onKeyDown);
 
   // --- Touch swipe navigation (Mobile) ---
+  let touchStartX = 0;
   let touchStartY = 0;
   window.addEventListener('touchstart', (e) => {
     if (e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
     }
   }, { passive: true });
@@ -112,6 +137,19 @@ export function initSectionScroll() {
   window.addEventListener('touchend', (e) => {
     if (isScrolling || !touchStartY) return;
     const deltaY = touchStartY - e.changedTouches[0].clientY;
+    const deltaX = touchStartX - e.changedTouches[0].clientX;
+
+    // Horizontal swipe over experience track scrubs milestones
+    if (sections[currentIndex]?.id === 'experience' && window.experienceController && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+      if (deltaX > 0 && window.experienceController.next()) {
+        touchStartY = 0;
+        return;
+      } else if (deltaX < 0 && window.experienceController.prev()) {
+        touchStartY = 0;
+        return;
+      }
+    }
+
     if (Math.abs(deltaY) > 40) {
       scrollToSection(deltaY > 0 ? currentIndex + 1 : currentIndex - 1);
     }

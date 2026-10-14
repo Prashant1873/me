@@ -30,7 +30,7 @@ export const EXPERIENCES = [
   {
     id: 'revolut',
     company: 'Revolut',
-    logo: './images/logos/Revolut.png',
+    logo: './images/logos/revolut_white.png',
     role: "CEO's Office Product Strategy Intern",
     period: 'Jan 2026 – Jun 2026',
     category: 'strategy',
@@ -52,7 +52,7 @@ export const EXPERIENCES = [
   {
     id: 'ketto',
     company: 'Ketto.org',
-    logo: './images/logos/Ketto.png',
+    logo: './images/logos/ketto_dark.png',
     role: 'Product, Strategy & Operations Intern',
     period: 'Sep 2025 – Nov 2025',
     category: 'product',
@@ -96,7 +96,7 @@ export const EXPERIENCES = [
   {
     id: 'faoud',
     company: 'FAOUD',
-    logo: './images/logos/FAOUD.jpeg',
+    logo: './images/logos/faoud_transparent.png',
     role: 'Head of Product',
     period: 'Dec 2024 – Apr 2025',
     category: 'product',
@@ -122,4 +122,66 @@ export const CATEGORIES = [
   { id: 'all', label: 'All Experience', count: 5 },
   { id: 'strategy', label: 'Strategy', count: 2 },
   { id: 'product', label: 'Product', count: 3 }
+];
+
+export const TIMELINE_YEARS = [
+  {
+    year: 2024,
+    months: [
+      { name: 'Jan', expId: null },
+      { name: 'Feb', expId: null },
+      { name: 'Mar', expId: null },
+      { name: 'Apr', expId: null },
+      { name: 'May', expId: null },
+      { name: 'Jun', expId: null },
+      { name: 'Jul', expId: null },
+      { name: 'Aug', expId: null },
+      { name: 'Sep', expId: null },
+      { name: 'Oct', expId: null },
+      { name: 'Nov', expId: null },
+      { name: 'Dec', expId: 'faoud' },
+    ]
+  },
+  {
+    year: 2025,
+    months: [
+      { name: 'Jan', expId: 'faoud' },
+      { name: 'Feb', expId: 'faoud' },
+      { name: 'Mar', expId: 'faoud' },
+      { name: 'Apr', expId: 'faoud' },
+      { name: 'May', expId: 'kalam-labs' },
+      { name: 'Jun', expId: 'kalam-labs' },
+      { name: 'Jul', expId: 'kalam-labs' },
+      { name: 'Aug', expId: null },
+      { name: 'Sep', expId: 'ketto' },
+      { name: 'Oct', expId: 'ketto' },
+      { name: 'Nov', expId: 'ketto' },
+      { name: 'Dec', expId: null },
+    ]
+  },
+  {
+    year: 2026,
+    months: [
+      { name: 'Jan', expId: 'revolut' },
+      { name: 'Feb', expId: 'revolut' },
+      { name: 'Mar', expId: 'revolut' },
+      { name: 'Apr', expId: 'revolut' },
+      { name: 'May', expId: 'revolut' },
+      { name: 'Jun', expId: 'revolut' },
+      { name: 'Jul', expId: 'iqvia' },
+      { name: 'Aug', expId: 'iqvia' },
+      { name: 'Sep', expId: 'iqvia' },
+      { name: 'Oct', expId: 'iqvia' },
+      { name: 'Nov', expId: 'iqvia' },
+      { name: 'Dec', expId: 'iqvia' },
+    ]
+  }
+];
+
+export const CHRONOLOGICAL_ROLES = [
+  { id: 'faoud', company: 'FAOUD', role: 'Head of Product', period: 'Dec 2024 – Apr 2025', duration: '5 mos', category: 'product', color: 'coral' },
+  { id: 'kalam-labs', company: 'Kalam Labs', role: "Founder's Office Intern", period: 'May 2025 – Jul 2025', duration: '3 mos', category: 'product', color: 'coral' },
+  { id: 'ketto', company: 'Ketto.org', role: 'Product & Strategy Intern', period: 'Sep 2025 – Nov 2025', duration: '3 mos', category: 'product', color: 'coral' },
+  { id: 'revolut', company: 'Revolut', role: "CEO's Office Product Strategy", period: 'Jan 2026 – Jun 2026', duration: '6 mos', category: 'strategy', color: 'royal-blue' },
+  { id: 'iqvia', company: 'IQVIA', role: 'Analyst, Strategy Consulting', period: 'Jul 2026 – Present', duration: '6+ mos', category: 'strategy', color: 'royal-blue' },
 ];

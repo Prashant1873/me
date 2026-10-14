@@ -181,15 +181,44 @@
           </div>
 
           <div class="col-span-12">
-            <!-- Category Filter Tabs -->
-            <div class="experience-filters" id="experience-filters" role="tablist" aria-label="Experience category filters"></div>
+            <!-- Top Controls Toolbar: Category Filter Tabs + Calendar View Button -->
+            <div class="experience-toolbar">
+              <div class="experience-filters" id="experience-filters" role="tablist" aria-label="Experience category filters"></div>
+              
+              <div class="experience-toolbar__actions">
+                <button type="button" class="experience-calendar-btn text-mono" id="experience-calendar-trigger-btn" aria-label="Open Work Experience Calendar Timeline">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  <span>CALENDAR VIEW</span>
+                </button>
+              </div>
+            </div>
 
-            <!-- Master-Detail Interactive Showcase -->
-            <div class="experience-showcase">
-              <!-- Left: Company Selector List -->
-              <div class="experience-list" id="experience-list" role="tablist" aria-orientation="vertical" aria-label="Companies list"></div>
+            <!-- Integrated Horizontal 3D Timeline Track (Full Width, Left-to-Right Chain) -->
+            <div class="experience-timeline-track" id="experience-timeline-track">
+              <!-- Full-width 3D WebGL Canvas Viewport -->
+              <div id="experience-canvas" class="experience-canvas experience-canvas--horizontal" role="region" aria-label="3D Experience Timeline Canvas"></div>
 
-              <!-- Right: Detailed Active Company Card -->
+              <!-- Minimalist IBM Plex Mono Date Rail Along the Track -->
+              <div id="experience-date-rail" class="experience-date-rail text-mono" aria-label="Chronological date rail"></div>
+
+              <!-- Track Progress Bar -->
+              <div id="experience-progress-track" class="experience-progress-track" aria-hidden="true">
+                <div class="experience-progress-bar" id="experience-progress-bar"></div>
+                <span class="experience-progress-label text-mono" id="experience-progress-label">0%</span>
+              </div>
+            </div>
+
+            <!-- Attached Active Company Card Panel (Centered directly below active orb) -->
+            <div class="experience-detail-container" id="experience-canvas-container">
+              <!-- Accessible Company Selector List -->
+              <div class="experience-list" id="experience-list" role="tablist" aria-label="Companies list"></div>
+
+              <!-- Synchronized Detailed Card -->
               <div class="experience-detail" id="experience-detail" role="tabpanel" aria-live="polite"></div>
             </div>
           </div>
@@ -276,7 +305,52 @@
     <div id="experience-lightbox" class="experience-lightbox" role="dialog" aria-modal="true" aria-label="Photo preview">
       <div class="experience-lightbox__content">
         <button id="experience-lightbox-close" class="experience-lightbox__close" aria-label="Close photo preview">✕</button>
-        <img id="experience-lightbox-img" class="experience-lightbox__img" src="" alt="" />
+        <button id="experience-lightbox-prev" class="experience-lightbox__nav experience-lightbox__nav--prev" aria-label="Previous photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <img id="experience-lightbox-img" class="experience-lightbox__img" src="" alt="Workplace photo" />
+        <button id="experience-lightbox-next" class="experience-lightbox__nav experience-lightbox__nav--next" aria-label="Next photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div id="experience-lightbox-counter" class="experience-lightbox__counter"></div>
+      </div>
+    </div>
+
+    <!-- ================================================================
+         EXPERIENCE WORK TIMELINE CALENDAR MODAL
+         ================================================================ -->
+    <div id="experience-timeline-modal" class="timeline-modal" role="dialog" aria-modal="true" aria-label="Work Experience Calendar Timeline">
+      <div class="timeline-modal__content">
+        <button id="experience-timeline-close" class="timeline-modal__close" aria-label="Close timeline calendar">✕</button>
+        
+        <div class="timeline-modal__header">
+          <div class="timeline-modal__badge">CAREER TIMELINE // 2024 – 2026</div>
+          <h2 class="timeline-modal__title">Experience Calendar</h2>
+          
+          <div class="timeline-modal__legend">
+            <span class="timeline-legend-pill" style="--pill-color: #2962FF;">● IQVIA</span>
+            <span class="timeline-legend-pill" style="--pill-color: #00D4FF;">● Revolut</span>
+            <span class="timeline-legend-pill" style="--pill-color: #00A86B;">● Ketto.org</span>
+            <span class="timeline-legend-pill" style="--pill-color: #7C3AED;">● Kalam Labs</span>
+            <span class="timeline-legend-pill" style="--pill-color: #E8655A;">● FAOUD</span>
+          </div>
+        </div>
+
+        <div class="timeline-calendar-wrapper">
+          <div id="timeline-calendar-grid" class="timeline-calendar-grid">
+            <!-- Dynamic calendar rows for 2024, 2025, 2026 -->
+          </div>
+        </div>
+
+        <div class="timeline-modal__tracks" id="timeline-modal-tracks-wrap">
+          <div class="timeline-modal__tracks-header">
+            <span>CHRONOLOGICAL ROLES</span>
+            <span class="timeline-modal__tracks-hint">Click any role to navigate directly</span>
+          </div>
+          <div id="timeline-role-tracks" class="timeline-role-tracks">
+            <!-- Dynamic role cards -->
+          </div>
+        </div>
       </div>
     </div>
 
