@@ -50,6 +50,10 @@ export function initHeroCanvas(container) {
 
   const colors = getColors();
 
+  // --- Central Interactive Core Group ---
+  const coreGroup = new THREE.Group();
+  scene.add(coreGroup);
+
   // --- Central wireframe core (icosahedron) ---
   const coreGeo = new THREE.IcosahedronGeometry(1.22, 1);
   const coreMat = new THREE.MeshBasicMaterial({
@@ -59,7 +63,7 @@ export function initHeroCanvas(container) {
     opacity: 0.52,
   });
   const core = new THREE.Mesh(coreGeo, coreMat);
-  scene.add(core);
+  coreGroup.add(core);
 
   // --- Inner glow sphere ---
   const glowGeo = new THREE.SphereGeometry(0.8, 16, 16);
@@ -69,7 +73,7 @@ export function initHeroCanvas(container) {
     opacity: 0.07,
   });
   const glow = new THREE.Mesh(glowGeo, glowMat);
-  scene.add(glow);
+  coreGroup.add(glow);
 
   // --- Floating particles scattered widely across orbital space ---
   const particleCount = 180;
@@ -97,11 +101,7 @@ export function initHeroCanvas(container) {
   const particles = new THREE.Points(particleGeo, particleMat);
   scene.add(particles);
 
-  // --- GSAP ambient rotation ---
-  gsap.to(core.rotation, { y: Math.PI * 2, x: Math.PI, duration: 25, repeat: -1, ease: 'none' });
-  gsap.to(particles.rotation, { y: Math.PI * 2, duration: 45, repeat: -1, ease: 'none' });
-
-  // Core glow pulse
+  // Core glow subtle breathing pulse
   gsap.to(glowMat, {
     opacity: 0.12,
     duration: 2.5,
@@ -110,12 +110,36 @@ export function initHeroCanvas(container) {
     ease: 'sine.inOut',
   });
 
-  // --- Mouse parallax ---
+  // --- Mouse pointer and proximity interaction ---
+  let proximity = 0;
+  let targetProximity = 0;
+  let currentTiltX = 0;
+  let currentTiltY = 0;
+  let currentScale = 1.0;
+  let currentGlow = 0;
+
   function onMouseMove(e) {
     targetMouseX = ((e.clientX / window.innerWidth) - 0.5) * 2;
     targetMouseY = ((e.clientY / window.innerHeight) - 0.5) * 2;
+
+    if (container) {
+      const rect = container.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY);
+      const activeRadius = rect.width * 0.9;
+      targetProximity = Math.max(0, Math.min(1, 1 - dist / activeRadius));
+    }
   }
+
+  function onMouseLeave() {
+    targetMouseX = 0;
+    targetMouseY = 0;
+    targetProximity = 0;
+  }
+
   window.addEventListener('mousemove', onMouseMove, { passive: true });
+  document.addEventListener('mouseleave', onMouseLeave, { passive: true });
 
   // --- Theme change listener ---
   const observer = new MutationObserver(() => {
@@ -139,16 +163,63 @@ export function initHeroCanvas(container) {
   }
 
   // --- Render loop ---
+  let lastTime = performance.now();
+
   function animate() {
     if (state.destroyed) return;
     requestAnimationFrame(animate);
 
-    mouseX += (targetMouseX - mouseX) * 0.05;
-    mouseY += (targetMouseY - mouseY) * 0.05;
+    const now = performance.now();
+    const delta = Math.min((now - lastTime) / 1000, 0.1);
+    lastTime = now;
 
-    camera.position.x = mouseX * 0.3;
-    camera.position.y = -mouseY * 0.2;
-    camera.lookAt(0, 0, 0);
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    mouseX += (targetMouseX - mouseX) * 0.06;
+    mouseY += (targetMouseY - mouseY) * 0.06;
+    proximity += (targetProximity - proximity) * 0.08;
+
+    if (!prefersReduced) {
+      // Dynamic spin speed: accelerates smoothly when cursor is near polygon
+      const baseSpin = 0.32;
+      const hoverBoost = proximity * 0.72;
+      const currentSpin = (baseSpin + hoverBoost) * delta;
+
+      core.rotation.y += currentSpin;
+      core.rotation.x += currentSpin * 0.5;
+
+      // Particle orbit rotation
+      particles.rotation.y += (0.14 + proximity * 0.22) * delta;
+      particles.rotation.x = -mouseY * 0.12;
+
+      // Fluid 3D tilt tracking: polygon tilts directly toward mouse pointer
+      const targetTiltY = mouseX * 0.85;
+      const targetTiltX = -mouseY * 0.65;
+      const targetScale = 1.0 + proximity * 0.12;
+      const targetGlow = proximity;
+
+      currentTiltX += (targetTiltX - currentTiltX) * 0.07;
+      currentTiltY += (targetTiltY - currentTiltY) * 0.07;
+      currentScale += (targetScale - currentScale) * 0.08;
+      currentGlow += (targetGlow - currentGlow) * 0.08;
+
+      coreGroup.rotation.x = currentTiltX;
+      coreGroup.rotation.y = currentTiltY;
+      coreGroup.rotation.z = mouseX * 0.15;
+      coreGroup.scale.set(currentScale, currentScale, currentScale);
+
+      // Interactive brightness & glow amplification on proximity
+      coreMat.opacity = 0.52 + currentGlow * 0.32;
+      glowMat.opacity = 0.07 + currentGlow * 0.14;
+
+      // Camera parallax
+      camera.position.x = mouseX * 0.35;
+      camera.position.y = -mouseY * 0.25;
+      camera.lookAt(0, 0, 0);
+    } else {
+      core.rotation.y += 0.15 * delta;
+      particles.rotation.y += 0.08 * delta;
+    }
 
     renderer.render(scene, camera);
   }
@@ -182,6 +253,7 @@ export function initHeroCanvas(container) {
       observer.disconnect();
       resizeObserver.disconnect();
       window.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseleave', onMouseLeave);
       window.removeEventListener('resize', handleResize);
       renderer.dispose();
       if (renderer.domElement.parentNode) {
