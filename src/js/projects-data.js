@@ -10,7 +10,7 @@ export const PROJECTS = [
     category: 'Fintech & Compounding',
     statusTag: '● 98/98 TESTS',
     oneLiner: 'Algorithmic mutual fund screener & compounding engine built with Next.js 16 and a 98-test Vitest harness.',
-    narrative: 'Frustrated by opaque fund rating agencies and high-expense active funds while allocating my first salary, I engineered BickerBape to bring systematic quantitative screening and mathematical CAGR compounding simulation to retail investors with zero commission bias.',
+    narrative: 'Built to invest my first salary without biased ratings or high active fees. Gives retail investors clean, math-backed compounding simulations.',
     innovations: [
       {
         title: 'Dual-Engine Compounding Simulator',
@@ -81,7 +81,7 @@ export const PROJECTS = [
     category: 'Cold Outreach',
     statusTag: '● SELF-HOSTED',
     oneLiner: 'Self-hosted cold-email campaign command center and deliverability workspace powered by SQLite and Node.',
-    narrative: 'Exasperated by punitive seat-based SaaS pricing and opaque warm-up algorithms on commercial email platforms, I engineered StrokeCRM as a fully sovereign, self-hosted outreach engine with real-time sequence pacing and inbox rotation.',
+    narrative: 'Tired of expensive SaaS subscription seats and opaque warm-up tools. Engineered a self-hosted cold email engine with full control over deliverability.',
     innovations: [
       {
         title: 'Sovereign Deliverability Engine',
@@ -147,7 +147,7 @@ export const PROJECTS = [
     category: 'Manufacturing Intel',
     statusTag: '● 500+ MFRS',
     oneLiner: 'India-wide manufacturing cluster intelligence and vendor discovery platform powered by Gemini AI and MapLibre GL.',
-    narrative: 'Witnessing supply chain bottlenecks during industrial hardware sourcing, I built TRINET to catalog Indian manufacturing powerhouses on an interactive geospatial canvas backed by semantic multimodal LLM extraction.',
+    narrative: 'Saw how difficult it was to source Indian hardware suppliers directly. Built an interactive map and AI profiler to discover 500+ verified factories.',
     innovations: [
       {
         title: 'Geospatial Industrial Cluster Map',
@@ -198,7 +198,7 @@ export const PROJECTS = [
     category: 'Behavioral Psych',
     statusTag: '● 18 SCENARIOS',
     oneLiner: 'Scenario-based psychometric assessment engine mapping executive charisma into continuous 2D vector coordinates.',
-    narrative: 'Driven by an obsession with behavioral psychology and leadership archetypes, I formulated this psychometric engine to measure charisma through nuanced high-stakes dilemma simulations instead of simplistic binary questionnaires.',
+    narrative: 'Most personality tests rely on superficial binary questions. Designed an 18-dilemma simulation engine that maps charisma into continuous 2D coordinates.',
     innovations: [
       {
         title: 'Continuous Coordinate Mapping',
@@ -258,7 +258,7 @@ export const PROJECTS = [
     category: 'Career Discovery',
     statusTag: '● 200+ FIRMS',
     oneLiner: 'Natural language career discovery engine aggregating direct enterprise ATS feeds across 200+ elite global firms.',
-    narrative: 'Frustrated by recruiter spam, stale job boards, and disjointed ATS portals, I created CareerLoom as a desktop-grade command center that ingests direct career feeds from OpenAI, Stripe, Jane Street, and top Indian startups.',
+    narrative: 'Built to cut through recruiter spam and stale job boards. Ingests clean, direct career feeds from 200+ global tech firms and Indian startups.',
     innovations: [
       {
         title: 'Multi-ATS Direct Feed Ingestion',
@@ -308,7 +308,7 @@ export const PROJECTS = [
     category: 'Creative Automation',
     statusTag: '● LOCAL-FIRST',
     oneLiner: 'Brag-grade product launch video generator transforming codebases and repo URLs into cinematic motion clips.',
-    narrative: 'Tired of spending hours in video editors just to announce code releases, I designed Marcutie to render high-octane launch videos locally from git commits and landing page URLs using generative motion primitives.',
+    narrative: 'Tired of spending hours editing release videos. Renders high-motion product clips locally in the browser with zero cloud render costs.',
     innovations: [
       {
         title: 'Local-First Video Rendering',
