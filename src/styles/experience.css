@@ -851,6 +851,17 @@ html[data-theme="light"] .experience-detail__metric {
   border-top: 1px solid var(--border-subtle);
 }
 
+.timeline-legend-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-technical);
+  font-size: 11px;
+  color: var(--pill-color, var(--text-primary));
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
 .timeline-legend-item {
   display: flex;
   align-items: center;
@@ -927,11 +938,11 @@ html[data-theme="light"] .experience-detail__metric {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 4px 5px 4px;
-  border-radius: 6px;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  min-height: 64px;
+  padding: 5px 3px 6px 3px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 70px;
   transition: all var(--duration-fast, 160ms) ease;
   overflow: hidden;
   box-sizing: border-box;
@@ -939,37 +950,41 @@ html[data-theme="light"] .experience-detail__metric {
 
 .timeline-month-abbr {
   font-family: var(--font-technical);
-  font-size: 11px;
-  font-weight: var(--weight-bold);
-  letter-spacing: var(--tracking-wide);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--text-muted);
   line-height: 1;
+  opacity: 0.85;
 }
 
 .timeline-month-logo-box {
-  width: 24px;
-  height: 24px;
+  width: 100%;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  margin-block: 3px;
+  padding: 2px 3px;
+  box-sizing: border-box;
 }
 
 .timeline-month-logo {
   max-width: 100%;
-  max-height: 100%;
+  max-height: 32px;
   object-fit: contain;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.55));
   transition: transform var(--duration-fast, 160ms) ease;
 }
 
 .timeline-month-cell:hover .timeline-month-logo {
-  transform: scale(1.12);
+  transform: scale(1.15);
 }
 
 .timeline-month-logo--iitb {
-  opacity: 0.45;
+  opacity: 0.38;
+  max-height: 22px;
   filter: grayscale(1) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
 }
 
@@ -989,100 +1004,112 @@ html[data-theme="light"] .experience-detail__metric {
 
 /* Empty / IIT Bombay Academic months */
 .timeline-month-cell.is-empty {
-  opacity: 0.6;
+  opacity: 0.55;
+  background-color: rgba(255, 255, 255, 0.025);
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
 .timeline-month-cell.is-empty:hover {
   opacity: 0.85;
-  background-color: rgba(255, 255, 255, 0.04);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .timeline-month-empty-text {
   font-family: var(--font-technical);
-  font-size: 9px;
+  font-size: 8.5px;
   color: rgba(255, 255, 255, 0.35);
   line-height: 1;
   text-align: center;
 }
 
-/* Active Color-Coded Months with Specific Company Brand Themes */
+/* Active Color-Coded Months with Specific Company Brand Themes — Rich High-Contrast Opaque Blocks */
 .timeline-month-cell.is-active {
   cursor: pointer;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.35);
 }
 
 .timeline-month-cell.is-active:hover {
-  transform: translateY(-2px) scale(1.05);
+  transform: translateY(-2px) scale(1.04);
   z-index: 2;
 }
 
-/* IQVIA Theme (Royal Blue) */
+/* IQVIA Theme (Royal Blue — Deep & Vivid) */
 .timeline-month-cell.theme-iqvia {
-  background-color: rgba(41, 98, 255, 0.25);
-  border-color: rgba(41, 98, 255, 0.55);
+  background-color: rgba(30, 64, 175, 0.78);
+  border-color: rgba(96, 165, 250, 0.7);
 }
 .timeline-month-cell.theme-iqvia .timeline-month-abbr {
-  color: #93C5FD;
+  color: #DBEAFE;
+  font-weight: 700;
+}
+.timeline-month-cell.theme-iqvia .timeline-month-logo {
+  filter: brightness(1.8) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
 }
 .timeline-month-cell.theme-iqvia:hover {
-  background-color: rgba(41, 98, 255, 0.4);
-  border-color: #2962FF;
-  box-shadow: 0 0 16px rgba(41, 98, 255, 0.45);
+  background-color: rgba(37, 99, 235, 0.92);
+  border-color: #93C5FD;
+  box-shadow: 0 0 18px rgba(37, 99, 235, 0.6);
 }
 
-/* Revolut Theme (Electric Cyan / Deep Blue) */
+/* Revolut Theme (Oceanic Electric Teal / Deep Cyan) */
 .timeline-month-cell.theme-revolut {
-  background-color: rgba(0, 212, 255, 0.22);
-  border-color: rgba(0, 212, 255, 0.55);
+  background-color: rgba(14, 116, 144, 0.82);
+  border-color: rgba(34, 211, 238, 0.75);
 }
 .timeline-month-cell.theme-revolut .timeline-month-abbr {
-  color: #67E8F9;
+  color: #CFFAFE;
+  font-weight: 700;
 }
 .timeline-month-cell.theme-revolut:hover {
-  background-color: rgba(0, 212, 255, 0.38);
-  border-color: #00D4FF;
-  box-shadow: 0 0 16px rgba(0, 212, 255, 0.45);
+  background-color: rgba(8, 145, 178, 0.94);
+  border-color: #67E8F9;
+  box-shadow: 0 0 18px rgba(6, 182, 212, 0.6);
 }
 
-/* Ketto.org Theme (Emerald Teal) */
+/* Ketto.org Theme (Emerald Jade) */
 .timeline-month-cell.theme-ketto {
-  background-color: rgba(0, 168, 107, 0.25);
-  border-color: rgba(0, 168, 107, 0.55);
+  background-color: rgba(5, 150, 105, 0.78);
+  border-color: rgba(52, 211, 153, 0.75);
 }
 .timeline-month-cell.theme-ketto .timeline-month-abbr {
-  color: #6EE7B7;
+  color: #D1FAE5;
+  font-weight: 700;
 }
 .timeline-month-cell.theme-ketto:hover {
-  background-color: rgba(0, 168, 107, 0.4);
-  border-color: #00A86B;
-  box-shadow: 0 0 16px rgba(0, 168, 107, 0.45);
+  background-color: rgba(16, 185, 129, 0.92);
+  border-color: #6EE7B7;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.6);
 }
 
-/* Kalam Labs Theme (Indigo Purple) */
+/* Kalam Labs Theme (Deep Cosmic Violet) */
 .timeline-month-cell.theme-kalam-labs {
-  background-color: rgba(124, 58, 237, 0.25);
-  border-color: rgba(124, 58, 237, 0.55);
+  background-color: rgba(109, 40, 217, 0.8);
+  border-color: rgba(167, 139, 250, 0.75);
 }
 .timeline-month-cell.theme-kalam-labs .timeline-month-abbr {
-  color: #C4B5FD;
+  color: #EDE9FE;
+  font-weight: 700;
 }
 .timeline-month-cell.theme-kalam-labs:hover {
-  background-color: rgba(124, 58, 237, 0.4);
-  border-color: #7C3AED;
-  box-shadow: 0 0 16px rgba(124, 58, 237, 0.45);
+  background-color: rgba(124, 58, 237, 0.94);
+  border-color: #C4B5FD;
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.6);
 }
 
-/* FAOUD Theme (Sunset Coral) */
+/* FAOUD Theme (Sunset Crimson Coral) */
 .timeline-month-cell.theme-faoud {
-  background-color: rgba(232, 101, 90, 0.25);
-  border-color: rgba(232, 101, 90, 0.55);
+  background-color: rgba(220, 38, 38, 0.8);
+  border-color: rgba(248, 113, 113, 0.75);
 }
 .timeline-month-cell.theme-faoud .timeline-month-abbr {
-  color: #FCA5A5;
+  color: #FEE2E2;
+  font-weight: 700;
 }
 .timeline-month-cell.theme-faoud:hover {
-  background-color: rgba(232, 101, 90, 0.4);
-  border-color: #E8655A;
-  box-shadow: 0 0 16px rgba(232, 101, 90, 0.45);
+  background-color: rgba(239, 68, 68, 0.94);
+  border-color: #FCA5A5;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.6);
 }
 
 .timeline-month-cell.is-strategy {
@@ -1298,4 +1325,53 @@ html[data-theme="light"] .timeline-track-card:hover {
 html[data-theme="light"] .timeline-track-card__logo-box {
   background-color: #0F172A;
   border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+html[data-theme="light"] .timeline-month-cell.is-empty {
+  background-color: #F8FAFC;
+  border-color: #E2E8F0;
+  opacity: 0.7;
+}
+
+html[data-theme="light"] .timeline-month-cell.theme-iqvia {
+  background-color: #DBEAFE;
+  border-color: #3B82F6;
+}
+html[data-theme="light"] .timeline-month-cell.theme-iqvia .timeline-month-abbr {
+  color: #1D4ED8;
+}
+html[data-theme="light"] .timeline-month-cell.theme-iqvia .timeline-month-logo {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+html[data-theme="light"] .timeline-month-cell.theme-revolut {
+  background-color: #0E7490;
+  border-color: #0891B2;
+}
+html[data-theme="light"] .timeline-month-cell.theme-revolut .timeline-month-abbr {
+  color: #ECFEFF;
+}
+
+html[data-theme="light"] .timeline-month-cell.theme-ketto {
+  background-color: #D1FAE5;
+  border-color: #059669;
+}
+html[data-theme="light"] .timeline-month-cell.theme-ketto .timeline-month-abbr {
+  color: #065F46;
+}
+
+html[data-theme="light"] .timeline-month-cell.theme-kalam-labs {
+  background-color: #EDE9FE;
+  border-color: #7C3AED;
+}
+html[data-theme="light"] .timeline-month-cell.theme-kalam-labs .timeline-month-abbr {
+  color: #5B21B6;
+}
+
+html[data-theme="light"] .timeline-month-cell.theme-faoud {
+  background-color: #FEE2E2;
+  border-color: #DC2626;
+}
+html[data-theme="light"] .timeline-month-cell.theme-faoud .timeline-month-abbr {
+  color: #991B1B;
 }
