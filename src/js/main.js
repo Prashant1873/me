@@ -9,22 +9,112 @@ import { initEducation } from './education.js';
 import { initContact } from './contact.js';
 
 // --------------------------------------------------------------------------
-// Theme Toggle
+// Viscoelastic Stretch-and-Squish Theme Toggle Controller
 // --------------------------------------------------------------------------
-const themeToggleBtn = document.getElementById('theme-toggle');
+const themeToggleContainer = document.getElementById('theme-toggle');
+const themeThumb = document.getElementById('theme-toggle-thumb');
+const btnDark = document.getElementById('theme-opt-dark');
+const btnLight = document.getElementById('theme-opt-light');
 const htmlEl = document.documentElement;
 
-const savedTheme = localStorage.getItem('theme') || 'dark';
-htmlEl.setAttribute('data-theme', savedTheme);
+let currentTheme = localStorage.getItem('theme') || 'dark';
+htmlEl.setAttribute('data-theme', currentTheme);
 
-if (themeToggleBtn) {
-  themeToggleBtn.addEventListener('click', () => {
-    const current = htmlEl.getAttribute('data-theme') || 'dark';
-    const next = current === 'dark' ? 'light' : 'dark';
-    htmlEl.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
+function getThumbTargetX(theme) {
+  if (!btnDark || !btnLight) return 0;
+  if (theme === 'dark') {
+    return 0;
+  }
+  return btnLight.offsetLeft - btnDark.offsetLeft;
+}
 
-    gsap.fromTo('body', { opacity: 0.96 }, { opacity: 1, duration: 0.22, ease: 'power2.out' });
+function updateThemeUI(theme, animate = true) {
+  currentTheme = theme;
+  htmlEl.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+
+  if (btnDark && btnLight) {
+    const isDark = theme === 'dark';
+    btnDark.classList.toggle('is-active', isDark);
+    btnDark.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    btnLight.classList.toggle('is-active', !isDark);
+    btnLight.setAttribute('aria-pressed', !isDark ? 'true' : 'false');
+  }
+
+  if (!themeThumb) return;
+
+  const targetX = getThumbTargetX(theme);
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!animate || prefersReduced) {
+    gsap.killTweensOf(themeThumb);
+    gsap.set(themeThumb, { x: targetX, scaleX: 1, scaleY: 1 });
+    return;
+  }
+
+  // Viscoelastic stretch-and-squish animation with Poisson volume conservation
+  gsap.killTweensOf(themeThumb);
+  const tl = gsap.timeline();
+
+  // 1. Acceleration and Elongation: stretch along transit axis, compress vertical thickness
+  tl.to(themeThumb, {
+    x: targetX,
+    duration: 0.24,
+    ease: 'power2.inOut'
+  }, 0)
+  .to(themeThumb, {
+    scaleX: 1.34,
+    scaleY: 0.82,
+    duration: 0.11,
+    ease: 'power2.in'
+  }, 0)
+  // 2. Deceleration and Squish Impact: compress along movement axis, expand vertically
+  .to(themeThumb, {
+    scaleX: 0.88,
+    scaleY: 1.12,
+    duration: 0.11,
+    ease: 'power2.out'
+  }, 0.11)
+  // 3. Equilibrium Rebound: settle with fluid Apple spring decay
+  .to(themeThumb, {
+    scaleX: 1.0,
+    scaleY: 1.0,
+    duration: 0.28,
+    ease: 'elastic.out(1.15, 0.45)'
+  }, 0.22);
+
+  // Subtle ambient body cross-fade
+  gsap.fromTo('body', { opacity: 0.98 }, { opacity: 1, duration: 0.2, ease: 'power2.out' });
+}
+
+// Initial positioning on page load without animation
+if (themeThumb) {
+  requestAnimationFrame(() => {
+    updateThemeUI(currentTheme, false);
+  });
+
+  if (window.ResizeObserver && themeToggleContainer) {
+    const ro = new ResizeObserver(() => {
+      gsap.set(themeThumb, { x: getThumbTargetX(currentTheme), scaleX: 1, scaleY: 1 });
+    });
+    ro.observe(themeToggleContainer);
+  }
+}
+
+// Unified click handler for both direct option buttons and container toggle
+if (themeToggleContainer) {
+  themeToggleContainer.addEventListener('click', (e) => {
+    const clickedBtn = e.target.closest('.theme-toggle-pill__btn');
+    if (clickedBtn) {
+      const chosen = clickedBtn.getAttribute('data-theme-val');
+      if (chosen === currentTheme) {
+        updateThemeUI(currentTheme === 'dark' ? 'light' : 'dark', true);
+      } else {
+        updateThemeUI(chosen, true);
+      }
+    } else {
+      updateThemeUI(currentTheme === 'dark' ? 'light' : 'dark', true);
+    }
   });
 }
 
