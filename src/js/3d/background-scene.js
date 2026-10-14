@@ -94,12 +94,40 @@ export function initBackgroundScene() {
   const dustParticles = new THREE.Points(dustGeometry, dustMaterial);
   scene.add(dustParticles);
 
+  // --- Dynamic Hero Polygon Center Positioning ---
+  function getHeroCenterWorldPos() {
+    const el = document.getElementById('hero-canvas');
+    if (!el || window.innerWidth <= 900) {
+      return { x: 0, y: 0, z: 0 };
+    }
+    const rect = el.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const ndcX = (centerX / window.innerWidth) * 2 - 1;
+    const ndcY = -(centerY / window.innerHeight) * 2 + 1;
+
+    const tempCam = camera.clone();
+    tempCam.position.set(CAMERA_WAYPOINTS[0].pos.x, CAMERA_WAYPOINTS[0].pos.y, CAMERA_WAYPOINTS[0].pos.z);
+    tempCam.lookAt(CAMERA_WAYPOINTS[0].lookAt.x, CAMERA_WAYPOINTS[0].lookAt.y, CAMERA_WAYPOINTS[0].lookAt.z);
+    tempCam.updateMatrixWorld();
+
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(new THREE.Vector2(ndcX, ndcY), tempCam);
+
+    const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+    const target = new THREE.Vector3();
+    raycaster.ray.intersectPlane(plane, target);
+
+    return { x: target.x || 3.25, y: target.y || -0.23, z: 0 };
+  }
+
   // --- Procedural Terrain Landscape (3D-02) ---
   const terrain = createTerrain();
   scene.add(terrain.mesh);
 
   // --- Pure Particle Constellations (3D-03) ---
-  const constellations = createConstellations(scene, activeSection);
+  const constellations = createConstellations(scene, activeSection, getHeroCenterWorldPos);
 
   // --- Multi-Layer Mouse Parallax (3D-05) ---
   let targetMouseX = 0;
@@ -221,6 +249,9 @@ export function initBackgroundScene() {
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
     renderer.setPixelRatio(getPixelRatio());
+    if (constellations && typeof constellations.recenterHero === 'function') {
+      constellations.recenterHero();
+    }
   }
 
   window.addEventListener('resize', onResize);
@@ -321,7 +352,7 @@ export function initBackgroundScene() {
     isLowPowerMode: () => lowPowerMode,
     getFPSMetrics: () => ({ averageFPS: currentFPS, lowPowerMode, reducedMotion }),
     transitionToSection,
-    getSectionPositions,
+    getSectionPositions: (idx) => getSectionPositions(idx, getHeroCenterWorldPos()),
   };
 
   window.backgroundScene = controller;

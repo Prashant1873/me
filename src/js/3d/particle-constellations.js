@@ -28,7 +28,16 @@ function createPointTexture() {
  * 0. Hero: Aerospace Orbital Command
  * Spherical nucleus + 2 tilted elliptical orbital rings
  */
-export function generateHeroPositions() {
+/**
+ * 0. Hero: Aerospace Orbital Command
+ * Spherical nucleus + 2 tilted elliptical orbital rings
+ * Centered around the polygon located on the right side of the hero section
+ */
+export function generateHeroPositions(center = { x: 3.25, y: -0.23, z: 0 }) {
+  const cx = center && center.x !== undefined ? center.x : 3.25;
+  const cy = center && center.y !== undefined ? center.y : -0.23;
+  const cz = center && center.z !== undefined ? center.z : 0;
+
   const positions = new Float32Array(PARTICLE_COUNT * 3);
   const nucleusCount = 200;
   const ring1Count = 200;
@@ -42,9 +51,9 @@ export function generateHeroPositions() {
     const phi = Math.acos(2.0 * v - 1.0);
     const r = Math.cbrt(Math.random()) * 0.95;
 
-    positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-    positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-    positions[i * 3 + 2] = r * Math.cos(phi);
+    positions[i * 3] = cx + r * Math.sin(phi) * Math.cos(theta);
+    positions[i * 3 + 1] = cy + r * Math.sin(phi) * Math.sin(theta);
+    positions[i * 3 + 2] = cz + r * Math.cos(phi);
   }
 
   // Inner tilted ring (200 to 399)
@@ -57,9 +66,9 @@ export function generateHeroPositions() {
     const y = Math.sin(angle) * radius * Math.cos(tilt1) + (Math.random() - 0.5) * 0.15;
     const z = Math.sin(angle) * radius * Math.sin(tilt1) + (Math.random() - 0.5) * 0.15;
 
-    positions[idx * 3] = x;
-    positions[idx * 3 + 1] = y;
-    positions[idx * 3 + 2] = z;
+    positions[idx * 3] = cx + x;
+    positions[idx * 3 + 1] = cy + y;
+    positions[idx * 3 + 2] = cz + z;
   }
 
   // Outer eccentric ring (400 to 599)
@@ -72,9 +81,9 @@ export function generateHeroPositions() {
     const y = Math.sin(angle) * radius * Math.cos(tilt2) + (Math.random() - 0.5) * 0.18;
     const z = Math.sin(angle) * radius * Math.sin(tilt2) + (Math.random() - 0.5) * 0.18;
 
-    positions[idx * 3] = x;
-    positions[idx * 3 + 1] = y;
-    positions[idx * 3 + 2] = z;
+    positions[idx * 3] = cx + x;
+    positions[idx * 3 + 1] = cy + y;
+    positions[idx * 3 + 2] = cz + z;
   }
 
   return positions;
@@ -270,10 +279,10 @@ export function generateContactPositions() {
   return positions;
 }
 
-export function getSectionPositions(sectionIndex) {
+export function getSectionPositions(sectionIndex, heroCenter) {
   switch (sectionIndex) {
     case 0:
-      return generateHeroPositions();
+      return generateHeroPositions(heroCenter);
     case 1:
       return generateExperiencePositions();
     case 2:
@@ -283,16 +292,16 @@ export function getSectionPositions(sectionIndex) {
     case 4:
       return generateContactPositions();
     default:
-      return generateHeroPositions();
+      return generateHeroPositions(heroCenter);
   }
 }
 
 /**
  * Pure Particle Constellation Engine
  */
-export function createConstellations(scene, initialSection = 0) {
+export function createConstellations(scene, initialSection = 0, getHeroCenter) {
   const geometry = new THREE.BufferGeometry();
-  const initialPositions = getSectionPositions(initialSection);
+  const initialPositions = getSectionPositions(initialSection, getHeroCenter ? getHeroCenter() : undefined);
 
   const currentPositions = new Float32Array(initialPositions);
   const sourcePositions = new Float32Array(initialPositions);
@@ -350,11 +359,28 @@ export function createConstellations(scene, initialSection = 0) {
       if (currentTween) currentTween.kill();
       morphState.progress = 1.0;
       const posAttr = geometry.attributes.position;
-      const targets = getSectionPositions(activeSection);
+      const heroCenter = getHeroCenter ? getHeroCenter() : undefined;
+      const targets = getSectionPositions(activeSection, heroCenter);
       for (let i = 0; i < PARTICLE_COUNT * 3; i++) {
         sourcePositions[i] = targets[i];
         targetPositions[i] = targets[i];
         posAttr.array[i] = targets[i];
+      }
+      posAttr.needsUpdate = true;
+    }
+  }
+
+  function recenterHero() {
+    if (activeSection === 0) {
+      const heroCenter = getHeroCenter ? getHeroCenter() : undefined;
+      const targets = getSectionPositions(0, heroCenter);
+      const posAttr = geometry.attributes.position;
+      for (let i = 0; i < PARTICLE_COUNT * 3; i++) {
+        targetPositions[i] = targets[i];
+        if (morphState.progress >= 1.0) {
+          sourcePositions[i] = targets[i];
+          posAttr.array[i] = targets[i];
+        }
       }
       posAttr.needsUpdate = true;
     }
@@ -372,7 +398,8 @@ export function createConstellations(scene, initialSection = 0) {
       sourcePositions[i] = posAttr.array[i];
     }
 
-    const newTarget = getSectionPositions(targetIndex);
+    const heroCenter = getHeroCenter ? getHeroCenter() : undefined;
+    const newTarget = getSectionPositions(targetIndex, heroCenter);
     for (let i = 0; i < PARTICLE_COUNT * 3; i++) {
       targetPositions[i] = newTarget[i];
     }
@@ -432,6 +459,7 @@ export function createConstellations(scene, initialSection = 0) {
     mesh: pointsMesh,
     update,
     morphToSection,
+    recenterHero,
     setTheme,
     setReducedMotion,
     getActiveSection: () => activeSection,
