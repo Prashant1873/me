@@ -131,10 +131,11 @@
 - [ ] **PROJ-10**: Increase project card backdrop scrim opacity, gradient contrast, and targeted blur so text has unambiguous distinction over background screenshots
 - [ ] **PROJ-11**: Upgrade typography contrast for category eyebrows, headings, and descriptions to ensure WCAG AA readability in both dark and light modes
 
-### Education, Pedigree & Extracurricular Refinement
+### Education Page UI/UX Redesign & Formatting
 - [ ] **EDU-07**: Expand Core Competencies & Toolkit items and categories sourced from resume to eliminate excess blank card space
 - [ ] **EDU-08**: Equally distribute Academic Excellence space within the existing card into 3 balanced columns across IIT Bombay, CMS, and St. Francis College
 - [ ] **EDU-09**: Remove emoji and medal icons flanking "2× GOLD MEDALIST" in the Stage & Synthesis pill
+- [ ] **EDU-10**: Overhaul Education page UI/UX and card interior formatting: reduce visual traffic, declutter stat representations, eliminate noisy pill overload, and refine curvatures and iconography
 
 ### Contact Editorial Statement
 - [ ] **CONT-07**: Update Contact editorial statement to remove "engineering rigor meets behavioral empathy" and begin with single impactful sentence on careers and products
@@ -246,13 +247,14 @@
 | EDU-07 | Phase 19 | Pending |
 | EDU-08 | Phase 19 | Pending |
 | EDU-09 | Phase 19 | Pending |
-| CONT-07 | Phase 19 | Pending |
-| NAV-06 | Phase 20 | Pending |
+| EDU-10 | Phase 19 | Pending |
+| CONT-07 | Phase 20 | Pending |
+| NAV-06 | Phase 21 | Pending |
 
 **Coverage:**
 - Milestone 1 requirements: 57 total (57 completed)
 - Milestone 2 requirements: 9 total (9 completed)
-- Milestone 3 requirements: 9 total (9 mapped to Phases 17-20)
+- Milestone 3 requirements: 10 total (10 mapped to Phases 17-21)
 - Unmapped: 0 ✓
 
 ---

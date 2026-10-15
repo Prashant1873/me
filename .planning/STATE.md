@@ -4,11 +4,11 @@ milestone: v3.0
 milestone_name: Performance, Contrast, Pedigree & Mobile UX
 status: planning
 stopped_at: Milestone 3 initialized (Ready to execute Phase 17)
-last_updated: "2026-10-16T05:16:00.000Z"
+last_updated: "2026-10-16T05:20:00.000Z"
 progress:
-  total_phases: 4
+  total_phases: 5
   completed_phases: 0
-  total_plans: 4
+  total_plans: 5
   completed_plans: 0
 ---
 
@@ -33,8 +33,9 @@ Milestone 3: Performance, Contrast, Pedigree & Mobile UX (In Progress)
 | 11–16 | Milestone 2 (Visual Refinement, 3D Polish & Layout Cohesion) | **Complete** |
 | 17 | Experience Photo Pipeline Optimization & Lightbox State Fix | **Pending** |
 | 18 | Project Cards Contrast, Scrims & Text Readability | **Pending** |
-| 19 | Content & Pedigree Refinement (Competencies, Academic 3-Col, Extracurricular, Contact) | **Pending** |
-| 20 | Mobile Navigation Drawer Redesign | **Pending** |
+| 19 | Education Page UI/UX & Card Interior Redesign | **Pending** |
+| 20 | Contact Editorial Statement Refinement | **Pending** |
+| 21 | Mobile Navigation Drawer Redesign | **Pending** |
 
 ## Session Context
 
@@ -50,8 +51,8 @@ Milestone 3: Performance, Contrast, Pedigree & Mobile UX (In Progress)
 
 ## Session
 
-**Last session:** 2026-10-16T05:16:00.000Z
-**Stopped at:** Milestone 3 initialized (Phases 17–20 defined)
+**Last session:** 2026-10-16T05:20:00.000Z
+**Stopped at:** Milestone 3 initialized (Phases 17–21 defined)
 **Next action:** Plan and execute Phase 17 (Experience Photo Pipeline Optimization & Lightbox State Fix)
 **Resume file:** .planning/ROADMAP.md
 

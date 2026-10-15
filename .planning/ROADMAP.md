@@ -291,21 +291,34 @@
 
 ---
 
-### Phase 19: Content & Pedigree Refinement: Competencies, Academic Grid, Extracurricular & Contact Tagline
+### Phase 19: Education Page UI/UX & Card Interior Redesign
 
-**Goal:** Redistribute Academic Excellence space into 3 equal columns within the existing card, enrich the Core Competencies card from resume, strip emoji/icons from the gold medalist pill, and refine the Contact closing statement.
+**Goal:** Overhaul the visual hierarchy and internal card formatting across all 4 Education cards (Academic Excellence, High-Stakes Leadership, Stage & Synthesis, Core Competencies) to eliminate visual traffic and hodgepodge, deliver clean number typography, refined pill styling, elegant curvatures, and clean vector favicons.
 
-**Delivers:** EDU-07, EDU-08, EDU-09, CONT-07
+**Delivers:** EDU-07, EDU-08, EDU-09, EDU-10
 
 **UAT:**
-- Academic Excellence card presents IIT Bombay, CMS Lucknow, and St. Francis College in 3 equal, balanced columns within the card body.
-- Core Competencies card features expanded strategic, data, and engineering competencies from resume, eliminating dead space.
-- The "2× GOLD MEDALIST" pill renders clean, elegant typography without emoji or medal icon flanking.
-- Contact section statement starts with: single impactful sentence starting from "building systems that accelerate careers and craft products people genuinely love...".
+- Card 1 (Academic Excellence): 3-column equal distribution across IIT Bombay, CMS, and St. Francis College within existing card chassis, with balanced spacing and clean credential badges.
+- Card 2 (High-Stakes Leadership): Abhyuday and Placement Cell numbers are formatted with prominent, elegant hierarchy; eliminate cluttered stat boxes and conflicting tags.
+- Card 3 (Stage & Synthesis): Clean vector favicons for Dramatics, Speaking, Athletics; "2× GOLD MEDALIST" pill rendered cleanly with zero emoji or medal icon clutter; balanced breathing room.
+- Card 4 (Core Competencies & Toolkits): Expanded competencies and technical proficiencies from resume populated into structured, clean domains; pills use subtle borders and intentional curvatures with zero dead space.
+- Overall Education layout feels calm, authoritative, and uncluttered adhering to `frontend-skill` anti-slop craft standards.
 
 ---
 
-### Phase 20: Mobile Navigation Drawer Redesign
+### Phase 20: Contact Editorial Statement Refinement
+
+**Goal:** Refine the closing Contact editorial quote to remove "engineering rigor meets behavioral empathy" and establish a focused, single-sentence statement on career systems and product craft.
+
+**Delivers:** CONT-07
+
+**UAT:**
+- Editorial statement begins with "Building systems that accelerate careers and craft products people genuinely love...".
+- Quote is rendered cleanly in Newsreader editorial typography as a single cohesive sentence.
+
+---
+
+### Phase 21: Mobile Navigation Drawer Redesign
 
 **Goal:** Redesign mobile drawer navigation items using `frontend-skill` into tactile, styled command-module cards with distinct active/hover micro-interactions and Apple fluid spring physics.
 
