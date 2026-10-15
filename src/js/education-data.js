@@ -14,11 +14,11 @@ export const ACADEMICS = [
     timeline: '2022 - 2026',
     badge: 'UNDERGRADUATE',
     logo: '/images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp',
-    details: 'Focus on flight mechanics, aerodynamics, autonomous control, and quantitative engineering optimization.',
     metrics: [
-      { label: 'DEGREE', value: 'B.Tech Aerospace' },
-      { label: 'GRADUATION', value: 'Class of 2026' }
-    ]
+      { value: 'AIR 276', label: 'JEE ADV (99.98%ile)' },
+      { value: '2026', label: 'GRADUATION' }
+    ],
+    tags: ['Autonomous Systems & Flight Optimization']
   },
   {
     id: 'cms-lucknow',
@@ -29,11 +29,11 @@ export const ACADEMICS = [
     badge: 'GOLD MEDAL',
     score: '98.25%',
     logo: '/images/logos/cms.png',
-    details: 'Awarded Gold Medal for academic excellence; national percentile ranking with mathematics and physics concentration.',
     metrics: [
-      { label: 'SCORE', value: '98.25% ISC' },
-      { label: 'HONOR', value: 'Gold Medal' }
-    ]
+      { label: 'ISC SCORE', value: '98.25%' },
+      { label: 'HONOR', value: 'Gold Medalist' }
+    ],
+    tags: ['National Percentile Ranking']
   },
   {
     id: 'st-francis-lucknow',
@@ -44,11 +44,11 @@ export const ACADEMICS = [
     badge: 'GOLD MEDAL',
     score: '98.00%',
     logo: '/images/logos/St._Francis_Lucknow.png',
-    details: 'Awarded Gold Medal for graduating at the top of the batch; foundation in analytical science, literature, and stage dramatics.',
     metrics: [
-      { label: 'SCORE', value: '98.00% ICSE' },
-      { label: 'HONOR', value: 'Gold Medal' }
-    ]
+      { label: 'ICSE SCORE', value: '98.00%' },
+      { label: 'HONOR', value: 'Gold Medalist' }
+    ],
+    tags: ['Batch Topper & Gold Medal']
   }
 ];
 
@@ -57,58 +57,67 @@ export const GOVERNANCE = [
     id: 'abhyuday',
     title: 'Operations & Marketing Head',
     organization: 'Abhyuday, IIT Bombay',
-    timeline: 'Apr 2024 - Apr 2025',
+    timeline: '2024 - 2025',
     scale: "Asia's Largest Student Social Body",
-    patronages: 'UNICEF, PETA, UNESCO',
-    impactBullets: [
-      'Managed a ₹10M+ operational budget and coordinated a team of 150+ organizers across campus.',
-      'Organised Advitya annual flagship festival with 50,000+ footfall across IIT Bombay campus.',
-      'Spearheaded Pan-India Impact Innovator Summit, securing ₹20M+ in on-spot venture funding.',
-      'Directed city-wide Female Hygiene & Education campaign, directly impacting 5,000+ young girls.'
+    logo: '/images/logos/abhyuday.png',
+    patronages: 'UNICEF, UNESCO',
+    metrics: [
+      { value: '₹10M+', label: 'Budget' },
+      { value: '50K+', label: 'Footfall' },
+      { value: '150+', label: 'Team Led' },
+      { value: '₹20M+', label: 'Raised' }
     ],
-    metricTag: '₹10M+ Budget // 7M+ Reach'
+    tags: ["Asia's Largest Student Body", 'UNICEF & UNESCO Patronage']
   },
   {
     id: 'placement-cell',
     title: 'Department Placement Coordinator',
     organization: 'Placement Cell, IIT Bombay',
-    timeline: 'Jul 2025 - May 2026',
+    timeline: '2025 - 2026',
     scale: 'Aerospace Engineering Department',
-    impactBullets: [
-      'Facilitated recruitment operations for 2,000+ graduating students in collaboration with 65+ coordinators.',
-      'Engaged with 40+ premier corporate recruiters across strategy, consulting, technology, and quant finance.',
-      'Orchestrated 16-week long, 30+ event placement prep bootcamp for 100+ candidates across 5 core domains.'
+    logo: '/images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp',
+    metrics: [
+      { value: '2,000+', label: 'Candidates' },
+      { value: '40+', label: 'Recruiters' },
+      { value: '16-Wk', label: 'Bootcamp' },
+      { value: '100%', label: 'Placement Support' }
     ],
-    metricTag: '2,000+ Students // 40+ Recruiters'
+    tags: ['Aerospace Department', 'Quant & Strategy Prep']
   }
 ];
 
 export const EXTRACURRICULARS = [
   {
+    id: 'stage-dramatics',
     category: 'Stage & Dramatics',
+    icon: 'theater',
     badge: '2× GOLD MEDALIST',
     role: 'Writer & Director',
-    achievements: [
-      'Gold Medal (Writer & Director) at Inter IIT Cultural Meet (2024, 2025).',
-      'Triple Gold Medal winner at Inter-Hostel Dramatics Championship (2023, 2024, 2025).'
+    highlights: [
+      { value: '2× Gold', label: 'Inter IIT Cultural Meet' },
+      { value: '3× Gold', label: 'Inter-Hostel Championship' }
     ]
   },
   {
+    id: 'speaking-comedy',
     category: 'Speaking & Comedy',
+    icon: 'mic',
     badge: 'FEATURED SPEAKER',
     role: 'Performer & Host',
-    achievements: [
-      'Selected Stand-up Comedy Performer at Institute Annual Cultural Showcase (2023).',
-      'Master of Ceremonies & Host for Abhyuday CSR + ESG National Conclave.'
+    highlights: [
+      { value: 'Stand-up Comic', label: 'Institute Cultural Showcase' },
+      { value: 'Conclave MC', label: 'Abhyuday National Conclave' }
     ]
   },
   {
+    id: 'athletics',
     category: 'Competitive Athletics',
+    icon: 'sports',
     badge: 'TEAM CAPTAIN',
     role: 'Basketball & Hockey',
-    achievements: [
-      'Champion, Freshiesta Basketball League (2023).',
-      'Captained the winning championship team at Mixed Hockey League (2024).'
+    highlights: [
+      { value: 'Champion', label: 'Mixed Hockey League (2024)' },
+      { value: 'Champion', label: 'Freshiesta Basketball (2023)' }
     ]
   }
 ];

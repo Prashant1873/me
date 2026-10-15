@@ -56,6 +56,7 @@ export function initExperience() {
         navigateToIndex(nodeIdx);
       }
     });
+    window.experienceCanvas = experienceCanvas;
   }
 
 
@@ -294,7 +295,7 @@ export function initExperience() {
         let logoHtml = '';
         const isLight = document.documentElement.getAttribute('data-theme') === 'light';
         if (isActive && expData) {
-          const logoSrc = getExperienceLogo(expData, isLight);
+          const logoSrc = expData.logoDark || expData.logo;
           logoHtml = `<img src="${logoSrc}" alt="${expData.company} logo" class="timeline-month-logo" />`;
         } else if (!isFuture) {
           logoHtml = `<img src="./images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp" alt="IIT Bombay logo" class="timeline-month-logo timeline-month-logo--iitb" />`;

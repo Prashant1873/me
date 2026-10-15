@@ -30,3 +30,12 @@ Valuable concepts, design directions, and feature ideas for the portfolio.
 - Zero-FOUC skeleton shell: instant frame-0 render with render-blocking CSS and smooth 3D handoff
 - Authentic artifact evidence: subtle inline photo proof strips for real-world roles from `Portfolio_images`
 - Education lineage: St. Francis' College (ICSE 98% Gold Medal) → City Montessori School / CMS (ISC 98.25% Gold Medal) → IIT Bombay (Aerospace B.Tech)
+
+## Milestone 2 Visual Polish Directions
+- **3D Orbital Z-Occlusion & Scaling:** Experience particle sizes substantially larger for unmistakable presence in both light and dark modes; particles swinging behind the medallion along the z-axis dynamically attenuate/vanish behind the logo disc.
+- **Borderless Dark Calendar:** Replace pastel blocks and rigid cell outlines with borderless, rich, theme-coherent dark blocks.
+- **Project Backdrop Legibility:** Soften card background blur/dimming so product screenshots yield an identifiable preview; vertically center 2x3 cards with tight, uniform vertical spacing.
+- **Scannable Governance Cards:** Strip verbose body prose from Abhyuday and Placement Cell cards; elevate prominent bold key metrics.
+- **Vector / Favicon Iconography:** Replace emoji markers (🎭, 🎙️, 🏑, 🥇) with razor-sharp SVG / favicon glyphs.
+- **Global Anchor Y-Alignment:** Identical vertical Y position for all page titles with deliberate top breathing room.
+

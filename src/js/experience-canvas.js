@@ -14,11 +14,11 @@ import gsap from 'gsap';
 
 // 5 Commercial roles spaced linearly on the horizontal X-axis (Reverse CV Order: Left = 2026 IQVIA -> Right = 2024 FAOUD)
 export const MILESTONES = [
-  { id: 'iqvia', company: 'IQVIA', x: -12.0, logoDark: './images/logos/IQVIA.png', logoLight: './images/logos/IQVIA.png', logo: './images/logos/IQVIA.png', logoW: 2.15, logoH: 0.40, color: 0x2962FF },
-  { id: 'revolut', company: 'Revolut', x: -6.0, logoDark: './images/logos/revolut_white.png', logoLight: './images/logos/revolut_black.png', logo: './images/logos/revolut_white.png', logoW: 1.4, logoH: 1.4, color: 0x00D4FF },
-  { id: 'ketto', company: 'Ketto.org', x: 0.0, logoDark: './images/logos/ketto_dark.png', logoLight: './images/logos/Ketto.png', logo: './images/logos/ketto_dark.png', logoW: 1.8, logoH: 0.86, color: 0x00A86B },
-  { id: 'kalam-labs', company: 'Kalam Labs', x: 6.0, logoDark: './images/logos/kalamLabsLogo.png', logoLight: './images/logos/kalamLabsLogo_dark.png', logo: './images/logos/kalamLabsLogo.png', logoW: 1.5, logoH: 1.33, color: 0x7C3AED },
-  { id: 'faoud', company: 'FAOUD', x: 12.0, logoDark: './images/logos/faoud_transparent.png', logoLight: './images/logos/faoud_dark.png', logo: './images/logos/faoud_transparent.png', logoW: 1.45, logoH: 1.47, color: 0xE8655A }
+  { id: 'iqvia', company: 'IQVIA', x: -12.0, logoDark: './images/logos/IQVIA.png', logoLight: './images/logos/IQVIA.png', logo: './images/logos/IQVIA.png', logoW: 2.15, logoH: 0.40, color: 0x2962FF, colorLight: 0x1D4ED8 },
+  { id: 'revolut', company: 'Revolut', x: -6.0, logoDark: './images/logos/revolut_white.png', logoLight: './images/logos/revolut_black.png', logo: './images/logos/revolut_white.png', logoW: 1.4, logoH: 1.4, color: 0x00D4FF, colorLight: 0x0284C7 },
+  { id: 'ketto', company: 'Ketto.org', x: 0.0, logoDark: './images/logos/ketto_dark.png', logoLight: './images/logos/Ketto.png', logo: './images/logos/ketto_dark.png', logoW: 1.8, logoH: 0.86, color: 0x00A86B, colorLight: 0x059669 },
+  { id: 'kalam-labs', company: 'Kalam Labs', x: 6.0, logoDark: './images/logos/kalamLabsLogo.png', logoLight: './images/logos/kalamLabsLogo_dark.png', logo: './images/logos/kalamLabsLogo.png', logoW: 1.5, logoH: 1.33, color: 0x7C3AED, colorLight: 0x6D28D9 },
+  { id: 'faoud', company: 'FAOUD', x: 12.0, logoDark: './images/logos/faoud_transparent.png', logoLight: './images/logos/faoud_dark.png', logo: './images/logos/faoud_transparent.png', logoW: 1.45, logoH: 1.47, color: 0xE8655A, colorLight: 0xC2410C }
 ];
 
 export const MILESTONE_X = MILESTONES.map(m => m.x);
@@ -26,17 +26,17 @@ export const MILESTONE_X = MILESTONES.map(m => m.x);
 const PALETTES = {
   dark: {
     activeAmber: 0xF59E0B,      // Radiant Tungsten Gold
-    dustCyan: 0x4DD0E1,
-    dustBlue: 0x2962FF,
+    dustCyan: 0x38BDF8,
+    dustBlue: 0x3B82F6,
     conduit: 0xF59E0B,
-    beamCoreOpacity: 0.95,
-    beamFlowOpacity: 0.55,
+    beamCoreOpacity: 1.0,
+    beamFlowOpacity: 0.85,
     glowBlending: THREE.AdditiveBlending,
     ringBlending: THREE.AdditiveBlending,
     ringActiveOpacity: 1.0,
-    ringInactiveOpacity: 0.60,
-    orbitRingActiveOpacity: 0.95,
-    orbitRingInactiveOpacity: 0.50,
+    ringInactiveOpacity: 0.85,
+    orbitRingActiveOpacity: 1.0,
+    orbitRingInactiveOpacity: 0.80,
     haloActiveOpacity: 0.45,
     haloInactiveOpacity: 0.15,
     inactiveGhost: 0x334155,
@@ -46,22 +46,22 @@ const PALETTES = {
     medallionRoughness: 0.3
   },
   light: {
-    activeAmber: 0xD97706,      // Radiant Amber Gold
-    dustCyan: 0x0891B2,
-    dustBlue: 0x2563EB,
-    conduit: 0xD97706,          // Radiant warm gold beam
-    beamCoreOpacity: 0.95,
-    beamFlowOpacity: 0.45,
+    activeAmber: 0xB45309,      // Saturated Tungsten Amber-Gold (High Contrast)
+    dustCyan: 0x0E7490,
+    dustBlue: 0x1D4ED8,
+    conduit: 0xB45309,          // Saturated warm tungsten beam
+    beamCoreOpacity: 1.0,
+    beamFlowOpacity: 0.85,
     glowBlending: THREE.NormalBlending,
     ringBlending: THREE.NormalBlending,
     ringActiveOpacity: 1.0,
-    ringInactiveOpacity: 0.75,  // Clearly visible rim
-    orbitRingActiveOpacity: 0.95,
-    orbitRingInactiveOpacity: 0.70, // High-contrast, clearly visible orbit rings for other companies
+    ringInactiveOpacity: 0.95,  // Clearly visible rim in light mode
+    orbitRingActiveOpacity: 1.0,
+    orbitRingInactiveOpacity: 0.90, // High-contrast, clearly visible orbit rings
     haloActiveOpacity: 0.35,
     haloInactiveOpacity: 0.12,
-    inactiveGhost: 0x64748B,
-    medallionRim: 0xD97706,
+    inactiveGhost: 0x475569,
+    medallionRim: 0xB45309,
     medallionBack: 0xFFFFFF,    // Pure white medallion disc in light mode
     medallionMetalness: 0.05,
     medallionRoughness: 0.15
@@ -135,48 +135,50 @@ export function initExperienceCanvas(container, options = {}) {
 
   function createParticleTexture() {
     const canvas = document.createElement('canvas');
-    canvas.width = 64;
-    canvas.height = 64;
+    canvas.width = 128;
+    canvas.height = 128;
     const ctx = canvas.getContext('2d');
-    const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-    grad.addColorStop(0, 'rgba(255,255,255,1)');
-    grad.addColorStop(0.3, 'rgba(255,255,255,0.95)');
-    grad.addColorStop(0.65, 'rgba(255,255,255,0.4)');
-    grad.addColorStop(0.9, 'rgba(255,255,255,0.08)');
-    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    const grad = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+    grad.addColorStop(0, 'rgba(255,255,255,1.0)');
+    grad.addColorStop(0.35, 'rgba(255,255,255,0.95)');
+    grad.addColorStop(0.65, 'rgba(255,255,255,0.45)');
+    grad.addColorStop(0.88, 'rgba(255,255,255,0.12)');
+    grad.addColorStop(1.0, 'rgba(255,255,255,0.0)');
     ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 64, 64);
-    return new THREE.CanvasTexture(canvas);
+    ctx.fillRect(0, 0, 128, 128);
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.generateMipmaps = true;
+    return texture;
   }
   const particleMap = createParticleTexture();
 
-  function createCircleParticleGeo(radius, count, jitter = 0) {
+  function createCircleParticleGeo(radius, count, radialThickness = 0.12) {
     const geo = new THREE.BufferGeometry();
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       const angle = (i / count) * Math.PI * 2;
-      const r = radius + (Math.random() - 0.5) * jitter;
+      const r = radius + (Math.random() - 0.5) * radialThickness;
       pos[i * 3] = Math.cos(angle) * r;
       pos[i * 3 + 1] = Math.sin(angle) * r;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * jitter;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * (radialThickness * 0.7);
     }
     geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
     return geo;
   }
 
   // 3. 3D Horizontal Glowing Particle Conduit Beam (End-to-End Behind Logos)
-  // A. Dense Core Particle Stream (2200 particles along X from -80 to +80)
-  const beamCoreCount = 2200;
+  // A. Dense Core Particle Stream (5000 particles bundled into a thick glowing conduit)
+  const beamCoreCount = 5000;
   const beamCorePositions = new Float32Array(beamCoreCount * 3);
   for (let i = 0; i < beamCoreCount; i++) {
     beamCorePositions[i * 3] = -80.0 + (i / beamCoreCount) * 160.0 + (Math.random() - 0.5) * 0.08;
-    beamCorePositions[i * 3 + 1] = (Math.random() - 0.5) * 0.06;
-    beamCorePositions[i * 3 + 2] = -0.4 + (Math.random() - 0.5) * 0.06;
+    beamCorePositions[i * 3 + 1] = (Math.random() - 0.5) * 0.18;
+    beamCorePositions[i * 3 + 2] = -0.4 + (Math.random() - 0.5) * 0.16;
   }
   const beamCoreGeo = new THREE.BufferGeometry();
   beamCoreGeo.setAttribute('position', new THREE.BufferAttribute(beamCorePositions, 3));
   const beamCoreMat = new THREE.PointsMaterial({
-    size: 0.28,
+    size: 1.15,
     color: colors.conduit,
     map: particleMap,
     transparent: true,
@@ -187,18 +189,18 @@ export function initExperienceCanvas(container, options = {}) {
   const beamCorePoints = new THREE.Points(beamCoreGeo, beamCoreMat);
   scene.add(beamCorePoints);
 
-  // B. Radiant Shimmer Flow Stream (700 flowing particles with subtle wider dispersion)
-  const beamFlowCount = 700;
+  // B. Radiant Shimmer Flow Stream (1800 flowing particles with wide prominent ribbon aura)
+  const beamFlowCount = 1800;
   const beamFlowPositions = new Float32Array(beamFlowCount * 3);
   for (let i = 0; i < beamFlowCount; i++) {
     beamFlowPositions[i * 3] = -80.0 + Math.random() * 160.0;
-    beamFlowPositions[i * 3 + 1] = (Math.random() - 0.5) * 0.22;
-    beamFlowPositions[i * 3 + 2] = -0.4 + (Math.random() - 0.5) * 0.18;
+    beamFlowPositions[i * 3 + 1] = (Math.random() - 0.5) * 0.36;
+    beamFlowPositions[i * 3 + 2] = -0.4 + (Math.random() - 0.5) * 0.28;
   }
   const beamFlowGeo = new THREE.BufferGeometry();
   beamFlowGeo.setAttribute('position', new THREE.BufferAttribute(beamFlowPositions, 3));
   const beamFlowMat = new THREE.PointsMaterial({
-    size: 0.44,
+    size: 1.55,
     color: colors.activeAmber,
     map: particleMap,
     transparent: true,
@@ -235,10 +237,10 @@ export function initExperienceCanvas(container, options = {}) {
   dustGeo.setAttribute('color', new THREE.BufferAttribute(dustColors, 3));
 
   const dustMat = new THREE.PointsMaterial({
-    size: 0.14,
+    size: 0.55,
     vertexColors: true,
     transparent: true,
-    opacity: 0.65,
+    opacity: 0.75,
     map: particleMap,
     blending: THREE.AdditiveBlending,
     depthWrite: false
@@ -252,10 +254,18 @@ export function initExperienceCanvas(container, options = {}) {
   const raycastObjects = [];
 
   // Scaled up prominent particle geometries
-  const sharedRingGeo = createCircleParticleGeo(1.48, 160, 0.015);
-  const sharedOrbitRingGeo = createCircleParticleGeo(1.82, 200, 0.025);
+  const sharedRingGeo = createCircleParticleGeo(1.48, 480, 0.12);
+  const sharedOrbitRingGeo = createCircleParticleGeo(1.82, 650, 0.18);
   const sharedBackGeo = new THREE.CylinderGeometry(1.35, 1.35, 0.1, 32);
   sharedBackGeo.rotateX(Math.PI / 2);
+  // Hardware depth occluder disc (Invisible color pass, writes depth to occlude particles passing behind logo)
+  const sharedOccluderGeo = new THREE.CylinderGeometry(1.40, 1.40, 0.12, 32);
+  sharedOccluderGeo.rotateX(Math.PI / 2);
+  const sharedOccluderMat = new THREE.MeshBasicMaterial({
+    colorWrite: false,
+    depthWrite: true,
+    depthTest: true
+  });
   const sharedHaloGeo = new THREE.PlaneGeometry(3.6, 3.6);
   const sharedHitGeo = new THREE.SphereGeometry(1.8, 16, 16);
 
@@ -265,33 +275,45 @@ export function initExperienceCanvas(container, options = {}) {
     const nodeGroup = new THREE.Group();
     nodeGroup.position.set(milestone.x, 0, 0);
 
+    // 0. Hardware Depth Occluder Disc (Rendered first in opaque pass to block rear particles)
+    const occluderMesh = new THREE.Mesh(sharedOccluderGeo, sharedOccluderMat);
+    occluderMesh.position.z = 0.0;
+    occluderMesh.renderOrder = 0;
+    nodeGroup.add(occluderMesh);
+
     // A. Outer Stationary Particle Rim
+    const initialRingCol = idx === activeIndex ? colors.activeAmber : (isInitialLight ? (milestone.colorLight || milestone.color) : milestone.color);
     const ringMat = new THREE.PointsMaterial({
-      size: 0.24,
+      size: 1.25,
       map: particleMap,
-      color: idx === activeIndex ? colors.activeAmber : milestone.color,
+      color: initialRingCol,
       transparent: true,
       opacity: idx === activeIndex ? colors.ringActiveOpacity : colors.ringInactiveOpacity,
       blending: colors.ringBlending,
+      depthTest: true,
       depthWrite: false
     });
     const ring = new THREE.Points(sharedRingGeo, ringMat);
     ring.position.z = 0.05;
+    ring.renderOrder = 5;
     nodeGroup.add(ring);
 
-    // B. Outer Orbiting Particle Ring (Continuously rotating 3D celestial orbit)
+    // B. Outer Orbiting Particle Ring (Centered along Z; occluded when revolving behind logo)
     const orbitRingMat = new THREE.PointsMaterial({
-      size: 0.26,
+      size: 1.45,
       map: particleMap,
       color: colors.activeAmber,
       transparent: true,
       opacity: idx === activeIndex ? colors.orbitRingActiveOpacity : colors.orbitRingInactiveOpacity,
       blending: colors.ringBlending,
+      depthTest: true,
       depthWrite: false
     });
     const orbitRing = new THREE.Points(sharedOrbitRingGeo, orbitRingMat);
-    orbitRing.rotation.x = 0.45; // ~25° celestial inclination
-    orbitRing.rotation.y = idx * 0.7; // Staggered phase per milestone
+    orbitRing.rotation.x = 0.45; // ~25° original celestial inclination
+    orbitRing.rotation.y = idx * 0.7; // Original staggered phase per milestone
+    orbitRing.position.z = 0.0; // Centered at medallion origin (occludes when z < 0)
+    orbitRing.renderOrder = 6;
     nodeGroup.add(orbitRing);
 
     // C. Medallion Backing Disc (Pure white in light mode, dark obsidian in dark mode)
@@ -299,13 +321,17 @@ export function initExperienceCanvas(container, options = {}) {
       color: colors.medallionBack,
       metalness: colors.medallionMetalness,
       roughness: colors.medallionRoughness,
-      transparent: true,
-      opacity: 0.98
+      transparent: false,
+      opacity: 1.0,
+      depthWrite: true,
+      depthTest: true
     });
     const backMesh = new THREE.Mesh(sharedBackGeo, backMaterial);
+    backMesh.position.z = 0.0;
+    backMesh.renderOrder = 1;
     nodeGroup.add(backMesh);
 
-    // D. Front Logo Face (100% Upright Native Aspect Plane - No 90° Rotation!)
+    // D. Front Logo Face (100% Upright Native Aspect Plane)
     const logoDarkTexture = textureLoader.load(milestone.logoDark || milestone.logo);
     logoDarkTexture.colorSpace = THREE.SRGBColorSpace;
     logoDarkTexture.generateMipmaps = true;
@@ -326,10 +352,13 @@ export function initExperienceCanvas(container, options = {}) {
       map: currentLogoTexture,
       transparent: true,
       opacity: 1.0,
-      depthWrite: false
+      depthTest: true,
+      depthWrite: true,
+      alphaTest: 0.08
     });
     const logoMesh = new THREE.Mesh(logoPlaneGeo, logoMat);
     logoMesh.position.z = 0.065; // Sit slightly in front of medallion face
+    logoMesh.renderOrder = 3;
     nodeGroup.add(logoMesh);
 
     // E. Soft Halo Glow Mesh behind medallion
@@ -530,7 +559,8 @@ export function initExperienceCanvas(container, options = {}) {
 
     milestoneNodes.forEach((node, k) => {
       const isActive = k === activeIndex;
-      const ringCol = isActive ? colors.activeAmber : node.data.color;
+      const nodeCol = isLight ? (node.data.colorLight || node.data.color) : node.data.color;
+      const ringCol = isActive ? colors.activeAmber : nodeCol;
 
       node.ring.material.color.setHex(ringCol);
       node.ring.material.blending = colors.ringBlending;
@@ -665,6 +695,8 @@ export function initExperienceCanvas(container, options = {}) {
     sharedRingGeo.dispose();
     sharedOrbitRingGeo.dispose();
     sharedBackGeo.dispose();
+    sharedOccluderGeo.dispose();
+    sharedOccluderMat.dispose();
     sharedHaloGeo.dispose();
     sharedHitGeo.dispose();
 
@@ -691,6 +723,12 @@ export function initExperienceCanvas(container, options = {}) {
     focusNode,
     dispose,
     MILESTONES,
-    MILESTONE_X
+    MILESTONE_X,
+    getDebugInfo: () => ({
+      orbitRingDepthTest: milestoneNodes[0]?.orbitRing?.material?.depthTest ?? true,
+      orbitRingZ: milestoneNodes[0]?.orbitRing?.position?.z ?? 0,
+      orbitRingSize: milestoneNodes[0]?.orbitRing?.material?.size ?? 1.45,
+      conduitSize: beamCoreMat?.size ?? 1.15
+    })
   };
 }

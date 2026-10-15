@@ -156,5 +156,98 @@
 - Live on GitHub Pages URL, all features functional
 
 ---
+
+## Milestone 2: Visual Refinement, 3D Polish & Layout Cohesion
+
+**Goal:** Elevate visual fidelity, physical realism of 3D orbital mechanics, calendar color balance, project card backdrop clarity, scannable governance density, and global vertical alignment across all sections.
+
+**Success Criteria:**
+- Experience 3D particles are prominent, clearly distinguishable in both light/dark modes, and dynamically occluded/faded when revolving behind the logo along the z-axis.
+- Timeline calendar modal has borderless month cells and a deep, harmonious dark theme palette without jarring light pastel fills.
+- Projects background blur allows identifiable hints of the underlying product, and all 6 cards are vertically centered with uniform spacing.
+- Abhyuday and Placement Cell governance cards feature concise, high-impact numbers and bullets without heavy text walls.
+- Extracurricular badges and categories use clean vector / favicon iconography instead of emojis.
+- Every section heading anchors at the exact same vertical Y-coordinate with consistent, deliberate top breathing room.
+
+---
+
+### Phase 11: Experience 3D Canvas Polish & Particle Occlusion
+
+**Goal:** Substantially increase particle size across rings, conduit beam, and cosmic dust for strong presence and light-mode distinguishability; implement realistic z-axis occlusion/fade so particles revolving behind company logo medallions become invisible.
+
+**Delivers:** EXP-3D-01, EXP-3D-02
+
+**UAT:**
+- Particle size visibly larger across orbit rings, beam conduit, and dust motes.
+- In light mode, particle colors are vibrant and easily distinguishable against light backgrounds.
+- Orbit ring particles revolving along the z-axis dynamically fade or disappear as they pass behind the company medallion plane (z < 0).
+- 60fps frame rate maintained during continuous rotation and interaction.
+
+---
+
+### Phase 12: Experience Calendar Contrast & Dark Theme Palette
+
+**Goal:** Upgrade the timeline calendar modal styling with borderless month blocks and sophisticated, high-contrast dark tones that match the Structured Intensity design system.
+
+**Delivers:** CAL-01, CAL-02
+
+**UAT:**
+- Month boxes have no rigid borders, creating a modern, seamless grid.
+- Replaced light/pastel fills with cohesive dark theme colors matching company identities.
+- Month abbreviations and company logos maintain WCAG AA contrast against their container backgrounds.
+- Hover states and active milestone selections remain crisp and tactile.
+
+---
+
+### Phase 13: Projects Section Layout & Backdrop Clarity
+
+**Goal:** Calibrate project card background backdrop-filter blur and overlay gradient opacity so product screenshots provide an identifiable preview; vertically center all 6 project cards within the viewport with uniform spacing.
+
+**Delivers:** PROJ-08, PROJ-09
+
+**UAT:**
+- Background screenshot behind each project card is subtly blurred and discernible, providing a legible preview of the product.
+- All 6 project cards are vertically centered in the viewport, eliminating the excessive vertical gap between the top and bottom rows.
+- Click-to-expand modal and case study interactions remain fully functional.
+
+---
+
+### Phase 14: Education & Governance Cards Density Reduction
+
+**Goal:** Streamline Abhyuday and Placement Cell cards by eliminating redundant descriptive text, focusing strictly on highlighted key metrics and high-impact accomplishments.
+
+**Delivers:** EDU-06
+
+**UAT:**
+- Abhyuday and Placement Cell cards contain punchy, concise bullets with highlighted key figures (e.g. ₹10M+ budget, 50,000+ footfall, 2,000+ candidates).
+- Text walls are eliminated; content is scannable in under 5 seconds.
+- Typography adheres to Structured Intensity hierarchy.
+
+---
+
+### Phase 15: Creative & Athletics Iconography Refactoring
+
+**Goal:** Replace all informal emoji icons in the Creative & Athletics / Extracurriculars section with clean, bespoke vector SVG / favicon-styled iconography.
+
+**Delivers:** CREAT-01
+
+**UAT:**
+- No emoji characters (🎭, 🎙️, 🏑, 🥇) are rendered anywhere in the section or its badges.
+- Clean vector SVG / favicon icons represent stage, speaking, athletics, and gold medals with crisp rendering in both dark and light modes.
+
+---
+
+### Phase 16: Global Section Heading Vertical Alignment
+
+**Goal:** Standardize top padding and header layout coordinates across all five pages/sections so headings sit at the exact same vertical Y-position across the entire portfolio.
+
+**Delivers:** LAYOUT-01
+
+**UAT:**
+- Section title (`.section__title`) and category tag across Hero, Experience, Projects, Education, and Contact share the exact same top Y-offset from the viewport top.
+- Generous, balanced padding is established below the fixed navigation bar.
+- Transitions between sections feel visually anchored without vertical heading jumping.
+
+---
 *Roadmap defined: 2026-10-12*
-*Last updated: 2026-10-12 after initial definition*
+*Milestone 2 added: 2026-10-15*

@@ -173,10 +173,10 @@
   z-index: 0;
   will-change: transform;
   transform-origin: center center;
-  /* Dark mode indicator: Coral glow tactile membrane */
-  background: linear-gradient(135deg, rgba(255, 77, 0, 0.22) 0%, rgba(255, 107, 43, 0.12) 100%);
-  border: 1px solid rgba(255, 77, 0, 0.45);
-  box-shadow: 0 2px 10px rgba(255, 77, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  /* Dark mode indicator: Royal blue tactile membrane */
+  background: linear-gradient(135deg, rgba(41, 98, 255, 0.28) 0%, rgba(0, 229, 255, 0.16) 100%);
+  border: 1px solid rgba(41, 98, 255, 0.55);
+  box-shadow: 0 2px 12px rgba(41, 98, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.18);
   transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -222,8 +222,8 @@
 }
 
 [data-theme="dark"] .theme-toggle-pill__btn.is-active {
-  color: #ff9153;
-  text-shadow: 0 0 12px rgba(255, 77, 0, 0.35);
+  color: #60a5fa;
+  text-shadow: 0 0 12px rgba(41, 98, 255, 0.45);
 }
 
 [data-theme="light"] .theme-toggle-pill__btn.is-active {

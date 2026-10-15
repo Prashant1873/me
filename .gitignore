@@ -18,9 +18,15 @@ dist-ssr/
 .DS_Store
 Thumbs.db
 
-# Playwright
+# Playwright & Visual Test Artifacts
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+/screenshots/
+
+# Staging assets (production assets are in public/)
+/Abhyuday IIT Bombay/
+/Logos/
+/Portfolio_images/

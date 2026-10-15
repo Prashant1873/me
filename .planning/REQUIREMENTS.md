@@ -98,9 +98,30 @@
 - [x] **DEPL-02**: All assets optimized (compressed images, minified JS/CSS)
 - [x] **DEPL-03**: Meta tags for SEO (title, description, OG tags)
 
-## v2 Requirements
+## Milestone 2 Requirements
 
-### Future Enhancements
+### Experience 3D Canvas Polish
+- [x] **EXP-3D-01**: Substantially enlarged particle sizes across Experience 3D canvas (conduit, dust, orbit rings) with clear light-mode contrast
+- [x] **EXP-3D-02**: Dynamic z-axis occlusion/fade so revolving orbit ring particles become invisible when passing behind company logo medallions
+
+### Experience Calendar
+- [x] **CAL-01**: Borderless month matrix in the experience timeline calendar modal
+- [x] **CAL-02**: Deep, rich dark theme color palette and high-contrast typography/badges for the calendar modal
+
+### Projects Showcase Layout & Clarity
+- [ ] **PROJ-08**: Calibrated project card background backdrop-filter blur and overlay gradient opacity for clear product identification
+- [ ] **PROJ-09**: Vertically centered 2x3 project cards layout with uniform, cohesive spacing
+
+### Education & Governance
+- [ ] **EDU-06**: Streamlined high-impact governance cards (Abhyuday & Placement Cell) with bold key numbers and minimal text walls
+
+### Creative & Athletics
+- [ ] **CREAT-01**: Bespoke vector/favicon iconography for Creative & Athletics replacing informal emojis
+
+### Global Section Alignment
+- [ ] **LAYOUT-01**: Standardized section header top padding and identical vertical Y-axis anchor positions across all sections
+
+## Future Enhancements
 
 - **V2-01**: Blog / writing section for essays and thought pieces
 - **V2-02**: Custom domain (prashantshukla.com)
@@ -125,38 +146,38 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 | Pending |
-| FOUND-02 | Phase 1 | Pending |
-| FOUND-03 | Phase 1 | Pending |
-| FOUND-04 | Phase 2 | Pending |
-| FOUND-05 | Phase 1 | Pending |
-| FOUND-06 | Phase 1 | Pending |
-| NAV-01 | Phase 2 | Pending |
-| NAV-02 | Phase 2 | Pending |
-| NAV-03 | Phase 2 | Pending |
+| FOUND-01 | Phase 1 | Complete |
+| FOUND-02 | Phase 1 | Complete |
+| FOUND-03 | Phase 1 | Complete |
+| FOUND-04 | Phase 2 | Complete |
+| FOUND-05 | Phase 1 | Complete |
+| FOUND-06 | Phase 1 | Complete |
+| NAV-01 | Phase 2 | Complete |
+| NAV-02 | Phase 2 | Complete |
+| NAV-03 | Phase 2 | Complete |
 | NAV-04 | Phase 8 | Complete |
-| NAV-05 | Phase 2 | Pending |
-| HERO-01 | Phase 3 | Pending |
-| HERO-02 | Phase 3 | Pending |
-| HERO-03 | Phase 3 | Pending |
-| HERO-04 | Phase 3 | Pending |
-| HERO-05 | Phase 3 | Pending |
-| HERO-06 | Phase 3 | Pending |
-| EXP-01 | Phase 5 | Pending |
-| EXP-02 | Phase 4 | Pending |
-| EXP-03 | Phase 4 | Pending |
-| EXP-04 | Phase 4 | Pending |
-| EXP-05 | Phase 4 | Pending |
-| EXP-06 | Phase 5 | Pending |
-| EXP-07 | Phase 5 | Pending |
-| EXP-08 | Phase 5 | Pending |
-| PROJ-01 | Phase 6 | Pending |
-| PROJ-02 | Phase 6 | Pending |
-| PROJ-03 | Phase 6 | Pending |
-| PROJ-04 | Phase 6 | Pending |
-| PROJ-05 | Phase 6 | Pending |
-| PROJ-06 | Phase 6 | Pending |
-| PROJ-07 | Phase 6 | Pending |
+| NAV-05 | Phase 2 | Complete |
+| HERO-01 | Phase 3 | Complete |
+| HERO-02 | Phase 3 | Complete |
+| HERO-03 | Phase 3 | Complete |
+| HERO-04 | Phase 3 | Complete |
+| HERO-05 | Phase 3 | Complete |
+| HERO-06 | Phase 3 | Complete |
+| EXP-01 | Phase 5 | Complete |
+| EXP-02 | Phase 4 | Complete |
+| EXP-03 | Phase 4 | Complete |
+| EXP-04 | Phase 4 | Complete |
+| EXP-05 | Phase 4 | Complete |
+| EXP-06 | Phase 5 | Complete |
+| EXP-07 | Phase 5 | Complete |
+| EXP-08 | Phase 5 | Complete |
+| PROJ-01 | Phase 6 | Complete |
+| PROJ-02 | Phase 6 | Complete |
+| PROJ-03 | Phase 6 | Complete |
+| PROJ-04 | Phase 6 | Complete |
+| PROJ-05 | Phase 6 | Complete |
+| PROJ-06 | Phase 6 | Complete |
+| PROJ-07 | Phase 6 | Complete |
 | EDU-01 | Phase 7 | Complete |
 | EDU-02 | Phase 7 | Complete |
 | EDU-03 | Phase 7 | Complete |
@@ -168,12 +189,12 @@
 | CONT-04 | Phase 7 | Complete |
 | CONT-05 | Phase 7 | Complete |
 | CONT-06 | Phase 7 | Complete |
-| 3D-01 | Phase 3 | Pending |
+| 3D-01 | Phase 3 | Complete |
 | 3D-02 | Phase 9 | Complete |
 | 3D-03 | Phase 9 | Complete |
 | 3D-04 | Phase 9 | Complete |
 | 3D-05 | Phase 9 | Complete |
-| 3D-06 | Phase 5 | Pending |
+| 3D-06 | Phase 5 | Complete |
 | 3D-07 | Phase 9 | Complete |
 | 3D-08 | Phase 9 | Complete |
 | 3D-09 | Phase 10 | Complete |
@@ -188,12 +209,21 @@
 | DEPL-01 | Phase 10 | Complete |
 | DEPL-02 | Phase 10 | Complete |
 | DEPL-03 | Phase 10 | Complete |
+| EXP-3D-01 | Phase 11 | Complete |
+| EXP-3D-02 | Phase 11 | Complete |
+| CAL-01 | Phase 12 | Complete |
+| CAL-02 | Phase 12 | Complete |
+| PROJ-08 | Phase 13 | Complete |
+| PROJ-09 | Phase 13 | Complete |
+| EDU-06 | Phase 14 | Complete |
+| CREAT-01 | Phase 15 | Complete |
+| LAYOUT-01 | Phase 16 | Complete |
 
 **Coverage:**
-- v1 requirements: 57 total
-- Mapped to phases: 57
+- Milestone 1 requirements: 57 total (57 completed)
+- Milestone 2 requirements: 9 total (9 mapped to Phases 11-16)
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-10-12*
-*Last updated: 2026-10-12 after initial definition*
+*Milestone 2 added: 2026-10-15*

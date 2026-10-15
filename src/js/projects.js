@@ -55,37 +55,47 @@ function renderProjectsGrid() {
         tabindex="0" 
         aria-label="Open case study for ${escapeHtml(proj.title)}"
       >
-        <div class="project-card__thumb-box">
-          <span class="project-card__status-tag text-mono">${escapeHtml(proj.statusTag)}</span>
+        <div class="project-card__bg-wrap" aria-hidden="true">
           <img 
-            class="project-card__thumb" 
+            class="project-card__bg-img project-card__thumb" 
             src="${escapeHtml(thumbSrc)}" 
-            alt="${escapeHtml(proj.title)} screenshot preview" 
+            alt="" 
             loading="lazy" 
           />
+          <div class="project-card__backdrop"></div>
         </div>
-        <div class="project-card__body">
-          <span class="project-card__category">${escapeHtml(proj.category)}</span>
-          <h3 class="project-card__title">${escapeHtml(proj.title)}</h3>
-          <p class="project-card__desc">${escapeHtml(proj.oneLiner)}</p>
-          <div class="project-card__tags">
-            ${tagsHtml}
+
+        <div class="project-card__overlay">
+          <div class="project-card__top">
+            <span class="project-card__category">${escapeHtml(proj.category)}</span>
+            <span class="project-card__status-tag text-mono">${escapeHtml(proj.statusTag)}</span>
           </div>
-          <div class="project-card__footer">
-            <span class="project-card__trigger">
-              Explore Case Study
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </span>
-            ${
-              proj.liveUrl
-                ? `<a href="${escapeHtml(proj.liveUrl)}" class="project-card__ext-link" target="_blank" rel="noopener noreferrer" aria-label="Open live site for ${escapeHtml(proj.title)}" onclick="event.stopPropagation();">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                  </a>`
-                : ''
-            }
+
+          <div class="project-card__middle">
+            <h3 class="project-card__title">${escapeHtml(proj.title)}</h3>
+            <p class="project-card__desc">${escapeHtml(proj.oneLiner)}</p>
+          </div>
+
+          <div class="project-card__bottom">
+            <div class="project-card__tags">
+              ${tagsHtml}
+            </div>
+            <div class="project-card__footer">
+              <span class="project-card__trigger">
+                Case Study
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+              ${
+                proj.liveUrl
+                  ? `<a href="${escapeHtml(proj.liveUrl)}" class="project-card__ext-link" target="_blank" rel="noopener noreferrer" aria-label="Open live site for ${escapeHtml(proj.title)}" onclick="event.stopPropagation();">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </a>`
+                  : ''
+              }
+            </div>
           </div>
         </div>
       </article>

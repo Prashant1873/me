@@ -77,10 +77,10 @@ export function initSectionScroll() {
     clearTimeout(safetyTimer);
     safetyTimer = setTimeout(() => {
       isScrolling = false;
-    }, 600);
+    }, 850);
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const scrollDuration = prefersReducedMotion ? 0.05 : (isMobileOrTablet() ? 0.55 : 0.42);
+    const scrollDuration = prefersReducedMotion ? 0.05 : (isMobileOrTablet() ? 0.55 : 0.45);
 
     gsap.to(window, {
       scrollTo: { y: targetY, autoKill: false },
@@ -90,7 +90,7 @@ export function initSectionScroll() {
       onComplete: () => {
         setTimeout(() => {
           isScrolling = false;
-        }, 60);
+        }, 200);
       }
     });
   }

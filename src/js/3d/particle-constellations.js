@@ -29,9 +29,8 @@ function createPointTexture() {
  * Spherical nucleus + 2 tilted elliptical orbital rings
  */
 /**
- * 0. Hero: Aerospace Orbital Command
- * Spherical nucleus + 2 tilted elliptical orbital rings
- * Centered around the polygon located on the right side of the hero section
+ * 0. Hero: Aerospace Command Center Resting Matrix
+ * Nucleus cluster centered with polygon, zero orbital rings
  */
 export function generateHeroPositions(center = { x: 3.25, y: -0.23, z: 0 }) {
   const cx = center && center.x !== undefined ? center.x : 3.25;
@@ -39,12 +38,9 @@ export function generateHeroPositions(center = { x: 3.25, y: -0.23, z: 0 }) {
   const cz = center && center.z !== undefined ? center.z : 0;
 
   const positions = new Float32Array(PARTICLE_COUNT * 3);
-  const nucleusCount = 200;
-  const ring1Count = 200;
-  const ring2Count = 200;
 
-  // Nucleus core (0 to 199)
-  for (let i = 0; i < nucleusCount; i++) {
+  // Soft spherical resting cluster around hero center (no massive orbital rings)
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
     const u = Math.random();
     const v = Math.random();
     const theta = u * 2.0 * Math.PI;
@@ -54,36 +50,6 @@ export function generateHeroPositions(center = { x: 3.25, y: -0.23, z: 0 }) {
     positions[i * 3] = cx + r * Math.sin(phi) * Math.cos(theta);
     positions[i * 3 + 1] = cy + r * Math.sin(phi) * Math.sin(theta);
     positions[i * 3 + 2] = cz + r * Math.cos(phi);
-  }
-
-  // Inner tilted ring (200 to 399)
-  const tilt1 = 0.55; // ~31 deg
-  for (let i = 0; i < ring1Count; i++) {
-    const idx = nucleusCount + i;
-    const angle = (i / ring1Count) * Math.PI * 2 + (Math.random() - 0.5) * 0.15;
-    const radius = 2.0 + (Math.random() - 0.5) * 0.35;
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius * Math.cos(tilt1) + (Math.random() - 0.5) * 0.15;
-    const z = Math.sin(angle) * radius * Math.sin(tilt1) + (Math.random() - 0.5) * 0.15;
-
-    positions[idx * 3] = cx + x;
-    positions[idx * 3 + 1] = cy + y;
-    positions[idx * 3 + 2] = cz + z;
-  }
-
-  // Outer eccentric ring (400 to 599)
-  const tilt2 = -0.72; // ~-41 deg
-  for (let i = 0; i < ring2Count; i++) {
-    const idx = nucleusCount + ring1Count + i;
-    const angle = (i / ring2Count) * Math.PI * 2 + (Math.random() - 0.5) * 0.15;
-    const radius = 3.2 + (Math.random() - 0.5) * 0.45;
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius * Math.cos(tilt2) + (Math.random() - 0.5) * 0.18;
-    const z = Math.sin(angle) * radius * Math.sin(tilt2) + (Math.random() - 0.5) * 0.18;
-
-    positions[idx * 3] = cx + x;
-    positions[idx * 3 + 1] = cy + y;
-    positions[idx * 3 + 2] = cz + z;
   }
 
   return positions;
@@ -334,12 +300,14 @@ export function createConstellations(scene, initialSection = 0, getHeroCenter) {
 
   const pointTexture = createPointTexture();
 
+  const initialOpacity = initialSection === 0 ? 0 : (THEME_CONFIG[getTheme()] || THEME_CONFIG.dark).opacity;
+
   const material = new THREE.PointsMaterial({
     map: pointTexture,
     color: THEME_CONFIG[getTheme()].color,
     size: THEME_CONFIG[getTheme()].size,
     transparent: true,
-    opacity: THEME_CONFIG[getTheme()].opacity,
+    opacity: initialOpacity,
     blending: THEME_CONFIG[getTheme()].blending,
     depthWrite: false,
     sizeAttenuation: true,
@@ -351,13 +319,16 @@ export function createConstellations(scene, initialSection = 0, getHeroCenter) {
   let activeSection = initialSection;
   const morphState = { progress: 1.0 };
   let currentTween = null;
+  let opacityTween = null;
   let reducedMotion = false;
 
   function setReducedMotion(val) {
     reducedMotion = !!val;
     if (reducedMotion) {
       if (currentTween) currentTween.kill();
+      if (opacityTween) opacityTween.kill();
       morphState.progress = 1.0;
+      material.opacity = activeSection === 0 ? 0 : (THEME_CONFIG[getTheme()] || THEME_CONFIG.dark).opacity;
       const posAttr = geometry.attributes.position;
       const heroCenter = getHeroCenter ? getHeroCenter() : undefined;
       const targets = getSectionPositions(activeSection, heroCenter);
@@ -391,6 +362,20 @@ export function createConstellations(scene, initialSection = 0, getHeroCenter) {
     activeSection = targetIndex;
 
     const actualDuration = reducedMotion ? 0.05 : duration;
+    const targetTheme = getTheme();
+    const activeOpacity = (THEME_CONFIG[targetTheme] || THEME_CONFIG.dark).opacity;
+    const targetOpacity = targetIndex === 0 ? 0 : activeOpacity;
+
+    if (opacityTween) opacityTween.kill();
+    if (reducedMotion) {
+      material.opacity = targetOpacity;
+    } else {
+      opacityTween = gsap.to(material, {
+        opacity: targetOpacity,
+        duration: Math.min(0.6, actualDuration),
+        ease: 'power2.inOut',
+      });
+    }
 
     // Snapshot current position as source
     const posAttr = geometry.attributes.position;
@@ -450,7 +435,7 @@ export function createConstellations(scene, initialSection = 0, getHeroCenter) {
     const config = THEME_CONFIG[theme] || THEME_CONFIG.dark;
     material.color.setHex(config.color);
     material.size = config.size;
-    material.opacity = config.opacity;
+    material.opacity = activeSection === 0 ? 0 : config.opacity;
     material.blending = config.blending;
     material.needsUpdate = true;
   }

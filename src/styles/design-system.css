@@ -62,8 +62,8 @@
 
   /* Fluid font scales via clamp() */
   --text-hero: clamp(2.125rem, 5.5vw, 5rem);        /* ~34px to 80px */
-  --text-section: clamp(1.75rem, 3.2vh, 2.35rem);   /* ~28px to 38px */
-  --text-section-sub: clamp(0.875rem, 1.4vh, 1.05rem); /* ~14px to 17px */
+  --text-section: clamp(2.125rem, 3.8vh, 2.85rem);   /* ~34px to 46px */
+  --text-section-sub: clamp(0.975rem, 1.65vh, 1.2rem); /* ~15.6px to 19.2px */
   --text-subsection: clamp(1.25rem, 2vw, 1.5rem);  /* ~20px to 24px */
   --text-body: clamp(1rem, 1.125vw, 1.125rem);      /* ~16px to 18px */
   --text-ui: clamp(0.75rem, 0.875vw, 0.875rem);    /* ~12px to 14px */
@@ -116,6 +116,8 @@
   --grid-margin: clamp(14px, 2vw, 32px);
   --grid-margin-mobile: var(--space-4);
   --max-content-width: min(96vw, 1540px);
+  --section-padding-top: calc(64px + clamp(12px, 1.8vh, 22px));
+  --section-header-mb: clamp(4px, 0.8vh, 10px);
 
   /* Radii */
   --radius-xs: 2px;

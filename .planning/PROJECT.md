@@ -170,27 +170,35 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 
 ### Validated
 
-(None yet - ship to validate)
+- [x] Single-page scrollable narrative with anchor navigation (Home, Experience, Projects, Education, Contact) (Phase 2)
+- [x] Sticky top navigation bar with section buttons for instant scroll-to-section (Phase 2)
+- [x] Dark mode default with light mode toggle (Phase 2)
+- [x] Immersive 3D hero section with orbital geometry and Three.js canvas (Phase 3)
+- [x] Cinematic section transitions with scroll-triggered animations (Phase 9)
+- [x] Professional experience as interactive 3D timeline with company logos and LinkedIn links (Phases 4, 5)
+- [x] Projects section with cinematic case-study cards expanding into full showcases with screenshots (Phase 6)
+- [x] Education section (IIT Bombay, school achievements, governance, creative) (Phase 7)
+- [x] Contact section with LinkedIn, GitHub, Email, Phone, and downloadable resume PDF (Phase 7)
+- [x] 3D elements throughout: orbital geometry, terrain landscape, interactive objects per section, particle systems, parallax depth layers (Phases 3, 5, 9)
+- [x] Interactive experience categories: Work Experience, Entrepreneurship, Leadership, Creative/Sports (Phase 4)
+- [x] Hero narrative: thinker-builder hybrid identity from behavioral psychology + automation obsessions (Phase 3)
+- [x] Company details with logos and LinkedIn links for each professional experience (Phase 4)
+- [x] Project slideshows that are part of the storytelling (Phase 6)
+- [x] Responsive design (desktop-first, mobile-adaptive) (Phase 8)
+- [x] "Structured Intensity" design language applied throughout (Phases 1-10)
+- [x] GitHub Pages deployment setup (Phase 10)
 
-### Active
+### Active (Milestone 2: Visual Refinement, 3D Polish & Layout Cohesion - COMPLETE)
 
-- [ ] Single-page scrollable narrative with anchor navigation (Home, Experience, Projects, Education, Contact)
-- [ ] Sticky top navigation bar with section buttons for instant scroll-to-section
-- [ ] Dark mode default with light mode toggle
-- [ ] Immersive 3D hero section with orbital geometry and Three.js canvas
-- [ ] Cinematic section transitions with scroll-triggered animations
-- [ ] Professional experience as interactive 3D timeline with company logos and LinkedIn links
-- [ ] Projects section with cinematic case-study cards expanding into full showcases with screenshots
-- [ ] Education section (IIT Bombay, school achievements)
-- [ ] Contact section with LinkedIn, GitHub, Email, Phone, and downloadable resume PDF
-- [ ] 3D elements throughout: orbital geometry, terrain landscape, interactive objects per section, particle systems, parallax depth layers
-- [ ] Interactive experience categories: Work Experience, Entrepreneurship, Leadership, Creative/Sports
-- [ ] Hero narrative: thinker-builder hybrid identity from behavioral psychology + automation obsessions
-- [ ] Company details with logos and LinkedIn links for each professional experience
-- [ ] Project slideshows that are part of the storytelling (not just images on a page)
-- [ ] Responsive design (desktop-first, mobile-adaptive)
-- [ ] "Structured Intensity" design language applied throughout (colors, typography, motifs, motion)
-- [ ] GitHub Pages deployment
+- [x] **EXP-3D-01**: Substantially increase particle size on Experience 3D canvas (conduit, dust, orbit rings) for distinct visual presence and light-mode distinction.
+- [x] **EXP-3D-02**: Dynamic z-axis occlusion/fade for revolving orbit ring particles when passing behind company logo medallions.
+- [x] **CAL-01**: Borderless month matrix in the experience timeline calendar modal.
+- [x] **CAL-02**: Deep, rich dark theme color palette and high-contrast typography/badges for the calendar modal.
+- [x] **PROJ-08**: Calibrate project card background screenshot blur and overlay opacity for clear product identification.
+- [x] **PROJ-09**: Vertically center all 6 project cards with uniform, harmonious spacing (eliminating excess row gap).
+- [x] **EDU-06**: Condense Abhyuday & Placement Cell governance text down to high-impact bullets with bold key metrics.
+- [x] **CREAT-01**: Replace all emojis in Creative & Athletics with clean, bespoke vector/favicon iconography.
+- [x] **LAYOUT-01**: Align all page headings to the exact same vertical Y-axis position with uniform, generous top padding.
 
 ### Out of Scope
 
@@ -204,16 +212,15 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 
 - **Personal Importance:** This website is deeply personal to Prashant - it represents his identity and will be shown to recruiters, collaborators, and professional contacts. Quality cannot be compromised.
 - **Design Authority:** The "Structured Intensity Personal Design Language" document is the sole source of truth for all visual decisions. Every color, font, spacing, and motion decision must trace back to it.
-- **Content Available:** Resume text, cover letter text, 6 project folders with screenshots and READMEs. Photo folders for experiences will be added incrementally.
-- **Feedback-Driven:** Prashant wants heavy back-and-forth at every step. UI/UX decisions are the priority.
-- **Frontend Skill:** The frontend-skill will be used extensively for button design, color contrast ratios, animation physics, font sizing, and WCAG compliance.
+- **Milestone 1:** Completed all 10 initial foundational phases (scaffolding through deployment optimization).
+- **Milestone 2 Goal:** Visual polish, 3D occlusion/sizing realism, calendar styling upgrade, project grid clarity, text density streamlining, and cross-section vertical alignment.
 
 ## Constraints
 
 - **Tech Stack:** Vite + Vanilla JS + Three.js (3D) + GSAP (animations) - zero-framework, maximum control
 - **Design System:** Must follow "Structured Intensity" design language exclusively
 - **Deployment:** GitHub Pages (static export)
-- **Performance:** 3D graphics must not tank mobile performance - progressive enhancement required
+- **Performance:** 60fps target on desktop, graceful degradation on mobile
 - **Accessibility:** WCAG 2.2 AA compliance for text, navigation, and interactive elements
 - **Fonts:** Horizon (hero, via CDN), Plus Jakarta Sans (body/UI, Google Fonts), IBM Plex Mono (technical, Google Fonts), Newsreader (expressive, Google Fonts)
 
@@ -221,30 +228,13 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Vite + Vanilla JS over Next.js/React | Maximum control over every pixel; no framework abstractions between the design language and the DOM | - Pending |
-| Three.js for 3D, GSAP for animations | Industry standard for web 3D; GSAP has best scroll-trigger ecosystem | - Pending |
-| Single-page scrollable over multi-page | Linear storytelling matches the narrative arc; recruiter-friendly continuous scroll | - Pending |
-| Dark mode default | Design doc specifies dark as signature presentation mode | - Pending |
-| Fine-grained GSD phases | Prashant wants small, deliberate steps with heavy feedback at each | - Pending |
-| Interactive experience categories over strict chronology | Prashant's life has distinct arcs that deserve their own exploration space | - Pending |
-| All 5 types of 3D elements | Maximum visual ambition: orbital geometry, terrain, interactive objects, particles, parallax depth | - Pending |
-
-## Evolution
-
-This document evolves at phase transitions and milestone boundaries.
-
-**After each phase transition** (via `/gsd-transition`):
-1. Requirements invalidated? → Move to Out of Scope with reason
-2. Requirements validated? → Move to Validated with phase reference
-3. New requirements emerged? → Add to Active
-4. Decisions to log? → Add to Key Decisions
-5. "What This Is" still accurate? → Update if drifted
-
-**After each milestone** (via `/gsd-complete-milestone`):
-1. Full review of all sections
-2. Core Value check - still the right priority?
-3. Audit Out of Scope - reasons still valid?
-4. Update Context with current state
+| Vite + Vanilla JS over Next.js/React | Maximum control over every pixel; no framework abstractions between the design language and the DOM | Confirmed |
+| Three.js for 3D, GSAP for animations | Industry standard for web 3D; GSAP has best scroll-trigger ecosystem | Confirmed |
+| Single-page scrollable over multi-page | Linear storytelling matches the narrative arc; recruiter-friendly continuous scroll | Confirmed |
+| Dark mode default | Design doc specifies dark as signature presentation mode | Confirmed |
+| Z-axis orbit ring occlusion | Realistic depth perception behind logo medallion disc | Delivered (Phase 11) |
+| Borderless dark calendar palette | Replaces jarring light/pastel blocks with cohesive industrial minimalism | Delivered (Phase 12) |
+| Unified section header Y-anchor | Prevents visual jumping when navigating across sections | Delivered (Phase 16) |
 
 ---
-*Last updated: 2026-10-12 after initialization*
+*Last updated: 2026-10-15 after Milestone 2 completion*
