@@ -39,37 +39,37 @@ export const PROJECTS = [
     githubUrl: 'https://github.com/Prashant1873/BickerBape',
     screenshots: [
       {
-        src: '/images/projects/bickerbape/slide-1.png',
+        src: './images/projects/bickerbape/slide-1.png',
         caption: 'Interactive Mutual Fund Screener with category filters & CAGR rankers',
         alt: 'BickerBape mutual fund screener showing scheme rankings'
       },
       {
-        src: '/images/projects/bickerbape/slide-2.png',
+        src: './images/projects/bickerbape/slide-2.png',
         caption: 'Historical performance & expense ratio distribution breakdown',
         alt: 'BickerBape historical performance charts and distribution'
       },
       {
-        src: '/images/projects/bickerbape/slide-3.png',
+        src: './images/projects/bickerbape/slide-3.png',
         caption: 'Compounding simulator input deck with monthly SIP toggles',
         alt: 'BickerBape compounding simulator inputs'
       },
       {
-        src: '/images/projects/bickerbape/slide-4.png',
+        src: './images/projects/bickerbape/slide-4.png',
         caption: 'Visual growth trajectory comparison across hybrid and equity funds',
         alt: 'BickerBape growth trajectory curves'
       },
       {
-        src: '/images/projects/bickerbape/slide-5.png',
+        src: './images/projects/bickerbape/slide-5.png',
         caption: 'Category-wise risk/reward quadrant and beta score matrix',
         alt: 'BickerBape risk and reward matrix'
       },
       {
-        src: '/images/projects/bickerbape/slide-6.png',
+        src: './images/projects/bickerbape/slide-6.png',
         caption: 'Portfolio allocation inspector and tax efficiency estimators',
         alt: 'BickerBape portfolio allocation inspector'
       },
       {
-        src: '/images/projects/bickerbape/slide-7.png',
+        src: './images/projects/bickerbape/slide-7.png',
         caption: 'Detailed fund deep-dive modal showing top holdings and sector weights',
         alt: 'BickerBape fund holdings deep dive'
       }
@@ -110,32 +110,32 @@ export const PROJECTS = [
     githubUrl: 'https://github.com/Prashant1873/StrokeCRM',
     screenshots: [
       {
-        src: '/images/projects/strokecrm/slide-1.png',
+        src: './images/projects/strokecrm/slide-1.png',
         caption: 'Campaign performance dashboard with live sending cadence',
         alt: 'StrokeCRM campaign performance dashboard'
       },
       {
-        src: '/images/projects/strokecrm/slide-2.png',
+        src: './images/projects/strokecrm/slide-2.png',
         caption: 'Multi-account SMTP configuration & inbox warming health status',
         alt: 'StrokeCRM SMTP and inbox configuration'
       },
       {
-        src: '/images/projects/strokecrm/slide-3.png',
+        src: './images/projects/strokecrm/slide-3.png',
         caption: 'Lead list segmentation and personalized tag injection matrix',
         alt: 'StrokeCRM lead segmentation matrix'
       },
       {
-        src: '/images/projects/strokecrm/slide-4.png',
+        src: './images/projects/strokecrm/slide-4.png',
         caption: 'Automated sequence timeline builder with time-delay triggers',
         alt: 'StrokeCRM automated sequence builder'
       },
       {
-        src: '/images/projects/strokecrm/slide-5.png',
+        src: './images/projects/strokecrm/slide-5.png',
         caption: 'Real-time delivery log and bounce detection inspector',
         alt: 'StrokeCRM delivery log and bounce monitor'
       },
       {
-        src: '/images/projects/strokecrm/slide-6.png',
+        src: './images/projects/strokecrm/slide-6.png',
         caption: 'Inbox reply monitor with categorization and thread context',
         alt: 'StrokeCRM inbox reply tracker'
       }
@@ -176,17 +176,17 @@ export const PROJECTS = [
     githubUrl: 'https://github.com/Prashant1873/Trinet',
     screenshots: [
       {
-        src: '/images/projects/trinet/slide-1.png',
+        src: './images/projects/trinet/slide-1.png',
         caption: 'National industrial cluster map with interactive regional filters',
         alt: 'TRINET national manufacturing cluster map'
       },
       {
-        src: '/images/projects/trinet/slide-2.png',
+        src: './images/projects/trinet/slide-2.png',
         caption: 'Vendor capability dossier with machine specs and quality certifications',
         alt: 'TRINET vendor capability and machinery dossier'
       },
       {
-        src: '/images/projects/trinet/slide-3.png',
+        src: './images/projects/trinet/slide-3.png',
         caption: 'Category-based search matrix for precision tooling and sheet metal fabrication',
         alt: 'TRINET category search matrix'
       }
@@ -226,27 +226,27 @@ export const PROJECTS = [
     githubUrl: 'https://github.com/Prashant1873/Archetype',
     screenshots: [
       {
-        src: '/images/projects/archetype/slide-1.png',
+        src: './images/projects/archetype/slide-1.png',
         caption: 'Assessment welcome interface and psychometric philosophy intro',
         alt: 'Know Your Archetype welcome assessment screen'
       },
       {
-        src: '/images/projects/archetype/slide-2.png',
+        src: './images/projects/archetype/slide-2.png',
         caption: 'Interactive scenario evaluation card with moral dilemma options',
         alt: 'Know Your Archetype dilemma decision card'
       },
       {
-        src: '/images/projects/archetype/slide-3.png',
+        src: './images/projects/archetype/slide-3.png',
         caption: 'Intermediate response calibration and sentiment balance meter',
         alt: 'Know Your Archetype sentiment balance meter'
       },
       {
-        src: '/images/projects/archetype/slide-4.png',
+        src: './images/projects/archetype/slide-4.png',
         caption: 'Archetype coordinate visualization on continuous 2D polar plane',
         alt: 'Know Your Archetype polar coordinate plane'
       },
       {
-        src: '/images/projects/archetype/slide-5.png',
+        src: './images/projects/archetype/slide-5.png',
         caption: 'Detailed psychometric profile report with cognitive blindspots',
         alt: 'Know Your Archetype psychometric report'
       }
@@ -286,17 +286,17 @@ export const PROJECTS = [
     githubUrl: 'https://github.com/Prashant1873/CareerLoom',
     screenshots: [
       {
-        src: '/images/projects/careerloom/slide-1.png',
+        src: './images/projects/careerloom/slide-1.png',
         caption: 'Desktop master-detail career search command center',
         alt: 'CareerLoom master-detail job search interface'
       },
       {
-        src: '/images/projects/careerloom/slide-2.png',
+        src: './images/projects/careerloom/slide-2.png',
         caption: 'Direct ATS application pipeline with company sentiment badges',
         alt: 'CareerLoom ATS pipeline view'
       },
       {
-        src: '/images/projects/careerloom/slide-3.png',
+        src: './images/projects/careerloom/slide-3.png',
         caption: 'Faceted query filtering and regional Indian tech hub locator',
         alt: 'CareerLoom query filters and Indian tech hubs'
       }
@@ -336,17 +336,17 @@ export const PROJECTS = [
     githubUrl: 'https://github.com/Prashant1873/Marcutie',
     screenshots: [
       {
-        src: '/images/projects/marcutie/slide-1.png',
+        src: './images/projects/marcutie/slide-1.png',
         caption: 'Video storyboard studio with kinetic typography and audio timeline',
         alt: 'Marcutie video storyboard studio'
       },
       {
-        src: '/images/projects/marcutie/slide-2.png',
+        src: './images/projects/marcutie/slide-2.png',
         caption: 'Dynamic template customization panel with aspect-ratio controls',
         alt: 'Marcutie template customization panel'
       },
       {
-        src: '/images/projects/marcutie/slide-3.png',
+        src: './images/projects/marcutie/slide-3.png',
         caption: 'Deterministic WebCodecs rendering progress and preview player',
         alt: 'Marcutie rendering preview player'
       }

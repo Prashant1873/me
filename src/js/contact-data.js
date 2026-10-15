@@ -49,6 +49,6 @@ export const RESUME_DATA = {
   label: 'Download Official Resume',
   format: 'PDF (IIT Bombay)',
   fileName: 'Prashant Shukla Resume IIT Bombay.pdf',
-  url: '/Prashant_Shukla_Resume_IIT_Bombay.pdf'
+  url: './Prashant_Shukla_Resume_IIT_Bombay.pdf'
 };
 

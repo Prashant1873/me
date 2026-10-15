@@ -13,7 +13,7 @@ export const ACADEMICS = [
     degree: 'B.Tech in Aerospace Engineering',
     timeline: '2022 - 2026',
     badge: 'UNDERGRADUATE',
-    logo: '/images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp',
+    logo: './images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp',
     metrics: [
       { value: 'AIR 1543', label: 'JEE ADVANCED' },
       { value: '2026', label: 'GRADUATION' }
@@ -28,7 +28,7 @@ export const ACADEMICS = [
     timeline: '2020 - 2022',
     badge: 'GOLD MEDAL',
     score: '98.25%',
-    logo: '/images/logos/cms.png',
+    logo: './images/logos/cms.png',
     metrics: [
       { label: 'ISC SCORE', value: '98.25%' },
       { label: 'HONOR', value: 'Gold Medalist' }
@@ -43,7 +43,7 @@ export const ACADEMICS = [
     timeline: 'Till 2020',
     badge: 'GOLD MEDAL',
     score: '98.00%',
-    logo: '/images/logos/St._Francis_Lucknow.png',
+    logo: './images/logos/St._Francis_Lucknow.png',
     metrics: [
       { label: 'ICSE SCORE', value: '98.00%' },
       { label: 'HONOR', value: 'Gold Medalist' }
@@ -59,7 +59,7 @@ export const GOVERNANCE = [
     organization: 'Abhyuday, IIT Bombay',
     timeline: '2024 - 2025',
     scale: "Asia's Largest Student Social Body",
-    logo: '/images/logos/abhyuday.png',
+    logo: './images/logos/abhyuday.png',
     patronages: 'UNICEF, UNESCO',
     metrics: [
       { value: '₹10M+', label: 'Budget' },
@@ -75,7 +75,7 @@ export const GOVERNANCE = [
     organization: 'Placement Cell, IIT Bombay',
     timeline: '2025 - 2026',
     scale: 'Aerospace Engineering Department',
-    logo: '/images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp',
+    logo: './images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp',
     metrics: [
       { value: '2,000+', label: 'Candidates' },
       { value: '40+', label: 'Recruiters' },
