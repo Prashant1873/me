@@ -140,7 +140,7 @@ src/
   - *Stage & Synthesis:* 3-column grid (`repeat(3, 1fr)`). Stage & Dramatics, Speaking & Comedy, and Competitive Athletics side-by-side with bespoke SVGs.
 - **Strict Gap Uniformity & Doubled Inter-Card Spacing:** Doubled inter-card spacing token to `--edu-card-gap: clamp(8px, 1.35vh, 18px);`. Gap between Card 1→Card 2, Card 2→Card 3, and Card 3→Core Competencies is strictly uniform across all viewports (`14.6px` at 1080p, `9.7px` at 720p).
 - **1cm Upward Shift & Header Proximity:** Shifted `.education__content` upwards by ~38px (~1 centimeter), locking `TopSpace` to `24.0px` (`Card0_Y=210.9px` at 1080p, `189.1px` at 720p), optimizing vertical balance and bottom canvas clearance.
-- **Visual Highlight Numbers & Zero Sentences:** Eliminated narrative bullet paragraphs. Replaced with high-impact metric chips and badges: `AIR 276 JEE ADV`, `₹10M+ Budget`, `50K+ Footfall`, `150+ Team Led`, `₹20M+ Raised`, `2,000+ Candidates`, `40+ Recruiters`, `16-Wk Bootcamp`, `2× Inter IIT Gold`, `3× Inter-Hostel Gold`, `Mixed Hockey Champion`, and `Basketball Champion`.
+- **Visual Highlight Numbers & Zero Sentences:** Eliminated narrative bullet paragraphs. Replaced with high-impact metric chips and badges: `AIR 1543 JEE ADV`, `₹10M+ Budget`, `50K+ Footfall`, `150+ Team Led`, `₹20M+ Raised`, `2,000+ Candidates`, `40+ Recruiters`, `16-Wk Bootcamp`, `2× Inter IIT Gold`, `3× Inter-Hostel Gold`, `Mixed Hockey Champion`, and `Basketball Champion`.
 - **Enlarged Typography & Strict 100vh Containment:** Font scale expanded across institution names, roles, and skills. Bottom clearance maintains `262.4px` at 1080p and `9.9px` at 720p without scrollbars.
 
 ## Contact Section Full-Width Stacked Cards & Vertical Proportions (Post-Milestone 2)

@@ -15,7 +15,7 @@ export const ACADEMICS = [
     badge: 'UNDERGRADUATE',
     logo: '/images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp',
     metrics: [
-      { value: 'AIR 276', label: 'JEE ADV (99.98%ile)' },
+      { value: 'AIR 1543', label: 'JEE ADVANCED' },
       { value: '2026', label: 'GRADUATION' }
     ],
     tags: ['Autonomous Systems & Flight Optimization']

@@ -26,7 +26,7 @@ Designed for strict **100vh / 100dvh desktop viewport containment** across commo
 - **Case Study Modal Inspector:** In-depth multi-slide walkthroughs with high-resolution slides, problem-solution statements, and technical tag pills.
 
 ### 4. 03 // Education & Governance - Triple-Pillar Excellence
-- **Academic Pedigree:** Featured **IIT Bombay B.Tech Aerospace Engineering** (`AIR 276 JEE Advanced · 99.98%ile`) alongside **City Montessori School (CMS)** (`98.25% ISC Gold Medal`) and **St. Francis' College** (`98.00% ICSE Gold Medal`).
+- **Academic Pedigree:** Featured **IIT Bombay B.Tech Aerospace Engineering** (`AIR 1543 JEE Advanced`) alongside **City Montessori School (CMS)** (`98.25% ISC Gold Medal`) and **St. Francis' College** (`98.00% ICSE Gold Medal`).
 - **High-Stakes Leadership:** Campus governance impact spanning **Abhyuday, IIT Bombay** (`₹10M+ Budget`, `50K+ Footfall`, `150+ Team Led`, `₹20M+ Raised`) and **Placement Cell, IIT Bombay** (`2,000+ Candidates`, `40+ Recruiters`, `16-Wk Bootcamp`).
 - **Stage & Synthesis:** Bespoke SVG iconography showcasing creative and athletic accolades: **2× Inter IIT Cultural Gold Medalist** (Writer & Director), Stand-up Comedy & Conclave MC, and Varsity Mixed Hockey Championship.
 - **Core Competencies & Toolkit:** Multi-category technical chip matrix covering Product & Strategy, Data Analytics, and AI & Automation.
