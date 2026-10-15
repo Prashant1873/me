@@ -249,5 +249,74 @@
 - Transitions between sections feel visually anchored without vertical heading jumping.
 
 ---
+
+## Milestone 3: Performance, Contrast, Pedigree & Mobile UX
+
+**Goal:** Eradicate experience photo loading lag and viewer flaws, maximize project card text contrast and readability, balance academic credentials into 3 equal columns within the existing card, expand competencies from resume, remove icons/emojis from gold medalist pill, streamline contact statement, and redesign mobile drawer navigation.
+
+**Success Criteria:**
+- Experience photos load with zero cold-start lag, thumbnails are lightweight, and the image viewer transitions instantly without stale-image caching or freezing.
+- All project card text (eyebrows, titles, descriptions) achieves crisp, effortless readability in both dark and light modes over background screenshots.
+- The Academic Excellence card body is distributed into 3 balanced, equal columns across IIT Bombay, CMS, and St. Francis College.
+- Core Competencies & Toolkit card is expanded with high-value technical and strategic proficiencies from the resume, eliminating awkward empty space.
+- The "2× GOLD MEDALIST" pill in Stage & Synthesis is cleanly stripped of emoji and medal icons.
+- Contact section editorial statement begins with a single impactful sentence on careers and products.
+- Mobile drawer navigation items are redesigned with tactile, styled command-module aesthetics adhering to `frontend-skill`.
+
+---
+
+### Phase 17: Experience Photo Pipeline Optimization & Lightbox State Fix
+
+**Goal:** Compress raw experience images into responsive WebP thumbnails and web-optimized view formats, implement proactive image preloading, and overhaul the lightbox viewer with loading states and zero stale-image flicker.
+
+**Delivers:** IMG-01, IMG-02
+
+**UAT:**
+- Initial site open loads experience thumbnails instantly without megabyte-scale payload lag.
+- Lightbox opens selected photo with smooth transition; changing photos immediately displays loading indicator/skeleton until the target image loads (no stale-image persistence).
+- Lightbox preloads previous and next images in the sequence for instant traversal.
+
+---
+
+### Phase 18: Project Cards Contrast, Scrims & Text Readability
+
+**Goal:** Calibrate project card background scrim opacity, blur gradient, and text colors so category eyebrows (e.g. Fintech, Compounding), headings, and descriptions achieve prominent, effortless contrast without obscuring product identity.
+
+**Delivers:** PROJ-10, PROJ-11
+
+**UAT:**
+- Project category tags / eyebrows are distinct, crisp, and immediately readable against any background screenshot.
+- Headings and descriptions pass WCAG AA contrast against card backgrounds in both dark and light themes.
+- Product screenshots remain discernible with refined backdrop filter and calibrated scrims.
+
+---
+
+### Phase 19: Content & Pedigree Refinement: Competencies, Academic Grid, Extracurricular & Contact Tagline
+
+**Goal:** Redistribute Academic Excellence space into 3 equal columns within the existing card, enrich the Core Competencies card from resume, strip emoji/icons from the gold medalist pill, and refine the Contact closing statement.
+
+**Delivers:** EDU-07, EDU-08, EDU-09, CONT-07
+
+**UAT:**
+- Academic Excellence card presents IIT Bombay, CMS Lucknow, and St. Francis College in 3 equal, balanced columns within the card body.
+- Core Competencies card features expanded strategic, data, and engineering competencies from resume, eliminating dead space.
+- The "2× GOLD MEDALIST" pill renders clean, elegant typography without emoji or medal icon flanking.
+- Contact section statement starts with: single impactful sentence starting from "building systems that accelerate careers and craft products people genuinely love...".
+
+---
+
+### Phase 20: Mobile Navigation Drawer Redesign
+
+**Goal:** Redesign mobile drawer navigation items using `frontend-skill` into tactile, styled command-module cards with distinct active/hover micro-interactions and Apple fluid spring physics.
+
+**Delivers:** NAV-06
+
+**UAT:**
+- Mobile sidebar navigation buttons have tailored, tactile card styling with glassmorphic borders and surfaces.
+- Active and hover states feature smooth spring micro-interactions and clear visual hierarchy.
+- Seamless touch feedback on mobile devices.
+
+---
 *Roadmap defined: 2026-10-12*
 *Milestone 2 added: 2026-10-15*
+*Milestone 3 added: 2026-10-16*

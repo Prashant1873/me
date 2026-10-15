@@ -188,17 +188,29 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 - [x] "Structured Intensity" design language applied throughout (Phases 1-10)
 - [x] GitHub Pages deployment setup (Phase 10)
 
-### Active (Milestone 2: Visual Refinement, 3D Polish & Layout Cohesion - COMPLETE)
+### Validated (Milestone 2: Visual Refinement, 3D Polish & Layout Cohesion)
 
-- [x] **EXP-3D-01**: Substantially increase particle size on Experience 3D canvas (conduit, dust, orbit rings) for distinct visual presence and light-mode distinction.
-- [x] **EXP-3D-02**: Dynamic z-axis occlusion/fade for revolving orbit ring particles when passing behind company logo medallions.
-- [x] **CAL-01**: Borderless month matrix in the experience timeline calendar modal.
-- [x] **CAL-02**: Deep, rich dark theme color palette and high-contrast typography/badges for the calendar modal.
-- [x] **PROJ-08**: Calibrate project card background screenshot blur and overlay opacity for clear product identification.
-- [x] **PROJ-09**: Vertically center all 6 project cards with uniform, harmonious spacing (eliminating excess row gap).
-- [x] **EDU-06**: Condense Abhyuday & Placement Cell governance text down to high-impact bullets with bold key metrics.
-- [x] **CREAT-01**: Replace all emojis in Creative & Athletics with clean, bespoke vector/favicon iconography.
-- [x] **LAYOUT-01**: Align all page headings to the exact same vertical Y-axis position with uniform, generous top padding.
+- [x] **EXP-3D-01**: Substantially increase particle size on Experience 3D canvas (conduit, dust, orbit rings) for distinct visual presence and light-mode distinction. (Phase 11)
+- [x] **EXP-3D-02**: Dynamic z-axis occlusion/fade for revolving orbit ring particles when passing behind company logo medallions. (Phase 11)
+- [x] **CAL-01**: Borderless month matrix in the experience timeline calendar modal. (Phase 12)
+- [x] **CAL-02**: Deep, rich dark theme color palette and high-contrast typography/badges for the calendar modal. (Phase 12)
+- [x] **PROJ-08**: Calibrate project card background screenshot blur and overlay opacity for clear product identification. (Phase 13)
+- [x] **PROJ-09**: Vertically center all 6 project cards with uniform, harmonious spacing. (Phase 13)
+- [x] **EDU-06**: Condense Abhyuday & Placement Cell governance text down to high-impact bullets with bold key metrics. (Phase 14)
+- [x] **CREAT-01**: Replace all emojis in Creative & Athletics with clean, bespoke vector/favicon iconography. (Phase 15)
+- [x] **LAYOUT-01**: Align all page headings to the exact same vertical Y-axis position with uniform top padding. (Phase 16)
+
+### Active (Milestone 3: Performance, Contrast, Pedigree & Mobile UX)
+
+- [ ] **IMG-01**: Optimize experience photos with compressed webp & responsive thumbnail sizing, plus asset preloading.
+- [ ] **IMG-02**: Fix image lightbox stale-image caching flaw with loading skeleton/spinner state, instant placeholder reset, and seamless transition.
+- [ ] **PROJ-10**: Increase project card backdrop scrim opacity, gradient contrast, and targeted blur for crisp text legibility.
+- [ ] **PROJ-11**: Upgrade typography contrast for category eyebrows, headings, and descriptions to ensure WCAG AA readability.
+- [ ] **EDU-07**: Expand Core Competencies & Toolkit items and categories sourced from resume to eliminate excess blank card space.
+- [ ] **EDU-08**: Equally distribute Academic Excellence space within the existing card into 3 balanced columns across IIT Bombay, CMS, and St. Francis College.
+- [ ] **EDU-09**: Remove emoji and medal icons flanking "2× GOLD MEDALIST" in the Stage & Synthesis pill.
+- [ ] **CONT-07**: Update Contact editorial statement to start with single impactful sentence on careers and products.
+- [ ] **NAV-06**: Redesign mobile drawer navigation items using frontend-skill into tactile, styled command-module cards.
 
 ### Out of Scope
 
@@ -213,7 +225,8 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 - **Personal Importance:** This website is deeply personal to Prashant - it represents his identity and will be shown to recruiters, collaborators, and professional contacts. Quality cannot be compromised.
 - **Design Authority:** The "Structured Intensity Personal Design Language" document is the sole source of truth for all visual decisions. Every color, font, spacing, and motion decision must trace back to it.
 - **Milestone 1:** Completed all 10 initial foundational phases (scaffolding through deployment optimization).
-- **Milestone 2 Goal:** Visual polish, 3D occlusion/sizing realism, calendar styling upgrade, project grid clarity, text density streamlining, and cross-section vertical alignment.
+- **Milestone 2:** Completed all 6 visual refinement phases (3D occlusion/sizing, calendar styling, projects layout, text density, vector icons, global Y-alignment).
+- **Milestone 3 Goal:** Eliminate experience photo loading lag and viewer flaws, maximize project card text contrast, balance academic credential spacing in 3 equal columns, expand competencies from resume, clean pill badges, refine editorial statement, and deliver premium tactile mobile drawer navigation.
 
 ## Constraints
 
@@ -235,6 +248,7 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 | Z-axis orbit ring occlusion | Realistic depth perception behind logo medallion disc | Delivered (Phase 11) |
 | Borderless dark calendar palette | Replaces jarring light/pastel blocks with cohesive industrial minimalism | Delivered (Phase 12) |
 | Unified section header Y-anchor | Prevents visual jumping when navigating across sections | Delivered (Phase 16) |
+| 4-Phase Milestone 3 Architecture | Vertical slice separation: images/lightbox (P17), contrast (P18), content/pedigree (P19), mobile nav (P20) | Active |
 
 ---
-*Last updated: 2026-10-15 after Milestone 2 completion*
+*Last updated: 2026-10-16 for Milestone 3 start*

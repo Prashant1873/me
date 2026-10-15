@@ -121,6 +121,27 @@
 ### Global Section Alignment
 - [ ] **LAYOUT-01**: Standardized section header top padding and identical vertical Y-axis anchor positions across all sections
 
+## Milestone 3 Requirements
+
+### Professional Experience Photo Pipeline
+- [ ] **IMG-01**: Optimize experience photos with compressed webp & responsive thumbnail sizing, plus asset preloading to eradicate first-visit network lag
+- [ ] **IMG-02**: Fix image lightbox stale-image caching flaw with loading skeleton/spinner state, instant placeholder reset, and seamless transition
+
+### Projects Section Card Readability & Contrast
+- [ ] **PROJ-10**: Increase project card backdrop scrim opacity, gradient contrast, and targeted blur so text has unambiguous distinction over background screenshots
+- [ ] **PROJ-11**: Upgrade typography contrast for category eyebrows, headings, and descriptions to ensure WCAG AA readability in both dark and light modes
+
+### Education, Pedigree & Extracurricular Refinement
+- [ ] **EDU-07**: Expand Core Competencies & Toolkit items and categories sourced from resume to eliminate excess blank card space
+- [ ] **EDU-08**: Equally distribute Academic Excellence space within the existing card into 3 balanced columns across IIT Bombay, CMS, and St. Francis College
+- [ ] **EDU-09**: Remove emoji and medal icons flanking "2× GOLD MEDALIST" in the Stage & Synthesis pill
+
+### Contact Editorial Statement
+- [ ] **CONT-07**: Update Contact editorial statement to remove "engineering rigor meets behavioral empathy" and begin with single impactful sentence on careers and products
+
+### Mobile Navigation Drawer
+- [ ] **NAV-06**: Redesign mobile drawer navigation items using frontend-skill into tactile, styled command-module cards with distinct active/hover micro-interactions
+
 ## Future Enhancements
 
 - **V2-01**: Blog / writing section for essays and thought pieces
@@ -218,12 +239,23 @@
 | EDU-06 | Phase 14 | Complete |
 | CREAT-01 | Phase 15 | Complete |
 | LAYOUT-01 | Phase 16 | Complete |
+| IMG-01 | Phase 17 | Pending |
+| IMG-02 | Phase 17 | Pending |
+| PROJ-10 | Phase 18 | Pending |
+| PROJ-11 | Phase 18 | Pending |
+| EDU-07 | Phase 19 | Pending |
+| EDU-08 | Phase 19 | Pending |
+| EDU-09 | Phase 19 | Pending |
+| CONT-07 | Phase 19 | Pending |
+| NAV-06 | Phase 20 | Pending |
 
 **Coverage:**
 - Milestone 1 requirements: 57 total (57 completed)
-- Milestone 2 requirements: 9 total (9 mapped to Phases 11-16)
+- Milestone 2 requirements: 9 total (9 completed)
+- Milestone 3 requirements: 9 total (9 mapped to Phases 17-20)
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-10-12*
 *Milestone 2 added: 2026-10-15*
+*Milestone 3 added: 2026-10-16*
