@@ -35,12 +35,12 @@ test.describe('Phase 15: Creative & Athletics Iconography Refactoring', () => {
       await expect(svgIcons.nth(i)).toBeVisible();
     }
 
-    // Gold Medalist badge should contain vector medal SVGs
+    // EDU-09: Gold Medalist badge renders clean unadorned text without flanking medal SVGs
     const goldBadge = creativeCard.locator('.creative-badge--gold');
     await expect(goldBadge).toBeVisible();
+    await expect(goldBadge).toHaveText('2× GOLD MEDALIST');
     const medalSvgs = goldBadge.locator('.medal-svg');
-    await expect(medalSvgs).toHaveCount(2);
-    await expect(medalSvgs.first()).toBeVisible();
+    await expect(medalSvgs).toHaveCount(0);
   });
 
   test('CREAT-01: Multi-theme SVG rendering and contrast in dark and light modes', async ({ page }) => {

@@ -1,6 +1,6 @@
 /**
- * Education Section Component - Phase 7
- * Triple-Pillar Layout: Academics, Governance, Performing Arts & Skills Matrix
+ * Education Section Component - Milestone 3
+ * Quad-Card Layout: Academic Excellence (3 Equal Columns), High-Stakes Leadership, Stage & Synthesis, Competencies
  */
 
 import { ACADEMICS, GOVERNANCE, EXTRACURRICULARS, SKILLS } from './education-data.js';
@@ -11,7 +11,7 @@ export function initEducation() {
 
   if (!pillarsContainer || !skillsContainer) return;
 
-  // 1. Render Pillar 1: Academics & Pedigree
+  // 1. Render Card 1: Academic Excellence (3 Balanced Equal Columns)
   const academicsHtml = `
     <div class="education-card education-card--academics">
       <div class="education-card__header">
@@ -20,58 +20,39 @@ export function initEducation() {
       </div>
       
       <div class="education-card__body">
-        <!-- IIT Bombay Featured Block -->
-        <div class="academic-entry academic-entry--featured">
-          <div class="academic-entry__crest">
-            <img src="${ACADEMICS[0].logo}" alt="${ACADEMICS[0].institution} Crest" loading="lazy" />
-          </div>
-          <div class="academic-entry__info">
-            <div class="academic-entry__inst">${ACADEMICS[0].institution}</div>
-            <div class="academic-entry__degree">${ACADEMICS[0].degree}</div>
-            <div class="academic-entry__meta">
-              <span class="academic-pill">${ACADEMICS[0].timeline}</span>
-              <span class="academic-pill academic-pill--accent">${ACADEMICS[0].badge}</span>
+        ${ACADEMICS.map(item => `
+          <div class="academic-col-card" id="academic-entry-${item.id}">
+            <div class="academic-col-card__header">
+              <div class="academic-col-card__crest">
+                <img src="${item.logo}" alt="${item.institution} Crest" loading="lazy" />
+              </div>
+              <div class="academic-col-card__title-wrap">
+                <h4 class="academic-col-card__inst">${item.shortName}</h4>
+                <div class="academic-col-card__degree">${item.degree}</div>
+                <div class="academic-col-card__subtext">${item.institution}</div>
+              </div>
             </div>
-            <div class="academic-highlights-row">
-              ${ACADEMICS[0].metrics.map(m => `
-                <div class="edu-stat-chip">
-                  <span class="edu-stat-chip__val">${m.value}</span>
-                  <span class="edu-stat-chip__lbl">${m.label}</span>
-                </div>
-              `).join('')}
-              ${ACADEMICS[0].tags.map(t => `
-                <span class="edu-tag-pill">● ${t}</span>
-              `).join('')}
+            
+            <div class="academic-col-card__meta">
+              <span class="edu-badge-pill">${item.timeline}</span>
+              <span class="edu-badge-pill edu-badge-pill--accent">${item.badge}</span>
             </div>
-          </div>
-        </div>
 
-        <!-- Schooling Accolades (CMS & St. Francis) -->
-        <div class="academic-school-row">
-          ${ACADEMICS.slice(1).map(school => `
-            <div class="school-mini-card">
-              <div class="school-mini-card__crest">
-                <img src="${school.logo}" alt="${school.institution} Logo" loading="lazy" />
-              </div>
-              <div class="school-mini-card__info">
-                <div class="school-mini-card__name">${school.shortName}</div>
-                <div class="school-mini-card__grade">${school.degree}</div>
-                <div class="school-mini-card__badge">
-                  <span class="gold-badge">● ${school.metrics[0].value}</span>
-                  <span class="gold-badge gold-badge--warm">${school.metrics[1].value}</span>
+            <div class="academic-col-card__metrics">
+              ${item.metrics.map(m => `
+                <div class="edu-metric-capsule">
+                  <span class="edu-metric-capsule__val">${m.value}</span>
+                  <span class="edu-metric-capsule__lbl">${m.label}</span>
                 </div>
-                <div class="school-mini-card__tags">
-                  ${school.tags.map(t => `<span class="school-tag-pill">${t}</span>`).join('')}
-                </div>
-              </div>
+              `).join('')}
             </div>
-          `).join('')}
-        </div>
+          </div>
+        `).join('')}
       </div>
     </div>
   `;
 
-  // 2. Render Pillar 2: Campus Governance & High-Stakes Leadership
+  // 2. Render Card 2: Campus Governance & High-Stakes Leadership
   const governanceHtml = `
     <div class="education-card education-card--governance">
       <div class="education-card__header">
@@ -91,22 +72,28 @@ export function initEducation() {
                   <h4 class="governance-entry__title">${gov.organization}</h4>
                   <span class="governance-tag">${gov.timeline}</span>
                 </div>
-                <div class="governance-entry__role">${gov.title}</div>
+                <div class="governance-entry__role">${gov.title} · <span class="governance-entry__scale">${gov.scale}</span></div>
               </div>
             </div>
 
-            <!-- Visual Highlight Numbers -->
-            <div class="governance-stats-grid">
-              ${gov.metrics.map(m => `
-                <div class="gov-stat-item">
-                  <span class="gov-stat-item__val">${m.value}</span>
-                  <span class="gov-stat-item__lbl">${m.label}</span>
+            <!-- Scannable Bullet Lines with Highlighted Numbers -->
+            <div class="governance-bullets">
+              ${gov.bullets.map(b => `
+                <div class="governance-bullet-line">
+                  <span class="governance-bullet-marker">●</span>
+                  <p class="governance-bullet-text">${b}</p>
                 </div>
               `).join('')}
             </div>
 
-            <div class="governance-entry__tags">
-              ${gov.tags.map(t => `<span class="gov-tag-pill">● ${t}</span>`).join('')}
+            <!-- Scannable KPI strip -->
+            <div class="governance-kpis">
+              ${gov.metrics.map(m => `
+                <div class="gov-kpi-chip">
+                  <span class="gov-kpi-chip__val">${m.value}</span>
+                  <span class="gov-kpi-chip__lbl">${m.label}</span>
+                </div>
+              `).join('')}
             </div>
           </div>
         `).join('')}
@@ -128,9 +115,7 @@ export function initEducation() {
     }
   };
 
-  const medalSvg = `<svg class="medal-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="14" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>`;
-
-  // 3. Render Pillar 3: Performing Arts, Athletics & Synthesis
+  // 3. Render Card 3: Performing Arts, Athletics & Synthesis
   const creativeHtml = `
     <div class="education-card education-card--creative">
       <div class="education-card__header">
@@ -141,8 +126,9 @@ export function initEducation() {
       <div class="education-card__body">
         ${EXTRACURRICULARS.map(extra => {
           const icon = getCategoryIcon(extra.id);
+          // EDU-09: Unadorned 2x Gold Medalist pill without flanking emojis or medal SVGs
           const badgeHtml = extra.id === 'stage-dramatics'
-            ? `<span class="creative-badge creative-badge--gold">${medalSvg} 2× GOLD MEDALIST ${medalSvg}</span>`
+            ? `<span class="creative-badge creative-badge--gold">2× GOLD MEDALIST</span>`
             : `<span class="creative-badge">${extra.badge}</span>`;
 
           return `
@@ -158,7 +144,7 @@ export function initEducation() {
                 ${badgeHtml}
               </div>
 
-              <!-- Visual Highlight Cards -->
+              <!-- Visual Highlight Key Pairs -->
               <div class="creative-highlights-list">
                 ${extra.highlights.map(h => `
                   <div class="creative-stat-item">
@@ -176,7 +162,7 @@ export function initEducation() {
 
   pillarsContainer.innerHTML = academicsHtml + governanceHtml + creativeHtml;
 
-  // 4. Render Skills Matrix Row
+  // 4. Render Card 4: Expanded Skills & Core Competencies Matrix
   skillsContainer.innerHTML = `
     <div class="skills-matrix">
       <div class="skills-matrix__title">

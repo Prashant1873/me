@@ -1,8 +1,9 @@
 /**
- * Authentic Education & Achievements Data Model - Phase 7
+ * Authentic Education & Achievements Data Model - Milestone 3
  * Pedigree: IIT Bombay B.Tech Aerospace, CMS Gold Medal, St. Francis Gold Medal
  * Leadership: Abhyuday (Head, ₹10M+ Budget), Placement Cell (Coordinator, 2000+ Students)
  * Arts & Sports: Dramatics Inter IIT Culturals 2x Gold, Stand-up Comedy, Basketball & Hockey
+ * Competencies: Comprehensive multi-domain resume proficiencies
  */
 
 export const ACADEMICS = [
@@ -30,8 +31,8 @@ export const ACADEMICS = [
     score: '98.25%',
     logo: './images/logos/cms.png',
     metrics: [
-      { label: 'ISC SCORE', value: '98.25%' },
-      { label: 'HONOR', value: 'Gold Medalist' }
+      { value: '98.25%', label: 'ISC SCORE' },
+      { value: 'Gold Medalist', label: 'HONOR' }
     ],
     tags: ['National Percentile Ranking']
   },
@@ -45,8 +46,8 @@ export const ACADEMICS = [
     score: '98.00%',
     logo: './images/logos/St._Francis_Lucknow.png',
     metrics: [
-      { label: 'ICSE SCORE', value: '98.00%' },
-      { label: 'HONOR', value: 'Gold Medalist' }
+      { value: '98.00%', label: 'ICSE SCORE' },
+      { value: 'Gold Medalist', label: 'HONOR' }
     ],
     tags: ['Batch Topper & Gold Medal']
   }
@@ -60,7 +61,11 @@ export const GOVERNANCE = [
     timeline: '2024 - 2025',
     scale: "Asia's Largest Student Social Body",
     logo: './images/logos/abhyuday.png',
-    patronages: 'UNICEF, UNESCO',
+    patronages: 'UNICEF & UNESCO Patronage',
+    bullets: [
+      'Directed operations with <strong>₹10M+</strong> budget and led <strong>150+</strong> team members',
+      'Orchestrated <strong>50,000+</strong> footfall with <strong>₹20M+</strong> sponsorships raised'
+    ],
     metrics: [
       { value: '₹10M+', label: 'Budget' },
       { value: '50K+', label: 'Footfall' },
@@ -76,6 +81,11 @@ export const GOVERNANCE = [
     timeline: '2025 - 2026',
     scale: 'Aerospace Engineering Department',
     logo: './images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp',
+    patronages: 'Quant & Strategy Placement Support',
+    bullets: [
+      'Facilitated placement for <strong>2,000+</strong> candidates across <strong>40+</strong> top recruiters',
+      'Designed <strong>16-week</strong> intensive quantitative and strategy preparation bootcamp'
+    ],
     metrics: [
       { value: '2,000+', label: 'Candidates' },
       { value: '40+', label: 'Recruiters' },
@@ -124,15 +134,44 @@ export const EXTRACURRICULARS = [
 
 export const SKILLS = [
   {
-    category: 'Strategy & Product',
-    items: ['Storyboarding', 'GTM Playbooks', 'User Research', 'Demand Modeling', 'UI/UX Design Systems']
+    category: 'Strategy & Product Execution',
+    items: [
+      'Storyboarding',
+      'GTM Playbooks',
+      'MVP Funnel Building',
+      'User Research',
+      'Demand Modeling',
+      'UI/UX Design Systems',
+      'Product Roadmapping',
+      'Unit Economics'
+    ]
   },
   {
-    category: 'Data & Analytics',
-    items: ['Python', 'Power BI', 'Alteryx', 'Tableau', 'Financial Modeling', 'Advanced Excel']
+    category: 'Data Systems & Analytics',
+    items: [
+      'Python',
+      'Power BI',
+      'Alteryx',
+      'Tableau',
+      'SQL',
+      'Financial Modeling',
+      'Advanced Excel',
+      'Monte Carlo Simulations',
+      'DAX Architecture'
+    ]
   },
   {
-    category: 'Automation & AI',
-    items: ['AI Agents', 'Production Bots', 'Selenium', 'Webhooks', 'API Architecture', 'Three.js']
+    category: 'Engineering & AI Automation',
+    items: [
+      'AI Agents',
+      'Production Bots',
+      'Webhooks',
+      'API Architecture',
+      'Selenium',
+      'Three.js',
+      'GSAP Animations',
+      'Fastify',
+      'Vector Search'
+    ]
   }
 ];

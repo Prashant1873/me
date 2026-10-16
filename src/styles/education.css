@@ -162,31 +162,46 @@
 }
 
 /* --------------------------------------------------------------------------
-   2. Pillar 1: Academics & Schooling (Full-Width Row)
+   2. Pillar 1: Academic Excellence (3 Balanced Equal Columns)
    -------------------------------------------------------------------------- */
 .education-card--academics .education-card__body {
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  gap: clamp(10px, 1.4vw, 18px);
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(8px, 1.1vw, 14px);
   align-items: stretch;
 }
 
-.academic-entry--featured {
+.academic-col-card {
   display: flex;
-  align-items: center;
-  gap: clamp(6px, 0.9vw, 12px);
-  padding: clamp(3px, 0.5vh, 8px) clamp(6px, 0.8vw, 12px);
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(4px, 0.6vh, 8px);
+  padding: clamp(5px, 0.7vh, 10px) clamp(8px, 1vw, 12px);
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   box-sizing: border-box;
+  transition: border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
 }
 
-.academic-entry__crest {
-  width: clamp(30px, 3.6vh, 44px);
-  height: clamp(30px, 3.6vh, 44px);
+.academic-col-card:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.academic-col-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.academic-col-card__crest {
+  width: clamp(28px, 3.4vh, 36px);
+  height: clamp(28px, 3.4vh, 36px);
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 2px;
   display: flex;
   align-items: center;
@@ -194,203 +209,108 @@
   flex-shrink: 0;
 }
 
-.academic-entry__crest img {
+.academic-col-card__crest img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.academic-entry__info {
+.academic-col-card__title-wrap {
   flex: 1;
   min-width: 0;
 }
 
-.academic-entry__top-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 6px;
-}
-
-.academic-entry__inst {
+.academic-col-card__inst {
   font-family: var(--font-primary);
-  font-size: clamp(0.88rem, 1.3vh, 1.1rem);
+  font-size: clamp(0.85rem, 1.22vh, 1.02rem);
   font-weight: var(--weight-bold);
   color: var(--text-primary);
   line-height: 1.18;
+  margin: 0;
 }
 
-.academic-entry__degree {
+.academic-col-card__degree {
   font-family: var(--font-primary);
-  font-size: clamp(0.78rem, 1.1vh, 0.92rem);
-  color: var(--accent-primary);
-  font-weight: var(--weight-semibold);
+  font-size: clamp(0.74rem, 1.05vh, 0.88rem);
+  color: var(--accent-primary-bright, #38bdf8);
+  font-weight: var(--weight-medium);
   margin-top: 1px;
+  line-height: 1.2;
 }
 
-.academic-entry__meta {
+.academic-col-card__subtext {
+  font-size: 0.1px;
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.academic-col-card__meta {
   display: flex;
   gap: 5px;
   margin-top: 2px;
+  flex-wrap: wrap;
 }
 
-.academic-pill {
+.edu-badge-pill {
   font-family: var(--font-technical);
-  font-size: clamp(8.5px, 1vh, 10px);
-  padding: 1px 6px;
+  font-size: clamp(8.5px, 1vh, 9.5px);
+  padding: 2px 6px;
   border-radius: 3px;
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-subtle);
-  color: var(--text-muted);
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  line-height: 1.2;
 }
 
-.academic-pill--accent {
-  background: rgba(41, 98, 255, 0.12);
-  border-color: rgba(41, 98, 255, 0.3);
-  color: var(--accent-primary);
+.edu-badge-pill--accent {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.28);
+  color: var(--accent-primary-bright, #38bdf8);
   font-weight: var(--weight-semibold);
 }
 
-.academic-highlights-row {
+.academic-col-card__metrics {
   display: flex;
   align-items: center;
   gap: 5px;
+  margin-top: auto;
+  padding-top: 3px;
   flex-wrap: wrap;
-  margin-top: clamp(2px, 0.4vh, 6px);
 }
 
-.edu-stat-chip {
+.edu-metric-capsule {
   display: inline-flex;
   align-items: baseline;
   gap: 4px;
-  background: rgba(41, 98, 255, 0.12);
-  border: 1px solid rgba(41, 98, 255, 0.32);
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.22);
   border-radius: 4px;
-  padding: 1px 7px;
+  padding: 2px 7px;
 }
 
-.edu-stat-chip__val {
+.edu-metric-capsule__val {
   font-family: var(--font-technical);
-  font-size: clamp(11px, 1.25vh, 13px);
+  font-size: clamp(10.5px, 1.25vh, 12.5px);
   font-weight: var(--weight-bold);
-  color: var(--accent-primary);
+  color: var(--accent-primary-bright, #38bdf8);
 }
 
-.edu-stat-chip__lbl {
+.edu-metric-capsule__lbl {
   font-family: var(--font-technical);
-  font-size: clamp(8.5px, 0.95vh, 9.5px);
+  font-size: clamp(8px, 0.92vh, 9px);
   color: var(--text-secondary);
   text-transform: uppercase;
 }
 
-.edu-tag-pill {
-  font-family: var(--font-technical);
-  font-size: clamp(9px, 1.05vh, 10.5px);
-  color: var(--text-muted);
-  background: var(--bg-surface-elevated);
-  border: 1px solid var(--border-subtle);
-  padding: 1px 6px;
-  border-radius: 3px;
-}
-
-.academic-school-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(6px, 0.8vw, 10px);
-  align-items: stretch;
-}
-
-.school-mini-card {
-  display: flex;
-  align-items: center;
-  gap: clamp(6px, 0.8vw, 9px);
-  padding: clamp(3px, 0.5vh, 7px) clamp(6px, 0.8vw, 10px);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  box-sizing: border-box;
-}
-
-.school-mini-card__crest {
-  width: clamp(26px, 3.2vh, 36px);
-  height: clamp(26px, 3.2vh, 36px);
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.school-mini-card__crest img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.school-mini-card__info {
-  flex: 1;
-  min-width: 0;
-}
-
-.school-mini-card__name {
-  font-family: var(--font-primary);
-  font-size: clamp(0.82rem, 1.18vh, 0.96rem);
-  font-weight: var(--weight-semibold);
-  color: var(--text-primary);
-  line-height: 1.18;
-}
-
-.school-mini-card__grade {
-  font-family: var(--font-technical);
-  font-size: clamp(9px, 1.05vh, 10.5px);
-  color: var(--text-muted);
-}
-
-.school-mini-card__badge {
-  display: flex;
-  gap: 3px;
-  margin-top: 2px;
-}
-
-.school-mini-card__tags {
-  display: flex;
-  gap: 3px;
-  margin-top: 1px;
-}
-
-.school-tag-pill {
-  font-family: var(--font-technical);
-  font-size: clamp(8px, 0.9vh, 9px);
-  color: var(--text-secondary);
-}
-
-.gold-badge {
-  font-family: var(--font-technical);
-  font-size: clamp(9px, 1.1vh, 10.5px);
-  padding: 1px 6px;
-  border-radius: 3px;
-  background: rgba(41, 98, 255, 0.12);
-  border: 1px solid rgba(41, 98, 255, 0.3);
-  color: var(--accent-primary);
-  font-weight: var(--weight-bold);
-  white-space: nowrap;
-}
-
-.gold-badge--warm {
-  background: rgba(232, 101, 90, 0.12);
-  border-color: rgba(232, 101, 90, 0.3);
-  color: var(--accent-warm);
-}
-
 /* --------------------------------------------------------------------------
-   3. Pillar 2: Governance & High-Stakes Leadership (Full-Width Row)
+   3. Pillar 2: High-Stakes Leadership (Campus Governance)
    -------------------------------------------------------------------------- */
 .education-card--governance .education-card__body {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(10px, 1.4vw, 18px);
+  gap: clamp(8px, 1.1vw, 14px);
   align-items: stretch;
 }
 
@@ -398,8 +318,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: clamp(2px, 0.4vh, 6px);
-  padding: clamp(3px, 0.5vh, 8px) clamp(8px, 1vw, 14px);
+  gap: clamp(3px, 0.45vh, 6px);
+  padding: clamp(5px, 0.7vh, 10px) clamp(8px, 1vw, 14px);
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
@@ -409,14 +329,15 @@
 .governance-entry__main {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
 }
 
 .governance-entry__crest {
-  width: clamp(24px, 3vh, 32px);
-  height: clamp(24px, 3vh, 32px);
+  width: clamp(26px, 3.2vh, 32px);
+  height: clamp(26px, 3.2vh, 32px);
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 2px;
   display: flex;
   align-items: center;
@@ -443,81 +364,110 @@
 
 .governance-entry__title {
   font-family: var(--font-primary);
-  font-size: clamp(0.88rem, 1.28vh, 1.08rem);
+  font-size: clamp(0.86rem, 1.25vh, 1.04rem);
   font-weight: var(--weight-bold);
   color: var(--text-primary);
   margin: 0;
+  line-height: 1.2;
+}
+
+.governance-tag {
+  font-family: var(--font-technical);
+  font-size: clamp(8.5px, 1vh, 10px);
+  color: var(--text-muted);
 }
 
 .governance-entry__role {
   font-family: var(--font-primary);
-  font-size: clamp(0.78rem, 1.1vh, 0.92rem);
+  font-size: clamp(0.74rem, 1.05vh, 0.86rem);
   color: var(--accent-primary);
   font-weight: var(--weight-medium);
   margin-top: 1px;
 }
 
-.governance-tag {
-  font-family: var(--font-technical);
-  font-size: clamp(9px, 1.05vh, 10.5px);
+.governance-entry__scale {
   color: var(--text-muted);
+  font-size: 0.92em;
+  font-weight: var(--weight-regular);
 }
 
-.governance-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(4px, 0.6vw, 8px);
+.governance-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
   margin-top: 1px;
 }
 
-.gov-stat-item {
+.governance-bullet-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.governance-bullet-marker {
+  color: var(--accent-primary);
+  font-size: 8px;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+
+.governance-bullet-text {
+  font-family: var(--font-primary);
+  font-size: clamp(0.74rem, 1.05vh, 0.85rem);
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.governance-bullets strong {
+  color: var(--accent-primary-bright, #38bdf8);
+  font-weight: 700;
+  font-family: var(--font-technical);
+}
+
+[data-theme="light"] .governance-bullets strong {
+  color: #0284c7;
+}
+
+.governance-kpis {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  flex-wrap: wrap;
+}
+
+.gov-kpi-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-subtle);
   border-radius: 4px;
-  padding: clamp(2px, 0.35vh, 5px) 4px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  padding: 1px 6px;
 }
 
-.gov-stat-item__val {
+.gov-kpi-chip__val {
   font-family: var(--font-technical);
-  font-size: clamp(11.5px, 1.45vh, 14.5px);
+  font-size: clamp(10.5px, 1.2vh, 12px);
   font-weight: var(--weight-bold);
   color: var(--accent-primary);
-  line-height: 1.1;
 }
 
-.gov-stat-item__lbl {
+.gov-kpi-chip__lbl {
   font-family: var(--font-technical);
-  font-size: clamp(8px, 0.95vh, 9.5px);
+  font-size: clamp(8px, 0.9vh, 9px);
   color: var(--text-muted);
   text-transform: uppercase;
-  margin-top: 1px;
-}
-
-.governance-entry__tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 1px;
-}
-
-.gov-tag-pill {
-  font-family: var(--font-technical);
-  font-size: clamp(8.5px, 1vh, 10px);
-  color: var(--accent-warm);
 }
 
 /* --------------------------------------------------------------------------
-   4. Pillar 3: Performing Arts & Athletics (Full-Width Row)
+   4. Pillar 3: Performing Arts, Athletics & Synthesis
    -------------------------------------------------------------------------- */
 .education-card--creative .education-card__body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(10px, 1.4vw, 18px);
+  gap: clamp(8px, 1.1vw, 14px);
   align-items: stretch;
 }
 
@@ -525,8 +475,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: clamp(2px, 0.4vh, 6px);
-  padding: clamp(3px, 0.5vh, 8px) clamp(6px, 0.9vw, 12px);
+  gap: clamp(3px, 0.45vh, 6px);
+  padding: clamp(5px, 0.7vh, 10px) clamp(8px, 1vw, 12px);
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
@@ -549,9 +499,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(21px, 2.6vh, 26px);
-  height: clamp(21px, 2.6vh, 26px);
-  border-radius: 4px;
+  width: clamp(22px, 2.7vh, 28px);
+  height: clamp(22px, 2.7vh, 28px);
+  border-radius: 5px;
   background: rgba(232, 101, 90, 0.1);
   border: 1px solid rgba(232, 101, 90, 0.22);
   flex-shrink: 0;
@@ -564,7 +514,7 @@
 
 .creative-entry__category {
   font-family: var(--font-primary);
-  font-size: clamp(0.86rem, 1.25vh, 1.02rem);
+  font-size: clamp(0.85rem, 1.22vh, 1.02rem);
   font-weight: var(--weight-bold);
   color: var(--text-primary);
   margin: 0;
@@ -572,7 +522,7 @@
 
 .creative-entry__role {
   font-family: var(--font-primary);
-  font-size: clamp(0.76rem, 1.05vh, 0.88rem);
+  font-size: clamp(0.74rem, 1.02vh, 0.86rem);
   color: var(--accent-warm);
   font-weight: var(--weight-medium);
   margin-top: 1px;
@@ -581,7 +531,7 @@
 .creative-badge {
   font-family: var(--font-technical);
   font-size: clamp(8.5px, 1vh, 10px);
-  padding: 1px 6px;
+  padding: 2px 6px;
   border-radius: 3px;
   background: rgba(232, 101, 90, 0.12);
   border: 1px solid rgba(232, 101, 90, 0.3);
@@ -591,22 +541,26 @@
 }
 
 .creative-badge--gold {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(217, 119, 6, 0.32) 100%);
-  border: 1px solid rgba(245, 158, 11, 0.55);
+  background: rgba(245, 158, 11, 0.16);
+  border: 1px solid rgba(245, 158, 11, 0.45);
   color: #f59e0b;
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.04em;
+  display: inline-block;
+  white-space: nowrap;
+  padding: 2px 7px;
+  border-radius: 3px;
 }
 
 [data-theme="light"] .creative-badge--gold {
   color: #b45309;
   border-color: rgba(180, 83, 9, 0.4);
+  background: rgba(245, 158, 11, 0.12);
 }
 
 .creative-svg-icon {
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   stroke: var(--accent-warm);
   stroke-width: 2;
   fill: none;
@@ -615,17 +569,6 @@
 
 [data-theme="light"] .creative-svg-icon {
   stroke: #e11d48;
-}
-
-.medal-svg {
-  width: 10px;
-  height: 10px;
-  stroke: currentColor;
-  stroke-width: 2.2;
-  fill: none;
-  display: inline-block;
-  vertical-align: middle;
-  flex-shrink: 0;
 }
 
 .creative-highlights-list {
@@ -647,43 +590,30 @@
 
 .creative-stat-item__val {
   font-family: var(--font-technical);
-  font-size: clamp(10.5px, 1.25vh, 12.5px);
+  font-size: clamp(10.5px, 1.22vh, 12px);
   font-weight: var(--weight-bold);
   color: var(--accent-warm);
 }
 
 .creative-stat-item__lbl {
   font-family: var(--font-primary);
-  font-size: clamp(9.5px, 1.1vh, 11.5px);
+  font-size: clamp(9px, 1.05vh, 11px);
   color: var(--text-secondary);
 }
 
-.creative-entry__tags {
-  display: flex;
-  gap: 5px;
-  flex-wrap: wrap;
-  margin-top: 1px;
-}
-
-.creative-tag-pill {
-  font-family: var(--font-technical);
-  font-size: clamp(8.5px, 1vh, 10px);
-  color: var(--text-muted);
-}
-
 /* --------------------------------------------------------------------------
-   5. Core Competencies & Skills Marquee Bar
+   5. Core Competencies & Toolkits
    -------------------------------------------------------------------------- */
 .skills-matrix {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: clamp(3px, 0.5vh, 6px) clamp(8px, 1.1vw, 14px);
+  padding: clamp(4px, 0.6vh, 8px) clamp(10px, 1.2vw, 16px);
   display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  flex-shrink: 0;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .skills-matrix__title {
@@ -691,28 +621,25 @@
 }
 
 .skills-matrix__groups {
-  display: flex;
-  align-items: center;
-  row-gap: 2px;
-  column-gap: 10px;
-  flex-wrap: wrap;
-  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(6px, 0.8vw, 14px);
+  width: 100%;
 }
 
 .skills-group {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 4px;
-  flex-wrap: wrap;
 }
 
 .skills-group__label {
   font-family: var(--font-technical);
-  font-size: clamp(9.5px, 1.1vh, 11px);
-  color: var(--text-muted);
+  font-size: clamp(9px, 1.05vh, 10.5px);
+  color: var(--accent-primary-bright, #38bdf8);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: var(--weight-medium);
+  letter-spacing: 0.06em;
+  font-weight: var(--weight-bold);
 }
 
 .skills-group__items {
@@ -724,13 +651,14 @@
 
 .skill-pill {
   font-family: var(--font-technical);
-  font-size: clamp(9.5px, 1.15vh, 11px);
-  padding: 2px 7px;
-  border-radius: var(--radius-xs);
+  font-size: clamp(8.5px, 1.02vh, 10px);
+  padding: 2px 6px;
+  border-radius: 3px;
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   color: var(--text-secondary);
   transition: all var(--duration-fast) var(--ease-out);
+  white-space: nowrap;
 }
 
 .skill-pill:hover {
@@ -748,12 +676,30 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
-[data-theme="light"] .academic-entry--featured,
-[data-theme="light"] .school-mini-card,
+[data-theme="light"] .academic-col-card,
 [data-theme="light"] .governance-entry,
 [data-theme="light"] .creative-entry {
   background: #F8FAFC;
   border-color: #E2E8F0;
+}
+
+[data-theme="light"] .academic-col-card__degree {
+  color: #0284c7;
+}
+
+[data-theme="light"] .edu-metric-capsule {
+  background: rgba(2, 132, 199, 0.08);
+  border-color: rgba(2, 132, 199, 0.25);
+}
+
+[data-theme="light"] .edu-metric-capsule__val {
+  color: #0369a1;
+}
+
+[data-theme="light"] .edu-badge-pill--accent {
+  background: rgba(2, 132, 199, 0.1);
+  border-color: rgba(2, 132, 199, 0.25);
+  color: #0369a1;
 }
 
 [data-theme="light"] .skills-matrix {
@@ -761,17 +707,18 @@
   border-color: #E2E8F0;
 }
 
+[data-theme="light"] .skills-group__label {
+  color: #0369a1;
+}
+
 [data-theme="light"] .skill-pill {
   background: #F8FAFC;
   border-color: #CBD5E1;
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 @media (max-width: 900px) {
   .education-card--academics .education-card__body {
-    grid-template-columns: 1fr;
-  }
-  .academic-school-row {
     grid-template-columns: 1fr;
   }
   .education-card--governance .education-card__body {
@@ -780,4 +727,8 @@
   .education-card--creative .education-card__body {
     grid-template-columns: 1fr;
   }
+  .skills-matrix__groups {
+    grid-template-columns: 1fr;
+  }
 }
+

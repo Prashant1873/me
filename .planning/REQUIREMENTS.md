@@ -132,10 +132,10 @@
 - [x] **PROJ-11**: Upgrade typography contrast for category eyebrows, headings, and descriptions to ensure WCAG AA readability in both dark and light modes
 
 ### Education Page UI/UX Redesign & Formatting
-- [ ] **EDU-07**: Expand Core Competencies & Toolkit items and categories sourced from resume to eliminate excess blank card space
-- [ ] **EDU-08**: Equally distribute Academic Excellence space within the existing card into 3 balanced columns across IIT Bombay, CMS, and St. Francis College
-- [ ] **EDU-09**: Remove emoji and medal icons flanking "2× GOLD MEDALIST" in the Stage & Synthesis pill
-- [ ] **EDU-10**: Overhaul Education page UI/UX and card interior formatting: reduce visual traffic, declutter stat representations, eliminate noisy pill overload, and refine curvatures and iconography
+- [x] **EDU-07**: Expand Core Competencies & Toolkit items and categories sourced from resume to eliminate excess blank card space
+- [x] **EDU-08**: Equally distribute Academic Excellence space within the existing card into 3 balanced columns across IIT Bombay, CMS, and St. Francis College
+- [x] **EDU-09**: Remove emoji and medal icons flanking "2× GOLD MEDALIST" in the Stage & Synthesis pill
+- [x] **EDU-10**: Overhaul Education page UI/UX and card interior formatting: reduce visual traffic, declutter stat representations, eliminate noisy pill overload, and refine curvatures and iconography
 
 ### Contact Editorial Statement
 - [ ] **CONT-07**: Update Contact editorial statement to remove "engineering rigor meets behavioral empathy" and begin with single impactful sentence on careers and products
