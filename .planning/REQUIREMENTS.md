@@ -128,8 +128,8 @@
 - [x] **IMG-02**: Fix image lightbox stale-image caching flaw with loading skeleton/spinner state, instant placeholder reset, and seamless transition
 
 ### Projects Section Card Readability & Contrast
-- [ ] **PROJ-10**: Increase project card backdrop scrim opacity, gradient contrast, and targeted blur so text has unambiguous distinction over background screenshots
-- [ ] **PROJ-11**: Upgrade typography contrast for category eyebrows, headings, and descriptions to ensure WCAG AA readability in both dark and light modes
+- [x] **PROJ-10**: Increase project card backdrop scrim opacity, gradient contrast, and targeted blur so text has unambiguous distinction over background screenshots
+- [x] **PROJ-11**: Upgrade typography contrast for category eyebrows, headings, and descriptions to ensure WCAG AA readability in both dark and light modes
 
 ### Education Page UI/UX Redesign & Formatting
 - [ ] **EDU-07**: Expand Core Competencies & Toolkit items and categories sourced from resume to eliminate excess blank card space
