@@ -551,42 +551,103 @@ html[data-theme="light"] .nav-action-btn--mail:hover {
 .mobile-drawer__nav {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 10px;
   margin-bottom: auto;
 }
 
 .mobile-drawer__link {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: var(--space-4);
-  min-height: 52px;
-  padding: var(--space-3) var(--space-4);
+  justify-content: space-between;
+  min-height: 56px;
+  padding: 12px 16px;
   border-radius: var(--radius-md);
   text-decoration: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   color: var(--text-secondary);
-  transition: all var(--duration-fast) var(--ease-default);
-  border-left: 2px solid transparent;
+  box-sizing: border-box;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease,
+              color 0.2s ease;
+  outline: none;
 }
 
-.mobile-drawer__link:hover,
+.mobile-drawer__link:hover {
+  transform: translateY(-2px) scale(1.01);
+  color: var(--text-primary);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(56, 189, 248, 0.02) 100%);
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 12px rgba(56, 189, 248, 0.2);
+}
+
+.mobile-drawer__link:hover .mobile-drawer__chevron {
+  color: var(--accent-primary-bright, #38bdf8);
+  transform: translateX(3px);
+}
+
 .mobile-drawer__link.is-active {
   color: var(--text-primary);
-  background-color: var(--bg-card);
-  border-left-color: var(--accent-primary);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.16) 0%, rgba(56, 189, 248, 0.05) 100%);
+  border-color: var(--accent-primary-bright, #38bdf8);
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.35), 0 8px 22px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.mobile-drawer__link.is-active .mobile-drawer__chevron {
+  color: var(--accent-primary-bright, #38bdf8);
+  transform: translateX(2px);
+}
+
+.mobile-drawer__link:active {
+  transform: scale(0.97);
+  transition-duration: 0.08s;
+}
+
+.mobile-drawer__item-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .mobile-drawer__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
   font-size: 11px;
-  color: var(--accent-primary);
+  font-weight: 700;
+  color: var(--accent-primary-bright, #38bdf8);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
   letter-spacing: var(--tracking-mono);
+  flex-shrink: 0;
 }
 
 .mobile-drawer__label {
   font-family: var(--font-primary);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: var(--weight-bold);
-  letter-spacing: var(--tracking-tight);
+  letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+.mobile-drawer__chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+}
+
+.mobile-drawer__chevron svg {
+  display: block;
 }
 
 .mobile-drawer__footer {
@@ -603,9 +664,9 @@ html[data-theme="light"] .nav-action-btn--mail:hover {
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  min-height: 48px;
+  min-height: 50px;
   padding: var(--space-3) var(--space-4);
-  background-color: var(--accent-primary);
+  background: linear-gradient(135deg, var(--accent-primary) 0%, #1d4ed8 100%);
   color: #FFFFFF !important;
   font-family: var(--font-primary);
   font-size: var(--text-ui);
@@ -614,14 +675,20 @@ html[data-theme="light"] .nav-action-btn--mail:hover {
   text-transform: uppercase;
   text-decoration: none;
   border-radius: var(--radius-sm);
-  box-shadow: 0 4px 14px rgba(41, 98, 255, 0.3);
-  transition: transform var(--duration-fast) var(--ease-default),
-              background-color var(--duration-fast) var(--ease-default);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 14px rgba(41, 98, 255, 0.35);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              box-shadow 0.2s ease;
 }
 
 .mobile-drawer__resume-btn:hover {
   transform: translateY(-2px);
-  background-color: #1A50E5;
+  box-shadow: 0 8px 20px rgba(41, 98, 255, 0.5);
+}
+
+.mobile-drawer__resume-btn:active {
+  transform: scale(0.97);
 }
 
 .mobile-drawer__resume-btn svg {
@@ -647,11 +714,52 @@ html[data-theme="light"] .nav-action-btn--mail:hover {
   color: var(--text-secondary);
   text-decoration: none;
   border-radius: var(--radius-sm);
-  transition: color var(--duration-fast) var(--ease-default);
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--duration-fast) var(--ease-default);
 }
 
 .mobile-drawer__socials a:hover {
   color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+/* Light Theme Overrides for Drawer */
+[data-theme="light"] .mobile-drawer__link {
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  color: #334155;
+}
+
+[data-theme="light"] .mobile-drawer__num {
+  color: #0369a1;
+  background: rgba(3, 105, 161, 0.08);
+  border-color: rgba(3, 105, 161, 0.22);
+}
+
+[data-theme="light"] .mobile-drawer__label {
+  color: #0F172A;
+}
+
+[data-theme="light"] .mobile-drawer__link:hover,
+[data-theme="light"] .mobile-drawer__link.is-active {
+  background: #F0F9FF;
+  border-color: #0284c7;
+  color: #0F172A;
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.14);
+}
+
+[data-theme="light"] .mobile-drawer__link:hover .mobile-drawer__chevron,
+[data-theme="light"] .mobile-drawer__link.is-active .mobile-drawer__chevron {
+  color: #0284c7;
+}
+
+[data-theme="light"] .mobile-drawer__socials a {
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+  color: #334155;
 }
 
 .nav-spacer {

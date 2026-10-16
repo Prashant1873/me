@@ -131,7 +131,7 @@
   cursor: pointer;
   aspect-ratio: 16 / 9;
   height: auto;
-  min-height: 180px;
+  max-width: 100%;
   box-sizing: border-box;
   transition: transform var(--duration-fast) var(--ease-out),
               border-color var(--duration-fast) var(--ease-out),
