@@ -10,22 +10,22 @@ export const PROJECTS = [
     category: 'Fintech & Compounding',
     statusTag: '● 98/98 TESTS',
     oneLiner: 'Algorithmic mutual fund screener & compounding engine built with Next.js 16 and a 98-test Vitest harness.',
-    narrative: 'Built to invest my first salary without biased ratings or high active fees. Gives retail investors clean, math-backed compounding simulations.',
+    narrative: 'Engineered to invest my first salary without biased advisor ratings or high active fees. Gives retail investors clean, mathematically rigorous compounding simulations and instant portfolio clarity.',
     innovations: [
       {
         title: 'Dual-Engine Compounding Simulator',
         metric: '100% Client-Side',
-        desc: 'Real-time Monte Carlo simulations and NAV progression calculators rendering instant compound return visual projections.'
+        desc: 'Real-time Monte Carlo progression engine running thousands of compounding trajectory calculations entirely client-side. Dynamically computes multi-decade CAGR distributions, rolling standard deviations, and tax-drag impact with sub-millisecond reaction times.'
       },
       {
-        title: 'Vitest Rigorous Test Harness',
-        metric: '98/98 Tests',
-        desc: 'Exhaustive unit and mathematical boundary test suite verifying compounding formulas, expense ratios, and alpha/beta indices.'
+        title: 'Vitest Mathematical Test Harness',
+        metric: '98/98 Tests Passed',
+        desc: 'Exhaustive unit, property-based, and mathematical boundary verification suite. Validates expense ratio decay curves, benchmark alpha/beta computations, and inflation-adjusted terminal value algorithms against commercial fund matrices.'
       },
       {
-        title: 'Next.js 16 & React 19 Architecture',
-        metric: 'Sub-50ms Render',
-        desc: 'Zero-latency filtering over thousands of fund schemes with Tailwind 4 styling and dark-mode aesthetic.'
+        title: 'Next.js 16 & React 19 Core',
+        metric: 'Sub-50ms Filtering',
+        desc: 'Zero-overhead component architecture leveraging React 19 compiler primitives and concurrent state transitions. Enables instant parametric multi-filter traversal across thousands of schemes without re-render cascades or layout shifts.'
       }
     ],
     techStack: [
@@ -81,22 +81,22 @@ export const PROJECTS = [
     category: 'Cold Outreach',
     statusTag: '● SELF-HOSTED',
     oneLiner: 'Self-hosted cold-email campaign command center and deliverability workspace powered by SQLite and Node.',
-    narrative: 'Tired of expensive SaaS subscription seats and opaque warm-up tools. Engineered a self-hosted cold email engine with full control over deliverability.',
+    narrative: 'Frustrated by opaque email tools and punitive per-seat SaaS taxes. Built a sovereign, self-hosted cold outreach engine with complete control over inbox deliverability and sending cadence.',
     innovations: [
       {
         title: 'Sovereign Deliverability Engine',
         metric: '0 SaaS Fees',
-        desc: 'Direct SMTP integration with multi-inbox rotation, custom domain DKIM/SPF alignment, and automated bounce handling.'
+        desc: 'Direct SMTP socket orchestrator with multi-inbox round-robin rotation and dynamic throttle pacing. Automates custom domain DKIM/SPF/DMARC alignment validation and detects early ISP reputation throttling before deliverability drops.'
       },
       {
-        title: 'Lightweight SQLite Architecture',
+        title: 'Zero-Latency SQLite Subsystem',
         metric: '<10MB RAM Idle',
-        desc: 'Ultra-fast local database operations via SQLite with Express 5 backend delivering sub-5ms sequence queries.'
+        desc: 'Embedded ACID-compliant SQLite architecture with Express 5 connection pooling delivering sub-5ms sequence queries. Eliminates memory-heavy Docker microservices and costly cloud database bills for solo operators.'
       },
       {
-        title: 'Visual Campaign Builder',
+        title: 'Multi-Stage Campaign State Machine',
         metric: '6-Stage Flow',
-        desc: 'Step-by-step pipeline tracking cold email open rates, click-through metrics, and automatic follow-up dispatches.'
+        desc: 'Visual stage pipeline tracking lead states from warm-up to replied with automated time-delay follow-ups. Features real-time webhook ingestion for open and click tracking with strict deduplication guards.'
       }
     ],
     techStack: [
@@ -147,22 +147,22 @@ export const PROJECTS = [
     category: 'Manufacturing Intel',
     statusTag: '● 500+ MFRS',
     oneLiner: 'India-wide manufacturing cluster intelligence and vendor discovery platform powered by Gemini AI and MapLibre GL.',
-    narrative: 'Saw how difficult it was to source Indian hardware suppliers directly. Built an interactive map and AI profiler to discover 500+ verified factories.',
+    narrative: 'Bridging the discovery void in Indian hardware manufacturing. Built an interactive geospatial engine and multimodal AI parser to map 500+ verified production facilities direct to founders.',
     innovations: [
       {
         title: 'Geospatial Industrial Cluster Map',
-        metric: '500+ Plants',
-        desc: 'Hardware-accelerated MapLibre GL vector map plotting manufacturing clusters across Gujarat, Maharashtra, and Tamil Nadu.'
+        metric: '500+ Plants Mapped',
+        desc: 'Hardware-accelerated MapLibre GL vector canvas plotting verified precision manufacturing clusters across Gujarat, Maharashtra, and Tamil Nadu. Features dynamic spatial clustering and millisecond viewport filtering.'
       },
       {
-        title: 'Gemini AI Vendor Profiler',
-        metric: 'Multimodal AI',
-        desc: 'Automated ingestion and extraction of technical capability sheets, CNC tolerances, and ISO certifications using Gemini.'
+        title: 'Multimodal Gemini Extraction Engine',
+        metric: 'Automated Ingestion',
+        desc: 'Multimodal AI pipeline parsing unstructured supplier machinery spec sheets, CNC tolerance brochures, and ISO compliance PDFs into structured machine capacity records with high entity extraction accuracy.'
       },
       {
-        title: 'B2B RFP Matchmaking Engine',
+        title: 'Parametric RFP Matchmaking',
         metric: 'Instant Search',
-        desc: 'Direct manufacturer discovery matching bill-of-materials specifications to certified Indian tier-2 and tier-3 job shops.'
+        desc: 'Direct manufacturer discovery engine matching engineering bill-of-materials tolerances directly to certified job shops, eliminating opaque brokerage layers and procurement latency.'
       }
     ],
     techStack: [
@@ -198,22 +198,22 @@ export const PROJECTS = [
     category: 'Behavioral Psych',
     statusTag: '● 18 SCENARIOS',
     oneLiner: 'Scenario-based psychometric assessment engine mapping executive charisma into continuous 2D vector coordinates.',
-    narrative: 'Most personality tests rely on superficial binary questions. Designed an 18-dilemma simulation engine that maps charisma into continuous 2D coordinates.',
+    narrative: 'Most personality tests rely on transparent, gameable binary questions. Designed an 18-dilemma simulation engine that maps executive charisma into continuous 2D vector coordinates.',
     innovations: [
       {
-        title: 'Continuous Coordinate Mapping',
-        metric: 'Vector Math',
-        desc: 'Mathematical SVG mapping of responses onto dual-axis archetype spectrums (Magnetism vs Authority, Warmth vs Vision).'
+        title: 'Continuous 2D Vector Plane',
+        metric: 'Vector Coordinates',
+        desc: 'Mathematical vector engine projecting multi-factor psychological answers onto a continuous 2D polar plane (Magnetism vs Authority, Warmth vs Vision). Replaces reductive Myers-Briggs binaries with nuanced spatial coordinate clusters.'
       },
       {
-        title: 'Branching Dilemma Engine',
-        metric: '18 Scenarios',
-        desc: 'High-context boardroom and interpersonal dilemmas that force calibrated trade-offs and reveal underlying instincts.'
+        title: '18-Scenario Dilemma Engine',
+        metric: 'Branching Logic',
+        desc: 'Realistic high-stakes executive leadership dilemmas forcing calibrated trade-offs under competing constraints. Dynamically weights subconscious risk tolerance, empathy markers, and strategic decisive posture.'
       },
       {
-        title: 'Zero-Dependency Micro-UI',
-        metric: '<12KB Bundle',
-        desc: 'Hand-crafted Vanilla JS and SVG engine running client-side with zero external UI dependencies and sub-10ms response times.'
+        title: 'Zero-Dependency Micro-Engine',
+        metric: '<12KB Zero-Dependency',
+        desc: 'Handcrafted Vanilla JS and mathematical SVG rendering engine executing entirely client-side. Boots in under 15ms with zero external UI frameworks, yielding instant interaction and absolute cross-browser portability.'
       }
     ],
     techStack: [
@@ -258,22 +258,22 @@ export const PROJECTS = [
     category: 'Career Discovery',
     statusTag: '● 200+ FIRMS',
     oneLiner: 'Natural language career discovery engine aggregating direct enterprise ATS feeds across 200+ elite global firms.',
-    narrative: 'Built to cut through recruiter spam and stale job boards. Ingests clean, direct career feeds from 200+ global tech firms and Indian startups.',
+    narrative: 'Cutting through recruiter spam and stale job boards. Direct API ingestion across 200+ elite tech firms with natural language querying and community referral intelligence.',
     innovations: [
       {
-        title: 'Multi-ATS Direct Feed Ingestion',
+        title: 'Multi-ATS Ingestion Pipeline',
         metric: '200+ Elite Firms',
-        desc: 'Zero-scraping direct ingestion pipelines across Greenhouse, Lever, Ashby, and Workday CXS endpoints.'
+        desc: 'Direct API polling pipelines aggregating live job feeds from Greenhouse, Lever, Ashby, and Workday CXS endpoints. Bypasses stale scraper aggregators to deliver verified, zero-latency job opportunities direct from source.'
       },
       {
-        title: 'Natural Language Semantic Querying',
-        metric: 'Free LLM Parser',
-        desc: 'Conversational omnibox parser converting queries like "remote junior python in fintech" into precise facet filters.'
+        title: 'Semantic Natural Language Parser',
+        metric: 'Omnibox Intelligence',
+        desc: 'Conversational omnibox parser converting complex unstructured queries like "remote junior product in fintech" into multi-dimensional structured database filters with instant facet reactivity.'
       },
       {
-        title: '3-Column Master-Detail Control Center',
+        title: 'Master-Detail Control Cockpit',
         metric: 'Sub-50ms Nav',
-        desc: 'Linear-inspired keyboard-first navigation with instant inspector drawer and community interview intelligence.'
+        desc: 'Linear-inspired 3-column split view with full keyboard shortcuts (J/K navigation, Space to preview). Features instant inspector drawers, compensation breakdowns, and community referral intelligence.'
       }
     ],
     techStack: [
@@ -328,22 +328,22 @@ export const PROJECTS = [
     category: 'Creative Automation',
     statusTag: '● LOCAL-FIRST',
     oneLiner: 'Brag-grade product launch video generator transforming codebases and repo URLs into cinematic motion clips.',
-    narrative: 'Tired of spending hours editing release videos. Renders high-motion product clips locally in the browser with zero cloud render costs.',
+    narrative: 'Product builders shouldn\'t spend entire weekends fighting video editors to announce releases. Generates brag-grade 60fps launch videos directly in the browser with zero cloud render fees.',
     innovations: [
       {
-        title: 'Local-First Video Rendering',
+        title: 'Local-First Browser Rendering',
         metric: 'Zero Cloud Fees',
-        desc: 'Deterministic browser-based canvas and WebCodecs rendering pipeline exporting 60fps MP4s directly on the client machine.'
+        desc: 'Deterministic HTML Canvas and WebCodecs encoding pipeline rendering and exporting 60fps high-bitrate MP4 launch clips directly on client hardware with zero remote server rendering costs.'
       },
       {
-        title: 'Multimodal Code Ingestion',
+        title: 'Multimodal Codebase Ingestion',
         metric: 'Instant Scaffolding',
-        desc: 'Parses package.json, git log, and code comments to generate kinetic scene blueprints and typography sequences.'
+        desc: 'Deep codebase parser analyzing repository structures, package.json dependencies, and commit logs to automatically synthesize kinetic scene blueprints and typography sequences.'
       },
       {
-        title: 'Kinetic Monospace Subtitles',
+        title: 'Spring-Physics Kinetic Typography',
         metric: '60 FPS Springs',
-        desc: 'Dynamic spring-physics caption animations synced to audio wave tracks for punchy, product-led social announcements.'
+        desc: 'Dynamic typography engine synchronizing monospace text reveals and motion transitions to audio waveforms using Apple fluid spring curves and precise audio ducking clocks.'
       }
     ],
     techStack: [

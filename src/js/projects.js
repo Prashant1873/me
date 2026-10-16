@@ -268,14 +268,14 @@ function renderModalContent(project) {
           "${escapeHtml(project.narrative)}"
         </blockquote>
 
-        <div>
+        <div class="modal-innovations-section">
           <div class="modal-section-title">ENGINEERING INNOVATIONS &amp; PROOF</div>
           <div class="modal-innovations-grid">
             ${innovationsHtml}
           </div>
         </div>
 
-        <div>
+        <div class="modal-tech-section">
           <div class="modal-section-title">TECHNICAL ARCHITECTURE</div>
           <div class="modal-tech-pills">
             ${techPillsHtml}
