@@ -40,7 +40,7 @@ export const CONTACT_CHANNELS = [
 ];
 
 export const EDITORIAL_STATEMENT = {
-  quote: 'Building systems that accelerate careers and craft products people genuinely love.',
+  quote: 'Architecting category-defining product strategies from first principles and forging high-leverage systems that turn ambitious visions into market-defining products people revere.',
   author: 'Prashant Shukla',
   sub: 'IIT Bombay Aerospace // Product, Strategy & AI Automation'
 };

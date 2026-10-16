@@ -43,5 +43,5 @@ Valuable concepts, design directions, and feature ideas for the portfolio.
 - **Experience Photo Pipeline:** WebP-compressed responsive assets (17.8MB to 1.4MB, 92.1% payload reduction), instant stale-image reset, skeleton loaders, and proactive adjacent asset preloading.
 - **Project Card Contrast & Scrims:** Deepened backdrop linear gradients, radial protective scrims, micro-capsule pill tags, and guaranteed WCAG AA readability.
 - **Education Card Interior Overhaul:** 3 equal columns for Academic Excellence, clean metric chips without spreadsheet-box clutter, clean "2× GOLD MEDALIST" pill without flanking emoji/medal icons, and 26+ resume proficiencies filling Core Competencies.
-- **Contact Editorial Single Sentence:** "Building systems that accelerate careers and craft products people genuinely love."
+- **Contact Editorial Single Sentence:** "Architecting category-defining product strategies from first principles and forging high-leverage systems that turn ambitious visions into market-defining products people revere."
 - **Tactile Mobile Drawer Cards:** Tactile glassmorphic command-module cards with index counter numerals, micro-chevrons, and spring physics micro-interactions.

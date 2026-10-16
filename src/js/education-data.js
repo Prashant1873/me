@@ -12,12 +12,10 @@ export const ACADEMICS = [
     institution: 'Indian Institute of Technology Bombay',
     shortName: 'IIT Bombay',
     degree: 'B.Tech in Aerospace Engineering',
-    timeline: '2022 - 2026',
-    badge: 'UNDERGRADUATE',
     logo: './images/logos/Indian_Institute_of_Technology_Bombay_Logo.svg.webp',
     metrics: [
       { value: 'AIR 1543', label: 'JEE ADVANCED' },
-      { value: '2026', label: 'GRADUATION' }
+      { value: 'Graduation', label: '2026' }
     ],
     tags: ['Autonomous Systems & Flight Optimization']
   },
@@ -26,13 +24,11 @@ export const ACADEMICS = [
     institution: 'City Montessori School (CMS), Lucknow',
     shortName: 'City Montessori School (CMS)',
     degree: 'ISC Examination (Class XII)',
-    timeline: '2020 - 2022',
-    badge: 'GOLD MEDAL',
     score: '98.25%',
     logo: './images/logos/cms.png',
     metrics: [
       { value: '98.25%', label: 'ISC SCORE' },
-      { value: 'Gold Medalist', label: 'HONOR' }
+      { value: 'Gold Medalist' }
     ],
     tags: ['National Percentile Ranking']
   },
@@ -41,13 +37,11 @@ export const ACADEMICS = [
     institution: "St. Francis' College, Lucknow",
     shortName: "St. Francis' College",
     degree: 'ICSE Examination (Class X)',
-    timeline: 'Till 2020',
-    badge: 'GOLD MEDAL',
     score: '98.00%',
     logo: './images/logos/St._Francis_Lucknow.png',
     metrics: [
       { value: '98.00%', label: 'ICSE SCORE' },
-      { value: 'Gold Medalist', label: 'HONOR' }
+      { value: 'Gold Medalist' }
     ],
     tags: ['Batch Topper & Gold Medal']
   }

@@ -40,22 +40,26 @@ test.describe('Phase 19: Education Page UI/UX & Card Interior Redesign', () => {
     const entries = govCard.locator('.governance-entry');
     await expect(entries).toHaveCount(2);
 
-    // Verify Abhyuday bullets and highlighted metrics
-    const abhyuday = entries.nth(0);
-    const abhyudayBullets = abhyuday.locator('.governance-bullets');
-    await expect(abhyudayBullets).toBeVisible();
-    await expect(abhyudayBullets).toContainText('₹10M+');
-    await expect(abhyudayBullets).toContainText('150+');
-    await expect(abhyudayBullets).toContainText('50,000+');
-    await expect(abhyudayBullets).toContainText('₹20M+');
+    // Verify sentences/bullets are removed for clean low text density
+    const bullets = govCard.locator('.governance-bullets');
+    await expect(bullets).toHaveCount(0);
 
-    // Verify Placement Cell bullets and highlighted metrics
+    // Verify Abhyuday enlarged number tags
+    const abhyuday = entries.nth(0);
+    const abhyudayKpis = abhyuday.locator('.governance-kpis');
+    await expect(abhyudayKpis).toBeVisible();
+    await expect(abhyudayKpis).toContainText('₹10M+');
+    await expect(abhyudayKpis).toContainText('150+');
+    await expect(abhyudayKpis).toContainText('50K+');
+    await expect(abhyudayKpis).toContainText('₹20M+');
+
+    // Verify Placement Cell enlarged number tags
     const placement = entries.nth(1);
-    const placementBullets = placement.locator('.governance-bullets');
-    await expect(placementBullets).toBeVisible();
-    await expect(placementBullets).toContainText('2,000+');
-    await expect(placementBullets).toContainText('40+');
-    await expect(placementBullets).toContainText('16-week');
+    const placementKpis = placement.locator('.governance-kpis');
+    await expect(placementKpis).toBeVisible();
+    await expect(placementKpis).toContainText('2,000+');
+    await expect(placementKpis).toContainText('40+');
+    await expect(placementKpis).toContainText('16-Wk');
   });
 
   test('EDU-09: 2x Gold Medalist badge is clean, unadorned, and free of medal icons or emojis', async ({ page }) => {

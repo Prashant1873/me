@@ -33,18 +33,23 @@ export function initEducation() {
               </div>
             </div>
             
-            <div class="academic-col-card__meta">
-              <span class="edu-badge-pill">${item.timeline}</span>
-              <span class="edu-badge-pill edu-badge-pill--accent">${item.badge}</span>
-            </div>
-
             <div class="academic-col-card__metrics">
-              ${item.metrics.map(m => `
-                <div class="edu-metric-capsule">
-                  <span class="edu-metric-capsule__val">${m.value}</span>
+              ${item.metrics.map(m => {
+                const isGold = m.value.includes('Gold');
+                const isRank = m.value.includes('1543');
+                const isGrad = m.value.includes('Graduation');
+                const modifier = isGold ? 'edu-metric-capsule--gold' : (isRank ? 'edu-metric-capsule--rank' : (isGrad ? 'edu-metric-capsule--grad' : ''));
+                const labelHtml = m.label ? `
+                  <span class="edu-metric-capsule__divider" aria-hidden="true">·</span>
                   <span class="edu-metric-capsule__lbl">${m.label}</span>
-                </div>
-              `).join('')}
+                ` : '';
+                return `
+                  <div class="edu-metric-capsule ${modifier}">
+                    <span class="edu-metric-capsule__val">${m.value}</span>
+                    ${labelHtml}
+                  </div>
+                `;
+              }).join('')}
             </div>
           </div>
         `).join('')}
@@ -76,21 +81,12 @@ export function initEducation() {
               </div>
             </div>
 
-            <!-- Scannable Bullet Lines with Highlighted Numbers -->
-            <div class="governance-bullets">
-              ${gov.bullets.map(b => `
-                <div class="governance-bullet-line">
-                  <span class="governance-bullet-marker">●</span>
-                  <p class="governance-bullet-text">${b}</p>
-                </div>
-              `).join('')}
-            </div>
-
-            <!-- Scannable KPI strip -->
+            <!-- Prominent Number Tags (Hero Metrics) -->
             <div class="governance-kpis">
               ${gov.metrics.map(m => `
                 <div class="gov-kpi-chip">
                   <span class="gov-kpi-chip__val">${m.value}</span>
+                  <span class="gov-kpi-chip__divider" aria-hidden="true">·</span>
                   <span class="gov-kpi-chip__lbl">${m.label}</span>
                 </div>
               `).join('')}

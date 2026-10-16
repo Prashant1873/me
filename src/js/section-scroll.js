@@ -28,6 +28,8 @@ export function initSectionScroll() {
     const prevIndex = currentIndex;
     currentIndex = index;
     const secId = sections[index]?.id;
+    if (!secId) return;
+
     navLinks.forEach(link => {
       link.classList.toggle('is-active', link.getAttribute('data-section') === secId);
     });
@@ -38,7 +40,15 @@ export function initSectionScroll() {
       sec.classList.toggle('is-active', idx === index);
     });
 
-    if (prevIndex !== index) {
+    // Synchronize URL hash with history.replaceState to avoid jumping
+    const targetHash = `#${secId}`;
+    if (window.location.hash !== targetHash) {
+      try {
+        history.replaceState(null, '', targetHash);
+      } catch (e) {}
+    }
+
+    if (prevIndex !== index || !window.backgroundScene?.getActiveSection || window.backgroundScene.getActiveSection() !== index) {
       window.backgroundScene?.transitionToSection(index);
     }
   }
@@ -268,8 +278,59 @@ export function initSectionScroll() {
     }
   });
 
-  // Initialize at current scroll position
-  updateNav(0);
+  // --- Initial Section Detection on Page Load / Refresh ---
+  function getInitialSectionIndex() {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      const hashIdx = sections.findIndex(s => s.id === hash);
+      if (hashIdx !== -1) return hashIdx;
+    }
+    // If browser restored scroll position without hash
+    if (window.scrollY > 40) {
+      const navOffset = isMobileOrTablet() ? (window.innerWidth <= 768 ? 56 : 64) : 0;
+      const currentScroll = window.scrollY + navOffset + 60;
+      for (let i = sections.length - 1; i >= 0; i--) {
+        if (sections[i].offsetTop <= currentScroll) {
+          return i;
+        }
+      }
+    }
+    return 0;
+  }
+
+  const initialIndex = getInitialSectionIndex();
+  currentIndex = initialIndex;
+  updateNav(initialIndex);
+
+  function alignToInitialSection() {
+    if (initialIndex > 0 && sections[initialIndex]) {
+      const navOffset = isMobileOrTablet() ? (window.innerWidth <= 768 ? 56 : 64) : 0;
+      const targetY = Math.max(0, sections[initialIndex].offsetTop - navOffset);
+      if (Math.abs(window.scrollY - targetY) > 8) {
+        window.scrollTo(0, targetY);
+      }
+      window.backgroundScene?.transitionToSection(initialIndex);
+    }
+  }
+
+  alignToInitialSection();
+  requestAnimationFrame(alignToInitialSection);
+
+  window.addEventListener('load', () => {
+    alignToInitialSection();
+    const verifiedIndex = getInitialSectionIndex();
+    if (verifiedIndex !== currentIndex) {
+      updateNav(verifiedIndex);
+    }
+  });
+
+  window.addEventListener('hashchange', () => {
+    const newHash = window.location.hash.replace('#', '');
+    const targetIdx = sections.findIndex(s => s.id === newHash);
+    if (targetIdx !== -1 && targetIdx !== currentIndex) {
+      scrollToSection(targetIdx);
+    }
+  });
 
   return {
     getCurrentIndex: () => currentIndex,

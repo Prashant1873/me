@@ -42,6 +42,7 @@ function renderProjectsGrid() {
   gridContainer.innerHTML = PROJECTS.map((proj) => {
     const thumbSrc = proj.screenshots[0]?.src || '';
     const tagsHtml = proj.techStack
+      .slice(0, 2)
       .map(
         (t) => `<span class="project-tag">${escapeHtml(t.name)}</span>`
       )
@@ -68,7 +69,7 @@ function renderProjectsGrid() {
         <div class="project-card__overlay">
           <div class="project-card__top">
             <span class="project-card__category">${escapeHtml(proj.category)}</span>
-            <span class="project-card__status-tag text-mono">${escapeHtml(proj.statusTag)}</span>
+            <span class="project-card__status-tag">${escapeHtml(proj.statusTag)}</span>
           </div>
 
           <div class="project-card__middle">
@@ -81,19 +82,31 @@ function renderProjectsGrid() {
               ${tagsHtml}
             </div>
             <div class="project-card__footer">
-              <span class="project-card__trigger">
-                Case Study
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <span class="project-card__trigger project-btn project-btn--case-study" role="button" tabindex="0" aria-label="View case study for ${escapeHtml(proj.title)}">
+                <span>Case Study</span>
+                <svg class="project-btn__icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
               </span>
               ${
                 proj.liveUrl
-                  ? `<a href="${escapeHtml(proj.liveUrl)}" class="project-card__ext-link" target="_blank" rel="noopener noreferrer" aria-label="Open live site for ${escapeHtml(proj.title)}" onclick="event.stopPropagation();">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  ? `<a href="${escapeHtml(proj.liveUrl)}" class="project-card__ext-link project-btn project-btn--website" target="_blank" rel="noopener noreferrer" aria-label="Open live website for ${escapeHtml(proj.title)}" onclick="event.stopPropagation();">
+                      <span>Website</span>
+                      <svg class="project-btn__icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
                     </a>`
-                  : ''
+                  : `<a href="${escapeHtml(proj.githubUrl)}" class="project-card__ext-link project-btn project-btn--website" target="_blank" rel="noopener noreferrer" aria-label="View source code on GitHub for ${escapeHtml(proj.title)}" onclick="event.stopPropagation();">
+                      <span>Code</span>
+                      <svg class="project-btn__icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>`
               }
             </div>
           </div>

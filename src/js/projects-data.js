@@ -222,8 +222,8 @@ export const PROJECTS = [
       { name: 'Webhooks', primary: false },
       { name: 'Vanilla CSS', primary: false }
     ],
-    liveUrl: null,
-    githubUrl: 'https://github.com/Prashant1873/Archetype',
+    liveUrl: 'https://prashant1873.github.io/KnowYourArchetype/',
+    githubUrl: 'https://github.com/Prashant1873/KnowYourArchetype',
     screenshots: [
       {
         src: './images/projects/archetype/slide-1.png',
@@ -282,7 +282,7 @@ export const PROJECTS = [
       { name: 'Community Intel', primary: false },
       { name: 'Direct ATS Ingestion', primary: false }
     ],
-    liveUrl: null,
+    liveUrl: 'https://careerloom-frontend.onrender.com/',
     githubUrl: 'https://github.com/Prashant1873/CareerLoom',
     screenshots: [
       {
@@ -292,13 +292,33 @@ export const PROJECTS = [
       },
       {
         src: './images/projects/careerloom/slide-2.png',
-        caption: 'Direct ATS application pipeline with company sentiment badges',
-        alt: 'CareerLoom ATS pipeline view'
+        caption: 'Interactive job detail inspector with direct ATS application pipeline',
+        alt: 'CareerLoom job detail split view'
       },
       {
         src: './images/projects/careerloom/slide-3.png',
-        caption: 'Faceted query filtering and regional Indian tech hub locator',
-        alt: 'CareerLoom query filters and Indian tech hubs'
+        caption: 'Enterprise career directory with multi-ATS company index',
+        alt: 'CareerLoom enterprise company directory'
+      },
+      {
+        src: './images/projects/careerloom/slide-4.png',
+        caption: 'Pan-India tech lead discovery with regional hub filtering',
+        alt: 'CareerLoom India leads and tech hubs locator'
+      },
+      {
+        src: './images/projects/careerloom/slide-5.png',
+        caption: 'Natural language semantic query parser transforming conversational inputs',
+        alt: 'CareerLoom semantic NLP search in action'
+      },
+      {
+        src: './images/projects/careerloom/slide-6.png',
+        caption: 'Community referral network intelligence modal',
+        alt: 'CareerLoom referral intelligence modal'
+      },
+      {
+        src: './images/projects/careerloom/slide-7.png',
+        caption: 'Targeted referral pitch builder and alumni outreach synthesizer',
+        alt: 'CareerLoom referral pitch builder'
       }
     ]
   },
@@ -337,18 +357,28 @@ export const PROJECTS = [
     screenshots: [
       {
         src: './images/projects/marcutie/slide-1.png',
-        caption: 'Video storyboard studio with kinetic typography and audio timeline',
-        alt: 'Marcutie video storyboard studio'
+        caption: 'Video creation studio overview with real-time browser canvas preview',
+        alt: 'Marcutie video creation studio overview'
       },
       {
         src: './images/projects/marcutie/slide-2.png',
-        caption: 'Dynamic template customization panel with aspect-ratio controls',
-        alt: 'Marcutie template customization panel'
+        caption: 'Tone, pacing, and format configuration with kinetic aspect controls',
+        alt: 'Marcutie tone and format configuration'
       },
       {
         src: './images/projects/marcutie/slide-3.png',
-        caption: 'Deterministic WebCodecs rendering progress and preview player',
-        alt: 'Marcutie rendering preview player'
+        caption: 'Brand and visual identity system with custom typography palettes',
+        alt: 'Marcutie brand and visual settings'
+      },
+      {
+        src: './images/projects/marcutie/slide-4.png',
+        caption: 'Voiceover synthesis and audio wave synchronizer controls',
+        alt: 'Marcutie voiceover settings and audio controls'
+      },
+      {
+        src: './images/projects/marcutie/slide-5.png',
+        caption: 'Advanced video rendering engine and export settings modal',
+        alt: 'Marcutie settings modal and export configuration'
       }
     ]
   }
