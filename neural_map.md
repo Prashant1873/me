@@ -156,4 +156,10 @@ src/
 - **Subheading Proportionality:** `--text-section-sub` increased from `clamp(0.875rem, 1.4vh, 1.05rem)` to `clamp(0.975rem, 1.65vh, 1.2rem)` (~15.6px to ~19.2px) for improved scannability and contrast.
 - **Hero Exclusion & Alignment Preservation:** Hero section typography (`--text-hero`, `.hero__name`, 70.4px–80px) left completely untouched. Strict vertical baseline Y-offset parity (0.00px variance) maintained across all 4 content sections.
 
+## Milestone 3 Subsystem Architecture Upgrades
+- **Photo Pipeline Subsystem (`src/js/experience.js`):** WebP assets with instant placeholder reset (`img.src = ''`), skeleton loading spinners, and proactive prefetching (`next/prev`).
+- **Project Scrim & Typography Subsystem (`src/styles/projects.css`):** Radial scrims (`rgba(0, 0, 0, 0.45)`), deepened card backdrop linear gradient (`rgba(6, 10, 20, 0.84)`), micro-capsule pill category backing (`rgba(41, 98, 255, 0.16)`), and 320px viewport overflow hardening (`max-width: 100%`).
+- **Education Interior Layout Engine (`src/js/education.js`, `src/styles/education.css`):** Equal 3-column academic distribution (`repeat(3, 1fr)`), clean metrics hierarchy without nested spreadsheet boxes, clean "2× GOLD MEDALIST" badge without flanking medal SVGs, and expanded 26-skill matrix eliminating empty space.
+- **Editorial Subsystem (`src/js/contact-data.js`):** Streamlined single-sentence editorial statement.
+- **Tactile Mobile Navigation Drawer (`src/styles/navigation.css`, `index.html`):** Semantic index numerals (`01`-`05`), directional micro-chevrons, tactile glassmorphism surfaces, and Apple fluid spring physics (`cubic-bezier(0.175, 0.885, 0.32, 1.275)`).
 
