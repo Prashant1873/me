@@ -1111,3 +1111,205 @@
 [data-theme="light"] .project-modal__backdrop {
   background: rgba(15, 23, 42, 0.7);
 }
+
+/* --------------------------------------------------------------------------
+   11. Dedicated Mobile Modal & Layout Overhaul (MOB-01, MOB-03)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .project-modal__chassis {
+    width: 95vw;
+    max-width: 100%;
+    height: 94vh;
+    max-height: 94dvh;
+    border-radius: 12px;
+    margin: auto;
+  }
+
+  .modal-header {
+    padding: 10px 14px;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+
+  .modal-header__info {
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .modal-header__title {
+    font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .modal-header__category {
+    font-size: 9.5px;
+    padding: 2px 7px;
+    flex-shrink: 0;
+  }
+
+  .modal-header__actions {
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .modal-traversal-btn {
+    padding: 0 8px;
+    height: 36px;
+    min-width: 36px;
+    font-size: 10.5px;
+  }
+
+  .modal-close-btn {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    font-size: 16px;
+  }
+
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    height: 100%;
+  }
+
+  .modal-slideshow {
+    padding: 8px;
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+  }
+
+  .modal-slideshow__viewport {
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+  }
+
+  .modal-slideshow__nav {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .modal-slideshow__caption {
+    font-size: 11px;
+    padding: 4px 0 2px;
+  }
+
+  .modal-slideshow__thumbs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 2px 0 4px;
+    scrollbar-width: none;
+  }
+
+  .modal-slideshow__thumb {
+    width: 48px;
+    height: 30px;
+    flex-shrink: 0;
+    min-width: 48px;
+  }
+
+  .modal-right-pane {
+    padding: 14px 14px 20px;
+    gap: 14px;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+  }
+
+  .modal-narrative {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    padding: 10px 12px;
+  }
+
+  .modal-innovations-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modal-innovation-item {
+    padding: 10px 12px;
+    border-radius: 8px;
+  }
+
+  .modal-innovation-title {
+    font-size: 0.85rem;
+  }
+
+  .modal-innovation-metric {
+    font-size: 10px;
+    padding: 2px 7px;
+  }
+
+  .modal-tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .modal-tech-pill {
+    font-size: 10.5px;
+    padding: 4px 8px;
+  }
+
+  .modal-ctas {
+    position: sticky;
+    bottom: 0;
+    background: var(--bg-surface);
+    padding-top: 10px;
+    padding-bottom: 4px;
+    border-top: 1px solid var(--border-subtle);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+    margin-top: auto;
+  }
+
+  .modal-cta {
+    width: 100%;
+    min-height: 46px;
+    justify-content: center;
+    font-size: 13px;
+  }
+
+  .section--projects .projects-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 16px;
+  }
+
+  .project-card {
+    aspect-ratio: auto;
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 440px) {
+  .modal-traversal-btn {
+    padding: 0 6px;
+    font-size: 10px;
+  }
+  .modal-header__info {
+    gap: 4px;
+  }
+}
+

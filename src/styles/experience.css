@@ -1348,10 +1348,49 @@ html[data-theme="light"] .experience-detail__metric {
 
   .experience-timeline-track {
     height: 140px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
   .experience-detail {
     padding: var(--space-4);
+    border-radius: var(--radius-md);
+  }
+
+  .experience-detail__company {
+    font-size: clamp(1.2rem, 5vw, 1.45rem);
+  }
+
+  .experience-detail__role {
+    font-size: clamp(0.9rem, 3.8vw, 1.05rem);
+  }
+
+  .experience-detail__photos {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .experience-detail__photos-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .experience-detail__photo-strip {
+    gap: 8px;
+  }
+
+  .experience-photo-thumb {
+    width: 64px;
+    height: 46px;
+    min-width: 64px;
+    min-height: 46px;
+  }
+
+  .experience-detail__metric {
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .timeline-modal__close,
@@ -1359,6 +1398,17 @@ html[data-theme="light"] .experience-detail__metric {
   .experience-lightbox__nav {
     min-width: 44px;
     min-height: 44px;
+  }
+
+  .experience-lightbox__container {
+    width: 95vw;
+    height: auto;
+    max-height: 90vh;
+  }
+
+  .experience-lightbox__img {
+    max-width: 100%;
+    max-height: 75vh;
   }
 }
 

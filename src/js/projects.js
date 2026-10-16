@@ -320,6 +320,28 @@ function renderModalContent(project) {
     });
   }
 
+  // Wire touch swipe on mobile slideshow viewport
+  const viewportEl = chassisEl.querySelector('.modal-slideshow__viewport');
+  if (viewportEl) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    viewportEl.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    viewportEl.addEventListener('touchend', (e) => {
+      const deltaX = touchStartX - e.changedTouches[0].clientX;
+      const deltaY = touchStartY - e.changedTouches[0].clientY;
+      if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+        if (deltaX > 0) {
+          stepSlide(1);
+        } else {
+          stepSlide(-1);
+        }
+      }
+    }, { passive: true });
+  }
+
   // Wire filmstrip thumbnails
   const thumbButtons = chassisEl.querySelectorAll('.modal-slideshow__thumb');
   thumbButtons.forEach((btn) => {

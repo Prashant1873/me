@@ -155,11 +155,10 @@ function initMobileNav() {
     navToggle.classList.add('is-open');
     navToggle.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('nav-drawer-open');
 
-    // Set initial focus to close button or first link
-    setTimeout(() => {
-      if (drawerClose) drawerClose.focus();
-    }, 100);
+    // Set initial focus to close button
+    if (drawerClose) drawerClose.focus();
   }
 
   function closeDrawer() {
@@ -167,6 +166,7 @@ function initMobileNav() {
     navToggle.classList.remove('is-open');
     navToggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    document.body.classList.remove('nav-drawer-open');
 
     setTimeout(() => {
       if (!mobileDrawer.classList.contains('is-active')) {
@@ -220,11 +220,23 @@ function initMobileNav() {
         if (document.activeElement === firstEl) {
           e.preventDefault();
           lastEl.focus();
+        } else {
+          const currentIndex = focusables.indexOf(document.activeElement);
+          if (currentIndex > 0) {
+            e.preventDefault();
+            focusables[currentIndex - 1].focus();
+          }
         }
       } else {
         if (document.activeElement === lastEl) {
           e.preventDefault();
           firstEl.focus();
+        } else {
+          const currentIndex = focusables.indexOf(document.activeElement);
+          if (currentIndex !== -1 && currentIndex < focusables.length - 1) {
+            e.preventDefault();
+            focusables[currentIndex + 1].focus();
+          }
         }
       }
     }

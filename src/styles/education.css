@@ -938,3 +938,50 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .education-card {
+    padding: 12px 14px;
+    gap: 8px;
+    border-radius: var(--radius-md);
+  }
+
+  .education-card__title {
+    font-size: clamp(0.95rem, 3.8vw, 1.1rem);
+  }
+
+  .education-card--academics .education-card__body,
+  .education-card--governance .education-card__body,
+  .education-card--creative .education-card__body {
+    gap: 12px;
+  }
+
+  .academic-col-card {
+    padding: 12px;
+    border-radius: 8px;
+    min-height: auto;
+  }
+
+  .skills-matrix__groups {
+    gap: 12px;
+  }
+
+  .skill-pill {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .governance-kpis {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .gov-kpi-chip {
+    padding: 4px 10px;
+    font-size: 11px;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: flex-start;
+  }
+}
+

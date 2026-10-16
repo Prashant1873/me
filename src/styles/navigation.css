@@ -381,9 +381,13 @@ html[data-theme="light"] .nav-action-btn--mail:hover {
   }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 350px) {
   .site-nav__tagline {
     display: none;
+  }
+  .nav-action-btn--call,
+  .nav-action-btn--mail {
+    display: none !important;
   }
 }
 
@@ -445,6 +449,10 @@ html[data-theme="light"] .nav-action-btn--mail:hover {
   }
   .nav-toggle {
     display: inline-flex;
+  }
+  body.nav-drawer-open {
+    overflow: hidden !important;
+    touch-action: none;
   }
 }
 

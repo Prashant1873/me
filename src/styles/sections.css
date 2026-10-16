@@ -278,6 +278,28 @@ main {
   }
 }
 
+@media (max-width: 768px) {
+  .hero__name {
+    font-size: clamp(1.85rem, 8vw, 3rem);
+    line-height: 1.1;
+  }
+  .hero__metadata {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    margin-top: 12px;
+  }
+  .hero__meta {
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .hero__meta .badge {
+    padding: 6px 10px;
+    font-size: 10.5px;
+  }
+  .hero__scroll-indicator {
+    bottom: 16px;
+  }
+}
 
 .hero__scroll-indicator {
   position: absolute;
