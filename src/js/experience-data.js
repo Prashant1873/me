@@ -23,9 +23,18 @@ export const EXPERIENCES = [
     ],
     linkedinUrl: 'https://www.linkedin.com/company/iqvia/',
     photos: [
-      './images/experience/iqvia/20260717_110908.jpg',
-      './images/experience/iqvia/20260731_141440.jpg',
-      './images/experience/iqvia/20260910_155612.jpg'
+      {
+        full: './images/experience/iqvia/20260717_110908.webp',
+        thumb: './images/experience/iqvia/thumb_20260717_110908.webp'
+      },
+      {
+        full: './images/experience/iqvia/20260731_141440.webp',
+        thumb: './images/experience/iqvia/thumb_20260731_141440.webp'
+      },
+      {
+        full: './images/experience/iqvia/20260910_155612.webp',
+        thumb: './images/experience/iqvia/thumb_20260910_155612.webp'
+      }
     ],
     badgeColor: 'royal-blue'
   },
@@ -48,8 +57,14 @@ export const EXPERIENCES = [
     ],
     linkedinUrl: 'https://www.linkedin.com/company/revolut/',
     photos: [
-      './images/experience/revolut/1729271100596.jpeg',
-      './images/experience/revolut/AGC_EGO_BASE_20260602_003850962.jpg'
+      {
+        full: './images/experience/revolut/1729271100596.webp',
+        thumb: './images/experience/revolut/thumb_1729271100596.webp'
+      },
+      {
+        full: './images/experience/revolut/AGC_EGO_BASE_20260602_003850962.webp',
+        thumb: './images/experience/revolut/thumb_AGC_EGO_BASE_20260602_003850962.webp'
+      }
     ],
     badgeColor: 'royal-blue'
   },
@@ -72,9 +87,18 @@ export const EXPERIENCES = [
     ],
     linkedinUrl: 'https://www.linkedin.com/company/ketto/',
     photos: [
-      './images/experience/ketto/IMG-20250930-WA0388(1).jpg',
-      './images/experience/ketto/Snapchat-374168654.jpg',
-      './images/experience/ketto/Snapchat-841329839.jpg'
+      {
+        full: './images/experience/ketto/IMG-20250930-WA0388(1).webp',
+        thumb: './images/experience/ketto/thumb_IMG-20250930-WA0388(1).webp'
+      },
+      {
+        full: './images/experience/ketto/Snapchat-374168654.webp',
+        thumb: './images/experience/ketto/thumb_Snapchat-374168654.webp'
+      },
+      {
+        full: './images/experience/ketto/Snapchat-841329839.webp',
+        thumb: './images/experience/ketto/thumb_Snapchat-841329839.webp'
+      }
     ],
     badgeColor: 'coral'
   },
@@ -97,7 +121,10 @@ export const EXPERIENCES = [
     ],
     linkedinUrl: 'https://www.linkedin.com/company/kalam-labs/',
     photos: [
-      './images/experience/kalam-labs/IMG-20250712-WA0010.jpg'
+      {
+        full: './images/experience/kalam-labs/IMG-20250712-WA0010.webp',
+        thumb: './images/experience/kalam-labs/thumb_IMG-20250712-WA0010.webp'
+      }
     ],
     badgeColor: 'coral'
   },
@@ -121,8 +148,14 @@ export const EXPERIENCES = [
     ],
     linkedinUrl: 'https://www.linkedin.com/company/faoud/',
     photos: [
-      './images/experience/faoud/20260820_175739.jpg',
-      './images/experience/faoud/20260820_180125.jpg'
+      {
+        full: './images/experience/faoud/20260820_175739.webp',
+        thumb: './images/experience/faoud/thumb_20260820_175739.webp'
+      },
+      {
+        full: './images/experience/faoud/20260820_180125.webp',
+        thumb: './images/experience/faoud/thumb_20260820_180125.webp'
+      }
     ],
     badgeColor: 'coral'
   }

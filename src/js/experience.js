@@ -32,6 +32,7 @@ export function initExperience() {
   const lightboxPrev = document.getElementById('experience-lightbox-prev');
   const lightboxNext = document.getElementById('experience-lightbox-next');
   const lightboxCounter = document.getElementById('experience-lightbox-counter');
+  const lightboxSpinner = document.getElementById('experience-lightbox-spinner');
 
   // Timeline calendar modal elements
   const timelineModal = document.getElementById('experience-timeline-modal');
@@ -62,6 +63,28 @@ export function initExperience() {
 
 
   // ------------------------------------------------------------------------
+  // Photo URL Resolvers & Preload Helpers (Phase 17)
+  // ------------------------------------------------------------------------
+  const preloadedImages = new Set();
+  function preloadImage(url) {
+    if (!url || preloadedImages.has(url)) return;
+    const img = new Image();
+    img.src = url;
+    preloadedImages.add(url);
+  }
+
+  function getPhotoUrl(photo, type = 'full') {
+    if (!photo) return '';
+    if (typeof photo === 'string') {
+      if (type === 'thumb') {
+        return photo.replace(/([^/]+)$/, 'thumb_$1');
+      }
+      return photo;
+    }
+    return type === 'thumb' ? (photo.thumb || photo.full) : (photo.full || photo.thumb);
+  }
+
+  // ------------------------------------------------------------------------
   // 4. Render Synchronized Detail Card (Attached Below Active 3D Orb)
   // ------------------------------------------------------------------------
   function renderDetail(exp, animate = false) {
@@ -74,11 +97,12 @@ export function initExperience() {
       ? `
         <div class="experience-detail__photos-group">
           <div class="experience-detail__photo-strip">
-            ${exp.photos.map((photoUrl, i) => {
-              const thumbUrl = photoUrl.replace(/([^/]+)$/, 'thumb_$1');
+            ${exp.photos.map((photo, i) => {
+              const thumbUrl = getPhotoUrl(photo, 'thumb');
+              const fullUrl = getPhotoUrl(photo, 'full');
               return `
               <div class="experience-photo-thumb" data-photo-idx="${i}" title="View workplace snapshot" role="button" tabindex="0" aria-label="View photo ${i + 1}">
-                <img src="${thumbUrl}" onerror="this.onerror=null;this.src='${photoUrl}'" alt="${exp.company} workplace photo" loading="lazy" decoding="async" width="80" height="80" />
+                <img src="${thumbUrl}" onerror="this.onerror=null;this.src='${fullUrl}'" alt="${exp.company} workplace photo" loading="lazy" decoding="async" width="80" height="80" />
                 <div class="experience-photo-thumb__overlay">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="11" cy="11" r="8"/>
@@ -196,27 +220,75 @@ export function initExperience() {
   }
 
   // ------------------------------------------------------------------------
-  // 6. Lightbox Handlers
+  // 6. Lightbox Handlers (Smooth Loading State, Zero Stale-Image Glitch - IMG-02)
   // ------------------------------------------------------------------------
+  let loadRequestId = 0;
+
   function openLightbox(idx) {
     if (!lightbox || !lightboxImg || !activePhotos.length) return;
     currentPhotoIdx = idx;
-    updateLightboxImage();
     lightbox.classList.add('is-open');
     document.body.style.overflow = 'hidden';
+    updateLightboxImage();
   }
 
   function closeLightbox() {
     if (!lightbox) return;
     lightbox.classList.remove('is-open');
     document.body.style.overflow = '';
+    loadRequestId++;
+    if (lightboxImg) {
+      lightboxImg.classList.add('is-loading');
+      lightboxImg.src = '';
+    }
+    if (lightboxSpinner) {
+      lightboxSpinner.classList.remove('is-active');
+    }
   }
 
   function updateLightboxImage() {
     if (!lightboxImg || !activePhotos.length) return;
-    lightboxImg.src = activePhotos[currentPhotoIdx];
+
+    const reqId = ++loadRequestId;
+    const photo = activePhotos[currentPhotoIdx];
+    const targetSrc = getPhotoUrl(photo, 'full');
+
     if (lightboxCounter) {
       lightboxCounter.textContent = `${currentPhotoIdx + 1} / ${activePhotos.length}`;
+    }
+
+    if (lightboxSpinner) {
+      lightboxSpinner.classList.add('is-active');
+    }
+    lightboxImg.classList.add('is-loading');
+
+    const loader = new Image();
+    loader.onload = () => {
+      if (reqId === loadRequestId) {
+        lightboxImg.src = targetSrc;
+        lightboxImg.classList.remove('is-loading');
+        if (lightboxSpinner) {
+          lightboxSpinner.classList.remove('is-active');
+        }
+      }
+    };
+    loader.onerror = () => {
+      if (reqId === loadRequestId) {
+        lightboxImg.src = targetSrc;
+        lightboxImg.classList.remove('is-loading');
+        if (lightboxSpinner) {
+          lightboxSpinner.classList.remove('is-active');
+        }
+      }
+    };
+    loader.src = targetSrc;
+
+    // Proactively preload adjacent photos
+    if (activePhotos.length > 1) {
+      const nextIdx = (currentPhotoIdx + 1) % activePhotos.length;
+      const prevIdx = (currentPhotoIdx - 1 + activePhotos.length) % activePhotos.length;
+      preloadImage(getPhotoUrl(activePhotos[nextIdx], 'full'));
+      preloadImage(getPhotoUrl(activePhotos[prevIdx], 'full'));
     }
   }
 
@@ -418,4 +490,25 @@ export function initExperience() {
     });
   });
   themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  // ------------------------------------------------------------------------
+  // 10. Background Idle Preloading of Thumbnails & Active Role Photos (IMG-01)
+  // ------------------------------------------------------------------------
+  if (typeof window !== 'undefined') {
+    const idlePreload = () => {
+      EXPERIENCES.forEach((e) => {
+        if (e.photos) {
+          e.photos.forEach((p) => preloadImage(getPhotoUrl(p, 'thumb')));
+        }
+      });
+      if (EXPERIENCES[0]?.photos) {
+        EXPERIENCES[0].photos.forEach((p) => preloadImage(getPhotoUrl(p, 'full')));
+      }
+    };
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(idlePreload, { timeout: 2000 });
+    } else {
+      setTimeout(idlePreload, 1500);
+    }
+  }
 }

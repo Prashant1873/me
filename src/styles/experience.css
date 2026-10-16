@@ -662,6 +662,30 @@ html[data-theme="light"] .experience-detail__metric {
   overflow: hidden;
 }
 
+.experience-lightbox__spinner {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.12);
+  border-top-color: var(--color-royal-blue, #2962FF);
+  animation: lightbox-spin 0.7s linear infinite;
+  z-index: 5;
+  pointer-events: none;
+}
+
+@keyframes lightbox-spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.experience-lightbox__spinner.is-active {
+  display: block;
+}
+
 .experience-lightbox__img {
   max-width: 100%;
   max-height: 85vh;
@@ -669,6 +693,14 @@ html[data-theme="light"] .experience-detail__metric {
   display: block;
   border-radius: 6px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.experience-lightbox__img.is-loading {
+  opacity: 0;
+  transform: scale(0.97);
 }
 
 .experience-lightbox__close {

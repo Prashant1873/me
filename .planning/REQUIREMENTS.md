@@ -124,8 +124,8 @@
 ## Milestone 3 Requirements
 
 ### Professional Experience Photo Pipeline
-- [ ] **IMG-01**: Optimize experience photos with compressed webp & responsive thumbnail sizing, plus asset preloading to eradicate first-visit network lag
-- [ ] **IMG-02**: Fix image lightbox stale-image caching flaw with loading skeleton/spinner state, instant placeholder reset, and seamless transition
+- [x] **IMG-01**: Optimize experience photos with compressed webp & responsive thumbnail sizing, plus asset preloading to eradicate first-visit network lag
+- [x] **IMG-02**: Fix image lightbox stale-image caching flaw with loading skeleton/spinner state, instant placeholder reset, and seamless transition
 
 ### Projects Section Card Readability & Contrast
 - [ ] **PROJ-10**: Increase project card backdrop scrim opacity, gradient contrast, and targeted blur so text has unambiguous distinction over background screenshots
@@ -240,8 +240,8 @@
 | EDU-06 | Phase 14 | Complete |
 | CREAT-01 | Phase 15 | Complete |
 | LAYOUT-01 | Phase 16 | Complete |
-| IMG-01 | Phase 17 | Pending |
-| IMG-02 | Phase 17 | Pending |
+| IMG-01 | Phase 17 | Complete |
+| IMG-02 | Phase 17 | Complete |
 | PROJ-10 | Phase 18 | Pending |
 | PROJ-11 | Phase 18 | Pending |
 | EDU-07 | Phase 19 | Pending |
