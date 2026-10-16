@@ -45,3 +45,8 @@ Valuable concepts, design directions, and feature ideas for the portfolio.
 - **Education Card Interior Overhaul:** 3 equal columns for Academic Excellence, clean metric chips without spreadsheet-box clutter, clean "2× GOLD MEDALIST" pill without flanking emoji/medal icons, and 26+ resume proficiencies filling Core Competencies.
 - **Contact Editorial Single Sentence:** "Architecting category-defining product strategies from first principles and forging high-leverage systems that turn ambitious visions into market-defining products people revere."
 - **Tactile Mobile Drawer Cards:** Tactile glassmorphic command-module cards with index counter numerals, micro-chevrons, and spring physics micro-interactions.
+
+## Milestone 4 Project Modal Density & Dedicated Mobile Experience
+- **Modal Vertical Fill & Content Distribution:** Eliminate empty/white vertical dead space on the right side of the project case study dialogue box; expand narrative, enrich innovation cards with deep architectural insights, and ensure proportional flex fill across all desktop screen heights (720p to 1440p+).
+- **Dedicated Mobile Ergonomics (Zero Desktop Drift):** Strictly isolate all mobile layout adjustments within `@media (max-width: 768px)` keeping web/desktop 100% frozen; deliver single-column modal flow, swipeable slideshows, thumb-friendly tap targets, and frictionless drawer navigation.
+

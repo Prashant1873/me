@@ -332,6 +332,46 @@
 - Seamless touch feedback on mobile devices.
 
 ---
+
+## Milestone 4: Project Modal Density & Dedicated Mobile Experience
+
+**Goal:** Eliminate vertical empty space on the right side of the project case study dialogue box by expanding content distribution and vertical fill, and deliver a dedicated, flawless mobile experience across layout fitting, component sizing, and navigation with zero changes or regressions to the web/desktop view.
+
+**Success Criteria:**
+- Project case study modal right-side content occupies the full vertical height harmoniously across 720p to 1440p+ desktop viewports, eradicating awkward white space without overflowing.
+- Project dialogue boxes are enriched with expanded technical architecture highlights and quantified metrics.
+- Desktop/web layout (`min-width: 769px`) remains 100% frozen with zero visual drift or regression.
+- Mobile viewport (`<= 768px`) exhibits flawless fitting, calibrated typography, single-column modal flow with touch-friendly controls, and seamless drawer navigation across 320px to 428px widths.
+
+### Phase 22: Project Modal Dialogue Box Right-Side Vertical Density & Space Optimization
+
+**Goal:** Overhaul the right pane of the project dialogue box (`.modal-right-pane`) to expand content distribution and eliminate dead vertical white space, distributing narrative, expanded innovation cards, architecture highlights, tech stack capsules, and footer action buttons harmoniously across the full modal height without overflow or empty voids.
+
+**Delivers:** PROJ-12, PROJ-13, PROJ-14
+
+**UAT:**
+- Project case study modal right pane spans the full vertical height of the cockpit seamlessly, eliminating the empty gap above footer CTAs.
+- Narrative and innovation cards feature expanded architecture details, metric pills, and technical depth tailored per project.
+- Proportional flex spacing maintains clean visual rhythm across 720p, 768p, 900p, 1080p, and 1440p desktop viewports in both dark and light modes.
+- No scrollbar appears unless content actually exceeds viewport height; custom scrollbar matches design system when needed.
+
+---
+
+### Phase 23: Dedicated Mobile Experience, Layout Fitting & Navigation Overhaul
+
+**Goal:** Engineer a dedicated, polished mobile experience strictly scoped within `@media (max-width: 768px)` that fixes sizing, padding, card fitting, project modal display, and mobile navigation with 0% drift or change to the current desktop layout.
+
+**Delivers:** MOB-01, MOB-02, MOB-03, MOB-04
+
+**UAT:**
+- Desktop/web viewports (`min-width: 769px`) remain 100% untouched with zero regressions.
+- All 5 sections (Hero, Experience, Projects, Education, Contact) fit naturally on mobile with zero horizontal overflow, balanced vertical padding, and legible typography across 320px, 375px, 390px, and 428px widths.
+- Project modal switches to a dedicated mobile layout: single-column vertical card flow, touch-optimized swipeable slideshow, full-width touch-friendly CTAs, and accessible close button.
+- Mobile navigation drawer and header provide seamless touch ergonomics, smooth spring transitions, thumb-friendly tap targets, and reliable scroll lock.
+
+---
 *Roadmap defined: 2026-10-12*
 *Milestone 2 added: 2026-10-15*
 *Milestone 3 added: 2026-10-16*
+*Milestone 4 added: 2026-10-16*
+

@@ -213,6 +213,16 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 - [x] **CONT-07**: Update Contact editorial statement to start with single impactful sentence on careers and products. (Phase 20)
 - [x] **NAV-06**: Redesign mobile drawer navigation items using frontend-skill into tactile, styled command-module cards. (Phase 21)
 
+### Active (Milestone 4: Project Modal Density & Dedicated Mobile Experience)
+
+- [ ] **PROJ-12**: Eliminate empty/white vertical dead space on right side of project dialogue box by expanding content distribution and vertical fill to span the full modal height without overflow. (Phase 22)
+- [ ] **PROJ-13**: Enrich modal narrative and innovation cards with deeper technical architecture highlights, metrics, and problem-solution insights tailored to each project. (Phase 22)
+- [ ] **PROJ-14**: Ensure seamless proportional vertical flex flow between narrative, innovation grid, tech stack capsules, and footer CTAs across all desktop screen heights (720p to 1440p+) in both dark and light themes. (Phase 22)
+- [ ] **MOB-01**: Strict isolation of all mobile visual styles within `@media (max-width: 768px)` ensuring 0% change or drift on desktop/web viewports (`min-width: 769px`). (Phase 23)
+- [ ] **MOB-02**: Optimize mobile viewport fitting, padding, font scaling, and component layout across all 5 sections (Hero, Experience, Projects, Education, Contact) eliminating cramped clipping or excessive scroll height across 320px to 428px viewport widths. (Phase 23)
+- [ ] **MOB-03**: Mobile project case study modal overhaul: ergonomic single-column vertical card flow, touch-optimized swipeable slideshow, full-width touch-friendly CTAs, and accessible close/traversal controls. (Phase 23)
+- [ ] **MOB-04**: Mobile navigation drawer & header refinement: tactile menu button, ergonomic link spacing, quick thumb-reach closing, and seamless scroll-lock without layout jump. (Phase 23)
+
 ### Out of Scope
 
 - Blog / writing section - not part of initial portfolio, can add in future milestone
@@ -220,6 +230,7 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 - Analytics / tracking - can add later
 - Multi-language support - English only
 - E-commerce / payment - not applicable
+- Desktop layout alteration - desktop web version is approved and frozen
 
 ## Context
 
@@ -228,11 +239,13 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 - **Milestone 1:** Completed all 10 initial foundational phases (scaffolding through deployment optimization).
 - **Milestone 2:** Completed all 6 visual refinement phases (3D occlusion/sizing, calendar styling, projects layout, text density, vector icons, global Y-alignment).
 - **Milestone 3:** Completed all 5 performance, contrast, pedigree & mobile UX phases (P17-P21).
+- **Milestone 4:** Active milestone focused on eliminating project modal vertical dead space (Phase 22) and engineering a dedicated, zero-regression mobile experience (Phase 23).
 
 ## Constraints
 
 - **Tech Stack:** Vite + Vanilla JS + Three.js (3D) + GSAP (animations) - zero-framework, maximum control
 - **Design System:** Must follow "Structured Intensity" design language exclusively
+- **Desktop Invariance:** Desktop/web version (`min-width: 769px`) must remain 100% frozen with zero visual drift
 - **Deployment:** GitHub Pages (static export)
 - **Performance:** 60fps target on desktop, graceful degradation on mobile
 - **Accessibility:** WCAG 2.2 AA compliance for text, navigation, and interactive elements
@@ -250,6 +263,9 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 | Borderless dark calendar palette | Replaces jarring light/pastel blocks with cohesive industrial minimalism | Delivered (Phase 12) |
 | Unified section header Y-anchor | Prevents visual jumping when navigating across sections | Delivered (Phase 16) |
 | 5-Phase Milestone 3 Architecture | Dedicated phases for images/lightbox (P17), contrast (P18), education page overhaul (P19), contact statement (P20), mobile nav (P21) | Delivered (Phases 17-21) |
+| Milestone 4 Strict Mobile Isolation | Scopes all mobile responsiveness strictly to `@media (max-width: 768px)` so desktop visuals stay untouched | Active (Milestone 4) |
+| Project Dialogue Box Density | Eliminates large vertical gaps on the right side of case study modals via proportional flex distribution and richer content | Active (Phase 22) |
 
 ---
-*Last updated: 2026-10-16 for Milestone 3 completion*
+*Last updated: 2026-10-16 for Milestone 4 kickoff*
+

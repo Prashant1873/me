@@ -174,3 +174,8 @@ src/
 - **Editorial Subsystem (`src/js/contact-data.js`):** Streamlined single-sentence editorial statement.
 - **Tactile Mobile Navigation Drawer (`src/styles/navigation.css`, `index.html`):** Semantic index numerals (`01`-`05`), directional micro-chevrons, tactile glassmorphism surfaces, and Apple fluid spring physics (`cubic-bezier(0.175, 0.885, 0.32, 1.275)`).
 
+## Milestone 4 Subsystem Architecture Plan
+- **Project Dialogue Box Vertical Fill & Content Distribution (`src/styles/projects.css`, `src/js/projects.js`):** Proportional vertical distribution in `.modal-right-pane` to eliminate large blank gaps above footer `.modal-ctas`; expand innovation cards with deep technical architecture insights, quantitative KPIs, and fluid responsive spacing across 720p to 1440p+ desktop viewports.
+- **Strictly Isolated Mobile Subsystem (`@media (max-width: 768px)`):** Zero drift or change to desktop/web layout (`min-width: 769px`); calibrate mobile viewport padding, typography, card stacking, mobile project modal single-column presentation, and touch ergonomics across 320px to 428px device viewports.
+
+
