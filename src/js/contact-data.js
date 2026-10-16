@@ -40,7 +40,7 @@ export const CONTACT_CHANNELS = [
 ];
 
 export const EDITORIAL_STATEMENT = {
-  quote: 'Engineering rigor meets behavioral empathy - building systems that outlast their creators and products people genuinely love.',
+  quote: 'Building systems that accelerate careers and craft products people genuinely love.',
   author: 'Prashant Shukla',
   sub: 'IIT Bombay Aerospace // Product, Strategy & AI Automation'
 };

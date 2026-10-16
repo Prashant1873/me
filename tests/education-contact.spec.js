@@ -114,10 +114,11 @@ test.describe('Education & Contact Sections (Phase 7)', () => {
     await page.waitForTimeout(300);
     await expect(resumeModal).not.toHaveClass(/is-open/);
 
-    // Editorial quote in Newsreader
+    // Editorial quote in Newsreader (CONT-07)
     const editorialQuote = contactSec.locator('.contact__quote');
     await expect(editorialQuote).toBeVisible();
-    await expect(editorialQuote).toContainText('Engineering rigor meets behavioral empathy');
+    await expect(editorialQuote).toContainText('Building systems that accelerate careers and craft products people genuinely love.');
+    await expect(editorialQuote).not.toContainText('engineering rigor meets behavioral empathy');
 
     // Site Footer
     const footer = page.locator('.site-footer');

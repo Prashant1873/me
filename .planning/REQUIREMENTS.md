@@ -138,7 +138,7 @@
 - [x] **EDU-10**: Overhaul Education page UI/UX and card interior formatting: reduce visual traffic, declutter stat representations, eliminate noisy pill overload, and refine curvatures and iconography
 
 ### Contact Editorial Statement
-- [ ] **CONT-07**: Update Contact editorial statement to remove "engineering rigor meets behavioral empathy" and begin with single impactful sentence on careers and products
+- [x] **CONT-07**: Update Contact editorial statement to remove "engineering rigor meets behavioral empathy" and begin with single impactful sentence on careers and products
 
 ### Mobile Navigation Drawer
 - [ ] **NAV-06**: Redesign mobile drawer navigation items using frontend-skill into tactile, styled command-module cards with distinct active/hover micro-interactions
