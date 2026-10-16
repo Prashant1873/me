@@ -250,7 +250,9 @@
 
 ---
 
-## Milestone 3: Performance, Contrast, Pedigree & Mobile UX
+## Milestone 3: Performance, Contrast, Pedigree & Mobile UX (Shipped & Archived)
+
+> Archived to [.planning/milestones/v3.0-ROADMAP.md](file:///c:/Users/u1233270/Downloads/Personal%20Apps/AboutMe/.planning/milestones/v3.0-ROADMAP.md) on 2026-10-16. All 5 phases complete and verified.
 
 **Goal:** Eradicate experience photo loading lag and viewer flaws, maximize project card text contrast and readability, balance academic credentials into 3 equal columns within the existing card, expand competencies from resume, remove icons/emojis from gold medalist pill, streamline contact statement, and redesign mobile drawer navigation.
 
