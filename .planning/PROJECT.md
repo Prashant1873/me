@@ -200,18 +200,18 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 - [x] **CREAT-01**: Replace all emojis in Creative & Athletics with clean, bespoke vector/favicon iconography. (Phase 15)
 - [x] **LAYOUT-01**: Align all page headings to the exact same vertical Y-axis position with uniform top padding. (Phase 16)
 
-### Active (Milestone 3: Performance, Contrast, Pedigree & Mobile UX)
+### Shipped (Milestone 3: Performance, Contrast, Pedigree & Mobile UX)
 
-- [ ] **IMG-01**: Optimize experience photos with compressed webp & responsive thumbnail sizing, plus asset preloading. (Phase 17)
-- [ ] **IMG-02**: Fix image lightbox stale-image caching flaw with loading skeleton/spinner state, instant placeholder reset, and seamless transition. (Phase 17)
-- [ ] **PROJ-10**: Increase project card backdrop scrim opacity, gradient contrast, and targeted blur for crisp text legibility. (Phase 18)
-- [ ] **PROJ-11**: Upgrade typography contrast for category eyebrows, headings, and descriptions to ensure WCAG AA readability. (Phase 18)
-- [ ] **EDU-07**: Expand Core Competencies & Toolkit items and categories sourced from resume to eliminate excess blank card space. (Phase 19)
-- [ ] **EDU-08**: Equally distribute Academic Excellence space within the existing card into 3 balanced columns across IIT Bombay, CMS, and St. Francis College. (Phase 19)
-- [ ] **EDU-09**: Remove emoji and medal icons flanking "2× GOLD MEDALIST" in the Stage & Synthesis pill. (Phase 19)
-- [ ] **EDU-10**: Overhaul Education page UI/UX and card interior formatting: reduce visual clutter, declutter stat representations, eliminate noisy pill overload, and refine curvatures and iconography. (Phase 19)
-- [ ] **CONT-07**: Update Contact editorial statement to start with single impactful sentence on careers and products. (Phase 20)
-- [ ] **NAV-06**: Redesign mobile drawer navigation items using frontend-skill into tactile, styled command-module cards. (Phase 21)
+- [x] **IMG-01**: Optimize experience photos with compressed webp & responsive thumbnail sizing, plus asset preloading. (Phase 17)
+- [x] **IMG-02**: Fix image lightbox stale-image caching flaw with loading skeleton/spinner state, instant placeholder reset, and seamless transition. (Phase 17)
+- [x] **PROJ-10**: Increase project card backdrop scrim opacity, gradient contrast, and targeted blur for crisp text legibility. (Phase 18)
+- [x] **PROJ-11**: Upgrade typography contrast for category eyebrows, headings, and descriptions to ensure WCAG AA readability. (Phase 18)
+- [x] **EDU-07**: Expand Core Competencies & Toolkit items and categories sourced from resume to eliminate excess blank card space. (Phase 19)
+- [x] **EDU-08**: Equally distribute Academic Excellence space within the existing card into 3 balanced columns across IIT Bombay, CMS, and St. Francis College. (Phase 19)
+- [x] **EDU-09**: Remove emoji and medal icons flanking "2× GOLD MEDALIST" in the Stage & Synthesis pill. (Phase 19)
+- [x] **EDU-10**: Overhaul Education page UI/UX and card interior formatting: reduce visual clutter, declutter stat representations, eliminate noisy pill overload, and refine curvatures and iconography. (Phase 19)
+- [x] **CONT-07**: Update Contact editorial statement to start with single impactful sentence on careers and products. (Phase 20)
+- [x] **NAV-06**: Redesign mobile drawer navigation items using frontend-skill into tactile, styled command-module cards. (Phase 21)
 
 ### Out of Scope
 
@@ -227,7 +227,7 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 - **Design Authority:** The "Structured Intensity Personal Design Language" document is the sole source of truth for all visual decisions. Every color, font, spacing, and motion decision must trace back to it.
 - **Milestone 1:** Completed all 10 initial foundational phases (scaffolding through deployment optimization).
 - **Milestone 2:** Completed all 6 visual refinement phases (3D occlusion/sizing, calendar styling, projects layout, text density, vector icons, global Y-alignment).
-- **Milestone 3 Goal:** Eliminate experience photo loading lag and viewer flaws, maximize project card text contrast, thoroughly redesign the Education page card interiors (better formatting, numbers, pills, curvatures, favicons, 3 equal academic columns, expanded competencies), refine contact statement, and deliver premium tactile mobile drawer navigation.
+- **Milestone 3:** Completed all 5 performance, contrast, pedigree & mobile UX phases (P17-P21).
 
 ## Constraints
 
@@ -249,7 +249,7 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 | Z-axis orbit ring occlusion | Realistic depth perception behind logo medallion disc | Delivered (Phase 11) |
 | Borderless dark calendar palette | Replaces jarring light/pastel blocks with cohesive industrial minimalism | Delivered (Phase 12) |
 | Unified section header Y-anchor | Prevents visual jumping when navigating across sections | Delivered (Phase 16) |
-| 5-Phase Milestone 3 Architecture | Dedicated phases for images/lightbox (P17), contrast (P18), education page overhaul (P19), contact statement (P20), mobile nav (P21) | Active |
+| 5-Phase Milestone 3 Architecture | Dedicated phases for images/lightbox (P17), contrast (P18), education page overhaul (P19), contact statement (P20), mobile nav (P21) | Delivered (Phases 17-21) |
 
 ---
-*Last updated: 2026-10-16 for Milestone 3 start*
+*Last updated: 2026-10-16 for Milestone 3 completion*
