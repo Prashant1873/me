@@ -186,27 +186,27 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, rgba(6, 10, 20, 0.68) 0%, rgba(8, 14, 28, 0.84) 100%);
-  backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
   transition: background 0.25s ease, backdrop-filter 0.25s ease;
 }
 
 [data-theme="light"] .project-card__backdrop {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.9) 100%);
-  backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
 }
 
 .project-card:hover .project-card__backdrop {
   background: linear-gradient(135deg, rgba(6, 10, 20, 0.54) 0%, rgba(8, 14, 28, 0.72) 100%);
-  backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
 }
 
 [data-theme="light"] .project-card:hover .project-card__backdrop {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(248, 250, 252, 0.82) 100%);
-  backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
 }
 
 /* --------------------------------------------------------------------------
@@ -244,8 +244,8 @@
   border-radius: var(--radius-full, 9999px);
   background: rgba(6, 10, 22, 0.88);
   border: 1px solid rgba(56, 189, 248, 0.45);
-  backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55), 0 0 10px rgba(56, 189, 248, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.15);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
   white-space: nowrap;
@@ -273,8 +273,8 @@
   border: 1px solid rgba(255, 255, 255, 0.22);
   color: #f8fafc;
   letter-spacing: 0.03em;
-  backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   white-space: nowrap;
   line-height: 1;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12);
@@ -427,6 +427,7 @@
   cursor: pointer;
   white-space: nowrap;
   box-sizing: border-box;
+  -webkit-user-select: none;
   user-select: none;
   transition: transform var(--duration-fast) var(--ease-spring),
               background var(--duration-fast) var(--ease-default),
@@ -543,8 +544,8 @@
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.84);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   cursor: pointer;
 }
 
@@ -785,6 +786,19 @@
   overflow-x: auto;
   padding: 4px 2px;
   scrollbar-width: thin;
+}
+
+.modal-slideshow__thumbs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.modal-slideshow__thumbs::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+}
+
+[data-theme="light"] .modal-slideshow__thumbs::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .modal-slideshow__thumb {

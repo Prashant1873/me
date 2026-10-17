@@ -223,6 +223,14 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 - [x] **MOB-03**: Mobile project case study modal overhaul: ergonomic single-column vertical card flow, touch-optimized swipeable slideshow, full-width touch-friendly CTAs, and accessible close/traversal controls. (Phase 23)
 - [x] **MOB-04**: Mobile navigation drawer & header refinement: tactile menu button, ergonomic link spacing, quick thumb-reach closing, and seamless scroll-lock without layout jump. (Phase 23)
 
+### Active (Milestone 5: Cross-Browser CSS Hygiene & Lint Zero-Tolerance)
+
+- [x] **LINT-01**: Add `-webkit-user-select: none;` preceding `user-select: none;` in `education.css` (lines 344, 509), `experience.css` (line 350), `navigation.css` (line 151), and `projects.css` (line 430) to ensure full iOS Safari support and eradicate IDE errors. (Phase 24)
+- [x] **LINT-02**: Enforce standard vendor prefix order by listing `-webkit-backdrop-filter` before `backdrop-filter` in `experience.css` (lines 636, 740, 778, 799), `navigation.css` (lines 16, 149, 299, 471), `projects.css` (lines 189, 196, 202, 208, 247, 276, 546), and `contact.css` (line 422). (Phase 24)
+- [x] **LINT-03**: Remove deprecated legacy `-webkit-overflow-scrolling: touch;` in `navigation.css` (line 505). (Phase 24)
+- [x] **LINT-04**: Harmonize `.modal-slideshow__thumbs` scrollbar in `projects.css` with WebKit scrollbar rules (`::-webkit-scrollbar` with height 4px and rounded thumb) matching design system. (Phase 24)
+- [x] **LINT-05**: Move inline `--pill-color` custom property styles from `index.html` (lines 451-455) into semantic CSS modifier classes in `experience.css` (`.timeline-legend-pill--iqvia`, `.timeline-legend-pill--revolut`, `.timeline-legend-pill--ketto`, `.timeline-legend-pill--kalam`, `.timeline-legend-pill--faoud`), completely eliminating inline styles from HTML. (Phase 24)
+
 ### Out of Scope
 
 - Blog / writing section - not part of initial portfolio, can add in future milestone
@@ -230,7 +238,7 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 - Analytics / tracking - can add later
 - Multi-language support - English only
 - E-commerce / payment - not applicable
-- Desktop layout alteration - desktop web version is approved and frozen
+- Desktop or mobile layout drift - visual presentation remains 100% frozen
 
 ## Context
 
@@ -240,6 +248,7 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 - **Milestone 2:** Completed all 6 visual refinement phases (3D occlusion/sizing, calendar styling, projects layout, text density, vector icons, global Y-alignment).
 - **Milestone 3:** Completed all 5 performance, contrast, pedigree & mobile UX phases (P17-P21).
 - **Milestone 4:** Completed all 2 modal density and dedicated mobile experience phases (P22-P23). All 83 tracked requirements shipped and verified.
+- **Milestone 5:** Active milestone focused on cross-browser CSS hygiene, vendor prefix ordering, WebKit scrollbar harmonization, and eliminating HTML inline styles (Phase 24).
 
 ## Constraints
 
@@ -265,7 +274,8 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 | 5-Phase Milestone 3 Architecture | Dedicated phases for images/lightbox (P17), contrast (P18), education page overhaul (P19), contact statement (P20), mobile nav (P21) | Delivered (Phases 17-21) |
 | Milestone 4 Strict Mobile Isolation | Scopes all mobile responsiveness strictly to `@media (max-width: 768px)` so desktop visuals stay untouched | Delivered (Phase 23) |
 | Project Dialogue Box Density | Eliminates large vertical gaps on the right side of case study modals via proportional flex distribution and richer content | Delivered (Phase 22) |
+| Milestone 5 Lint Zero-Tolerance | Resolves all IDE linter errors and warnings across CSS and HTML with zero visual drift | Active (Milestone 5) |
 
 ---
-*Last updated: 2026-10-16 after Milestone 4 completion*
+*Last updated: 2026-10-17 for Milestone 5 kickoff*
 

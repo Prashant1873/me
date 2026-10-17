@@ -340,8 +340,35 @@
 **Goal:** Eliminate vertical empty space on the right side of the project case study dialogue box by expanding content distribution and vertical fill, and deliver a dedicated, flawless mobile experience across layout fitting, component sizing, and navigation with zero changes or regressions to the web/desktop view.
 
 ---
+
+## Milestone 5: Cross-Browser CSS Hygiene & Lint Zero-Tolerance
+
+**Goal:** Eradicate all IDE CSS errors and warnings across the codebase by adding missing `-webkit-user-select` properties, standardizing vendor prefix ordering for `backdrop-filter`, cleaning obsolete `-webkit-overflow-scrolling` properties, harmonizing WebKit scrollbars, and extracting inline styles from HTML to external CSS classes.
+
+**Success Criteria:**
+- Zero errors and zero ordering warnings in `education.css`, `experience.css`, `navigation.css`, `projects.css`, and `contact.css`.
+- Zero inline styles in `index.html`.
+- 100% visual and functional preservation with zero regressions on desktop or mobile.
+
+### Phase 24: Cross-Browser Vendor Prefixes, Prefix Ordering & Inline Styles Removal (Shipped & Verified)
+
+**Goal:** Address and eliminate reported IDE errors and warnings across `education.css`, `experience.css`, `navigation.css`, `projects.css`, `contact.css`, and `index.html`.
+
+**Delivers:** LINT-01, LINT-02, LINT-03, LINT-04, LINT-05
+
+**UAT:**
+- All `user-select: none;` declarations have a preceding `-webkit-user-select: none;` (zero Safari selection errors).
+- All `-webkit-backdrop-filter` declarations precede standard `backdrop-filter` properties across all stylesheets.
+- Obsolete `-webkit-overflow-scrolling: touch;` removed from `navigation.css`.
+- `.modal-slideshow__thumbs` receives matching WebKit scrollbar styling.
+- `index.html` `.timeline-legend-pill` elements use external CSS classes (`.timeline-legend-pill--iqvia`, etc.) with zero inline `style=""` attributes.
+- Playwright test suites (all 44 tests + 15 mobile tests) pass with zero failures.
+- Vite production build completes cleanly.
+
+---
 *Roadmap defined: 2026-10-12*
 *Milestone 2 added: 2026-10-15*
 *Milestone 3 added: 2026-10-16*
 *Milestone 4 archived: 2026-10-16*
+*Milestone 5 added: 2026-10-17*
 
