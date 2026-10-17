@@ -19,6 +19,12 @@
 ### HTML Separation of Concerns & Inline Style Removal
 - [x] **LINT-05**: Move inline `--pill-color` custom property styles from `index.html` (lines 451-455) into semantic CSS modifier classes in `experience.css` (`.timeline-legend-pill--iqvia`, `.timeline-legend-pill--revolut`, `.timeline-legend-pill--ketto`, `.timeline-legend-pill--kalam`, `.timeline-legend-pill--faoud`), completely eliminating inline styles from HTML.
 
+### Projects Image Pipeline & Fast Loading
+- [x] **PROJ-IMG-01**: Batch convert all 33 raw project screenshots to high-efficiency WebP format (85% quality, 1600px max bounds), reducing project image payload from ~15 MB down to <1.5 MB (>85% reduction).
+- [x] **PROJ-IMG-02**: Generate dedicated responsive WebP thumbnails (240px for modal filmstrip, 480px for project card backgrounds, <25 KB each) eliminating multi-megabyte thumbnail downloads on page load and modal open.
+- [x] **PROJ-IMG-03**: Update `src/js/projects-data.js` and `src/js/projects.js` to serve WebP assets with robust fallback handling, and implement proactive memory preloading for card previews and modal slides via `requestIdleCallback`.
+- [x] **PROJ-IMG-04**: Add a dedicated loading spinner / skeleton to `#slideshow-main-img` ensuring instant visual feedback with zero blank frames or frozen states during slide transitions.
+
 ---
 
 ## Future Requirements (Backlog)
@@ -45,6 +51,10 @@
 | LINT-03 | Phase 24 | Deprecated `-webkit-overflow-scrolling` cleanup | Complete |
 | LINT-04 | Phase 24 | Modal thumbnail WebKit scrollbar styling | Complete |
 | LINT-05 | Phase 24 | Remove inline styles on timeline legend pills | Complete |
+| PROJ-IMG-01 | Phase 25 | Batch WebP conversion for 33 project screenshots | Complete |
+| PROJ-IMG-02 | Phase 25 | Dedicated WebP thumbnails for cards & filmstrip | Complete |
+| PROJ-IMG-03 | Phase 25 | WebP data migration & proactive memory preloading | Complete |
+| PROJ-IMG-04 | Phase 25 | Slideshow loading skeleton & zero blank frames | Complete |
 
 ---
 
@@ -53,5 +63,5 @@
 - **Milestone 2:** 9 / 9 Complete
 - **Milestone 3:** 10 / 10 Complete
 - **Milestone 4:** 7 / 7 Complete
-- **Milestone 5:** 5 / 5 Complete
-- **Total Requirements Tracked:** 88
+- **Milestone 5:** 9 / 9 Complete (All 9 Shipped & Verified)
+- **Total Requirements Tracked:** 92

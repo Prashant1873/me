@@ -230,6 +230,10 @@ Cinematic Modernism, Restrained Neo-brutalism, Swiss Typography
 - [x] **LINT-03**: Remove deprecated legacy `-webkit-overflow-scrolling: touch;` in `navigation.css` (line 505). (Phase 24)
 - [x] **LINT-04**: Harmonize `.modal-slideshow__thumbs` scrollbar in `projects.css` with WebKit scrollbar rules (`::-webkit-scrollbar` with height 4px and rounded thumb) matching design system. (Phase 24)
 - [x] **LINT-05**: Move inline `--pill-color` custom property styles from `index.html` (lines 451-455) into semantic CSS modifier classes in `experience.css` (`.timeline-legend-pill--iqvia`, `.timeline-legend-pill--revolut`, `.timeline-legend-pill--ketto`, `.timeline-legend-pill--kalam`, `.timeline-legend-pill--faoud`), completely eliminating inline styles from HTML. (Phase 24)
+- [x] **PROJ-IMG-01**: Batch convert all 33 raw project screenshots to high-efficiency WebP format (85% quality, 1600px max bounds), reducing project image payload from ~15 MB down to <1.5 MB (>85% reduction). (Phase 25)
+- [x] **PROJ-IMG-02**: Generate dedicated responsive WebP thumbnails (240px for modal filmstrip, 480px for project card backgrounds, <25 KB each) eliminating multi-megabyte thumbnail downloads on page load and modal open. (Phase 25)
+- [x] **PROJ-IMG-03**: Update `src/js/projects-data.js` and `src/js/projects.js` to serve WebP assets with robust fallback handling, and implement proactive memory preloading for card previews and modal slides via `requestIdleCallback`. (Phase 25)
+- [x] **PROJ-IMG-04**: Add a dedicated loading spinner / skeleton to `#slideshow-main-img` ensuring instant visual feedback with zero blank frames or frozen states during slide transitions. (Phase 25)
 
 ### Out of Scope
 

@@ -18,6 +18,16 @@ let backdropEl = null;
 let chassisEl = null;
 let siteNav = null;
 let mainEl = null;
+let slideRequestId = 0;
+
+/**
+ * Preload an image asset in memory for instant subsequent display
+ */
+function preloadImage(url) {
+  if (!url) return;
+  const img = new Image();
+  img.src = url;
+}
 
 /**
  * Helper to escape HTML characters preventing DOM XSS (T-06-02)
@@ -40,7 +50,7 @@ function renderProjectsGrid() {
   if (!gridContainer) return;
 
   gridContainer.innerHTML = PROJECTS.map((proj) => {
-    const thumbSrc = proj.screenshots[0]?.src || '';
+    const thumbSrc = proj.screenshots[0]?.thumb || proj.screenshots[0]?.src || '';
     const tagsHtml = proj.techStack
       .slice(0, 2)
       .map(
@@ -170,7 +180,7 @@ function renderModalContent(project) {
         data-slide-index="${idx}"
         aria-label="View screenshot ${idx + 1}: ${escapeHtml(s.caption)}"
       >
-        <img src="${escapeHtml(s.src)}" alt="Thumbnail ${idx + 1}" />
+        <img src="${escapeHtml(s.thumb || s.src)}" alt="Thumbnail ${idx + 1}" loading="lazy" />
       </button>
     `
     )
@@ -241,6 +251,7 @@ function renderModalContent(project) {
       <!-- Left Column: Interactive Screenshot Slideshow (7 Cols) -->
       <div class="modal-slideshow" role="region" aria-label="Screenshot Slideshow">
         <div class="modal-slideshow__viewport">
+          <div id="slideshow-spinner" class="modal-slideshow__spinner" aria-hidden="true"></div>
           <button id="slideshow-prev-btn" class="modal-slideshow__nav modal-slideshow__nav--prev" aria-label="View Previous Screenshot ←">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
@@ -387,6 +398,7 @@ function setSlide(index) {
 
   const mainImg = chassisEl.querySelector('#slideshow-main-img');
   const captionEl = chassisEl.querySelector('#slideshow-caption');
+  const spinner = chassisEl.querySelector('#slideshow-spinner');
 
   if (captionEl) {
     captionEl.textContent = `[${activeSlideIndex + 1} / ${total}] - ${slide.caption}`;
@@ -398,18 +410,34 @@ function setSlide(index) {
     btn.classList.toggle('is-active', idx === activeSlideIndex);
   });
 
-  // GSAP crossfade image
   if (mainImg) {
-    gsap.to(mainImg, {
-      opacity: 0.3,
-      duration: 0.1,
-      ease: 'power1.out',
-      onComplete: () => {
+    const reqId = ++slideRequestId;
+    if (spinner) spinner.classList.add('is-active');
+    mainImg.classList.add('is-loading');
+
+    const loader = new Image();
+    loader.onload = () => {
+      if (reqId === slideRequestId) {
         mainImg.src = slide.src;
         mainImg.alt = slide.alt || project.title;
-        gsap.to(mainImg, { opacity: 1, duration: 0.18, ease: 'power2.out' });
+        mainImg.classList.remove('is-loading');
+        if (spinner) spinner.classList.remove('is-active');
       }
-    });
+    };
+    loader.onerror = () => {
+      if (reqId === slideRequestId) {
+        mainImg.src = createSvgFallback(project.title, activeSlideIndex);
+        mainImg.classList.remove('is-loading');
+        if (spinner) spinner.classList.remove('is-active');
+      }
+    };
+    loader.src = slide.src;
+
+    // Proactively preload adjacent full-size slides
+    const nextSlide = project.screenshots[(activeSlideIndex + 1) % total];
+    const prevSlide = project.screenshots[(activeSlideIndex - 1 + total) % total];
+    if (nextSlide?.src) preloadImage(nextSlide.src);
+    if (prevSlide?.src) preloadImage(prevSlide.src);
   }
 }
 
@@ -505,6 +533,12 @@ export function openProjectModal(projectId, triggerCardEl) {
 
   // Initialize modal chassis content
   renderModalContent(PROJECTS[activeProjectIndex]);
+
+  // Preload all full-size slides for the opened project
+  const openedProj = PROJECTS[activeProjectIndex];
+  if (openedProj && openedProj.screenshots) {
+    openedProj.screenshots.forEach((s) => preloadImage(s.src));
+  }
 
   // Lock scroll & trap focus
   lockBodyScroll();
@@ -636,4 +670,20 @@ export function initProjects() {
 
   // Keyboard navigation
   window.addEventListener('keydown', onGlobalKeydown);
+
+  // Background idle preloading of all project card preview thumbnails
+  if (typeof window !== 'undefined') {
+    const idlePreload = () => {
+      PROJECTS.forEach((p) => {
+        if (p.screenshots?.[0]) {
+          preloadImage(p.screenshots[0].thumb || p.screenshots[0].src);
+        }
+      });
+    };
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(idlePreload, { timeout: 2000 });
+    } else {
+      setTimeout(idlePreload, 1200);
+    }
+  }
 }

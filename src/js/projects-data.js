@@ -39,37 +39,44 @@ export const PROJECTS = [
     githubUrl: 'https://github.com/Prashant1873/BickerBape',
     screenshots: [
       {
-        src: './images/projects/bickerbape/slide-1.png',
+        src: './images/projects/bickerbape/slide-1.webp',
+        thumb: './images/projects/bickerbape/thumb_slide-1.webp',
         caption: 'Interactive Mutual Fund Screener with category filters & CAGR rankers',
         alt: 'BickerBape mutual fund screener showing scheme rankings'
       },
       {
-        src: './images/projects/bickerbape/slide-2.png',
+        src: './images/projects/bickerbape/slide-2.webp',
+        thumb: './images/projects/bickerbape/thumb_slide-2.webp',
         caption: 'Historical performance & expense ratio distribution breakdown',
         alt: 'BickerBape historical performance charts and distribution'
       },
       {
-        src: './images/projects/bickerbape/slide-3.png',
+        src: './images/projects/bickerbape/slide-3.webp',
+        thumb: './images/projects/bickerbape/thumb_slide-3.webp',
         caption: 'Compounding simulator input deck with monthly SIP toggles',
         alt: 'BickerBape compounding simulator inputs'
       },
       {
-        src: './images/projects/bickerbape/slide-4.png',
+        src: './images/projects/bickerbape/slide-4.webp',
+        thumb: './images/projects/bickerbape/thumb_slide-4.webp',
         caption: 'Visual growth trajectory comparison across hybrid and equity funds',
         alt: 'BickerBape growth trajectory curves'
       },
       {
-        src: './images/projects/bickerbape/slide-5.png',
+        src: './images/projects/bickerbape/slide-5.webp',
+        thumb: './images/projects/bickerbape/thumb_slide-5.webp',
         caption: 'Category-wise risk/reward quadrant and beta score matrix',
         alt: 'BickerBape risk and reward matrix'
       },
       {
-        src: './images/projects/bickerbape/slide-6.png',
+        src: './images/projects/bickerbape/slide-6.webp',
+        thumb: './images/projects/bickerbape/thumb_slide-6.webp',
         caption: 'Portfolio allocation inspector and tax efficiency estimators',
         alt: 'BickerBape portfolio allocation inspector'
       },
       {
-        src: './images/projects/bickerbape/slide-7.png',
+        src: './images/projects/bickerbape/slide-7.webp',
+        thumb: './images/projects/bickerbape/thumb_slide-7.webp',
         caption: 'Detailed fund deep-dive modal showing top holdings and sector weights',
         alt: 'BickerBape fund holdings deep dive'
       }
@@ -110,32 +117,38 @@ export const PROJECTS = [
     githubUrl: 'https://github.com/Prashant1873/StrokeCRM',
     screenshots: [
       {
-        src: './images/projects/strokecrm/slide-1.png',
+        src: './images/projects/strokecrm/slide-1.webp',
+        thumb: './images/projects/strokecrm/thumb_slide-1.webp',
         caption: 'Campaign performance dashboard with live sending cadence',
         alt: 'StrokeCRM campaign performance dashboard'
       },
       {
-        src: './images/projects/strokecrm/slide-2.png',
+        src: './images/projects/strokecrm/slide-2.webp',
+        thumb: './images/projects/strokecrm/thumb_slide-2.webp',
         caption: 'Multi-account SMTP configuration & inbox warming health status',
         alt: 'StrokeCRM SMTP and inbox configuration'
       },
       {
-        src: './images/projects/strokecrm/slide-3.png',
+        src: './images/projects/strokecrm/slide-3.webp',
+        thumb: './images/projects/strokecrm/thumb_slide-3.webp',
         caption: 'Lead list segmentation and personalized tag injection matrix',
         alt: 'StrokeCRM lead segmentation matrix'
       },
       {
-        src: './images/projects/strokecrm/slide-4.png',
+        src: './images/projects/strokecrm/slide-4.webp',
+        thumb: './images/projects/strokecrm/thumb_slide-4.webp',
         caption: 'Automated sequence timeline builder with time-delay triggers',
         alt: 'StrokeCRM automated sequence builder'
       },
       {
-        src: './images/projects/strokecrm/slide-5.png',
+        src: './images/projects/strokecrm/slide-5.webp',
+        thumb: './images/projects/strokecrm/thumb_slide-5.webp',
         caption: 'Real-time delivery log and bounce detection inspector',
         alt: 'StrokeCRM delivery log and bounce monitor'
       },
       {
-        src: './images/projects/strokecrm/slide-6.png',
+        src: './images/projects/strokecrm/slide-6.webp',
+        thumb: './images/projects/strokecrm/thumb_slide-6.webp',
         caption: 'Inbox reply monitor with categorization and thread context',
         alt: 'StrokeCRM inbox reply tracker'
       }
@@ -176,17 +189,20 @@ export const PROJECTS = [
     githubUrl: 'https://github.com/Prashant1873/Trinet',
     screenshots: [
       {
-        src: './images/projects/trinet/slide-1.png',
+        src: './images/projects/trinet/slide-1.webp',
+        thumb: './images/projects/trinet/thumb_slide-1.webp',
         caption: 'National industrial cluster map with interactive regional filters',
         alt: 'TRINET national manufacturing cluster map'
       },
       {
-        src: './images/projects/trinet/slide-2.png',
+        src: './images/projects/trinet/slide-2.webp',
+        thumb: './images/projects/trinet/thumb_slide-2.webp',
         caption: 'Vendor capability dossier with machine specs and quality certifications',
         alt: 'TRINET vendor capability and machinery dossier'
       },
       {
-        src: './images/projects/trinet/slide-3.png',
+        src: './images/projects/trinet/slide-3.webp',
+        thumb: './images/projects/trinet/thumb_slide-3.webp',
         caption: 'Category-based search matrix for precision tooling and sheet metal fabrication',
         alt: 'TRINET category search matrix'
       }
@@ -226,27 +242,32 @@ export const PROJECTS = [
     githubUrl: 'https://github.com/Prashant1873/KnowYourArchetype',
     screenshots: [
       {
-        src: './images/projects/archetype/slide-1.png',
+        src: './images/projects/archetype/slide-1.webp',
+        thumb: './images/projects/archetype/thumb_slide-1.webp',
         caption: 'Assessment welcome interface and psychometric philosophy intro',
         alt: 'Know Your Archetype welcome assessment screen'
       },
       {
-        src: './images/projects/archetype/slide-2.png',
+        src: './images/projects/archetype/slide-2.webp',
+        thumb: './images/projects/archetype/thumb_slide-2.webp',
         caption: 'Interactive scenario evaluation card with moral dilemma options',
         alt: 'Know Your Archetype dilemma decision card'
       },
       {
-        src: './images/projects/archetype/slide-3.png',
+        src: './images/projects/archetype/slide-3.webp',
+        thumb: './images/projects/archetype/thumb_slide-3.webp',
         caption: 'Intermediate response calibration and sentiment balance meter',
         alt: 'Know Your Archetype sentiment balance meter'
       },
       {
-        src: './images/projects/archetype/slide-4.png',
+        src: './images/projects/archetype/slide-4.webp',
+        thumb: './images/projects/archetype/thumb_slide-4.webp',
         caption: 'Archetype coordinate visualization on continuous 2D polar plane',
         alt: 'Know Your Archetype polar coordinate plane'
       },
       {
-        src: './images/projects/archetype/slide-5.png',
+        src: './images/projects/archetype/slide-5.webp',
+        thumb: './images/projects/archetype/thumb_slide-5.webp',
         caption: 'Detailed psychometric profile report with cognitive blindspots',
         alt: 'Know Your Archetype psychometric report'
       }
@@ -286,37 +307,44 @@ export const PROJECTS = [
     githubUrl: 'https://github.com/Prashant1873/CareerLoom',
     screenshots: [
       {
-        src: './images/projects/careerloom/slide-1.png',
+        src: './images/projects/careerloom/slide-1.webp',
+        thumb: './images/projects/careerloom/thumb_slide-1.webp',
         caption: 'Desktop master-detail career search command center',
         alt: 'CareerLoom master-detail job search interface'
       },
       {
-        src: './images/projects/careerloom/slide-2.png',
+        src: './images/projects/careerloom/slide-2.webp',
+        thumb: './images/projects/careerloom/thumb_slide-2.webp',
         caption: 'Interactive job detail inspector with direct ATS application pipeline',
         alt: 'CareerLoom job detail split view'
       },
       {
-        src: './images/projects/careerloom/slide-3.png',
+        src: './images/projects/careerloom/slide-3.webp',
+        thumb: './images/projects/careerloom/thumb_slide-3.webp',
         caption: 'Enterprise career directory with multi-ATS company index',
         alt: 'CareerLoom enterprise company directory'
       },
       {
-        src: './images/projects/careerloom/slide-4.png',
+        src: './images/projects/careerloom/slide-4.webp',
+        thumb: './images/projects/careerloom/thumb_slide-4.webp',
         caption: 'Pan-India tech lead discovery with regional hub filtering',
         alt: 'CareerLoom India leads and tech hubs locator'
       },
       {
-        src: './images/projects/careerloom/slide-5.png',
+        src: './images/projects/careerloom/slide-5.webp',
+        thumb: './images/projects/careerloom/thumb_slide-5.webp',
         caption: 'Natural language semantic query parser transforming conversational inputs',
         alt: 'CareerLoom semantic NLP search in action'
       },
       {
-        src: './images/projects/careerloom/slide-6.png',
+        src: './images/projects/careerloom/slide-6.webp',
+        thumb: './images/projects/careerloom/thumb_slide-6.webp',
         caption: 'Community referral network intelligence modal',
         alt: 'CareerLoom referral intelligence modal'
       },
       {
-        src: './images/projects/careerloom/slide-7.png',
+        src: './images/projects/careerloom/slide-7.webp',
+        thumb: './images/projects/careerloom/thumb_slide-7.webp',
         caption: 'Targeted referral pitch builder and alumni outreach synthesizer',
         alt: 'CareerLoom referral pitch builder'
       }
@@ -356,27 +384,32 @@ export const PROJECTS = [
     githubUrl: 'https://github.com/Prashant1873/Marcutie',
     screenshots: [
       {
-        src: './images/projects/marcutie/slide-1.png',
+        src: './images/projects/marcutie/slide-1.webp',
+        thumb: './images/projects/marcutie/thumb_slide-1.webp',
         caption: 'Video creation studio overview with real-time browser canvas preview',
         alt: 'Marcutie video creation studio overview'
       },
       {
-        src: './images/projects/marcutie/slide-2.png',
+        src: './images/projects/marcutie/slide-2.webp',
+        thumb: './images/projects/marcutie/thumb_slide-2.webp',
         caption: 'Tone, pacing, and format configuration with kinetic aspect controls',
         alt: 'Marcutie tone and format configuration'
       },
       {
-        src: './images/projects/marcutie/slide-3.png',
+        src: './images/projects/marcutie/slide-3.webp',
+        thumb: './images/projects/marcutie/thumb_slide-3.webp',
         caption: 'Brand and visual identity system with custom typography palettes',
         alt: 'Marcutie brand and visual settings'
       },
       {
-        src: './images/projects/marcutie/slide-4.png',
+        src: './images/projects/marcutie/slide-4.webp',
+        thumb: './images/projects/marcutie/thumb_slide-4.webp',
         caption: 'Voiceover synthesis and audio wave synchronizer controls',
         alt: 'Marcutie voiceover settings and audio controls'
       },
       {
-        src: './images/projects/marcutie/slide-5.png',
+        src: './images/projects/marcutie/slide-5.webp',
+        thumb: './images/projects/marcutie/thumb_slide-5.webp',
         caption: 'Advanced video rendering engine and export settings modal',
         alt: 'Marcutie settings modal and export configuration'
       }

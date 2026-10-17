@@ -366,9 +366,27 @@
 - Vite production build completes cleanly.
 
 ---
+
+### Phase 25: Projects Image Pipeline Optimization, WebP Conversion & Fast Loading (Shipped & Verified)
+
+**Goal:** Eradicate slow image loading and failed asset fetches across the Projects section on GitHub Pages by converting raw PNG screenshots to optimized WebP format, generating lightweight thumbnails, implementing proactive preloading, and introducing a smooth loading skeleton state.
+
+**Delivers:** PROJ-IMG-01, PROJ-IMG-02, PROJ-IMG-03, PROJ-IMG-04
+
+**UAT:**
+- All 33 project screenshots converted to modern WebP format reducing asset payload by >85% (from ~15 MB to <1.5 MB total).
+- Dedicated compact WebP thumbnails generated for project card backgrounds and modal filmstrip buttons (<25 KB each).
+- `src/js/projects-data.js` and `src/js/projects.js` updated to serve WebP assets with robust fallback handling.
+- Modal slideshow includes a loading skeleton/indicator during slide switches with zero frozen or stale frames.
+- Proactive memory preloading implemented via `requestIdleCallback` for project card previews and modal traversal.
+- Images load quickly and reliably on GitHub Pages across mobile and desktop connections.
+- Playwright tests verify fast loading and asset integrity.
+
+---
 *Roadmap defined: 2026-10-12*
 *Milestone 2 added: 2026-10-15*
 *Milestone 3 added: 2026-10-16*
 *Milestone 4 archived: 2026-10-16*
 *Milestone 5 added: 2026-10-17*
+*Phase 25 added: 2026-10-17*
 
