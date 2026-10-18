@@ -181,9 +181,16 @@ export function initExperience() {
     if (hasPhotos) {
       activePhotos = exp.photos;
       detailContainer.querySelectorAll('.experience-photo-thumb').forEach((thumb) => {
-        thumb.addEventListener('click', () => {
+        const triggerOpen = () => {
           const pIdx = parseInt(thumb.getAttribute('data-photo-idx'), 10);
-          openLightbox(pIdx);
+          openLightbox(pIdx, thumb);
+        };
+        thumb.addEventListener('click', triggerOpen);
+        thumb.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            triggerOpen();
+          }
         });
       });
     }
@@ -223,13 +230,18 @@ export function initExperience() {
   // 6. Lightbox Handlers (Smooth Loading State, Zero Stale-Image Glitch - IMG-02)
   // ------------------------------------------------------------------------
   let loadRequestId = 0;
+  let lastFocusedThumb = null;
 
-  function openLightbox(idx) {
+  function openLightbox(idx, triggerEl) {
     if (!lightbox || !lightboxImg || !activePhotos.length) return;
+    lastFocusedThumb = triggerEl || document.activeElement;
     currentPhotoIdx = idx;
     lightbox.classList.add('is-open');
     document.body.style.overflow = 'hidden';
     updateLightboxImage();
+    if (lightboxClose) {
+      lightboxClose.focus();
+    }
   }
 
   function closeLightbox() {
@@ -244,6 +256,18 @@ export function initExperience() {
     if (lightboxSpinner) {
       lightboxSpinner.classList.remove('is-active');
     }
+    if (lastFocusedThumb && typeof lastFocusedThumb.focus === 'function') {
+      try {
+        lastFocusedThumb.focus();
+      } catch (_) {}
+      lastFocusedThumb = null;
+    }
+  }
+
+  function stepPhoto(direction) {
+    if (!activePhotos || !activePhotos.length) return;
+    currentPhotoIdx = (currentPhotoIdx + direction + activePhotos.length) % activePhotos.length;
+    updateLightboxImage();
   }
 
   function updateLightboxImage() {
@@ -294,22 +318,44 @@ export function initExperience() {
 
   if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
   if (lightboxPrev) {
-    lightboxPrev.addEventListener('click', () => {
-      currentPhotoIdx = (currentPhotoIdx - 1 + activePhotos.length) % activePhotos.length;
-      updateLightboxImage();
-    });
+    lightboxPrev.addEventListener('click', () => stepPhoto(-1));
   }
   if (lightboxNext) {
-    lightboxNext.addEventListener('click', () => {
-      currentPhotoIdx = (currentPhotoIdx + 1) % activePhotos.length;
-      updateLightboxImage();
-    });
+    lightboxNext.addEventListener('click', () => stepPhoto(1));
   }
   if (lightbox) {
     lightbox.addEventListener('click', (e) => {
       if (e.target === lightbox) closeLightbox();
     });
   }
+
+  // Intercept Arrow keys and Escape for active modal dialogs (Lightbox & Calendar)
+  window.addEventListener('keydown', (e) => {
+    if (lightbox && lightbox.classList.contains('is-open')) {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        e.stopPropagation();
+        stepPhoto(-1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        e.stopPropagation();
+        stepPhoto(1);
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopPropagation();
+        closeLightbox();
+      }
+      return;
+    }
+
+    if (timelineModal && timelineModal.classList.contains('is-open')) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopPropagation();
+        closeTimelineModal();
+      }
+    }
+  }, true);
 
   // ------------------------------------------------------------------------
   // 7. Minimalist Thematic Calendar Modal Handlers
@@ -437,6 +483,9 @@ export function initExperience() {
   // ------------------------------------------------------------------------
   window.experienceController = {
     next: () => {
+      // Locked: Do not change experience company when photo lightbox or timeline modal is open
+      if (lightbox && lightbox.classList.contains('is-open')) return false;
+      if (timelineModal && timelineModal.classList.contains('is-open')) return false;
       if (activeIndex < EXPERIENCES.length - 1) {
         navigateToIndex(activeIndex + 1);
         return true;
@@ -444,23 +493,38 @@ export function initExperience() {
       return false;
     },
     prev: () => {
+      // Locked: Do not change experience company when photo lightbox or timeline modal is open
+      if (lightbox && lightbox.classList.contains('is-open')) return false;
+      if (timelineModal && timelineModal.classList.contains('is-open')) return false;
       if (activeIndex > 0) {
         navigateToIndex(activeIndex - 1);
         return true;
       }
       return false;
     },
-    setMilestone: (idx) => navigateToIndex(idx),
+    setMilestone: (idx) => {
+      if (lightbox && lightbox.classList.contains('is-open')) return;
+      if (timelineModal && timelineModal.classList.contains('is-open')) return;
+      navigateToIndex(idx);
+    },
     getIndex: () => activeIndex,
     getCount: () => EXPERIENCES.length
   };
 
-  // Keyboard navigation on container (Left / Right keys cycle milestones)
+  // Keyboard navigation on container (Left / Right keys cycle milestones when image is closed)
   container.addEventListener('keydown', (e) => {
+    if (lightbox && lightbox.classList.contains('is-open')) return;
+    if (timelineModal && timelineModal.classList.contains('is-open')) return;
     if (e.key === 'ArrowRight') {
-      if (window.experienceController.next()) e.preventDefault();
+      if (window.experienceController.next()) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
     } else if (e.key === 'ArrowLeft') {
-      if (window.experienceController.prev()) e.preventDefault();
+      if (window.experienceController.prev()) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
     }
   });
 

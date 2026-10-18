@@ -43,6 +43,7 @@ test.describe('Phase 17: Experience Photo Pipeline & Lightbox State Fix', () => 
     // Verify image source is WebP (full version, not thumb)
     const lightboxImg = page.locator('#experience-lightbox-img');
     await expect(lightboxImg).toBeVisible();
+    await expect(lightboxImg).toHaveAttribute('src', /\.webp/);
     const imgSrc = await lightboxImg.getAttribute('src');
     expect(imgSrc).toContain('.webp');
     expect(imgSrc).not.toContain('thumb_');
@@ -98,4 +99,57 @@ test.describe('Phase 17: Experience Photo Pipeline & Lightbox State Fix', () => 
     await page.waitForTimeout(200);
     await expect(lightbox).not.toHaveClass(/is-open/);
   });
+
+  test('IMG-03: Keyboard arrow navigation traverses photos while locking experience company; arrow keys traverse companies when closed', async ({ page }) => {
+    await page.goto('http://localhost:3000/#experience');
+    await page.waitForTimeout(400);
+
+    const detail = page.locator('#experience-detail');
+    await expect(detail.locator('.experience-detail__company')).toHaveText('IQVIA');
+
+    // Open lightbox via photo thumbnail
+    const photoThumb = detail.locator('.experience-photo-thumb').first();
+    await photoThumb.click();
+    await page.waitForTimeout(200);
+
+    const lightbox = page.locator('#experience-lightbox');
+    await expect(lightbox).toHaveClass(/is-open/);
+
+    const counter = page.locator('#experience-lightbox-counter');
+    await expect(counter).toHaveText('1 / 3');
+
+    // ArrowRight navigates to next photo, company remains locked at IQVIA
+    await page.keyboard.press('ArrowRight');
+    await page.waitForTimeout(300);
+    await expect(counter).toHaveText('2 / 3');
+    await expect(detail.locator('.experience-detail__company')).toHaveText('IQVIA');
+
+    // ArrowRight navigates to 3rd photo, company still locked
+    await page.keyboard.press('ArrowRight');
+    await page.waitForTimeout(300);
+    await expect(counter).toHaveText('3 / 3');
+    await expect(detail.locator('.experience-detail__company')).toHaveText('IQVIA');
+
+    // ArrowLeft navigates to previous photo, company still locked
+    await page.keyboard.press('ArrowLeft');
+    await page.waitForTimeout(300);
+    await expect(counter).toHaveText('2 / 3');
+    await expect(detail.locator('.experience-detail__company')).toHaveText('IQVIA');
+
+    // Close lightbox via Escape key
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(200);
+    await expect(lightbox).not.toHaveClass(/is-open/);
+
+    // With lightbox closed, ArrowRight navigates experience company to Revolut
+    await page.keyboard.press('ArrowRight');
+    await page.waitForTimeout(400);
+    await expect(detail.locator('.experience-detail__company')).toHaveText('Revolut');
+
+    // ArrowLeft navigates back to IQVIA
+    await page.keyboard.press('ArrowLeft');
+    await page.waitForTimeout(400);
+    await expect(detail.locator('.experience-detail__company')).toHaveText('IQVIA');
+  });
 });
+

@@ -30,6 +30,7 @@ Single-Page Scrollable Portfolio
 - **Attached Detailed Card (Option A):** Anchored directly below the centered 3D orb with live progress track and date rail markers.
 - **Filter State Engine:** Non-matching company nodes dim to 15% opacity with 400ms bloom on filter restore.
 - **Calendar Modal Subsystem:** Minimalist multi-year grid (2024–2026) featuring borderless mosaic tiles with rich, saturated dark jewel/obsidian palettes (`#0F2752`, `#083344`, `#064E3B`, `#2E1065`, `#5B1818`), high-contrast crisp off-white typography, and white company emblems across both themes.
+- **Photo Lightbox Subsystem & Keyboard Traversal Locking:** Clean full-bleed workplace snapshot viewer with smooth WebP loading state and spinner. While an image is open, `window.experienceController` locks milestone changes, capturing `ArrowLeft`/`ArrowRight` strictly for cycling adjacent workplace snapshots and `Escape` for closing. When closed, `ArrowLeft`/`ArrowRight` traverse through experience companies.
 
 ## Projects Subsystem Architecture (`src/js/projects.js` & `src/js/projects-data.js`)
 - **Uniform 2x3 Grid & Identifiable Backdrops:** 6 canonical projects with authentic screenshot hero cards, calibrated subtle backdrop blur (`2.5px`, down from opaque 14px fog), translucent scrims, and enhanced image brightness letting product UI previews shine through.
