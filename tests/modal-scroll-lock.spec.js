@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { openCaseStudy } from './helpers/projects.js';
 
 test('Verify modal scrolling does not scroll background page underneath', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
@@ -17,8 +18,7 @@ test('Verify modal scrolling does not scroll background page underneath', async 
   expect(initialScrollY).toBeGreaterThanOrEqual(720); // Projects is section 2
 
   // Open BickerBape modal
-  const card = page.locator('.project-card[data-project-id="bickerbape"]');
-  await card.click();
+  await openCaseStudy(page, 'bickerbape');
   await page.waitForTimeout(400);
 
   const modal = page.locator('#project-modal');

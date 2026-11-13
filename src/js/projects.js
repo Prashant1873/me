@@ -2,8 +2,8 @@ import gsap from 'gsap';
 import { PROJECTS } from './projects-data.js';
 
 /**
- * Projects Section & Cinematic Modal Controller
- * Structured Intensity Portfolio - Phase 6
+ * Projects Section: Accordion & Cinematic Case Study Modal Controller
+ * Structured Intensity Portfolio
  */
 
 let activeProjectIndex = 0;
@@ -42,103 +42,350 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
-/**
- * Render the uniform 2x3 projects showcase grid
- */
-function renderProjectsGrid() {
-  const gridContainer = document.getElementById('projects-grid');
-  if (!gridContainer) return;
+/* --------------------------------------------------------------------------
+   Projects Accordion
+   Three levels of disclosure:
+   1. Row      - index, title, category, one-liner, status (always visible)
+   2. Panel    - preview, narrative, proof metrics, stack, actions (one open)
+   3. Modal    - full case study with slideshow and innovation detail
+   -------------------------------------------------------------------------- */
 
-  gridContainer.innerHTML = PROJECTS.map((proj) => {
-    const thumbSrc = proj.screenshots[0]?.thumb || proj.screenshots[0]?.src || '';
-    const tagsHtml = proj.techStack
-      .slice(0, 2)
-      .map(
-        (t) => `<span class="project-tag">${escapeHtml(t.name)}</span>`
-      )
-      .join('');
+const ICON_ARROW = `<svg class="project-action__icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+const ICON_EXTERNAL = `<svg class="project-action__icon project-action__icon--external" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="8 7 17 7 17 16"></polyline></svg>`;
 
-    return `
-      <article 
-        class="project-card" 
-        data-project-id="${escapeHtml(proj.id)}" 
-        role="button" 
-        tabindex="0" 
-        aria-label="Open case study for ${escapeHtml(proj.title)}"
+// Layouts where the section grows with its content instead of filling one viewport
+const AUTO_HEIGHT_QUERY = '(max-width: 1023px), (max-height: 600px)';
+const FINE_POINTER_QUERY = '(hover: hover) and (pointer: fine)';
+
+let accordionEl = null;
+let openProjectId = null;
+let peekEl = null;
+let peekImg = null;
+let peekToX = null;
+let peekToY = null;
+
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function statusLabel(statusTag) {
+  return String(statusTag || '').replace(/^●\s*/, '');
+}
+
+function renderProjectItem(proj, index, isOpen) {
+  const id = escapeHtml(proj.id);
+  const title = escapeHtml(proj.title);
+  const cover = proj.screenshots[0] || {};
+  const slideCount = proj.screenshots.length;
+
+  const proofHtml = proj.innovations
+    .map(
+      (inv) => `
+        <li class="project-proof__item">
+          <span class="project-proof__metric">${escapeHtml(inv.metric)}</span>
+          <span class="project-proof__label">${escapeHtml(inv.title)}</span>
+        </li>`
+    )
+    .join('');
+
+  const stackHtml = proj.techStack
+    .map(
+      (t) =>
+        `<li class="project-tag${t.primary ? ' project-tag--primary' : ''}">${escapeHtml(t.name)}</li>`
+    )
+    .join('');
+
+  const liveHtml = proj.liveUrl
+    ? `<a href="${escapeHtml(proj.liveUrl)}" class="project-action project-action--ghost project-action--live" target="_blank" rel="noopener noreferrer" aria-label="Open live app for ${title}">
+        <span>Live app</span>${ICON_EXTERNAL}
+      </a>`
+    : '';
+
+  return `
+    <article class="project-item${isOpen ? ' is-open' : ''}" data-project-id="${id}" style="--i: ${index}">
+      <h3 class="project-item__heading">
+        <button
+          type="button"
+          class="project-item__header"
+          id="project-header-${id}"
+          aria-expanded="${isOpen ? 'true' : 'false'}"
+          aria-controls="project-panel-${id}"
+        >
+          <span class="project-item__index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
+          <span class="project-item__title">${title}</span>
+          <span class="project-item__category">${escapeHtml(proj.category)}</span>
+          <span class="project-item__summary">${escapeHtml(proj.oneLiner)}</span>
+          <span class="project-item__status"><span class="project-item__status-dot" aria-hidden="true"></span>${escapeHtml(statusLabel(proj.statusTag))}</span>
+          <span class="project-item__toggle" aria-hidden="true"></span>
+        </button>
+      </h3>
+
+      <div
+        class="project-item__panel"
+        id="project-panel-${id}"
+        role="region"
+        aria-labelledby="project-header-${id}"
+        ${isOpen ? '' : 'inert'}
       >
-        <div class="project-card__bg-wrap" aria-hidden="true">
-          <img 
-            class="project-card__bg-img project-card__thumb" 
-            src="${escapeHtml(thumbSrc)}" 
-            alt="" 
-            loading="lazy" 
-          />
-          <div class="project-card__backdrop"></div>
-        </div>
-
-        <div class="project-card__overlay">
-          <div class="project-card__top">
-            <span class="project-card__category">${escapeHtml(proj.category)}</span>
-            <span class="project-card__status-tag">${escapeHtml(proj.statusTag)}</span>
-          </div>
-
-          <div class="project-card__middle">
-            <h3 class="project-card__title">${escapeHtml(proj.title)}</h3>
-            <p class="project-card__desc">${escapeHtml(proj.oneLiner)}</p>
-          </div>
-
-          <div class="project-card__bottom">
-            <div class="project-card__tags">
-              ${tagsHtml}
-            </div>
-            <div class="project-card__footer">
-              <span class="project-card__trigger project-btn project-btn--case-study" role="button" tabindex="0" aria-label="View case study for ${escapeHtml(proj.title)}">
-                <span>Case Study</span>
-                <svg class="project-btn__icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
+        <div class="project-item__clip">
+          <div class="project-item__body">
+            <button
+              type="button"
+              class="project-preview project-item__reveal"
+              style="--r: 0"
+              data-open-case
+              aria-label="Open case study for ${title}, ${slideCount} screenshots"
+            >
+              <span class="project-preview__chrome" aria-hidden="true">
+                <i></i><i></i><i></i>
+                <span class="project-preview__count">${slideCount} screens</span>
               </span>
-              ${
-                proj.liveUrl
-                  ? `<a href="${escapeHtml(proj.liveUrl)}" class="project-card__ext-link project-btn project-btn--website" target="_blank" rel="noopener noreferrer" aria-label="Open live website for ${escapeHtml(proj.title)}" onclick="event.stopPropagation();">
-                      <span>Website</span>
-                      <svg class="project-btn__icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                      </svg>
-                    </a>`
-                  : `<a href="${escapeHtml(proj.githubUrl)}" class="project-card__ext-link project-btn project-btn--website" target="_blank" rel="noopener noreferrer" aria-label="View source code on GitHub for ${escapeHtml(proj.title)}" onclick="event.stopPropagation();">
-                      <span>Code</span>
-                      <svg class="project-btn__icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                      </svg>
-                    </a>`
-              }
+              <span class="project-preview__frame">
+                <img
+                  class="project-preview__img"
+                  ${isOpen ? `src="${escapeHtml(cover.src || '')}"` : `data-src="${escapeHtml(cover.src || '')}"`}
+                  alt="${escapeHtml(cover.alt || proj.title)}"
+                  decoding="async"
+                />
+                <span class="project-preview__glare" aria-hidden="true"></span>
+                <span class="project-preview__hint" aria-hidden="true">Open case study ${ICON_ARROW}</span>
+              </span>
+            </button>
+
+            <div class="project-item__content">
+              <p class="project-item__narrative project-item__reveal" style="--r: 1">${escapeHtml(proj.narrative)}</p>
+
+              <ul class="project-proof project-item__reveal" style="--r: 2" aria-label="Proof points">
+                ${proofHtml}
+              </ul>
+
+              <div class="project-item__footer project-item__reveal" style="--r: 3">
+                <ul class="project-stack" aria-label="Tech stack">
+                  ${stackHtml}
+                </ul>
+                <div class="project-actions">
+                  <button type="button" class="project-action project-action--primary" data-open-case aria-label="View case study for ${title}">
+                    <span>Case study</span>${ICON_ARROW}
+                  </button>
+                  ${liveHtml}
+                  <a href="${escapeHtml(proj.githubUrl)}" class="project-action project-action--ghost project-action--code" target="_blank" rel="noopener noreferrer" aria-label="View source code on GitHub for ${title}">
+                    <span>Code</span>${ICON_EXTERNAL}
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </article>
-    `;
-  }).join('');
+      </div>
+    </article>
+  `;
+}
 
-  // Attach card event listeners
-  const cards = gridContainer.querySelectorAll('.project-card');
-  cards.forEach((card) => {
-    const projectId = card.getAttribute('data-project-id');
-    card.addEventListener('click', () => {
-      openProjectModal(projectId, card);
-    });
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openProjectModal(projectId, card);
+/**
+ * Load the large preview image only once a panel is about to be seen
+ */
+function hydratePreview(item) {
+  const img = item.querySelector('.project-preview__img[data-src]');
+  if (!img) return;
+  img.src = img.getAttribute('data-src');
+  img.removeAttribute('data-src');
+}
+
+/**
+ * On stacked layouts, closing a tall panel above can push the opened row
+ * under the fixed nav. Bring it back once the height transition settles.
+ */
+function keepHeaderInView(item) {
+  if (!window.matchMedia(AUTO_HEIGHT_QUERY).matches) return;
+  const reduced = prefersReducedMotion();
+  window.setTimeout(
+    () => {
+      const navHeight = window.innerWidth <= 768 ? 56 : 64;
+      const top = item.getBoundingClientRect().top;
+      if (top < navHeight + 8) {
+        window.scrollBy({ top: top - navHeight - 12, behavior: reduced ? 'auto' : 'smooth' });
       }
-    });
+    },
+    reduced ? 0 : 480
+  );
+}
+
+/**
+ * Open one project panel (or pass null to collapse everything)
+ */
+export function setOpenProject(projectId) {
+  if (!accordionEl) return;
+  accordionEl.querySelectorAll('.project-item').forEach((item) => {
+    const isOpen = projectId !== null && item.getAttribute('data-project-id') === projectId;
+    item.classList.toggle('is-open', isOpen);
+    item.querySelector('.project-item__header')?.setAttribute('aria-expanded', String(isOpen));
+    item.querySelector('.project-item__panel')?.toggleAttribute('inert', !isOpen);
+    if (isOpen) {
+      hydratePreview(item);
+      keepHeaderInView(item);
+    }
   });
+  openProjectId = projectId;
+  hidePeek();
+}
+
+/**
+ * Ink ripple from the click point on a row header
+ */
+function spawnRipple(header, e) {
+  if (prefersReducedMotion() || e.detail === 0) return;
+  const rect = header.getBoundingClientRect();
+  const ripple = document.createElement('span');
+  ripple.className = 'project-item__ripple';
+  ripple.style.left = `${e.clientX - rect.left}px`;
+  ripple.style.top = `${e.clientY - rect.top}px`;
+  header.appendChild(ripple);
+  ripple.addEventListener('animationend', () => ripple.remove(), { once: true });
+}
+
+/**
+ * Floating thumbnail that trails the cursor over collapsed rows
+ */
+function ensurePeek() {
+  if (peekEl) return;
+  peekEl = document.createElement('div');
+  peekEl.className = 'project-peek';
+  peekEl.setAttribute('aria-hidden', 'true');
+  peekEl.innerHTML = '<img class="project-peek__img" alt="" />';
+  document.body.appendChild(peekEl);
+  peekImg = peekEl.querySelector('img');
+  peekToX = gsap.quickTo(peekEl, 'x', { duration: 0.35, ease: 'power3.out' });
+  peekToY = gsap.quickTo(peekEl, 'y', { duration: 0.35, ease: 'power3.out' });
+}
+
+function canPeek() {
+  return (
+    window.matchMedia(FINE_POINTER_QUERY).matches &&
+    !window.matchMedia(AUTO_HEIGHT_QUERY).matches &&
+    !prefersReducedMotion()
+  );
+}
+
+function movePeek(e, snap) {
+  if (!peekEl) return;
+  const w = peekEl.offsetWidth;
+  const h = peekEl.offsetHeight;
+  let x = e.clientX + 28;
+  if (x + w > window.innerWidth - 12) x = e.clientX - w - 28;
+  const y = Math.min(Math.max(e.clientY - h / 2, 76), window.innerHeight - h - 12);
+  if (snap) {
+    peekToX(x, x);
+    peekToY(y, y);
+  } else {
+    peekToX(x);
+    peekToY(y);
+  }
+}
+
+function showPeek(proj, e) {
+  if (!canPeek()) return;
+  const thumb = proj.screenshots[0]?.thumb || proj.screenshots[0]?.src;
+  if (!thumb) return;
+  ensurePeek();
+  if (peekImg.getAttribute('src') !== thumb) peekImg.src = thumb;
+  movePeek(e, !peekEl.classList.contains('is-visible'));
+  peekEl.classList.add('is-visible');
+}
+
+function hidePeek() {
+  if (peekEl) peekEl.classList.remove('is-visible');
+}
+
+/**
+ * Render the accordion and wire its interactions
+ */
+function renderProjectsAccordion() {
+  accordionEl = document.getElementById('projects-accordion');
+  if (!accordionEl) return;
+
+  openProjectId = PROJECTS[0]?.id ?? null;
+  accordionEl.innerHTML = PROJECTS.map((proj, i) =>
+    renderProjectItem(proj, i, proj.id === openProjectId)
+  ).join('');
+
+  accordionEl.querySelectorAll('.project-item').forEach((item) => {
+    const projectId = item.getAttribute('data-project-id');
+    const proj = PROJECTS.find((p) => p.id === projectId);
+    const header = item.querySelector('.project-item__header');
+    const preview = item.querySelector('.project-preview');
+    const previewImg = item.querySelector('.project-preview__img');
+
+    // Level 1 -> 2: toggle the panel
+    header.addEventListener('click', (e) => {
+      spawnRipple(header, e);
+      setOpenProject(openProjectId === projectId ? null : projectId);
+    });
+
+    // Cursor spotlight + trailing thumbnail on collapsed rows
+    header.addEventListener('pointerenter', (e) => {
+      hydratePreview(item);
+      if (!item.classList.contains('is-open')) showPeek(proj, e);
+    });
+    header.addEventListener('pointermove', (e) => {
+      const rect = header.getBoundingClientRect();
+      header.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+      header.style.setProperty('--my', `${e.clientY - rect.top}px`);
+      if (peekEl?.classList.contains('is-visible')) movePeek(e, false);
+    });
+    header.addEventListener('pointerleave', hidePeek);
+    header.addEventListener('focus', () => hydratePreview(item));
+
+    // Level 2 -> 3: open the full case study
+    item.querySelectorAll('[data-open-case]').forEach((trigger) => {
+      trigger.addEventListener('click', () => openProjectModal(projectId, trigger));
+    });
+
+    // Pointer-driven tilt and glare on the preview
+    if (preview) {
+      preview.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse' || prefersReducedMotion()) return;
+        const rect = preview.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        preview.style.setProperty('--tilt-x', `${(-py * 5).toFixed(2)}deg`);
+        preview.style.setProperty('--tilt-y', `${(px * 7).toFixed(2)}deg`);
+        preview.style.setProperty('--glare-x', `${((px + 0.5) * 100).toFixed(1)}%`);
+        preview.style.setProperty('--glare-y', `${((py + 0.5) * 100).toFixed(1)}%`);
+      });
+      preview.addEventListener('pointerleave', () => {
+        preview.style.setProperty('--tilt-x', '0deg');
+        preview.style.setProperty('--tilt-y', '0deg');
+      });
+    }
+
+    if (previewImg) {
+      previewImg.onerror = () => {
+        previewImg.onerror = null;
+        previewImg.src = createSvgFallback(proj.title, 0);
+      };
+    }
+  });
+
+  // Space activates buttons here; keep it from also paging to the next section
+  accordionEl.addEventListener('keydown', (e) => {
+    if (e.key === ' ' && e.target.closest('button, a')) e.stopPropagation();
+  });
+
+  // Staggered row entrance the first time the section scrolls into view
+  if ('IntersectionObserver' in window && !prefersReducedMotion()) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          accordionEl.classList.add('is-revealed');
+          revealObserver.disconnect();
+        }
+      },
+      { threshold: 0.12 }
+    );
+    revealObserver.observe(accordionEl);
+  } else {
+    accordionEl.classList.add('is-revealed');
+  }
 }
 
 /**
@@ -661,7 +908,7 @@ export function initProjects() {
   siteNav = document.getElementById('site-nav');
   mainEl = document.querySelector('main');
 
-  renderProjectsGrid();
+  renderProjectsAccordion();
 
   // Backdrop click listener closes modal
   if (backdropEl) {

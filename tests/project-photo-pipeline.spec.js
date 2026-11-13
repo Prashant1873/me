@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { PROJECT_IDS, expandProject, openDefaultCaseStudy } from './helpers/projects.js';
 
 test.describe('Phase 25: Projects Image Pipeline Optimization & Fast Loading', () => {
   test.beforeEach(async ({ page }) => {
@@ -7,37 +8,35 @@ test.describe('Phase 25: Projects Image Pipeline Optimization & Fast Loading', (
     await page.waitForTimeout(1000);
   });
 
-  test('PROJ-IMG-01 & PROJ-IMG-02: Project card backgrounds use lightweight WebP thumbnails', async ({ page }) => {
-    // Scroll to projects section so lazy-loaded cards enter viewport
+  test('PROJ-IMG-01 & PROJ-IMG-02: Accordion previews are WebP and deferred until a row is needed', async ({ page }) => {
     await page.evaluate(() => {
       document.getElementById('projects')?.scrollIntoView();
     });
-    await page.waitForTimeout(600);
+    await page.waitForTimeout(900);
 
-    const cards = page.locator('.project-card');
-    const cardCount = await cards.count();
-    expect(cardCount).toBe(6);
+    const items = page.locator('.project-item');
+    await expect(items).toHaveCount(PROJECT_IDS.length);
 
-    for (let i = 0; i < cardCount; i++) {
-      const card = cards.nth(i);
-      await card.evaluate((el) => el.scrollIntoView({ block: 'center', inline: 'nearest' }));
-      const thumb = card.locator('.project-card__thumb');
-      await expect(thumb).toBeAttached();
+    // The expanded project shows a decoded full-size WebP preview
+    const openPreview = page.locator('.project-item.is-open .project-preview__img');
+    const openSrc = await openPreview.getAttribute('src');
+    expect(openSrc).toContain('.webp');
+    expect(openSrc).not.toContain('thumb_');
+    await expect.poll(async () => openPreview.evaluate((img) => img.naturalWidth)).toBeGreaterThan(0);
 
-      const src = await thumb.getAttribute('src');
-      expect(src).toContain('.webp');
-      expect(src).toContain('thumb_');
+    // Collapsed projects have not requested their large preview yet
+    const deferred = page.locator('.project-item:not(.is-open) .project-preview__img[data-src]');
+    await expect(deferred).toHaveCount(PROJECT_IDS.length - 1);
 
-      // Verify that image decoded successfully
-      await expect.poll(async () => {
-        return await thumb.evaluate((img) => img.naturalWidth);
-      }).toBeGreaterThan(0);
-    }
+    // Expanding a row hydrates its preview on demand
+    const item = await expandProject(page, 'trinet');
+    const hydrated = item.locator('.project-preview__img');
+    expect(await hydrated.getAttribute('src')).toContain('slide-1.webp');
+    await expect.poll(async () => hydrated.evaluate((img) => img.naturalWidth)).toBeGreaterThan(0);
   });
 
   test('PROJ-IMG-03 & PROJ-IMG-04: Case study modal opens with WebP full image, filmstrip thumbs, and spinner', async ({ page }) => {
-    const firstCard = page.locator('.project-card').first();
-    await firstCard.click({ force: true });
+    await openDefaultCaseStudy(page);
     await page.waitForTimeout(400);
 
     const modal = page.locator('#project-modal');
@@ -71,8 +70,7 @@ test.describe('Phase 25: Projects Image Pipeline Optimization & Fast Loading', (
   });
 
   test('PROJ-IMG-04: Slideshow traversal across screenshots updates images smoothly without errors', async ({ page }) => {
-    const firstCard = page.locator('.project-card').first();
-    await firstCard.click({ force: true });
+    await openDefaultCaseStudy(page);
     await page.waitForTimeout(400);
 
     const nextBtn = page.locator('#slideshow-next-btn');

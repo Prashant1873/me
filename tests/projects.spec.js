@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { PROJECT_IDS, expandProject, openCaseStudy } from './helpers/projects.js';
 
 test.describe('Projects Section - Cinematic Case Studies (Phase 6)', () => {
   test.beforeEach(async ({ page }) => {
@@ -7,19 +8,18 @@ test.describe('Projects Section - Cinematic Case Studies (Phase 6)', () => {
     await page.waitForTimeout(1000);
   });
 
-  test('PROJ-01 & PROJ-02: Render all 6 project cards in uniform grid with authentic attributes', async ({ page }) => {
+  test('PROJ-01 & PROJ-02: Render all 7 projects as accordion rows with authentic attributes', async ({ page }) => {
     const projectsSection = page.locator('#projects');
     await expect(projectsSection).toBeVisible();
 
-    const grid = page.locator('#projects-grid');
-    await expect(grid).toBeVisible();
+    const accordion = page.locator('#projects-accordion');
+    await expect(accordion).toBeVisible();
 
-    // Verify exactly 6 project cards
-    const cards = grid.locator('.project-card');
-    await expect(cards).toHaveCount(6);
+    const items = accordion.locator('.project-item');
+    await expect(items).toHaveCount(7);
 
-    // Verify canonical sequence: BickerBape, StrokeCRM, TRINET, Know Your Archetype, CareerLoom, Marcutie
     const expectedTitles = [
+      'Sage',
       'BickerBape',
       'StrokeCRM',
       'TRINET',
@@ -28,39 +28,99 @@ test.describe('Projects Section - Cinematic Case Studies (Phase 6)', () => {
       'Marcutie'
     ];
 
-    const expectedStatusTags = [
-      '● 98/98 TESTS',
-      '● SELF-HOSTED',
-      '● 500+ MFRS',
-      '● 18 SCENARIOS',
-      '● 200+ FIRMS',
-      '● LOCAL-FIRST'
+    const expectedStatus = [
+      'LIVE APP',
+      '98/98 TESTS',
+      'SELF-HOSTED',
+      '500+ MFRS',
+      '18 SCENARIOS',
+      '200+ FIRMS',
+      'LOCAL-FIRST'
     ];
 
-    for (let i = 0; i < 6; i++) {
-      const card = cards.nth(i);
-      await expect(card.locator('.project-card__title')).toHaveText(expectedTitles[i]);
-      await expect(card.locator('.project-card__status-tag')).toContainText(expectedStatusTags[i]);
-      await expect(card.locator('.project-card__desc')).toBeVisible();
-      await expect(card.locator('.project-card__thumb')).toBeVisible();
-      await expect(card.locator('.project-card__category')).toBeVisible();
+    for (let i = 0; i < 7; i++) {
+      const item = items.nth(i);
+      await expect(item).toHaveAttribute('data-project-id', PROJECT_IDS[i]);
+      await expect(item.locator('.project-item__title')).toHaveText(expectedTitles[i]);
+      await expect(item.locator('.project-item__status')).toContainText(expectedStatus[i]);
+      await expect(item.locator('.project-item__index')).toHaveText(String(i + 1).padStart(2, '0'));
+      await expect(item.locator('.project-item__category')).toBeVisible();
+      await expect(item.locator('.project-item__summary')).toBeVisible();
 
-      // Verify tech stack badges exist on each card
-      const tags = card.locator('.project-tag');
-      const tagCount = await tags.count();
-      expect(tagCount).toBeGreaterThan(0);
+      // Panel content exists for every project, revealed only when expanded
+      expect(await item.locator('.project-tag').count()).toBeGreaterThan(0);
+      await expect(item.locator('.project-proof__item')).toHaveCount(3);
     }
   });
 
+  test('PROJ-ACC-01: Accordion discloses one project at a time with correct ARIA state', async ({ page }) => {
+    await page.evaluate(() => document.getElementById('projects').scrollIntoView({ behavior: 'instant' }));
+    await page.waitForTimeout(900);
+
+    const items = page.locator('.project-item');
+    const openItems = page.locator('.project-item.is-open');
+
+    // First project is expanded by default; every other panel is inert
+    await expect(openItems).toHaveCount(1);
+    await expect(items.first()).toHaveClass(/is-open/);
+    await expect(items.first().locator('.project-item__header')).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('.project-item__panel[inert]')).toHaveCount(6);
+
+    // Header and panel are cross-referenced
+    const header = items.nth(2).locator('.project-item__header');
+    const panelId = await header.getAttribute('aria-controls');
+    await expect(page.locator(`#${panelId}`)).toHaveAttribute('aria-labelledby', await header.getAttribute('id'));
+
+    // Expanding another row collapses the previous one
+    const stroke = await expandProject(page, 'strokecrm');
+    await expect(openItems).toHaveCount(1);
+    await expect(stroke).toHaveClass(/is-open/);
+    await expect(header).toHaveAttribute('aria-expanded', 'true');
+    await expect(items.first().locator('.project-item__header')).toHaveAttribute('aria-expanded', 'false');
+    await expect(stroke.locator('.project-item__narrative')).toContainText('self-hosted');
+    await expect(stroke.locator('.project-preview__img')).toBeVisible();
+
+    // Projects without a live deployment only offer case study and code
+    await expect(stroke.locator('.project-action--live')).toHaveCount(0);
+    await expect(stroke.locator('.project-action--code')).toHaveAttribute('href', 'https://github.com/Prashant1873/StrokeCRM');
+    await expect(stroke.locator('.project-action--code')).toHaveAttribute('rel', 'noopener noreferrer');
+
+    // Clicking the open row collapses it
+    await header.click();
+    await page.waitForTimeout(700);
+    await expect(openItems).toHaveCount(0);
+    await expect(header).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  test('PROJ-ACC-02: Rows are keyboard operable without paging the section', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.evaluate(() => document.getElementById('projects').scrollIntoView({ behavior: 'instant' }));
+    await page.waitForTimeout(900);
+    const scrollBefore = await page.evaluate(() => window.scrollY);
+
+    const header = page.locator('.project-item[data-project-id="trinet"] .project-item__header');
+    await header.focus();
+    await page.keyboard.press('Space');
+    await page.waitForTimeout(800);
+
+    await expect(page.locator('.project-item[data-project-id="trinet"]')).toHaveClass(/is-open/);
+    expect(await page.evaluate(() => window.scrollY)).toBe(scrollBefore);
+
+    // Sage links to its live deployment
+    const sage = await expandProject(page, 'sage');
+    await expect(sage.locator('.project-action--live')).toHaveAttribute('href', 'https://sage-api-bke34nnd7q-uc.a.run.app/');
+    await expect(sage.locator('.project-action--live')).toHaveAttribute('target', '_blank');
+  });
+
   test('PROJ-03 & PROJ-07: Click-to-expand modal takeover with GSAP animation, scroll lock, and ESC close', async ({ page }) => {
-    const card = page.locator('.project-card[data-project-id="bickerbape"]');
-    await expect(card).toBeVisible();
+    const item = page.locator('.project-item[data-project-id="bickerbape"]');
+    await expect(item).toBeVisible();
 
     const modal = page.locator('#project-modal');
     await expect(modal).not.toHaveClass(/is-open/);
 
-    // Click card to open modal
-    await card.click();
+    // Expand the row, then open the case study modal
+    await openCaseStudy(page, 'bickerbape');
     await page.waitForTimeout(400);
 
     // Modal should now be open
@@ -87,7 +147,7 @@ test.describe('Projects Section - Cinematic Case Studies (Phase 6)', () => {
 
   test('PROJ-04: Expanded modal cockpit renders narrative, 3 innovations, tech stack, and secure CTAs', async ({ page }) => {
     // Open BickerBape card
-    await page.locator('.project-card[data-project-id="bickerbape"]').click();
+    await openCaseStudy(page, 'bickerbape');
     await page.waitForTimeout(400);
 
     const modal = page.locator('#project-modal');
@@ -128,7 +188,7 @@ test.describe('Projects Section - Cinematic Case Studies (Phase 6)', () => {
 
   test('PROJ-05 & PROJ-06: Interactive slideshow controls, filmstrip thumbnails, and keyboard navigation', async ({ page }) => {
     // Open BickerBape case study (has 7 screenshots)
-    await page.locator('.project-card[data-project-id="bickerbape"]').click();
+    await openCaseStudy(page, 'bickerbape');
     await page.waitForTimeout(400);
 
     const modal = page.locator('#project-modal');
@@ -185,7 +245,7 @@ test.describe('Projects Section - Cinematic Case Studies (Phase 6)', () => {
 
   test('Modal project traversal: Prev / Next project controls switch between case studies smoothly', async ({ page }) => {
     // Open BickerBape (index 0)
-    await page.locator('.project-card[data-project-id="bickerbape"]').click();
+    await openCaseStudy(page, 'bickerbape');
     await page.waitForTimeout(400);
 
     const modal = page.locator('#project-modal');

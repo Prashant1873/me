@@ -5,6 +5,67 @@
 
 export const PROJECTS = [
   {
+    id: 'sage',
+    title: 'Sage',
+    category: 'Vedic Guidance',
+    statusTag: '● LIVE APP',
+    oneLiner: 'Vedic guidance companion pairing a deterministic TypeScript astrology engine with a context-aware AI chat on Expo and Fastify.',
+    narrative: 'Most astrology apps hand out generic horoscopes. Sage computes your chart with reproducible math, then turns it into a daily prime window, a 7-day forecast, and guidance that remembers your life context.',
+    innovations: [
+      {
+        title: 'Deterministic Vedic Engine',
+        metric: 'Pure TypeScript',
+        desc: 'High-precision chart, dasha, and panchang computation built on astronomy-engine. Every forecast and prime window is derived from reproducible math, so the AI layer explains results instead of inventing them.'
+      },
+      {
+        title: 'Context-Aware Sage Chat',
+        metric: 'Gemini + Memory',
+        desc: 'Conversational guidance grounded in the computed chart and the Temporal Loom, a personal memory timeline of events and decisions. Answers reference what is actually happening in your life, not a generic sign reading.'
+      },
+      {
+        title: 'One Codebase, Web and Mobile',
+        metric: 'Expo + Fastify 5',
+        desc: 'Expo Router and React Native Web client backed by a Fastify 5 API with Prisma 7 on Postgres, Firebase identity, and Zod-validated contracts, containerized and deployed on Google Cloud Run.'
+      }
+    ],
+    techStack: [
+      { name: 'Expo / React Native', primary: true },
+      { name: 'Fastify 5', primary: true },
+      { name: 'TypeScript', primary: false },
+      { name: 'Prisma 7 / Postgres', primary: false },
+      { name: 'Gemini AI', primary: false },
+      { name: 'Cloud Run', primary: false }
+    ],
+    liveUrl: 'https://sage-api-bke34nnd7q-uc.a.run.app/',
+    githubUrl: 'https://github.com/Prashant1873/Sage',
+    screenshots: [
+      {
+        src: './images/projects/sage/slide-1.webp',
+        thumb: './images/projects/sage/thumb_slide-1.webp',
+        caption: 'Today view with daily prime window, charm of the day, and life-area guidance',
+        alt: 'Sage Today view showing the daily prime window and guidance'
+      },
+      {
+        src: './images/projects/sage/slide-2.webp',
+        thumb: './images/projects/sage/thumb_slide-2.webp',
+        caption: '7-day cosmic horizon with a life-area wheel and daily prime windows',
+        alt: 'Sage Forecast view with a seven day selector and life-area wheel'
+      },
+      {
+        src: './images/projects/sage/slide-3.webp',
+        thumb: './images/projects/sage/thumb_slide-3.webp',
+        caption: 'Sage chat with common inquiries for decisions, energy, and timing',
+        alt: 'Sage chat screen with suggested questions'
+      },
+      {
+        src: './images/projects/sage/slide-4.webp',
+        thumb: './images/projects/sage/thumb_slide-4.webp',
+        caption: 'Temporal Loom memory timeline weaving life events into context',
+        alt: 'Sage You view showing the Temporal Loom memory timeline'
+      }
+    ]
+  },
+  {
     id: 'bickerbape',
     title: 'BickerBape',
     category: 'Fintech & Compounding',

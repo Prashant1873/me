@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { openDefaultCaseStudy } from './helpers/projects.js';
 
 test.describe('Phase 23: Dedicated Mobile Experience, Layout Fitting & Navigation Overhaul', () => {
   test.beforeEach(async () => {
@@ -20,9 +21,8 @@ test.describe('Phase 23: Dedicated Mobile Experience, Layout Fitting & Navigatio
     expect(hasHorizontalOverflow).toBe(false);
 
     // Open first project modal
-    const firstCard = page.locator('.project-card').first();
-    await expect(firstCard).toBeVisible();
-    await firstCard.click();
+    await expect(page.locator('.project-item').first()).toBeVisible();
+    await openDefaultCaseStudy(page);
     await page.waitForTimeout(500);
 
     const modal = page.locator('#project-modal');
@@ -82,8 +82,7 @@ test.describe('Phase 23: Dedicated Mobile Experience, Layout Fitting & Navigatio
     await page.goto('http://localhost:3000/#projects');
     await page.waitForTimeout(400);
 
-    const firstCard = page.locator('.project-card').first();
-    await firstCard.click();
+    await openDefaultCaseStudy(page);
     await page.waitForTimeout(500);
 
     const modal = page.locator('#project-modal');
@@ -230,8 +229,7 @@ test.describe('Phase 23: Dedicated Mobile Experience, Layout Fitting & Navigatio
     await page.goto('http://localhost:3000/#projects');
     await page.waitForTimeout(400);
 
-    const firstCard = page.locator('.project-card').first();
-    await firstCard.click();
+    await openDefaultCaseStudy(page);
     await page.waitForTimeout(500);
 
     const modal = page.locator('#project-modal');

@@ -10,7 +10,9 @@ async function main() {
     const page = await browser.newPage({ viewport: { width: w, height: h } });
     await page.goto('http://localhost:3000/#projects');
     await page.waitForTimeout(500);
-    await page.click('.project-card[data-project-id="bickerbape"]');
+    await page.click('.project-item[data-project-id="bickerbape"] .project-item__header');
+    await page.waitForTimeout(700);
+    await page.click('.project-item[data-project-id="bickerbape"] .project-action--primary');
     await page.waitForTimeout(500);
     const modalPath = `./screenshots/modal_${w}x${h}.png`;
     await page.screenshot({ path: modalPath });

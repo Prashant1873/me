@@ -89,8 +89,8 @@ async function capture() {
     // Capture Project Modal
     console.log(`Capturing Project Modal (${theme})...`);
     await page.evaluate(() => {
-      const card = document.querySelector('.project-card[data-project-id="bickerbape"]');
-      if (card) card.click();
+      const trigger = document.querySelector('.project-item[data-project-id="bickerbape"] .project-action--primary');
+      if (trigger) trigger.click();
     });
     await page.waitForTimeout(600);
 

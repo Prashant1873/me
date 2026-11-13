@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { openCaseStudy } from './helpers/projects.js';
 
 test.describe('Phase 22: Project Modal Dialogue Box Right-Side Vertical Density & Space Optimization', () => {
   test.beforeEach(async ({ page }) => {
@@ -9,8 +10,7 @@ test.describe('Phase 22: Project Modal Dialogue Box Right-Side Vertical Density 
 
   test('PROJ-12: Right pane eliminates dead vertical white space and fills modal height proportionally', async ({ page }) => {
     // Open BickerBape modal
-    const card = page.locator('.project-card[data-project-id="bickerbape"]');
-    await card.click();
+    await openCaseStudy(page, 'bickerbape');
     await page.waitForTimeout(400);
 
     const modal = page.locator('#project-modal');
@@ -58,14 +58,11 @@ test.describe('Phase 22: Project Modal Dialogue Box Right-Side Vertical Density 
   });
 
   test('PROJ-13: Innovation cards feature enriched technical architecture depth and quantitative metrics', async ({ page }) => {
-    const projectsToCheck = ['bickerbape', 'strokecrm', 'trinet', 'archetype', 'careerloom', 'marcutie'];
+    const projectsToCheck = ['sage', 'bickerbape', 'strokecrm', 'trinet', 'archetype', 'careerloom', 'marcutie'];
 
     for (const projId of projectsToCheck) {
       // Open modal for project
-      await page.evaluate((id) => {
-        const card = document.querySelector(`.project-card[data-project-id="${id}"]`);
-        if (card) card.click();
-      }, projId);
+      await openCaseStudy(page, projId);
       await page.waitForTimeout(300);
 
       const modal = page.locator('#project-modal');
@@ -113,7 +110,7 @@ test.describe('Phase 22: Project Modal Dialogue Box Right-Side Vertical Density 
       await page.waitForTimeout(200);
 
       // Open BickerBape modal
-      await page.locator('.project-card[data-project-id="bickerbape"]').click();
+      await openCaseStudy(page, 'bickerbape');
       await page.waitForTimeout(300);
 
       const modal = page.locator('#project-modal');
@@ -140,7 +137,7 @@ test.describe('Phase 22: Project Modal Dialogue Box Right-Side Vertical Density 
     await page.setViewportSize({ width: 1440, height: 900 });
 
     // Open modal in Dark Mode
-    await page.locator('.project-card[data-project-id="bickerbape"]').click();
+    await openCaseStudy(page, 'bickerbape');
     await page.waitForTimeout(300);
 
     const modal = page.locator('#project-modal');
@@ -158,7 +155,7 @@ test.describe('Phase 22: Project Modal Dialogue Box Right-Side Vertical Density 
     await page.waitForTimeout(200);
 
     // Open modal in Light Mode
-    await page.locator('.project-card[data-project-id="bickerbape"]').click();
+    await openCaseStudy(page, 'bickerbape');
     await page.waitForTimeout(300);
 
     await expect(modal).toHaveClass(/is-open/);
