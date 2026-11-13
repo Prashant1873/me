@@ -987,3 +987,12 @@
   }
 }
 
+
+/* --------------------------------------------------------------------------
+   Touch layouts: match the other sections' clearance under the fixed nav
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px), (pointer: coarse) {
+  .section--education {
+    padding-top: calc(56px + 24px);
+  }
+}

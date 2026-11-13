@@ -1353,6 +1353,20 @@ html[data-theme="light"] .experience-detail__metric {
     padding-bottom: 40px;
   }
 
+  .experience-detail__linkedin-btn {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Comfortable touch target for the tenure chip */
+  .experience-detail__period {
+    min-height: 44px;
+    padding: 0 12px;
+    font-size: 11px;
+  }
+
   .experience-timeline-track {
     height: 140px;
     -webkit-overflow-scrolling: touch;

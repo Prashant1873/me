@@ -773,3 +773,29 @@ html[data-theme="light"] .nav-action-btn--mail:hover {
 .nav-spacer {
   display: none;
 }
+
+/* --------------------------------------------------------------------------
+   Tablet Nav Fit (769px - 960px)
+   The full link row plus labelled theme toggle is wider than the viewport
+   here, which pushed the toggle off the right edge. Switch the toggle to
+   icons only and tighten link spacing so everything stays on screen.
+   -------------------------------------------------------------------------- */
+@media (min-width: 769px) and (max-width: 960px) {
+  .site-nav__inner {
+    gap: var(--space-3);
+  }
+  .site-nav__link {
+    padding-inline: var(--space-2);
+    letter-spacing: 0.03em;
+  }
+  .theme-toggle-pill {
+    margin-left: 0;
+  }
+  .theme-pill__label {
+    display: none;
+  }
+  .theme-toggle-pill__btn {
+    padding: 0 10px;
+    min-width: 32px;
+  }
+}

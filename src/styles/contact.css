@@ -231,11 +231,21 @@
   box-sizing: border-box;
 }
 
+/* Stack the card and its full-width buttons together. Tying the full-width
+   buttons to pointer type alone squeezed the copy to zero width on tablets. */
 @media (max-width: 768px) {
   .resume-chassis {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
+  }
+  .resume-chassis__actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+  .resume-btn {
+    width: 100%;
   }
 }
 
@@ -565,14 +575,7 @@
     min-height: 46px;
     padding: 10px 16px;
     font-size: 12px;
-    width: 100%;
     justify-content: center;
-  }
-  .resume-chassis__actions {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 8px;
   }
   .contact__quote {
     padding: 14px 16px;
