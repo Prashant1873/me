@@ -642,6 +642,14 @@
   overflow: hidden;
 }
 
+/* Blocks keep their natural height: a short panel must overflow (and be
+   detected by the fit guard) instead of silently crushing the narrative. */
+.project-item__narrative,
+.project-proof,
+.project-item__footer {
+  flex-shrink: 0;
+}
+
 .project-proof {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -896,7 +904,7 @@
 /* --------------------------------------------------------------------------
    4b. Stacked layouts: section grows with content, panels animate their height
    -------------------------------------------------------------------------- */
-@media (max-width: 1023px), (max-height: 600px) {
+@media (max-width: 1023px), (max-height: 600px), (pointer: coarse) {
   .section--projects {
     height: auto;
     min-height: 100vh;
@@ -1041,7 +1049,62 @@
 }
 
 /* --------------------------------------------------------------------------
-   4c. Reduced motion: keep state changes, drop the choreography
+   4c. Flow mode on desktop (viewport-fit.js): the window is too short for a
+   viewport-locked accordion, so panels size to their content instead.
+   -------------------------------------------------------------------------- */
+.section--projects.is-flow .grid-container > .col-span-12:not(.section__header) {
+  flex: none;
+  display: block;
+}
+
+.section--projects.is-flow .projects-accordion,
+.section--projects.is-flow .project-item,
+.section--projects.is-flow .project-item.is-open {
+  flex: none;
+}
+
+.section--projects.is-flow .project-item__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  flex: none;
+  transition: grid-template-rows var(--proj-open-duration) var(--proj-ease);
+}
+
+.section--projects.is-flow .project-item.is-open .project-item__panel {
+  grid-template-rows: 1fr;
+}
+
+.section--projects.is-flow .project-item__clip {
+  position: static;
+  min-height: 0;
+}
+
+.section--projects.is-flow .project-item__body {
+  height: auto;
+  padding-top: 6px;
+  padding-bottom: 18px;
+}
+
+.section--projects.is-flow .project-preview {
+  height: auto;
+  width: clamp(260px, 30%, 380px);
+  align-self: flex-start;
+}
+
+/* Touch: actions meet the 44px target regardless of viewport size */
+@media (pointer: coarse) {
+  .project-action {
+    min-height: 44px;
+    padding-inline: 16px;
+  }
+
+  .project-item__header {
+    min-height: 52px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4d. Reduced motion: keep state changes, drop the choreography
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .project-item,
@@ -1909,3 +1972,13 @@
   }
 }
 
+
+/* --------------------------------------------------------------------------
+   Phone action layout: with three actions, the primary takes its own row and
+   the two secondary links share the next, instead of an orphaned third button.
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .project-actions:has(.project-action--live) .project-action--primary {
+    flex-basis: 100%;
+  }
+}

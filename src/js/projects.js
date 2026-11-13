@@ -54,7 +54,7 @@ const ICON_ARROW = `<svg class="project-action__icon" width="12" height="12" vie
 const ICON_EXTERNAL = `<svg class="project-action__icon project-action__icon--external" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="8 7 17 7 17 16"></polyline></svg>`;
 
 // Layouts where the section grows with its content instead of filling one viewport
-const AUTO_HEIGHT_QUERY = '(max-width: 1023px), (max-height: 600px)';
+const AUTO_HEIGHT_QUERY = '(max-width: 1023px), (max-height: 600px), (pointer: coarse)';
 const FINE_POINTER_QUERY = '(hover: hover) and (pointer: fine)';
 
 let accordionEl = null;
@@ -63,6 +63,14 @@ let peekEl = null;
 let peekImg = null;
 let peekToX = null;
 let peekToY = null;
+
+/** True when panels size to their content (touch/narrow CSS, or desktop flow mode). */
+function isStackedLayout() {
+  return (
+    window.matchMedia(AUTO_HEIGHT_QUERY).matches ||
+    Boolean(accordionEl?.closest('.section')?.classList.contains('is-flow'))
+  );
+}
 
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -196,7 +204,7 @@ function hydratePreview(item) {
  * under the fixed nav. Bring it back once the height transition settles.
  */
 function keepHeaderInView(item) {
-  if (!window.matchMedia(AUTO_HEIGHT_QUERY).matches) return;
+  if (!isStackedLayout()) return;
   const reduced = prefersReducedMotion();
   window.setTimeout(
     () => {
@@ -227,6 +235,14 @@ export function setOpenProject(projectId) {
   });
   openProjectId = projectId;
   hidePeek();
+
+  // Once the panel has settled, let the fit guard confirm this project's content fits
+  if (projectId !== null && !isStackedLayout()) {
+    window.setTimeout(
+      () => window.dispatchEvent(new CustomEvent('viewportfit:request')),
+      prefersReducedMotion() ? 30 : 600
+    );
+  }
 }
 
 /**
@@ -262,6 +278,7 @@ function canPeek() {
   return (
     window.matchMedia(FINE_POINTER_QUERY).matches &&
     !window.matchMedia(AUTO_HEIGHT_QUERY).matches &&
+    window.innerWidth > 1024 &&
     !prefersReducedMotion()
   );
 }

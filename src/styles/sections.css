@@ -87,6 +87,24 @@ main {
 }
 
 /* --------------------------------------------------------------------------
+   Flow Mode (set by viewport-fit.js)
+   A desktop section whose content cannot fit one viewport grows to its
+   content instead of clipping it; the scroll controller travels inside it.
+   -------------------------------------------------------------------------- */
+.section.is-flow {
+  height: auto !important;
+  max-height: none !important;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: visible !important;
+  padding-bottom: clamp(20px, 3vh, 32px);
+}
+
+.section--contact.is-flow {
+  padding-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
    Section Header Pattern (tag + heading + description)
    -------------------------------------------------------------------------- */
 .section__header {

@@ -19,9 +19,72 @@ export function initSectionScroll() {
   let isScrolling = false;
   let scrollDirection = 0; // 1 = forward/down, -1 = backward/up
   let safetyTimer = null;
+  let lastInnerScrollAt = 0;
+  let innerScrollTarget = null;
+  // Distance scrolled into the current section (non-zero only inside sections taller than the viewport)
+  let innerOffset = 0;
+  let lastViewportWidth = window.innerWidth;
+
+  // Pixels of slack before a section counts as taller than the viewport
+  const EDGE_PX = 3;
+  // A wheel gesture that was travelling inside a tall section must pause this long before it may change section
+  const INNER_SCROLL_COOLDOWN_MS = 320;
 
   function isMobileOrTablet() {
     return window.innerWidth <= 1024 || window.matchMedia('(pointer: coarse)').matches;
+  }
+
+  /**
+   * Touch layouts already pad every section for the fixed nav, so sections
+   * align to the very top of the viewport on every layout.
+   */
+  function sectionTop(index) {
+    return Math.max(0, sections[index].offsetTop);
+  }
+
+  /** How far the current section extends past the viewport in each direction. */
+  function currentSectionOverflow() {
+    const rect = sections[currentIndex].getBoundingClientRect();
+    return {
+      above: Math.max(0, -rect.top),
+      below: Math.max(0, rect.bottom - window.innerHeight)
+    };
+  }
+
+  /** Re-derive the active section if something else moved the page (scrollbar drag, find-in-page, focus). */
+  function syncIndexFromScroll() {
+    const probe = window.scrollY + window.innerHeight * 0.5;
+    let idx = 0;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].offsetTop <= probe) {
+        idx = i;
+        break;
+      }
+    }
+    if (idx !== currentIndex) updateNav(idx);
+    innerOffset = Math.max(0, window.scrollY - sectionTop(currentIndex));
+  }
+
+  /** Travel inside a section that is taller than the viewport, clamped to its edges. */
+  function scrollWithinSection(delta) {
+    const section = sections[currentIndex];
+    const min = section.offsetTop;
+    const max = Math.max(min, section.offsetTop + section.offsetHeight - window.innerHeight);
+    const from = innerScrollTarget !== null ? innerScrollTarget : window.scrollY;
+    innerScrollTarget = Math.min(max, Math.max(min, from + delta));
+    innerOffset = innerScrollTarget - min;
+    lastInnerScrollAt = performance.now();
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    gsap.to(window, {
+      scrollTo: { y: innerScrollTarget, autoKill: false },
+      duration: reduced ? 0.01 : 0.22,
+      ease: 'power2.out',
+      overwrite: 'auto',
+      onComplete: () => {
+        innerScrollTarget = null;
+      }
+    });
   }
 
   function updateNav(index) {
@@ -72,16 +135,21 @@ export function initSectionScroll() {
 
   sections.forEach(sec => sectionObserver.observe(sec));
 
-  function scrollToSection(index) {
+  function scrollToSection(index, { alignEnd = false } = {}) {
     if (index < 0 || index >= sections.length) return;
     
     scrollDirection = index > currentIndex ? 1 : -1;
     isScrolling = true;
+    innerScrollTarget = null;
     updateNav(index);
     window.backgroundScene?.transitionToSection(index);
 
-    const navOffset = isMobileOrTablet() ? (window.innerWidth <= 768 ? 56 : 64) : 0;
-    const targetY = Math.max(0, sections[index].offsetTop - navOffset);
+    // Stepping back into a section taller than the viewport lands on its end, so reading continues upward
+    const overflowHeight = sections[index].offsetHeight - window.innerHeight;
+    const targetY = alignEnd && overflowHeight > EDGE_PX
+      ? sectionTop(index) + overflowHeight
+      : sectionTop(index);
+    innerOffset = targetY - sectionTop(index);
 
     // Safety timeout: guarantees isScrolling ALWAYS resets even if tween gets killed
     clearTimeout(safetyTimer);
@@ -129,8 +197,29 @@ export function initSectionScroll() {
 
     e.preventDefault();
 
-    if (Math.abs(e.deltaY) < 18) return;
     const eventDir = e.deltaY > 0 ? 1 : -1;
+
+    if (!isScrolling) {
+      syncIndexFromScroll();
+
+      // A section taller than the viewport scrolls internally until its edge is reached
+      const overflow = currentSectionOverflow();
+      const canTravel = eventDir > 0 ? overflow.below > EDGE_PX : overflow.above > EDGE_PX;
+      if (canTravel && Math.abs(e.deltaY) >= 1) {
+        const pixels = e.deltaMode === 1 ? e.deltaY * 32 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
+        scrollWithinSection(pixels);
+        return;
+      }
+
+      // Swallow the tail of that same gesture so reaching an edge never skips a section
+      const now = performance.now();
+      if (now - lastInnerScrollAt < INNER_SCROLL_COOLDOWN_MS) {
+        lastInnerScrollAt = now;
+        return;
+      }
+    }
+
+    if (Math.abs(e.deltaY) < 18) return;
 
     // While animating, allow immediate mid-flight reversal in opposite direction
     if (isScrolling) {
@@ -153,7 +242,7 @@ export function initSectionScroll() {
     if (e.deltaY > 0) {
       scrollToSection(currentIndex + 1);
     } else {
-      scrollToSection(currentIndex - 1);
+      scrollToSection(currentIndex - 1, { alignEnd: true });
     }
   }
 
@@ -178,12 +267,23 @@ export function initSectionScroll() {
       }
     }
 
-    if (['ArrowDown', 'PageDown', ' '].includes(e.key) && !e.target.matches('input, textarea')) {
+    const isForwardKey = ['ArrowDown', 'PageDown', ' '].includes(e.key);
+    const isBackKey = ['ArrowUp', 'PageUp'].includes(e.key);
+
+    if ((isForwardKey || isBackKey) && !e.target.matches('input, textarea')) {
       e.preventDefault();
-      scrollToSection(currentIndex + 1);
-    } else if (['ArrowUp', 'PageUp'].includes(e.key) && !e.target.matches('input, textarea')) {
-      e.preventDefault();
-      scrollToSection(currentIndex - 1);
+      syncIndexFromScroll();
+      const overflow = currentSectionOverflow();
+      const step = window.innerHeight * (e.key.startsWith('Arrow') ? 0.4 : 0.85);
+      if (isForwardKey && overflow.below > EDGE_PX) {
+        scrollWithinSection(step);
+      } else if (isBackKey && overflow.above > EDGE_PX) {
+        scrollWithinSection(-step);
+      } else if (isForwardKey) {
+        scrollToSection(currentIndex + 1);
+      } else {
+        scrollToSection(currentIndex - 1, { alignEnd: true });
+      }
     } else if (e.key === 'Home') {
       e.preventDefault();
       scrollToSection(0);
@@ -272,10 +372,42 @@ export function initSectionScroll() {
   }
 
   // --- Resize handling ---
-  window.addEventListener('resize', () => {
-    if (sections[currentIndex]) {
-      window.scrollTo(0, sections[currentIndex].offsetTop);
+  function realignToCurrentSection() {
+    if (!sections[currentIndex] || isScrolling || innerScrollTarget !== null) return;
+    const maxInner = Math.max(0, sections[currentIndex].offsetHeight - window.innerHeight);
+    innerOffset = Math.min(innerOffset, maxInner);
+    const targetY = sectionTop(currentIndex) + innerOffset;
+    if (Math.abs(window.scrollY - targetY) > 1) {
+      window.scrollTo(0, targetY);
     }
+  }
+
+  // Sections that flow with their content can change height after load (late
+  // images, fonts, an accordion row opening). Keep the current one anchored
+  // instead of letting it drift when something above it grows.
+  if ('ResizeObserver' in window) {
+    let anchorFrame = 0;
+    const anchorObserver = new ResizeObserver(() => {
+      if (isMobileOrTablet() || getActiveModal()) return;
+      cancelAnimationFrame(anchorFrame);
+      anchorFrame = requestAnimationFrame(realignToCurrentSection);
+    });
+    sections.forEach((sec) => anchorObserver.observe(sec));
+  }
+
+  window.addEventListener('resize', () => {
+    const widthChanged = window.innerWidth !== lastViewportWidth;
+    lastViewportWidth = window.innerWidth;
+
+    // Mobile browsers fire resize whenever the address bar shows or hides.
+    // Snapping there would yank the page mid-swipe, so only react to real width changes.
+    if (isMobileOrTablet() && !widthChanged) return;
+    realignToCurrentSection();
+  });
+
+  // A section switched between locked and flowing height, so offsets moved
+  window.addEventListener('viewportfit:change', () => {
+    if (!isMobileOrTablet()) realignToCurrentSection();
   });
 
   // --- Initial Section Detection on Page Load / Refresh ---
@@ -287,8 +419,7 @@ export function initSectionScroll() {
     }
     // If browser restored scroll position without hash
     if (window.scrollY > 40) {
-      const navOffset = isMobileOrTablet() ? (window.innerWidth <= 768 ? 56 : 64) : 0;
-      const currentScroll = window.scrollY + navOffset + 60;
+      const currentScroll = window.scrollY + 60;
       for (let i = sections.length - 1; i >= 0; i--) {
         if (sections[i].offsetTop <= currentScroll) {
           return i;
@@ -304,8 +435,7 @@ export function initSectionScroll() {
 
   function alignToInitialSection() {
     if (initialIndex > 0 && sections[initialIndex]) {
-      const navOffset = isMobileOrTablet() ? (window.innerWidth <= 768 ? 56 : 64) : 0;
-      const targetY = Math.max(0, sections[initialIndex].offsetTop - navOffset);
+      const targetY = sectionTop(initialIndex);
       if (Math.abs(window.scrollY - targetY) > 8) {
         window.scrollTo(0, targetY);
       }

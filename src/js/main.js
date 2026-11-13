@@ -7,6 +7,7 @@ import { initExperience } from './experience.js';
 import { initProjects } from './projects.js';
 import { initEducation } from './education.js';
 import { initContact } from './contact.js';
+import { initViewportFit } from './viewport-fit.js';
 
 // --------------------------------------------------------------------------
 // Viscoelastic Stretch-and-Squish Theme Toggle Controller
@@ -280,6 +281,11 @@ initEducation();
 // Contact & Action Channels (Phase 7)
 // --------------------------------------------------------------------------
 initContact();
+
+// --------------------------------------------------------------------------
+// Viewport Fit Guard: sections that cannot fit one viewport flow instead of clipping
+// --------------------------------------------------------------------------
+initViewportFit();
 
 // --------------------------------------------------------------------------
 // Dismiss Loading Skeleton & Trigger Orchestrated Entrance
